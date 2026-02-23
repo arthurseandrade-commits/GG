@@ -8,20 +8,8 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
         *{margin:0;padding:0;box-sizing:border-box}
-        :root{
-            --p:#7c3aed;--pl:#a855f7;--g:#10b981;--gl:#34d399;
-            --dark:#0a0a0f;--card:#13131f;--card2:#1a1a2e;
-            --t:#fff;--ts:#9ca3af;--tm:#6b7280;--border:#1e1e32;
-            --gp:linear-gradient(135deg,#7c3aed,#a855f7);
-            --gg:linear-gradient(135deg,#10b981,#34d399);
-            --gc:linear-gradient(145deg,#1a1a2e,#13131f);
-            --sp:0 0 30px rgba(124,58,237,.3);
-            --sg:0 0 30px rgba(16,185,129,.3);
-            --r:16px;--rs:12px;--rx:8px;
-        }
+        :root{--p:#7c3aed;--pl:#a855f7;--g:#10b981;--gl:#34d399;--dark:#0a0a0f;--card:#13131f;--card2:#1a1a2e;--t:#fff;--ts:#9ca3af;--tm:#6b7280;--border:#1e1e32;--gp:linear-gradient(135deg,#7c3aed,#a855f7);--gg:linear-gradient(135deg,#10b981,#34d399);--gc:linear-gradient(145deg,#1a1a2e,#13131f);--sp:0 0 30px rgba(124,58,237,.3);--sg:0 0 30px rgba(16,185,129,.3);--r:16px;--rs:12px;--rx:8px}
         body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--t);min-height:100vh;overflow-x:hidden}
-
-        /* BG */
         .bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
         .bg .orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.15;animation:orbF 20s ease-in-out infinite}
         .bg .orb:nth-child(1){width:400px;height:400px;background:var(--p);top:-100px;right:-100px}
@@ -48,7 +36,7 @@
         .login-msg.error{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:#fca5a5}
         .login-msg.info{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.25);color:#93c5fd}
         @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-        .g-btn{width:100%;padding:16px 24px;background:#fff;border:none;border-radius:14px;color:#1f1f1f;font-size:15px;font-weight:600;cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif;display:flex;align-items:center;justify-content:center;gap:12px;position:relative;overflow:hidden}
+        .g-btn{width:100%;padding:16px 24px;background:#fff;border:none;border-radius:14px;color:#1f1f1f;font-size:15px;font-weight:600;cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif;display:flex;align-items:center;justify-content:center;gap:12px}
         .g-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,255,255,.15)}
         .g-btn svg{width:22px;height:22px;flex-shrink:0}
         .g-btn.loading{pointer-events:none;opacity:.8}
@@ -57,21 +45,18 @@
         @keyframes spin{to{transform:rotate(360deg)}}
         .divider{display:flex;align-items:center;margin:28px 0;gap:16px}
         .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
-        .divider span{font-size:12px;color:var(--tm);text-transform:uppercase;letter-spacing:1px;white-space:nowrap}
+        .divider span{font-size:12px;color:var(--tm);text-transform:uppercase;letter-spacing:1px}
         .guest-btn{width:100%;padding:16px 24px;background:transparent;border:2px solid var(--border);border-radius:14px;color:var(--ts);font-size:15px;font-weight:600;cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif;display:flex;align-items:center;justify-content:center;gap:10px}
         .guest-btn:hover{border-color:var(--p);color:var(--t);background:rgba(124,58,237,.08);transform:translateY(-2px)}
         .guest-info{text-align:center;margin-top:16px;padding:14px;background:rgba(124,58,237,.06);border:1px solid rgba(124,58,237,.15);border-radius:var(--rs)}
-        .guest-info p{font-size:12px;color:var(--tm);line-height:1.6}
-        .guest-info span{color:var(--g);font-weight:600}
-        .login-footer{text-align:center;margin-top:24px;font-size:12px;color:var(--tm);line-height:1.6}
-        .login-footer a{color:var(--p);text-decoration:none}
+        .guest-info p{font-size:12px;color:var(--tm);line-height:1.6}.guest-info span{color:var(--g);font-weight:600}
+        .login-footer{text-align:center;margin-top:24px;font-size:12px;color:var(--tm);line-height:1.6}.login-footer a{color:var(--p);text-decoration:none}
 
         /* HEADER */
         header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,15,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:all .3s}
         header.scrolled{background:rgba(10,10,15,.95);box-shadow:0 4px 30px rgba(0,0,0,.5)}
         .h-bar{max-width:1400px;margin:0 auto;padding:0 24px;height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-        .logo{font-family:'Orbitron',sans-serif;font-size:28px;font-weight:900;color:var(--t);text-decoration:none;letter-spacing:3px;flex-shrink:0;cursor:pointer}
-        .logo span{color:var(--g)}
+        .logo{font-family:'Orbitron',sans-serif;font-size:28px;font-weight:900;color:var(--t);text-decoration:none;letter-spacing:3px;flex-shrink:0;cursor:pointer}.logo span{color:var(--g)}
         .nav{display:flex;align-items:center;gap:6px}
         .nav a{color:var(--ts);text-decoration:none;font-size:14px;font-weight:500;padding:8px 16px;border-radius:10px;transition:all .3s;white-space:nowrap;cursor:pointer}
         .nav a:hover,.nav a.active{color:var(--t);background:rgba(124,58,237,.15)}
@@ -79,7 +64,7 @@
         .search-box input{width:100%;padding:10px 16px 10px 44px;background:rgba(255,255,255,.06);border:2px solid var(--border);border-radius:var(--rs);color:var(--t);font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:all .3s}
         .search-box input:focus{border-color:var(--p);box-shadow:0 0 0 4px rgba(124,58,237,.1)}
         .search-box input::placeholder{color:var(--tm)}
-        .search-box .si{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--tm);font-size:16px}
+        .search-box .si{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--tm)}
         .user-area{display:flex;align-items:center;gap:12px;flex-shrink:0}
         .notif-btn{position:relative;background:rgba(255,255,255,.06);border:2px solid var(--border);border-radius:var(--rs);padding:10px;color:var(--ts);cursor:pointer;transition:all .3s;font-size:18px}
         .notif-btn:hover{border-color:var(--p);color:var(--t)}
@@ -88,10 +73,8 @@
         .u-profile:hover{background:rgba(255,255,255,.06)}
         .u-avatar{width:40px;height:40px;border-radius:var(--rs);background:var(--gp);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:#fff;border:2px solid rgba(124,58,237,.5);overflow:hidden}
         .u-avatar img{width:100%;height:100%;object-fit:cover;border-radius:10px}
-        .u-info{display:flex;flex-direction:column}
-        .u-name{font-size:14px;font-weight:600;line-height:1.2}
-        .u-role{font-size:11px;font-weight:500}
-        .u-role.guest{color:var(--tm)}.u-role.member{color:var(--g)}.u-role.admin{color:#f59e0b}
+        .u-info{display:flex;flex-direction:column}.u-name{font-size:14px;font-weight:600;line-height:1.2}
+        .u-role{font-size:11px;font-weight:500}.u-role.guest{color:var(--tm)}.u-role.member{color:var(--g)}.u-role.admin{color:#f59e0b}
         .u-dd{position:absolute;top:calc(100% + 12px);right:0;width:250px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:8px;opacity:0;visibility:hidden;transform:translateY(-10px);transition:all .3s;z-index:100;box-shadow:0 20px 60px rgba(0,0,0,.5)}
         .u-dd.show{opacity:1;visibility:visible;transform:translateY(0)}
         .dd-head{padding:14px 16px;border-bottom:1px solid var(--border);margin-bottom:6px;display:flex;align-items:center;gap:12px}
@@ -102,34 +85,26 @@
         .u-dd a:hover,.u-dd button:hover{background:rgba(124,58,237,.15);color:var(--t)}
         .u-dd .dd-div{height:1px;background:var(--border);margin:6px 8px}
         .u-dd .dd-out{color:#ef4444}.u-dd .dd-out:hover{background:rgba(239,68,68,.15);color:#fca5a5}
-        .u-dd .dd-in{color:var(--g)}.u-dd .dd-in:hover{background:rgba(16,185,129,.15);color:#6ee7b7}
-        .u-dd .dd-admin{color:#f59e0b}.u-dd .dd-admin:hover{background:rgba(245,158,11,.15);color:#fbbf24}
+        .u-dd .dd-in{color:var(--g)}.u-dd .dd-in:hover{background:rgba(16,185,129,.15)}
+        .u-dd .dd-admin{color:#f59e0b}.u-dd .dd-admin:hover{background:rgba(245,158,11,.15)}
         .mob-btn{display:none;background:rgba(255,255,255,.06);border:2px solid var(--border);border-radius:10px;padding:8px;color:var(--t);cursor:pointer;font-size:24px;transition:all .3s}
-        .mob-btn:hover{border-color:var(--p)}
 
         /* PAGES */
-        .page{display:none;position:relative;z-index:1}
-        .page.active{display:block}
-
-        /* VISITOR BANNER */
+        .page{display:none;position:relative;z-index:1}.page.active{display:block}
         .v-ban{display:none;background:linear-gradient(135deg,rgba(124,58,237,.12),rgba(16,185,129,.08));border:1px solid rgba(124,58,237,.2);border-radius:var(--r);padding:16px 24px;margin-bottom:24px;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
         .v-ban.show{display:flex}
-        .v-ban-text{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--ts)}
-        .v-ban-text strong{color:var(--t)}
-        .v-ban-acts{display:flex;gap:10px}
+        .v-ban-text{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--ts)}.v-ban-text strong{color:var(--t)}
         .v-login{padding:10px 24px;background:var(--gp);border:none;border-radius:10px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .3s}
         .v-login:hover{transform:translateY(-2px);box-shadow:var(--sp)}
-        .v-x{padding:10px 16px;background:transparent;border:1px solid var(--border);border-radius:10px;color:var(--tm);font-size:13px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .3s}
-
-        /* MAIN */
+        .v-x{padding:10px 16px;background:transparent;border:1px solid var(--border);border-radius:10px;color:var(--tm);font-size:13px;cursor:pointer;font-family:'Inter',sans-serif}
         main{max-width:1400px;margin:0 auto;padding:96px 24px 40px}
 
         /* HERO */
         .hero{margin-bottom:48px}
         .hero-card{position:relative;border-radius:24px;overflow:hidden;min-height:420px;display:flex;align-items:flex-end;background:linear-gradient(135deg,#1a0a3e,#0f0f2e 40%,#0a1628);border:1px solid rgba(124,58,237,.2);cursor:pointer;transition:all .4s}
         .hero-card:hover{transform:translateY(-4px);border-color:rgba(124,58,237,.4);box-shadow:0 20px 60px rgba(124,58,237,.15)}
-        .hero-card .hero-cover{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.4;transition:opacity .4s}
-        .hero-card:hover .hero-cover{opacity:.5}
+        .hero-card .hero-cover{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.35;transition:opacity .4s}
+        .hero-card:hover .hero-cover{opacity:.45}
         .hero-fx{position:absolute;inset:0;overflow:hidden}
         .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(124,58,237,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(124,58,237,.05) 1px,transparent 1px);background-size:40px 40px}
         .hero-glow{position:absolute;border-radius:50%;filter:blur(100px)}
@@ -142,10 +117,10 @@
         .hero-title{font-family:'Orbitron',sans-serif;font-size:48px;font-weight:900;line-height:1.1;margin-bottom:16px;background:linear-gradient(135deg,#fff,#c4b5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
         .hero-desc{font-size:17px;color:var(--ts);max-width:600px;line-height:1.7;margin-bottom:28px}
         .hero-actions{display:flex;gap:16px;flex-wrap:wrap}
-        .btn-p{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;background:var(--gp);border:none;border-radius:14px;color:#fff;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif;text-decoration:none}
+        .btn-p{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;background:var(--gp);border:none;border-radius:14px;color:#fff;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif}
         .btn-p:hover{transform:translateY(-2px);box-shadow:var(--sp)}
         .btn-s{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;background:transparent;border:2px solid var(--g);border-radius:14px;color:var(--g);font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif}
-        .btn-s:hover{background:rgba(16,185,129,.15);transform:translateY(-2px);box-shadow:var(--sg)}
+        .btn-s:hover{background:rgba(16,185,129,.15);transform:translateY(-2px)}
         .hero-stats{position:absolute;top:48px;right:48px;display:flex;flex-direction:column;gap:12px;z-index:2}
         .hero-stat{background:rgba(255,255,255,.06);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:14px 20px;text-align:center;min-width:140px}
         .hero-stat-v{font-family:'Orbitron',sans-serif;font-size:22px;font-weight:800;color:var(--g)}
@@ -157,12 +132,8 @@
         .sec-t .bar{width:4px;height:32px;background:var(--gg);border-radius:4px}
         .sec-t h2{font-family:'Orbitron',sans-serif;font-size:24px;font-weight:800;letter-spacing:1px}
         .sec-t .cnt{background:rgba(124,58,237,.2);color:var(--p);padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700}
-        .see-all{color:var(--p);text-decoration:none;font-size:14px;font-weight:600;transition:all .3s}
-        .see-all:hover{color:var(--pl)}
-
-        /* CATEGORIES */
-        .cats{display:flex;gap:10px;margin-bottom:48px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none}
-        .cats::-webkit-scrollbar{display:none}
+        .see-all{color:var(--p);text-decoration:none;font-size:14px;font-weight:600}
+        .cats{display:flex;gap:10px;margin-bottom:48px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none}.cats::-webkit-scrollbar{display:none}
         .chip{display:flex;align-items:center;gap:8px;padding:10px 20px;background:rgba(255,255,255,.05);border:2px solid var(--border);border-radius:var(--rs);color:var(--ts);font-size:13px;font-weight:600;cursor:pointer;transition:all .3s;white-space:nowrap}
         .chip:hover,.chip.active{border-color:var(--p);color:var(--t);background:rgba(124,58,237,.15)}
         .chip.active{background:var(--gp);color:#fff;border-color:transparent}
@@ -180,6 +151,7 @@
         .n-cat{position:absolute;top:14px;left:14px;padding:6px 14px;border-radius:var(--rx);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px}
         .n-cat.esports{background:rgba(124,58,237,.9)}.n-cat.lancamento{background:rgba(16,185,129,.9)}.n-cat.analise{background:rgba(59,130,246,.9)}.n-cat.atualizacao{background:rgba(245,158,11,.9)}.n-cat.indie{background:rgba(236,72,153,.9)}.n-cat.hardware{background:rgba(239,68,68,.9)}
         .n-time{position:absolute;top:14px;right:14px;padding:6px 12px;background:rgba(0,0,0,.7);backdrop-filter:blur(10px);border-radius:var(--rx);font-size:11px;color:var(--ts)}
+        .n-views{position:absolute;bottom:14px;right:14px;padding:6px 12px;background:rgba(0,0,0,.7);backdrop-filter:blur(10px);border-radius:var(--rx);font-size:11px;color:var(--g);font-weight:600}
         .n-body{padding:24px}
         .n-title{font-size:18px;font-weight:700;line-height:1.4;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;transition:color .3s}
         .n-card:hover .n-title{color:var(--p)}
@@ -188,20 +160,14 @@
         .n-author{display:flex;align-items:center;gap:10px}
         .n-author-av{width:32px;height:32px;border-radius:10px;background:var(--gp);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;overflow:hidden}
         .n-author-av img{width:100%;height:100%;object-fit:cover}
-        .n-author-name{font-size:13px;font-weight:600}
-        .n-date{font-size:11px;color:var(--tm)}
-        .n-engage{display:flex;gap:12px}
-        .n-engage span{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--tm)}
+        .n-author-name{font-size:13px;font-weight:600}.n-date{font-size:11px;color:var(--tm)}
+        .n-engage{display:flex;gap:12px}.n-engage span{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--tm)}
         .n-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
         .n-tag{padding:3px 10px;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.2);border-radius:6px;font-size:10px;color:var(--pl);font-weight:600}
-
-        /* RESTRICTED */
         .restricted{display:none;position:absolute;inset:0;background:rgba(10,10,15,.88);backdrop-filter:blur(4px);border-radius:20px;z-index:10;align-items:center;justify-content:center;flex-direction:column;gap:12px}
         .restricted.show{display:flex}
-        .restricted .ri{font-size:32px}
-        .restricted p{font-size:13px;color:var(--ts);font-weight:600}
-        .restricted .rb{padding:10px 24px;background:var(--gp);border:none;border-radius:10px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .3s}
-        .restricted .rb:hover{transform:translateY(-2px);box-shadow:var(--sp)}
+        .restricted .ri{font-size:32px}.restricted p{font-size:13px;color:var(--ts);font-weight:600}
+        .restricted .rb{padding:10px 24px;background:var(--gp);border:none;border-radius:10px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif}
 
         /* TRENDING */
         .trending{margin-bottom:48px}
@@ -213,7 +179,44 @@
         .t-title{font-size:15px;font-weight:600;margin-bottom:4px}
         .t-meta{font-size:12px;color:var(--tm);display:flex;align-items:center;gap:8px}
         .t-meta .up{color:var(--g)}
-        .t-thumb{width:64px;height:64px;border-radius:var(--rs);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+        .t-thumb{width:64px;height:64px;border-radius:var(--rs);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;background-size:cover;background-position:center;overflow:hidden}
+        .t-thumb img{width:100%;height:100%;object-fit:cover}
+
+        /* ARTICLE READER */
+        .article-reader{max-width:800px;margin:0 auto;padding:96px 24px 60px}
+        .ar-back{display:inline-flex;align-items:center;gap:8px;color:var(--ts);font-size:14px;font-weight:500;cursor:pointer;margin-bottom:24px;padding:8px 16px;border-radius:10px;transition:all .3s;border:none;background:rgba(255,255,255,.05)}
+        .ar-back:hover{color:var(--t);background:rgba(124,58,237,.15)}
+        .ar-cover{width:100%;height:400px;border-radius:20px;overflow:hidden;margin-bottom:32px;position:relative}
+        .ar-cover img{width:100%;height:100%;object-fit:cover}
+        .ar-cover .ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:80px}
+        .ar-cat-wrap{position:absolute;top:20px;left:20px;display:flex;gap:8px}
+        .ar-meta{display:flex;align-items:center;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+        .ar-meta-item{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ts)}
+        .ar-meta-item .dot{width:4px;height:4px;background:var(--tm);border-radius:50%}
+        .ar-title{font-family:'Orbitron',sans-serif;font-size:36px;font-weight:900;line-height:1.2;margin-bottom:16px;background:linear-gradient(135deg,#fff,#c4b5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .ar-excerpt{font-size:18px;color:var(--ts);line-height:1.7;margin-bottom:32px;padding-bottom:32px;border-bottom:1px solid var(--border)}
+        .ar-content{font-size:16px;line-height:1.8;color:var(--ts);margin-bottom:32px}
+        .ar-content h1,.ar-content h2,.ar-content h3{color:var(--t);margin:24px 0 12px;font-family:'Orbitron',sans-serif}
+        .ar-content h1{font-size:28px}.ar-content h2{font-size:24px}.ar-content h3{font-size:20px}
+        .ar-content p{margin-bottom:16px}
+        .ar-content strong,.ar-content b{color:var(--t);font-weight:700}
+        .ar-content em,.ar-content i{font-style:italic;color:var(--pl)}
+        .ar-content u{text-decoration:underline;text-decoration-color:var(--g)}
+        .ar-content s{text-decoration:line-through;opacity:.6}
+        .ar-content small{font-size:13px;opacity:.7}
+        .ar-content blockquote{border-left:4px solid var(--p);padding:16px 20px;margin:20px 0;background:rgba(124,58,237,.05);border-radius:0 12px 12px 0;font-style:italic;color:var(--ts)}
+        .ar-content ul,.ar-content ol{margin:16px 0;padding-left:24px}
+        .ar-content li{margin-bottom:8px}
+        .ar-content img{max-width:100%;border-radius:12px;margin:20px 0}
+        .ar-content-img{width:100%;border-radius:16px;overflow:hidden;margin:24px 0}
+        .ar-content-img img{width:100%;height:auto;display:block}
+        .ar-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+        .ar-tag{padding:6px 16px;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.2);border-radius:8px;font-size:12px;color:var(--pl);font-weight:600}
+        .ar-author-box{display:flex;align-items:center;gap:16px;padding:24px;background:var(--gc);border:1px solid var(--border);border-radius:16px}
+        .ar-author-av{width:56px;height:56px;border-radius:14px;background:var(--gp);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;overflow:hidden;flex-shrink:0}
+        .ar-author-av img{width:100%;height:100%;object-fit:cover}
+        .ar-author-name{font-size:16px;font-weight:700;margin-bottom:2px}
+        .ar-author-role{font-size:13px;color:var(--tm)}
 
         /* FOOTER */
         footer{border-top:1px solid var(--border);background:rgba(10,10,15,.9);padding:48px 24px 24px;position:relative;z-index:1}
@@ -222,15 +225,14 @@
         .f-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
         .f-brand p{color:var(--ts);font-size:14px;line-height:1.7;max-width:300px;margin-top:12px}
         .f-links h4{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:16px}
-        .f-links a{display:block;color:var(--ts);text-decoration:none;font-size:14px;padding:6px 0;transition:all .3s}
-        .f-links a:hover{color:var(--p);padding-left:6px}
+        .f-links a{display:block;color:var(--ts);text-decoration:none;font-size:14px;padding:6px 0;transition:all .3s}.f-links a:hover{color:var(--p);padding-left:6px}
         .f-bottom{border-top:1px solid var(--border);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
         .f-bottom p{font-size:13px;color:var(--tm)}
         .f-social{display:flex;gap:12px}
-        .f-social a{width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--ts);text-decoration:none;transition:all .3s;font-size:16px}
+        .f-social a{width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--ts);text-decoration:none;transition:all .3s}
         .f-social a:hover{background:var(--gp);border-color:transparent;color:#fff;transform:translateY(-2px)}
 
-        /* ═══════════ ADMIN PANEL ═══════════ */
+        /* ADMIN */
         .admin-layout{max-width:1400px;margin:0 auto;padding:96px 24px 40px;display:grid;grid-template-columns:260px 1fr;gap:24px}
         .admin-side{background:var(--gc);border:1px solid var(--border);border-radius:20px;padding:24px 16px;height:fit-content;position:sticky;top:96px}
         .admin-side-header{text-align:center;padding-bottom:20px;border-bottom:1px solid var(--border);margin-bottom:16px}
@@ -240,25 +242,19 @@
         .admin-nav a{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;color:var(--ts);text-decoration:none;font-size:13px;font-weight:500;transition:all .2s;cursor:pointer}
         .admin-nav a:hover,.admin-nav a.active{background:rgba(245,158,11,.15);color:var(--t)}
         .admin-nav a.active{background:linear-gradient(135deg,#f59e0b,#fbbf24);color:#000;font-weight:700}
-        .admin-nav .an-icon{font-size:16px;width:22px;text-align:center}
+        .admin-nav .an{font-size:16px;width:22px;text-align:center}
         .admin-main{min-width:0}
-
-        /* Admin Cards */
         .admin-welcome{background:linear-gradient(135deg,#2a1a00,#13131f);border:1px solid rgba(245,158,11,.2);border-radius:20px;padding:32px;margin-bottom:24px;position:relative;overflow:hidden}
         .admin-welcome::after{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;background:#f59e0b;border-radius:50%;filter:blur(80px);opacity:.15}
         .admin-welcome h2{font-family:'Orbitron',sans-serif;font-size:22px;font-weight:800;margin-bottom:8px;position:relative;z-index:1}
         .admin-welcome p{color:var(--ts);font-size:14px;position:relative;z-index:1}
-
         .admin-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
         .a-stat{background:var(--gc);border:1px solid var(--border);border-radius:var(--r);padding:20px;text-align:center;transition:all .3s}
         .a-stat:hover{border-color:rgba(245,158,11,.3);transform:translateY(-2px)}
         .a-stat-val{font-family:'Orbitron',sans-serif;font-size:28px;font-weight:800;color:#f59e0b;margin-bottom:4px}
         .a-stat-label{font-size:12px;color:var(--tm)}
-
         .admin-section{background:var(--gc);border:1px solid var(--border);border-radius:20px;padding:24px;margin-bottom:24px}
         .admin-section h3{font-size:18px;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:10px}
-
-        /* Admin Form */
         .a-form{display:grid;gap:16px}
         .a-field{display:flex;flex-direction:column;gap:6px}
         .a-field label{font-size:12px;font-weight:600;color:var(--ts);text-transform:uppercase;letter-spacing:1px}
@@ -269,7 +265,17 @@
         .a-field textarea{min-height:120px}
         .a-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 
-        /* Image Upload */
+        /* RICH EDITOR */
+        .editor-toolbar{display:flex;flex-wrap:wrap;gap:4px;padding:10px;background:rgba(255,255,255,.03);border:2px solid var(--border);border-bottom:none;border-radius:var(--rs) var(--rs) 0 0}
+        .editor-toolbar button{padding:6px 10px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:6px;color:var(--ts);cursor:pointer;font-size:13px;transition:all .2s;font-family:'Inter',sans-serif}
+        .editor-toolbar button:hover{background:rgba(245,158,11,.15);color:var(--t);border-color:rgba(245,158,11,.3)}
+        .editor-toolbar button.active{background:rgba(245,158,11,.2);color:#fbbf24;border-color:#f59e0b}
+        .editor-toolbar .sep{width:1px;background:var(--border);margin:0 4px}
+        .editor-area{min-height:250px;padding:16px;background:rgba(255,255,255,.05);border:2px solid var(--border);border-top:none;border-radius:0 0 var(--rs) var(--rs);color:var(--t);font-size:15px;line-height:1.8;outline:none;font-family:'Inter',sans-serif}
+        .editor-area:focus{border-color:#f59e0b}
+        .editor-area h1,.editor-area h2,.editor-area h3{color:var(--t);font-family:'Orbitron',sans-serif}
+        .editor-area blockquote{border-left:3px solid var(--p);padding-left:12px;margin:8px 0;color:var(--ts);font-style:italic}
+
         .img-upload{position:relative;border:2px dashed var(--border);border-radius:var(--rs);padding:32px;text-align:center;cursor:pointer;transition:all .3s;overflow:hidden}
         .img-upload:hover{border-color:#f59e0b;background:rgba(245,158,11,.05)}
         .img-upload.has-image{padding:0;border-style:solid}
@@ -282,22 +288,15 @@
         .img-upload.has-image .upload-text{display:none}
         .img-upload .remove-img{position:absolute;top:8px;right:8px;width:32px;height:32px;background:rgba(239,68,68,.9);border:none;border-radius:8px;color:#fff;font-size:16px;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:2}
         .img-upload.has-image .remove-img{display:flex}
-
-        /* Tags input */
         .tags-input-wrap{display:flex;flex-wrap:wrap;gap:8px;padding:10px;background:rgba(255,255,255,.05);border:2px solid var(--border);border-radius:var(--rs);min-height:48px;align-items:center;cursor:text;transition:all .3s}
-        .tags-input-wrap:focus-within{border-color:#f59e0b;box-shadow:0 0 0 4px rgba(245,158,11,.1)}
+        .tags-input-wrap:focus-within{border-color:#f59e0b}
         .tags-input-wrap .tag-pill{display:flex;align-items:center;gap:6px;padding:4px 12px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);border-radius:6px;font-size:12px;color:#fbbf24;font-weight:600}
-        .tags-input-wrap .tag-pill button{background:none;border:none;color:#fbbf24;cursor:pointer;font-size:14px;padding:0;line-height:1}
+        .tags-input-wrap .tag-pill button{background:none;border:none;color:#fbbf24;cursor:pointer;font-size:14px}
         .tags-input-wrap input{flex:1;min-width:100px;background:none;border:none;color:var(--t);font-size:14px;font-family:'Inter',sans-serif;outline:none}
         .tags-input-wrap input::placeholder{color:var(--tm)}
-
         .a-btn{padding:14px 32px;background:linear-gradient(135deg,#f59e0b,#fbbf24);border:none;border-radius:var(--rs);color:#000;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .3s;text-transform:uppercase;letter-spacing:1px}
         .a-btn:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(245,158,11,.3)}
-        .a-btn.danger{background:linear-gradient(135deg,#ef4444,#f87171);color:#fff}
         .a-btn.secondary{background:transparent;border:2px solid var(--border);color:var(--ts);text-transform:none;letter-spacing:0}
-        .a-btn.secondary:hover{border-color:#f59e0b;color:var(--t)}
-
-        /* Admin Table */
         .a-table{width:100%;border-collapse:collapse}
         .a-table th{text-align:left;padding:12px 16px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--tm);border-bottom:2px solid var(--border)}
         .a-table td{padding:14px 16px;font-size:14px;border-bottom:1px solid var(--border);vertical-align:middle}
@@ -305,675 +304,316 @@
         .a-table .thumb{width:48px;height:48px;border-radius:10px;object-fit:cover}
         .a-table .thumb-ph{width:48px;height:48px;border-radius:10px;background:var(--gp);display:flex;align-items:center;justify-content:center;font-size:18px}
         .a-table .status{padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700}
-        .a-table .status.published{background:rgba(16,185,129,.15);color:var(--g)}
-        .a-table .status.draft{background:rgba(245,158,11,.15);color:#f59e0b}
+        .a-table .status.published{background:rgba(16,185,129,.15);color:var(--g)}.a-table .status.draft{background:rgba(245,158,11,.15);color:#f59e0b}
         .a-table .actions{display:flex;gap:8px}
         .a-table .actions button{padding:6px 12px;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--ts);font-size:12px;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif}
         .a-table .actions button:hover{border-color:var(--p);color:var(--t)}
         .a-table .actions button.del:hover{border-color:#ef4444;color:#ef4444}
         .table-scroll{overflow-x:auto}
-        .empty-state{text-align:center;padding:48px;color:var(--tm)}
-        .empty-state span{font-size:48px;display:block;margin-bottom:12px}
+        .empty-state{text-align:center;padding:48px;color:var(--tm)}.empty-state span{font-size:48px;display:block;margin-bottom:12px}
+        .admin-panel{display:none}.admin-panel.active{display:block}
 
-        /* Admin sub-section panels */
-        .admin-panel{display:none}
-        .admin-panel.active{display:block}
-
-        /* MOBILE SIDEBAR */
-        .mob-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9998;opacity:0;transition:opacity .3s}
-        .mob-overlay.show{opacity:1}
-        .mob-side{position:fixed;top:0;left:-300px;width:280px;height:100%;background:var(--card);border-right:1px solid var(--border);z-index:9999;padding:24px;transition:left .3s;overflow-y:auto}
-        .mob-side.show{left:0}
+        /* MOBILE */
+        .mob-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9998;opacity:0;transition:opacity .3s}.mob-overlay.show{opacity:1}
+        .mob-side{position:fixed;top:0;left:-300px;width:280px;height:100%;background:var(--card);border-right:1px solid var(--border);z-index:9999;padding:24px;transition:left .3s;overflow-y:auto}.mob-side.show{left:0}
         .mob-side .m-close{position:absolute;top:16px;right:16px;background:none;border:none;color:var(--ts);font-size:24px;cursor:pointer}
         .mob-side .m-nav{margin-top:48px;display:flex;flex-direction:column;gap:4px}
         .mob-side .m-nav a{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:var(--rs);color:var(--ts);text-decoration:none;font-size:15px;font-weight:500;transition:all .2s;cursor:pointer}
         .mob-side .m-nav a:hover{background:rgba(124,58,237,.15);color:var(--t)}
         .mob-side .m-nav .m-div{height:1px;background:var(--border);margin:8px 0}
-
-        /* TOAST */
         .toast-box{position:fixed;top:90px;right:24px;z-index:10001;display:flex;flex-direction:column;gap:8px}
         .toast{padding:16px 24px;border-radius:14px;font-size:14px;font-weight:500;min-width:280px;display:flex;align-items:center;gap:12px;animation:tIn .3s ease,tOut .3s ease 3.7s forwards;backdrop-filter:blur(20px);border:1px solid}
         .toast.success{background:rgba(16,185,129,.15);border-color:rgba(16,185,129,.3);color:#6ee7b7}
         .toast.error{background:rgba(239,68,68,.15);border-color:rgba(239,68,68,.3);color:#fca5a5}
         .toast.info{background:rgba(59,130,246,.15);border-color:rgba(59,130,246,.3);color:#93c5fd}
         @keyframes tIn{from{transform:translateX(100px);opacity:0}to{transform:translateX(0);opacity:1}}
-        @keyframes tOut{from{transform:translateX(0);opacity:1}to{transform:translateX(100px);opacity:0}}
+        @keyframes tOut{from{opacity:1}to{opacity:0;transform:translateX(100px)}}
 
-        /* RESPONSIVE */
         @media(max-width:1024px){.nav{display:none}.mob-btn{display:flex}.hero-stats{display:none}.hero-title{font-size:36px}.hero-content{padding:32px}.f-top{grid-template-columns:1fr 1fr}.admin-stats{grid-template-columns:repeat(2,1fr)}.admin-layout{grid-template-columns:1fr}.admin-side{display:none}}
-        @media(max-width:768px){.h-bar{height:64px;padding:0 16px}.logo{font-size:24px}.search-box{display:none}.u-info{display:none}main{padding:80px 16px 24px}.hero-card{min-height:320px}.hero-content{padding:24px}.hero-title{font-size:28px}.hero-actions{flex-direction:column;align-items:stretch}.btn-p,.btn-s{justify-content:center}.news-grid{grid-template-columns:1fr}.t-list{grid-template-columns:1fr}.sec-t h2{font-size:20px}.f-top{grid-template-columns:1fr;gap:24px}.f-bottom{flex-direction:column;text-align:center}.login-card{padding:32px 24px}.login-logo h1{font-size:40px}.v-ban{flex-direction:column;text-align:center}.toast{min-width:unset;margin-left:24px}.admin-layout{padding:80px 16px 24px}.a-row{grid-template-columns:1fr}.admin-stats{grid-template-columns:1fr 1fr}.a-table{font-size:12px}.a-table th,.a-table td{padding:10px 8px}}
-        @media(max-width:480px){.hero-title{font-size:24px}.admin-stats{grid-template-columns:1fr}}
+        @media(max-width:768px){.h-bar{height:64px;padding:0 16px}.logo{font-size:24px}.search-box{display:none}.u-info{display:none}main{padding:80px 16px 24px}.hero-card{min-height:300px}.hero-content{padding:24px}.hero-title{font-size:28px}.hero-actions{flex-direction:column;align-items:stretch}.btn-p,.btn-s{justify-content:center}.news-grid{grid-template-columns:1fr}.t-list{grid-template-columns:1fr}.sec-t h2{font-size:20px}.f-top{grid-template-columns:1fr;gap:24px}.f-bottom{flex-direction:column;text-align:center}.login-card{padding:32px 24px}.login-logo h1{font-size:40px}.v-ban{flex-direction:column;text-align:center}.ar-title{font-size:26px}.ar-cover{height:250px}.a-row{grid-template-columns:1fr}.admin-stats{grid-template-columns:1fr 1fr}.editor-toolbar{gap:2px}.editor-toolbar button{padding:4px 8px;font-size:11px}}
+        @media(max-width:480px){.hero-title{font-size:24px}.admin-stats{grid-template-columns:1fr}.ar-title{font-size:22px}}
     </style>
 </head>
 <body>
-
 <div class="bg"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
 <div class="particles" id="particles"></div>
 <div class="toast-box" id="toastBox"></div>
 
 <!-- LOGIN -->
 <div class="login-page" id="loginPage">
-    <div class="bg"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
-    <div class="login-wrap">
-        <div class="login-card">
-            <div class="login-logo"><h1>GG<span>.</span></h1></div>
-            <p class="login-sub">Global Games Portal</p>
-            <div class="login-msg" id="loginMsg"></div>
-            <button class="g-btn" id="googleBtn" onclick="loginWithGoogle()">
-                <div class="spinner"></div>
-                <svg class="g-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-                <span class="g-text">Continuar com Google</span>
-            </button>
-            <div class="divider"><span>ou</span></div>
-            <button class="guest-btn" onclick="enterAsGuest()">👁️ Entrar como Visitante</button>
-            <div class="guest-info"><p>Como visitante você pode <span>navegar</span> e <span>ler matérias</span>, mas algumas funções ficam bloqueadas.</p></div>
-            <p class="login-footer">Ao continuar, concorda com nossos <a href="#">Termos</a> e <a href="#">Privacidade</a></p>
-        </div>
-    </div>
-</div>
+<div class="bg"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
+<div class="login-wrap"><div class="login-card">
+<div class="login-logo"><h1>GG<span>.</span></h1></div>
+<p class="login-sub">Global Games Portal</p>
+<div class="login-msg" id="loginMsg"></div>
+<button class="g-btn" id="googleBtn" onclick="loginWithGoogle()"><div class="spinner"></div><svg class="g-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span class="g-text">Continuar com Google</span></button>
+<div class="divider"><span>ou</span></div>
+<button class="guest-btn" onclick="enterAsGuest()">👁️ Entrar como Visitante</button>
+<div class="guest-info"><p>Como visitante você pode <span>navegar</span> e <span>ler matérias</span>, mas algumas funções ficam bloqueadas.</p></div>
+<p class="login-footer">Ao continuar, concorda com nossos <a href="#">Termos</a> e <a href="#">Privacidade</a></p>
+</div></div></div>
 
-<!-- MOBILE SIDEBAR -->
+<!-- MOBILE -->
 <div class="mob-overlay" id="mobOverlay" onclick="closeMob()"></div>
-<div class="mob-side" id="mobSide">
-    <button class="m-close" onclick="closeMob()">✕</button>
-    <div style="margin-top:8px;text-align:center"><span class="logo">GG<span>.</span></span></div>
-    <div class="m-nav">
-        <a onclick="goPage('home')">🏠 Início</a>
-        <a onclick="goPage('admin')" id="mobAdminLink" style="display:none">⚙️ Painel Admin</a>
-        <div class="m-div"></div>
-        <a href="#">🔥 Em Alta</a><a href="#">🎮 Jogos</a><a href="#">🏆 E-Sports</a>
-        <div class="m-div"></div>
-        <a id="mobAuth" onclick="mobAuthAction()">🚪 Sair</a>
-    </div>
-</div>
+<div class="mob-side" id="mobSide"><button class="m-close" onclick="closeMob()">✕</button><div style="margin-top:8px;text-align:center"><span class="logo">GG<span>.</span></span></div><div class="m-nav"><a onclick="goPage('home')">🏠 Início</a><a onclick="goPage('admin')" id="mobAdminLink" style="display:none">⚙️ Admin</a><div class="m-div"></div><a href="#">🔥 Em Alta</a><a href="#">🎮 Jogos</a><div class="m-div"></div><a id="mobAuth" onclick="mobAuthAction()">🚪 Sair</a></div></div>
 
 <!-- HEADER -->
-<header id="header">
-    <div class="h-bar">
-        <button class="mob-btn" onclick="openMob()">☰</button>
-        <a class="logo" onclick="goPage('home')">GG<span>.</span></a>
-        <nav class="nav">
-            <a onclick="goPage('home')" class="active">Início</a>
-            <a href="#">Em Alta</a><a href="#">Jogos</a><a href="#">E-Sports</a><a href="#">Análises</a>
-            <a onclick="goPage('admin')" id="navAdminLink" style="display:none">⚙️ Admin</a>
-        </nav>
-        <div class="search-box"><input type="text" placeholder="Buscar game ou notícia..." id="searchInput"><span class="si">🔍</span></div>
-        <div class="user-area">
-            <button class="notif-btn">🔔<span class="notif-badge" id="notifCount">3</span></button>
-            <div class="u-profile" onclick="toggleDD()">
-                <div class="u-avatar" id="uAvatar">V</div>
-                <div class="u-info">
-                    <span class="u-name" id="uName">Visitante</span>
-                    <span class="u-role guest" id="uRole">👁️ Visitante</span>
-                </div>
-                <div class="u-dd" id="uDD">
-                    <div class="dd-head"><div class="dd-av" id="ddAv">V</div><div><div class="dd-n" id="ddN">Visitante</div><div class="dd-e" id="ddE">Não logado</div></div></div>
-                    <a onclick="goPage('home')">🏠 Início</a>
-                    <a href="#">👤 Perfil</a>
-                    <div id="ddAdminLink"></div>
-                    <div class="dd-div"></div>
-                    <div id="ddAuth"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+<header id="header"><div class="h-bar">
+<button class="mob-btn" onclick="openMob()">☰</button>
+<a class="logo" onclick="goPage('home')">GG<span>.</span></a>
+<nav class="nav"><a onclick="goPage('home')" class="active">Início</a><a href="#">Em Alta</a><a href="#">Jogos</a><a href="#">E-Sports</a><a onclick="goPage('admin')" id="navAdminLink" style="display:none">⚙️ Admin</a></nav>
+<div class="search-box"><input type="text" placeholder="Buscar..." id="searchInput"><span class="si">🔍</span></div>
+<div class="user-area">
+<button class="notif-btn">🔔<span class="notif-badge">3</span></button>
+<div class="u-profile" onclick="toggleDD()"><div class="u-avatar" id="uAvatar">V</div><div class="u-info"><span class="u-name" id="uName">Visitante</span><span class="u-role guest" id="uRole">👁️ Visitante</span></div>
+<div class="u-dd" id="uDD"><div class="dd-head"><div class="dd-av" id="ddAv">V</div><div><div class="dd-n" id="ddN">Visitante</div><div class="dd-e" id="ddE">Não logado</div></div></div><a onclick="goPage('home')">🏠 Início</a><div id="ddAdminLink"></div><div class="dd-div"></div><div id="ddAuth"></div></div>
+</div></div></div></header>
 
-<!-- HOME PAGE -->
-<div class="page" id="homePage">
-    <main>
-        <div class="v-ban" id="vBanner">
-            <div class="v-ban-text"><span>👁️</span><span>Você está no <strong>modo visitante</strong>. Faça login para desbloquear tudo!</span></div>
-            <div class="v-ban-acts"><button class="v-login" onclick="goLogin()">Fazer Login</button><button class="v-x" onclick="this.closest('.v-ban').classList.remove('show')">✕</button></div>
-        </div>
-        <section class="hero">
-            <div class="hero-card" id="heroCard">
-                <div class="hero-cover" id="heroCover"></div>
-                <div class="hero-fx"><div class="hero-grid"></div><div class="hero-glow p"></div><div class="hero-glow g"></div></div>
-                <div class="hero-stats">
-                    <div class="hero-stat"><div class="hero-stat-v" id="statOnline">2.4M</div><div class="hero-stat-l">Jogadores Online</div></div>
-                    <div class="hero-stat"><div class="hero-stat-v" id="statArticles">0</div><div class="hero-stat-l">Matérias</div></div>
-                </div>
-                <div class="hero-content">
-                    <div class="hero-badge"><span class="pulse"></span>DESTAQUE PRINCIPAL</div>
-                    <h1 class="hero-title" id="heroTitle">BEM-VINDO AO GG.</h1>
-                    <p class="hero-desc" id="heroDesc">Seu portal de notícias gamer com as últimas atualizações, análises e reviews.</p>
-                    <div class="hero-actions"><button class="btn-p">🎮 EXPLORAR</button><button class="btn-s">📺 TRAILERS</button></div>
-                </div>
-            </div>
-        </section>
-        <div class="cats" id="catsStrip"></div>
-        <section>
-            <div class="sec-h"><div class="sec-t"><div class="bar"></div><h2>RADAR GAMER</h2><span class="cnt" id="newsCount">0</span></div><a href="#" class="see-all">Ver todas →</a></div>
-            <div class="news-grid" id="newsGrid"></div>
-            <div class="empty-state" id="emptyNews" style="display:none"><span>📭</span><p>Nenhuma notícia publicada ainda.</p></div>
-        </section>
-    </main>
-    <footer>
-        <div class="f-wrap">
-            <div class="f-top">
-                <div class="f-brand"><span class="logo">GG<span>.</span></span><p>Sua fonte definitiva de notícias gamer.</p></div>
-                <div class="f-links"><h4>Navegação</h4><a href="#">Início</a><a href="#">Notícias</a><a href="#">Análises</a></div>
-                <div class="f-links"><h4>Comunidade</h4><a href="#">Discord</a><a href="#">Fórum</a><a href="#">Eventos</a></div>
-                <div class="f-links"><h4>Suporte</h4><a href="#">Contato</a><a href="#">FAQ</a><a href="#">Termos</a></div>
-            </div>
-            <div class="f-bottom"><p>© 2024 GG - Global Games</p><div class="f-social"><a href="#">🐦</a><a href="#">📸</a><a href="#">🎬</a><a href="#">💬</a></div></div>
-        </div>
-    </footer>
+<!-- HOME -->
+<div class="page" id="homePage"><main>
+<div class="v-ban" id="vBanner"><div class="v-ban-text"><span>👁️</span><span>Modo <strong>visitante</strong>. Faça login para tudo!</span></div><div style="display:flex;gap:10px"><button class="v-login" onclick="goLogin()">Login</button><button class="v-x" onclick="this.closest('.v-ban').classList.remove('show')">✕</button></div></div>
+<section class="hero"><div class="hero-card" id="heroCard" onclick="clickHero()"><div class="hero-cover" id="heroCover"></div><div class="hero-fx"><div class="hero-grid"></div><div class="hero-glow p"></div><div class="hero-glow g"></div></div>
+<div class="hero-stats"><div class="hero-stat"><div class="hero-stat-v" id="statArticles">0</div><div class="hero-stat-l">Matérias</div></div><div class="hero-stat"><div class="hero-stat-v" id="statViews">0</div><div class="hero-stat-l">Views Total</div></div></div>
+<div class="hero-content"><div class="hero-badge"><span class="pulse"></span>DESTAQUE</div><h1 class="hero-title" id="heroTitle">BEM-VINDO AO GG.</h1><p class="hero-desc" id="heroDesc">Seu portal gamer.</p><div class="hero-actions"><button class="btn-p">🎮 EXPLORAR</button><button class="btn-s">📺 TRAILERS</button></div></div></div></section>
+<div class="cats" id="catsStrip"></div>
+<section><div class="sec-h"><div class="sec-t"><div class="bar"></div><h2>RADAR GAMER</h2><span class="cnt" id="newsCount">0</span></div><a href="#" class="see-all">Ver todas →</a></div>
+<div class="news-grid" id="newsGrid"></div><div class="empty-state" id="emptyNews" style="display:none"><span>📭</span><p>Nenhuma notícia publicada.</p></div></section>
+<section class="trending"><div class="sec-h"><div class="sec-t"><div class="bar"></div><h2>🔥 EM ALTA</h2></div></div><div class="t-list" id="trendingList"></div><div class="empty-state" id="emptyTrending" style="display:none"><span>📊</span><p>Matérias aparecerão aqui conforme forem visualizadas.</p></div></section>
+</main>
+<footer><div class="f-wrap"><div class="f-top"><div class="f-brand"><span class="logo">GG<span>.</span></span><p>Sua fonte definitiva de notícias gamer.</p></div><div class="f-links"><h4>Navegação</h4><a href="#">Início</a><a href="#">Notícias</a><a href="#">Análises</a></div><div class="f-links"><h4>Comunidade</h4><a href="#">Discord</a><a href="#">Fórum</a></div><div class="f-links"><h4>Suporte</h4><a href="#">Contato</a><a href="#">FAQ</a><a href="#">Termos</a></div></div><div class="f-bottom"><p>© 2024 GG - Global Games</p><div class="f-social"><a href="#">🐦</a><a href="#">📸</a><a href="#">🎬</a><a href="#">💬</a></div></div></div></footer></div>
+
+<!-- ARTICLE READER -->
+<div class="page" id="articlePage"><div class="article-reader" id="articleReader"></div></div>
+
+<!-- ADMIN -->
+<div class="page" id="adminPage"><div class="admin-layout">
+<aside class="admin-side"><div class="admin-side-header"><h3>⚙️ ADMIN</h3><p>Painel de Controle</p></div>
+<nav class="admin-nav" id="adminNav">
+<a class="active" onclick="adminTab('overview',this)"><span class="an">📊</span>Visão Geral</a>
+<a onclick="adminTab('articles',this)"><span class="an">📰</span>Matérias</a>
+<a onclick="adminTab('new-article',this)"><span class="an">✏️</span>Nova Matéria</a>
+<a onclick="adminTab('categories',this)"><span class="an">📂</span>Categorias</a>
+<a onclick="adminTab('tags',this)"><span class="an">🏷️</span>Tags</a>
+<a onclick="adminTab('pages',this)"><span class="an">📄</span>Páginas</a>
+<a onclick="adminTab('settings',this)"><span class="an">⚙️</span>Config</a>
+<a onclick="goPage('home')"><span class="an">🏠</span>Voltar</a>
+</nav></aside>
+<div class="admin-main">
+<div class="admin-panel active" id="ap-overview"><div class="admin-welcome"><h2>👋 Painel Admin</h2><p>Gerencie seu portal gamer.</p></div><div class="admin-stats"><div class="a-stat"><div class="a-stat-val" id="aStatArt">0</div><div class="a-stat-label">Matérias</div></div><div class="a-stat"><div class="a-stat-val" id="aStatCat">0</div><div class="a-stat-label">Categorias</div></div><div class="a-stat"><div class="a-stat-val" id="aStatTag">0</div><div class="a-stat-label">Tags</div></div><div class="a-stat"><div class="a-stat-val" id="aStatViews">0</div><div class="a-stat-label">Views Total</div></div></div><div class="admin-section"><h3>📰 Últimas Matérias</h3><div class="table-scroll" id="overviewTable"></div></div></div>
+
+<div class="admin-panel" id="ap-articles"><div class="admin-section"><h3>📰 Matérias <button class="a-btn" style="margin-left:auto;padding:8px 20px;font-size:12px" onclick="adminTab('new-article')">+ Nova</button></h3><div class="table-scroll" id="articlesTable"></div></div></div>
+
+<div class="admin-panel" id="ap-new-article"><div class="admin-section"><h3>✏️ <span id="artFormTitle">Nova Matéria</span></h3><div class="a-form">
+<input type="hidden" id="editId" value="">
+<div class="a-field"><label>Título</label><input type="text" id="artTitle" placeholder="Título..."></div>
+<div class="a-field"><label>Resumo</label><input type="text" id="artExcerpt" placeholder="Resumo curto..."></div>
+<div class="a-row"><div class="a-field"><label>Categoria</label><select id="artCat"></select></div><div class="a-field"><label>Status</label><select id="artStatus"><option value="published">Publicado</option><option value="draft">Rascunho</option></select></div></div>
+<div class="a-field"><label>Capa</label><div class="img-upload" id="coverUp"><input type="file" accept="image/*" onchange="imgUp(this,'coverUp','coverPrev')"><img class="preview-img" id="coverPrev"><button class="remove-img" onclick="imgRm(event,'coverUp','coverPrev')">✕</button><div class="upload-text"><span>📸</span>Imagem de capa</div></div></div>
+<div class="a-field"><label>Imagem Extra</label><div class="img-upload" id="extraUp"><input type="file" accept="image/*" onchange="imgUp(this,'extraUp','extraPrev')"><img class="preview-img" id="extraPrev"><button class="remove-img" onclick="imgRm(event,'extraUp','extraPrev')">✕</button><div class="upload-text"><span>🖼️</span>Imagem dentro da matéria (opcional)</div></div></div>
+<div class="a-field"><label>Conteúdo</label>
+<div class="editor-toolbar" id="editorToolbar">
+<button onclick="execCmd('bold')" title="Negrito"><b>B</b></button>
+<button onclick="execCmd('italic')" title="Itálico"><i>I</i></button>
+<button onclick="execCmd('underline')" title="Sublinhado"><u>U</u></button>
+<button onclick="execCmd('strikeThrough')" title="Tachado"><s>S</s></button>
+<div class="sep"></div>
+<button onclick="execCmd('formatBlock','<h2>')" title="Título">H2</button>
+<button onclick="execCmd('formatBlock','<h3>')" title="Subtítulo">H3</button>
+<button onclick="execCmd('formatBlock','<p>')" title="Parágrafo">¶</button>
+<div class="sep"></div>
+<button onclick="execCmd('insertUnorderedList')" title="Lista">• Lista</button>
+<button onclick="execCmd('insertOrderedList')" title="Lista numerada">1. Lista</button>
+<div class="sep"></div>
+<button onclick="execCmd('formatBlock','<blockquote>')" title="Citação">❝ Citação</button>
+<button onclick="execFontSize('2')" title="Texto menor">A<small>⁻</small></button>
+<button onclick="execFontSize('5')" title="Texto maior">A<sup>⁺</sup></button>
+<div class="sep"></div>
+<button onclick="execCmd('removeFormat')" title="Limpar formatação">✕ Limpar</button>
 </div>
-
-<!-- ADMIN PAGE -->
-<div class="page" id="adminPage">
-    <div class="admin-layout">
-        <aside class="admin-side">
-            <div class="admin-side-header"><h3>⚙️ ADMIN</h3><p>Painel de Controle</p></div>
-            <nav class="admin-nav">
-                <a class="active" onclick="adminTab('overview')"><span class="an-icon">📊</span>Visão Geral</a>
-                <a onclick="adminTab('articles')"><span class="an-icon">📰</span>Matérias</a>
-                <a onclick="adminTab('new-article')"><span class="an-icon">✏️</span>Nova Matéria</a>
-                <a onclick="adminTab('categories')"><span class="an-icon">📂</span>Categorias</a>
-                <a onclick="adminTab('tags')"><span class="an-icon">🏷️</span>Tags</a>
-                <a onclick="adminTab('pages')"><span class="an-icon">📄</span>Páginas</a>
-                <a onclick="adminTab('settings')"><span class="an-icon">⚙️</span>Configurações</a>
-                <a onclick="goPage('home')"><span class="an-icon">🏠</span>Voltar ao Site</a>
-            </nav>
-        </aside>
-        <div class="admin-main">
-            <!-- OVERVIEW -->
-            <div class="admin-panel active" id="ap-overview">
-                <div class="admin-welcome"><h2>👋 Painel Administrativo</h2><p>Gerencie seu portal de notícias gamer.</p></div>
-                <div class="admin-stats">
-                    <div class="a-stat"><div class="a-stat-val" id="aStatArticles">0</div><div class="a-stat-label">Matérias</div></div>
-                    <div class="a-stat"><div class="a-stat-val" id="aStatCats">0</div><div class="a-stat-label">Categorias</div></div>
-                    <div class="a-stat"><div class="a-stat-val" id="aStatTags">0</div><div class="a-stat-label">Tags</div></div>
-                    <div class="a-stat"><div class="a-stat-val" id="aStatPages">0</div><div class="a-stat-label">Páginas</div></div>
-                </div>
-                <div class="admin-section"><h3>📰 Últimas Matérias</h3><div class="table-scroll"><table class="a-table" id="overviewTable"><thead><tr><th></th><th>Título</th><th>Categoria</th><th>Status</th><th>Data</th></tr></thead><tbody id="overviewBody"></tbody></table></div><div class="empty-state" id="overviewEmpty"><span>📭</span><p>Nenhuma matéria criada. Clique em "Nova Matéria" para começar!</p></div></div>
-            </div>
-
-            <!-- ARTICLES -->
-            <div class="admin-panel" id="ap-articles">
-                <div class="admin-section">
-                    <h3>📰 Todas as Matérias <button class="a-btn" style="margin-left:auto;padding:8px 20px;font-size:12px" onclick="adminTab('new-article')">+ Nova</button></h3>
-                    <div class="table-scroll"><table class="a-table"><thead><tr><th></th><th>Título</th><th>Categoria</th><th>Status</th><th>Data</th><th>Ações</th></tr></thead><tbody id="articlesBody"></tbody></table></div>
-                    <div class="empty-state" id="articlesEmpty" style="display:none"><span>📭</span><p>Nenhuma matéria.</p></div>
-                </div>
-            </div>
-
-            <!-- NEW ARTICLE -->
-            <div class="admin-panel" id="ap-new-article">
-                <div class="admin-section">
-                    <h3>✏️ <span id="articleFormTitle">Nova Matéria</span></h3>
-                    <div class="a-form">
-                        <input type="hidden" id="editArticleId" value="">
-                        <div class="a-field"><label>Título</label><input type="text" id="artTitle" placeholder="Título da matéria..."></div>
-                        <div class="a-field"><label>Resumo / Subtítulo</label><input type="text" id="artExcerpt" placeholder="Uma linha descrevendo a matéria..."></div>
-                        <div class="a-row">
-                            <div class="a-field"><label>Categoria</label><select id="artCategory"></select></div>
-                            <div class="a-field"><label>Status</label><select id="artStatus"><option value="published">Publicado</option><option value="draft">Rascunho</option></select></div>
-                        </div>
-                        <div class="a-field"><label>Imagem de Capa</label>
-                            <div class="img-upload" id="coverUpload">
-                                <input type="file" accept="image/*" onchange="handleCoverUpload(this)">
-                                <img class="preview-img" id="coverPreview">
-                                <button class="remove-img" onclick="removeCover(event)">✕</button>
-                                <div class="upload-text"><span>📸</span>Clique ou arraste uma imagem<p>JPG, PNG ou WebP (máx. 5MB)</p></div>
-                            </div>
-                        </div>
-                        <div class="a-field"><label>Imagem da Notícia (dentro da matéria)</label>
-                            <div class="img-upload" id="contentImgUpload">
-                                <input type="file" accept="image/*" onchange="handleContentImgUpload(this)">
-                                <img class="preview-img" id="contentImgPreview">
-                                <button class="remove-img" onclick="removeContentImg(event)">✕</button>
-                                <div class="upload-text"><span>🖼️</span>Imagem adicional (opcional)<p>JPG, PNG ou WebP</p></div>
-                            </div>
-                        </div>
-                        <div class="a-field"><label>Conteúdo Completo</label><textarea id="artContent" placeholder="Escreva o conteúdo completo da matéria..."></textarea></div>
-                        <div class="a-field"><label>Tags</label>
-                            <div class="tags-input-wrap" id="artTagsWrap" onclick="document.getElementById('artTagsInput').focus()">
-                                <input type="text" id="artTagsInput" placeholder="Digite e pressione Enter...">
-                            </div>
-                        </div>
-                        <div class="a-field"><label>Autor</label><input type="text" id="artAuthor" placeholder="Nome do autor"></div>
-                        <div class="a-field"><label>Tempo de Leitura</label><input type="text" id="artReadTime" placeholder="Ex: 5 min"></div>
-                        <div style="display:flex;gap:12px">
-                            <button class="a-btn" onclick="saveArticle()">💾 Salvar Matéria</button>
-                            <button class="a-btn secondary" onclick="resetArticleForm();adminTab('articles')">Cancelar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CATEGORIES -->
-            <div class="admin-panel" id="ap-categories">
-                <div class="admin-section">
-                    <h3>📂 Categorias</h3>
-                    <div class="a-form" style="max-width:500px;margin-bottom:24px">
-                        <div class="a-row">
-                            <div class="a-field"><label>Nome</label><input type="text" id="catName" placeholder="Ex: E-Sports"></div>
-                            <div class="a-field"><label>Ícone (emoji)</label><input type="text" id="catIcon" placeholder="Ex: 🏆"></div>
-                        </div>
-                        <div class="a-field"><label>Cor CSS</label><select id="catColor"><option value="esports">Roxo</option><option value="lancamento">Verde</option><option value="analise">Azul</option><option value="atualizacao">Amarelo</option><option value="indie">Rosa</option><option value="hardware">Vermelho</option></select></div>
-                        <button class="a-btn" onclick="saveCategory()" style="width:fit-content">+ Adicionar Categoria</button>
-                    </div>
-                    <div id="catsList"></div>
-                </div>
-            </div>
-
-            <!-- TAGS -->
-            <div class="admin-panel" id="ap-tags">
-                <div class="admin-section">
-                    <h3>🏷️ Tags</h3>
-                    <div class="a-form" style="max-width:400px;margin-bottom:24px">
-                        <div class="a-field"><label>Nova Tag</label><input type="text" id="newTagInput" placeholder="Nome da tag..." onkeypress="if(event.key==='Enter')saveTag()"></div>
-                        <button class="a-btn" onclick="saveTag()" style="width:fit-content">+ Adicionar Tag</button>
-                    </div>
-                    <div id="tagsList" style="display:flex;flex-wrap:wrap;gap:8px"></div>
-                </div>
-            </div>
-
-            <!-- PAGES -->
-            <div class="admin-panel" id="ap-pages">
-                <div class="admin-section">
-                    <h3>📄 Páginas</h3>
-                    <div class="a-form" style="max-width:600px;margin-bottom:24px">
-                        <div class="a-field"><label>Título da Página</label><input type="text" id="pageName" placeholder="Ex: Sobre Nós"></div>
-                        <div class="a-field"><label>Slug (URL)</label><input type="text" id="pageSlug" placeholder="Ex: sobre-nos"></div>
-                        <div class="a-field"><label>Conteúdo</label><textarea id="pageContent" placeholder="Conteúdo da página..."></textarea></div>
-                        <button class="a-btn" onclick="savePage()" style="width:fit-content">+ Criar Página</button>
-                    </div>
-                    <div id="pagesList"></div>
-                </div>
-            </div>
-
-            <!-- SETTINGS -->
-            <div class="admin-panel" id="ap-settings">
-                <div class="admin-section">
-                    <h3>⚙️ Configurações do Site</h3>
-                    <div class="a-form" style="max-width:600px">
-                        <div class="a-field"><label>Nome do Site</label><input type="text" id="setSiteName" placeholder="GG. - Global Games"></div>
-                        <div class="a-field"><label>Descrição</label><textarea id="setSiteDesc" placeholder="Descrição do site..." style="min-height:80px"></textarea></div>
-                        <div class="a-field"><label>Título do Hero</label><input type="text" id="setHeroTitle" placeholder="Título principal"></div>
-                        <div class="a-field"><label>Descrição do Hero</label><input type="text" id="setHeroDesc" placeholder="Subtítulo"></div>
-                        <div class="a-field"><label>Imagem de Capa do Hero</label>
-                            <div class="img-upload" id="heroImgUpload">
-                                <input type="file" accept="image/*" onchange="handleHeroImgUpload(this)">
-                                <img class="preview-img" id="heroImgPreview">
-                                <button class="remove-img" onclick="removeHeroImg(event)">✕</button>
-                                <div class="upload-text"><span>🖼️</span>Imagem de fundo do hero<p>Recomendado: 1920x600</p></div>
-                            </div>
-                        </div>
-                        <button class="a-btn" onclick="saveSettings()">💾 Salvar Configurações</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="editor-area" id="editorArea" contenteditable="true"></div>
 </div>
+<div class="a-field"><label>Tags</label><div class="tags-input-wrap" id="artTagsWrap" onclick="document.getElementById('artTagsIn').focus()"><input type="text" id="artTagsIn" placeholder="Enter para adicionar..."></div></div>
+<div class="a-row"><div class="a-field"><label>Autor</label><input type="text" id="artAuthor" placeholder="Nome"></div><div class="a-field"><label>Leitura</label><input type="text" id="artRead" placeholder="5 min"></div></div>
+<div style="display:flex;gap:12px"><button class="a-btn" onclick="saveArticle()">💾 Salvar</button><button class="a-btn secondary" onclick="resetForm();adminTab('articles')">Cancelar</button></div>
+</div></div></div>
+
+<div class="admin-panel" id="ap-categories"><div class="admin-section"><h3>📂 Categorias</h3><div class="a-form" style="max-width:500px;margin-bottom:24px"><div class="a-row"><div class="a-field"><label>Nome</label><input type="text" id="catName" placeholder="E-Sports"></div><div class="a-field"><label>Ícone</label><input type="text" id="catIcon" placeholder="🏆"></div></div><div class="a-field"><label>Cor</label><select id="catColor"><option value="esports">Roxo</option><option value="lancamento">Verde</option><option value="analise">Azul</option><option value="atualizacao">Amarelo</option><option value="indie">Rosa</option><option value="hardware">Vermelho</option></select></div><button class="a-btn" onclick="saveCat()" style="width:fit-content">+ Adicionar</button></div><div id="catsList"></div></div></div>
+
+<div class="admin-panel" id="ap-tags"><div class="admin-section"><h3>🏷️ Tags</h3><div class="a-form" style="max-width:400px;margin-bottom:24px"><div class="a-field"><label>Nova Tag</label><input type="text" id="newTagIn" placeholder="Tag..." onkeypress="if(event.key==='Enter')saveTagAdmin()"></div><button class="a-btn" onclick="saveTagAdmin()" style="width:fit-content">+ Adicionar</button></div><div id="tagsList" style="display:flex;flex-wrap:wrap;gap:8px"></div></div></div>
+
+<div class="admin-panel" id="ap-pages"><div class="admin-section"><h3>📄 Páginas</h3><div class="a-form" style="max-width:600px;margin-bottom:24px"><div class="a-field"><label>Título</label><input type="text" id="pgName" placeholder="Sobre Nós"></div><div class="a-field"><label>Slug</label><input type="text" id="pgSlug" placeholder="sobre-nos"></div><div class="a-field"><label>Conteúdo</label><textarea id="pgContent" placeholder="Conteúdo..."></textarea></div><button class="a-btn" onclick="savePg()" style="width:fit-content">+ Criar</button></div><div id="pgList"></div></div></div>
+
+<div class="admin-panel" id="ap-settings"><div class="admin-section"><h3>⚙️ Configurações</h3><div class="a-form" style="max-width:600px"><div class="a-field"><label>Nome do Site</label><input type="text" id="setName" placeholder="GG."></div><div class="a-field"><label>Descrição</label><textarea id="setDesc" style="min-height:80px"></textarea></div><div class="a-field"><label>Hero Título</label><input type="text" id="setHeroT"></div><div class="a-field"><label>Hero Descrição</label><input type="text" id="setHeroD"></div><div class="a-field"><label>Hero Imagem</label><div class="img-upload" id="heroUp"><input type="file" accept="image/*" onchange="imgUp(this,'heroUp','heroPrev')"><img class="preview-img" id="heroPrev"><button class="remove-img" onclick="imgRm(event,'heroUp','heroPrev')">✕</button><div class="upload-text"><span>🖼️</span>Fundo do hero (1920x600)</div></div></div><button class="a-btn" onclick="saveSettings()">💾 Salvar</button></div></div></div>
+</div></div></div>
 
 <script>
-// ═══ CONFIG ═══
-const GOOGLE_CLIENT_ID='990622112342-63jj23kj8tv13m1qt770ojn0hqb2ib3v.apps.googleusercontent.com';
-const ADMIN_EMAIL='ggglobalgamesgg@gmail.com';
+const GID='990622112342-63jj23kj8tv13m1qt770ojn0hqb2ib3v.apps.googleusercontent.com',ADMIN='ggglobalgamesgg@gmail.com';
+let cUser=null,isGuest=false,isAdm=false,artTags=[];
+const DB={g:(k,d)=>{try{return JSON.parse(localStorage.getItem('gg_'+k))||d}catch(e){return d}},s:(k,v)=>localStorage.setItem('gg_'+k,JSON.stringify(v)),d:k=>localStorage.removeItem('gg_'+k)};
 
-let currentUser=null,isGuest=false,isAdmin=false;
-let articleTags=[];
+// INIT DB
+(function(){if(!DB.g('cats',null))DB.s('cats',[{id:1,name:'E-Sports',icon:'🏆',color:'esports'},{id:2,name:'Lançamento',icon:'🚀',color:'lancamento'},{id:3,name:'Análise',icon:'🎬',color:'analise'},{id:4,name:'Atualização',icon:'🔄',color:'atualizacao'},{id:5,name:'Indie',icon:'🕹️',color:'indie'},{id:6,name:'Hardware',icon:'💻',color:'hardware'}]);if(!DB.g('tags',null))DB.s('tags',['FPS','RPG','MOBA','Battle Royale','Ação','Aventura']);if(!DB.g('articles',null))DB.s('articles',[]);if(!DB.g('pages',null))DB.s('pages',[]);if(!DB.g('settings',null))DB.s('settings',{siteName:'GG.',siteDesc:'Portal Gamer',heroTitle:'BEM-VINDO AO GG.',heroDesc:'Seu portal gamer com as últimas novidades.',heroImage:''});if(!DB.g('views',null))DB.s('views',{})})();
 
-// ═══ DATABASE (LocalStorage) ═══
-const DB={
-    get:(k,d=[])=>{ try{return JSON.parse(localStorage.getItem('gg_'+k))||d}catch(e){return d}},
-    set:(k,v)=>localStorage.setItem('gg_'+k,JSON.stringify(v)),
-    del:k=>localStorage.removeItem('gg_'+k)
-};
+// PARTICLES
+(function(){const c=document.getElementById('particles');for(let i=0;i<20;i++){const p=document.createElement('div');p.classList.add('particle');p.style.left=Math.random()*100+'%';p.style.animationDuration=(Math.random()*15+10)+'s';p.style.animationDelay=(Math.random()*15)+'s';const s=(Math.random()*3+1)+'px';p.style.width=s;p.style.height=s;if(Math.random()>.5)p.style.background='#10b981';c.appendChild(p)}})();
 
-// Init default data
-(function initDB(){
-    if(!DB.get('categories',null)){
-        DB.set('categories',[
-            {id:1,name:'E-Sports',icon:'🏆',color:'esports'},
-            {id:2,name:'Lançamento',icon:'🚀',color:'lancamento'},
-            {id:3,name:'Análise',icon:'🎬',color:'analise'},
-            {id:4,name:'Atualização',icon:'🔄',color:'atualizacao'},
-            {id:5,name:'Indie',icon:'🕹️',color:'indie'},
-            {id:6,name:'Hardware',icon:'💻',color:'hardware'}
-        ]);
-    }
-    if(!DB.get('tags',null)){DB.set('tags',['FPS','RPG','MOBA','Battle Royale','Ação','Aventura','Estratégia','MMO','Simulação','Corrida'])}
-    if(!DB.get('articles',null)){DB.set('articles',[])}
-    if(!DB.get('pages',null)){DB.set('pages',[])}
-    if(!DB.get('settings',null)){DB.set('settings',{siteName:'GG. - Global Games',siteDesc:'Portal de Notícias Gamer',heroTitle:'BEM-VINDO AO GG.',heroDesc:'Seu portal de notícias gamer com as últimas atualizações, análises e reviews.',heroImage:''})}
-})();
+// GOOGLE
+function initG(){if(typeof google!=='undefined'&&google.accounts)google.accounts.id.initialize({client_id:GID,callback:gRes,auto_select:false})}
+window.addEventListener('load',()=>setTimeout(initG,500));
+function loginWithGoogle(){const b=document.getElementById('googleBtn');b.classList.add('loading');showLM('Conectando...','info');if(typeof google!=='undefined'&&google.accounts&&google.accounts.id){try{google.accounts.id.prompt(n=>{if(n.isNotDisplayed()||n.isSkippedMoment())gFallback(b);else if(n.isDismissedMoment()){b.classList.remove('loading');hideLM()}})}catch(e){gFallback(b)}}else gFallback(b)}
+function gFallback(b){const r=location.href.split('?')[0].split('#')[0],u='https://accounts.google.com/o/oauth2/v2/auth?client_id='+encodeURIComponent(GID)+'&redirect_uri='+encodeURIComponent(r)+'&response_type=token&scope='+encodeURIComponent('openid email profile')+'&prompt=select_account';const w=500,h=600,l=(screen.width-w)/2,t=(screen.height-h)/2;const p=window.open(u,'GL',`width=${w},height=${h},left=${l},top=${t}`);if(!p){b.classList.remove('loading');showLM('Permita popups!','error');return}const ci=setInterval(()=>{try{if(p.closed){clearInterval(ci);b.classList.remove('loading');hideLM();return}if(p.location.href.includes('access_token')){const tk=new URLSearchParams(p.location.hash.substring(1)).get('access_token');p.close();clearInterval(ci);tk?fetchGU(tk,b):(b.classList.remove('loading'),showLM('Erro.','error'))}}catch(e){}},300)}
+function fetchGU(tk,b){fetch('https://www.googleapis.com/oauth2/v3/userinfo',{headers:{Authorization:'Bearer '+tk}}).then(r=>r.json()).then(d=>{b.classList.remove('loading');doLogin({name:d.name||'Gamer',email:d.email||'',picture:d.picture||null})}).catch(()=>{b.classList.remove('loading');showLM('Erro.','error')})}
+function gRes(r){document.getElementById('googleBtn').classList.remove('loading');try{const p=JSON.parse(atob(r.credential.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));doLogin({name:p.name||'Gamer',email:p.email||'',picture:p.picture||null})}catch(e){showLM('Erro.','error')}}
 
-// ═══ PARTICLES ═══
-(function(){const c=document.getElementById('particles');for(let i=0;i<25;i++){const p=document.createElement('div');p.classList.add('particle');p.style.left=Math.random()*100+'%';p.style.animationDuration=(Math.random()*15+10)+'s';p.style.animationDelay=(Math.random()*15)+'s';const s=(Math.random()*3+1)+'px';p.style.width=s;p.style.height=s;if(Math.random()>.5)p.style.background='#10b981';c.appendChild(p)}})();
+// AUTH
+function enterAsGuest(){isGuest=true;cUser=null;isAdm=false;DB.s('mode','guest');DB.d('user');toast('Bem-vindo! 👁️','info');document.getElementById('loginPage').classList.add('hidden');document.getElementById('homePage').classList.add('active');uiGuest();render()}
+function doLogin(u){cUser=u;isGuest=false;isAdm=(u.email===ADMIN);DB.s('user',u);DB.s('mode','logged');toast(`Bem-vindo, ${u.name}! 🎮`,'success');document.getElementById('loginPage').classList.add('hidden');document.getElementById('homePage').classList.add('active');isAdm?uiAdmin(u):uiUser(u);render()}
+function logout(){cUser=null;isGuest=false;isAdm=false;DB.d('user');DB.d('mode');if(typeof google!=='undefined'&&google.accounts)try{google.accounts.id.disableAutoSelect()}catch(e){}document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('loginPage').classList.remove('hidden');closeDD();toast('Até mais! 👋','info')}
+function goLogin(){closeDD();closeMob();document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('loginPage').classList.remove('hidden')}
+function mobAuthAction(){closeMob();cUser?logout():goLogin()}
+function avH(u){return u&&u.picture?`<img src="${u.picture}" referrerpolicy="no-referrer">`:(u&&u.name||'G').charAt(0).toUpperCase()}
 
-// ═══ GOOGLE LOGIN ═══
-function initGoogle(){if(typeof google!=='undefined'&&google.accounts){google.accounts.id.initialize({client_id:GOOGLE_CLIENT_ID,callback:handleGoogleResponse,auto_select:false})}}
-window.addEventListener('load',()=>setTimeout(initGoogle,500));
+function uiUser(u){const a=avH(u);document.getElementById('uAvatar').innerHTML=a;document.getElementById('uName').textContent=u.name;const r=document.getElementById('uRole');r.textContent='🎮 Membro';r.className='u-role member';document.getElementById('ddAv').innerHTML=a;document.getElementById('ddN').textContent=u.name;document.getElementById('ddE').textContent=u.email;document.getElementById('ddAuth').innerHTML='<button class="dd-out" onclick="logout()">🚪 Sair</button>';document.getElementById('ddAdminLink').innerHTML='';document.getElementById('navAdminLink').style.display='none';document.getElementById('mobAdminLink').style.display='none';document.getElementById('vBanner').classList.remove('show');document.querySelectorAll('.restricted').forEach(e=>e.classList.remove('show'));const m=document.getElementById('mobAuth');m.textContent='🚪 Sair';m.style.color='#ef4444';m.onclick=()=>{closeMob();logout()}}
+function uiAdmin(u){uiUser(u);const r=document.getElementById('uRole');r.textContent='👑 Admin';r.className='u-role admin';document.getElementById('ddAdminLink').innerHTML='<a class="dd-admin" onclick="goPage(\'admin\')">⚙️ Admin</a>';document.getElementById('navAdminLink').style.display='';document.getElementById('mobAdminLink').style.display=''}
+function uiGuest(){document.getElementById('uAvatar').innerHTML='👁️';document.getElementById('uName').textContent='Visitante';const r=document.getElementById('uRole');r.textContent='👁️ Visitante';r.className='u-role guest';document.getElementById('ddAv').innerHTML='👁️';document.getElementById('ddN').textContent='Visitante';document.getElementById('ddE').textContent='Não logado';document.getElementById('ddAuth').innerHTML='<button class="dd-in" onclick="goLogin()">🔑 Login</button>';document.getElementById('ddAdminLink').innerHTML='';document.getElementById('navAdminLink').style.display='none';document.getElementById('mobAdminLink').style.display='none';document.getElementById('vBanner').classList.add('show');const m=document.getElementById('mobAuth');m.textContent='🔑 Login';m.style.color='#10b981';m.onclick=()=>{closeMob();goLogin()}}
 
-function loginWithGoogle(){
-    const btn=document.getElementById('googleBtn');btn.classList.add('loading');showLMsg('Conectando...','info');
-    if(typeof google!=='undefined'&&google.accounts&&google.accounts.id){
-        try{google.accounts.id.prompt(n=>{if(n.isNotDisplayed()||n.isSkippedMoment())fallbackGoogle(btn);else if(n.isDismissedMoment()){btn.classList.remove('loading');hideLMsg()}})}catch(e){fallbackGoogle(btn)}
-    }else fallbackGoogle(btn);
-}
+// NAV
+function goPage(p){closeMob();closeDD();document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));if(p==='home')document.getElementById('homePage').classList.add('active');else if(p==='admin'&&isAdm){document.getElementById('adminPage').classList.add('active');refreshAdmin()}else if(p==='article')document.getElementById('articlePage').classList.add('active');else document.getElementById('homePage').classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
 
-function fallbackGoogle(btn){
-    const r=window.location.href.split('?')[0].split('#')[0];
-    const url='https://accounts.google.com/o/oauth2/v2/auth?client_id='+encodeURIComponent(GOOGLE_CLIENT_ID)+'&redirect_uri='+encodeURIComponent(r)+'&response_type=token&scope='+encodeURIComponent('openid email profile')+'&prompt=select_account';
-    const w=500,h=600,l=(screen.width-w)/2,t=(screen.height-h)/2;
-    const popup=window.open(url,'GL',`width=${w},height=${h},left=${l},top=${t}`);
-    if(!popup){btn.classList.remove('loading');showLMsg('Permita popups!','error');return}
-    const ci=setInterval(()=>{try{if(popup.closed){clearInterval(ci);btn.classList.remove('loading');hideLMsg();return}const u=popup.location.href;if(u&&u.includes('access_token')){const p=new URLSearchParams(popup.location.hash.substring(1));const tk=p.get('access_token');popup.close();clearInterval(ci);if(tk)fetchGUser(tk,btn);else{btn.classList.remove('loading');showLMsg('Erro no token.','error')}}}catch(e){}},300);
-}
+// VIEWS SYSTEM
+function addView(id){const v=DB.g('views',{});const key='v_'+id;const viewed=DB.g('viewed_'+id,false);if(!viewed){v[id]=(v[id]||0)+1;DB.s('views',v);DB.s('viewed_'+id,true)}return v[id]||0}
+function getViews(id){return DB.g('views',{})[id]||0}
+function getTotalViews(){const v=DB.g('views',{});return Object.values(v).reduce((a,b)=>a+b,0)}
+function formatNum(n){if(n>=1000000)return(n/1000000).toFixed(1)+'M';if(n>=1000)return(n/1000).toFixed(1)+'k';return n}
 
-function fetchGUser(tk,btn){
-    fetch('https://www.googleapis.com/oauth2/v3/userinfo',{headers:{Authorization:'Bearer '+tk}})
-    .then(r=>r.json()).then(d=>{btn.classList.remove('loading');completeLogin({name:d.name||'Gamer',email:d.email||'',picture:d.picture||null,provider:'google'})})
-    .catch(()=>{btn.classList.remove('loading');showLMsg('Erro ao carregar perfil.','error')});
-}
+// RENDER
+function render(){renderCats();renderNews();renderTrending();renderHero();updateStats()}
 
-function handleGoogleResponse(r){
-    const btn=document.getElementById('googleBtn');btn.classList.remove('loading');
-    try{const p=JSON.parse(atob(r.credential.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));
-    completeLogin({name:p.name||'Gamer',email:p.email||'',picture:p.picture||null,provider:'google'})}catch(e){showLMsg('Erro no login.','error')}
-}
-
-// ═══ AUTH ═══
-function enterAsGuest(){isGuest=true;currentUser=null;isAdmin=false;DB.set('mode','guest');DB.del('user');toast('Bem-vindo, visitante! 👁️','info');document.getElementById('loginPage').classList.add('hidden');document.getElementById('homePage').classList.add('active');uiGuest();renderSite()}
-function completeLogin(u){currentUser=u;isGuest=false;isAdmin=(u.email===ADMIN_EMAIL);DB.set('user',u);DB.set('mode','logged');toast(`Bem-vindo, ${u.name}! 🎮`,'success');document.getElementById('loginPage').classList.add('hidden');document.getElementById('homePage').classList.add('active');isAdmin?uiAdmin(u):uiUser(u);renderSite()}
-function logout(){currentUser=null;isGuest=false;isAdmin=false;DB.del('user');DB.del('mode');if(typeof google!=='undefined'&&google.accounts)try{google.accounts.id.disableAutoSelect()}catch(e){}document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('loginPage').classList.remove('hidden');closeDD();toast('Até mais! 👋','info')}
-function goLogin(){closeDD();closeMob();document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('loginPage').classList.remove('hidden');isGuest=false;DB.del('mode')}
-function mobAuthAction(){closeMob();currentUser?logout():goLogin()}
-
-function avHTML(u){return u.picture?`<img src="${u.picture}" referrerpolicy="no-referrer">`:(u.name||'G').charAt(0).toUpperCase()}
-
-function uiUser(u){
-    const av=avHTML(u);
-    document.getElementById('uAvatar').innerHTML=av;document.getElementById('uName').textContent=u.name;
-    const r=document.getElementById('uRole');r.textContent='🎮 Membro';r.className='u-role member';
-    document.getElementById('ddAv').innerHTML=av;document.getElementById('ddN').textContent=u.name;document.getElementById('ddE').textContent=u.email;
-    document.getElementById('ddAuth').innerHTML=`<button class="dd-out" onclick="logout()">🚪 Sair</button>`;
-    document.getElementById('ddAdminLink').innerHTML='';
-    document.getElementById('navAdminLink').style.display='none';document.getElementById('mobAdminLink').style.display='none';
-    document.getElementById('vBanner').classList.remove('show');
-    document.querySelectorAll('.restricted').forEach(el=>el.classList.remove('show'));
-    const mb=document.getElementById('mobAuth');mb.textContent='🚪 Sair';mb.style.color='#ef4444';mb.onclick=()=>{closeMob();logout()};
-}
-
-function uiAdmin(u){
-    uiUser(u);
-    const r=document.getElementById('uRole');r.textContent='👑 Admin';r.className='u-role admin';
-    document.getElementById('ddAdminLink').innerHTML=`<a class="dd-admin" onclick="goPage('admin')">⚙️ Painel Admin</a>`;
-    document.getElementById('navAdminLink').style.display='';document.getElementById('mobAdminLink').style.display='';
-}
-
-function uiGuest(){
-    document.getElementById('uAvatar').innerHTML='👁️';document.getElementById('uName').textContent='Visitante';
-    const r=document.getElementById('uRole');r.textContent='👁️ Visitante';r.className='u-role guest';
-    document.getElementById('ddAv').innerHTML='👁️';document.getElementById('ddN').textContent='Visitante';document.getElementById('ddE').textContent='Não logado';
-    document.getElementById('ddAuth').innerHTML=`<button class="dd-in" onclick="goLogin()">🔑 Fazer Login</button>`;
-    document.getElementById('ddAdminLink').innerHTML='';
-    document.getElementById('navAdminLink').style.display='none';document.getElementById('mobAdminLink').style.display='none';
-    document.getElementById('vBanner').classList.add('show');
-    document.querySelectorAll('.restricted').forEach(el=>el.classList.add('show'));
-    const mb=document.getElementById('mobAuth');mb.textContent='🔑 Login';mb.style.color='#10b981';mb.onclick=()=>{closeMob();goLogin()};
-}
-
-// ═══ NAVIGATION ═══
-function goPage(p){closeMob();closeDD();document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
-    if(p==='home')document.getElementById('homePage').classList.add('active');
-    else if(p==='admin'&&isAdmin){document.getElementById('adminPage').classList.add('active');refreshAdminData()}
-    else{document.getElementById('homePage').classList.add('active')}
-    window.scrollTo({top:0,behavior:'smooth'});
-}
-
-// ═══ RENDER SITE ═══
-function renderSite(){renderCategories();renderNews();renderHero();updateAdminStats()}
-
-function renderCategories(){
-    const cats=DB.get('categories');const strip=document.getElementById('catsStrip');
-    strip.innerHTML='<div class="chip active">🔥 Todos</div>'+cats.map(c=>`<div class="chip">${c.icon} ${c.name}</div>`).join('');
-    strip.querySelectorAll('.chip').forEach(ch=>ch.addEventListener('click',()=>{strip.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));ch.classList.add('active')}));
-}
+function renderCats(){const cats=DB.g('cats',[]);document.getElementById('catsStrip').innerHTML='<div class="chip active">🔥 Todos</div>'+cats.map(c=>`<div class="chip">${c.icon} ${c.name}</div>`).join('');document.querySelectorAll('#catsStrip .chip').forEach(ch=>ch.addEventListener('click',()=>{document.querySelectorAll('#catsStrip .chip').forEach(x=>x.classList.remove('active'));ch.classList.add('active')}))}
 
 function renderNews(){
-    const articles=DB.get('articles').filter(a=>a.status==='published').sort((a,b)=>b.id-a.id);
-    const grid=document.getElementById('newsGrid');const empty=document.getElementById('emptyNews');
-    document.getElementById('newsCount').textContent=articles.length;
-    document.getElementById('statArticles').textContent=articles.length;
-    if(!articles.length){grid.innerHTML='';empty.style.display='block';return}
-    empty.style.display='none';
-    grid.innerHTML=articles.map((a,i)=>{
-        const cats=DB.get('categories');const cat=cats.find(c=>c.id==a.categoryId)||{name:'Geral',color:'esports',icon:'📰'};
-        const imgHTML=a.coverImage?`<img src="${a.coverImage}" alt="${a.title}">`:`<div class="ph purple">${cat.icon}</div>`;
-        const tagsHTML=a.tags&&a.tags.length?`<div class="n-tags">${a.tags.map(t=>`<span class="n-tag">${t}</span>`).join('')}</div>`:'';
-        const restricted=isGuest&&i>=3?`<div class="restricted show"><span class="ri">🔒</span><p>Conteúdo exclusivo</p><button class="rb" onclick="goLogin()">Fazer Login</button></div>`:'';
-        const authorAv=currentUser&&currentUser.picture?`<img src="${currentUser.picture}" referrerpolicy="no-referrer">`:(a.author||'A').charAt(0);
-        return`<article class="n-card">${restricted}<div class="n-img">${imgHTML}<span class="n-cat ${cat.color}">${cat.name}</span><span class="n-time">${a.readTime||'3 min'}</span></div><div class="n-body"><h3 class="n-title">${a.title}</h3><p class="n-excerpt">${a.excerpt||''}</p><div class="n-footer"><div class="n-author"><div class="n-author-av">${authorAv}</div><div><span class="n-author-name">${a.author||'Redação'}</span><br><span class="n-date">${timeAgo(a.id)}</span></div></div><div class="n-engage"><span>❤️ ${Math.floor(Math.random()*5000)}</span><span>💬 ${Math.floor(Math.random()*300)}</span></div></div>${tagsHTML}</div></article>`;
-    }).join('');
+    const arts=DB.g('articles',[]).filter(a=>a.status==='published').sort((a,b)=>b.id-a.id);const cats=DB.g('cats',[]);const grid=document.getElementById('newsGrid');
+    document.getElementById('newsCount').textContent=arts.length;document.getElementById('statArticles').textContent=arts.length;document.getElementById('statViews').textContent=formatNum(getTotalViews());
+    if(!arts.length){grid.innerHTML='';document.getElementById('emptyNews').style.display='block';return}
+    document.getElementById('emptyNews').style.display='none';
+    grid.innerHTML=arts.map((a,i)=>{const cat=cats.find(c=>c.id==a.categoryId)||{name:'Geral',color:'esports',icon:'📰'};const views=getViews(a.id);
+    const img=a.coverImage?`<img src="${a.coverImage}" alt="${a.title}">`:`<div class="ph purple">${cat.icon}</div>`;
+    const tags=a.tags&&a.tags.length?`<div class="n-tags">${a.tags.slice(0,3).map(t=>`<span class="n-tag">${t}</span>`).join('')}</div>`:'';
+    const restr=isGuest&&i>=3?`<div class="restricted show"><span class="ri">🔒</span><p>Exclusivo</p><button class="rb" onclick="event.stopPropagation();goLogin()">Login</button></div>`:'';
+    return`<article class="n-card" onclick="openArticle(${a.id})">${restr}<div class="n-img">${img}<span class="n-cat ${cat.color}">${cat.name}</span><span class="n-time">${a.readTime||'3 min'}</span>${views?`<span class="n-views">👁️ ${formatNum(views)}</span>`:''}</div><div class="n-body"><h3 class="n-title">${a.title}</h3><p class="n-excerpt">${a.excerpt||''}</p><div class="n-footer"><div class="n-author"><div class="n-author-av">${(a.author||'R').charAt(0)}</div><div><span class="n-author-name">${a.author||'Redação'}</span><br><span class="n-date">${timeAgo(a.id)}</span></div></div><div class="n-engage"><span>👁️ ${formatNum(views)}</span></div></div>${tags}</div></article>`}).join('');
 }
 
-function renderHero(){
-    const s=DB.get('settings',{});
-    document.getElementById('heroTitle').textContent=s.heroTitle||'BEM-VINDO AO GG.';
-    document.getElementById('heroDesc').textContent=s.heroDesc||'Seu portal de notícias gamer.';
-    const cover=document.getElementById('heroCover');
-    if(s.heroImage){cover.style.backgroundImage=`url(${s.heroImage})`;cover.style.opacity='.4'}else{cover.style.backgroundImage='';cover.style.opacity='0'}
-    document.title=s.siteName||'GG. - Global Games';
+function renderTrending(){
+    const arts=DB.g('articles',[]).filter(a=>a.status==='published');const v=DB.g('views',{});const cats=DB.g('cats',[]);
+    const sorted=arts.map(a=>({...a,views:v[a.id]||0})).filter(a=>a.views>0).sort((a,b)=>b.views-a.views).slice(0,6);
+    const list=document.getElementById('trendingList');
+    if(!sorted.length){list.innerHTML='';document.getElementById('emptyTrending').style.display='block';return}
+    document.getElementById('emptyTrending').style.display='none';
+    const ranks=['gold','silver','bronze','normal','normal','normal'];
+    list.innerHTML=sorted.map((a,i)=>{const cat=cats.find(c=>c.id==a.categoryId)||{icon:'📰'};
+    const thumb=a.coverImage?`<img src="${a.coverImage}">`:`${cat.icon}`;
+    return`<div class="t-item" onclick="openArticle(${a.id})"><span class="t-rank ${ranks[i]}">${String(i+1).padStart(2,'0')}</span><div style="flex:1"><div class="t-title">${a.title}</div><div class="t-meta"><span>👁️</span><span class="up">${formatNum(a.views)} views</span><span>• ${timeAgo(a.id)}</span></div></div><div class="t-thumb" style="background:rgba(124,58,237,.15)">${thumb}</div></div>`}).join('');
 }
 
-function timeAgo(ts){const d=Date.now()-ts;const m=Math.floor(d/60000);if(m<60)return`Há ${m} min`;const h=Math.floor(m/60);if(h<24)return`Há ${h}h`;return`Há ${Math.floor(h/24)}d`}
+function renderHero(){const s=DB.g('settings',{});document.getElementById('heroTitle').textContent=s.heroTitle||'BEM-VINDO AO GG.';document.getElementById('heroDesc').textContent=s.heroDesc||'Seu portal gamer.';const c=document.getElementById('heroCover');if(s.heroImage){c.style.backgroundImage=`url(${s.heroImage})`;c.style.opacity='.35'}else{c.style.backgroundImage='';c.style.opacity='0'}document.title=s.siteName||'GG.'}
 
-// ═══ ADMIN FUNCTIONS ═══
-function adminTab(tab){
-    document.querySelectorAll('.admin-panel').forEach(p=>p.classList.remove('active'));
-    document.getElementById('ap-'+tab).classList.add('active');
-    document.querySelectorAll('.admin-nav a').forEach(a=>a.classList.remove('active'));
-    event.target.closest('a')?.classList.add('active');
-    if(tab==='new-article'){resetArticleForm();loadCategorySelect()}
-    if(tab==='articles')renderArticlesTable();
-    if(tab==='categories')renderCategoriesAdmin();
-    if(tab==='tags')renderTagsAdmin();
-    if(tab==='pages')renderPagesAdmin();
-    if(tab==='settings')loadSettings();
-    if(tab==='overview')refreshAdminData();
+function clickHero(){const arts=DB.g('articles',[]).filter(a=>a.status==='published').sort((a,b)=>b.id-a.id);if(arts.length)openArticle(arts[0].id)}
+
+// OPEN ARTICLE (READER)
+function openArticle(id){
+    if(isGuest){const arts=DB.g('articles',[]).filter(a=>a.status==='published').sort((a,b)=>b.id-a.id);const idx=arts.findIndex(a=>a.id===id);if(idx>=3){goLogin();return}}
+    const a=DB.g('articles',[]).find(x=>x.id===id);if(!a)return;
+    const views=addView(id);const cats=DB.g('cats',[]);const cat=cats.find(c=>c.id==a.categoryId)||{name:'Geral',color:'esports',icon:'📰'};
+    const coverHTML=a.coverImage?`<img src="${a.coverImage}" alt="${a.title}">`:`<div class="ph purple" style="font-size:80px">${cat.icon}</div>`;
+    const contentImgHTML=a.contentImage?`<div class="ar-content-img"><img src="${a.contentImage}" alt=""></div>`:'';
+    const tagsHTML=a.tags&&a.tags.length?`<div class="ar-tags">${a.tags.map(t=>`<span class="ar-tag">${t}</span>`).join('')}</div>`:'';
+    
+    document.getElementById('articleReader').innerHTML=`
+    <button class="ar-back" onclick="goPage('home')">← Voltar</button>
+    <div class="ar-cover">${coverHTML}<div class="ar-cat-wrap"><span class="n-cat ${cat.color}">${cat.name}</span></div></div>
+    <div class="ar-meta">
+        <span class="ar-meta-item">📝 ${a.author||'Redação GG'}</span>
+        <span class="ar-meta-item"><span class="dot"></span></span>
+        <span class="ar-meta-item">📅 ${new Date(a.id).toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'})}</span>
+        <span class="ar-meta-item"><span class="dot"></span></span>
+        <span class="ar-meta-item">⏱️ ${a.readTime||'3 min'}</span>
+        <span class="ar-meta-item"><span class="dot"></span></span>
+        <span class="ar-meta-item">👁️ ${formatNum(views)} views</span>
+    </div>
+    <h1 class="ar-title">${a.title}</h1>
+    ${a.excerpt?`<p class="ar-excerpt">${a.excerpt}</p>`:''}
+    <div class="ar-content">${a.content||'<p>Sem conteúdo.</p>'}</div>
+    ${contentImgHTML}${tagsHTML}
+    <div class="ar-author-box"><div class="ar-author-av">${(a.author||'R').charAt(0)}</div><div><div class="ar-author-name">${a.author||'Redação GG'}</div><div class="ar-author-role">Redator · GG. Global Games</div></div></div>`;
+    
+    goPage('article');renderNews();renderTrending();
 }
 
-function refreshAdminData(){
-    updateAdminStats();renderOverviewTable();loadCategorySelect();
-}
+function timeAgo(ts){const d=Date.now()-ts;const m=Math.floor(d/60000);if(m<1)return'Agora';if(m<60)return`${m} min`;const h=Math.floor(m/60);if(h<24)return`${h}h`;return`${Math.floor(h/24)}d`}
 
-function updateAdminStats(){
-    document.getElementById('aStatArticles').textContent=DB.get('articles').length;
-    document.getElementById('aStatCats').textContent=DB.get('categories').length;
-    document.getElementById('aStatTags').textContent=DB.get('tags').length;
-    document.getElementById('aStatPages').textContent=DB.get('pages').length;
-}
+// ADMIN
+function adminTab(tab,el){document.querySelectorAll('.admin-panel').forEach(p=>p.classList.remove('active'));document.getElementById('ap-'+tab)?.classList.add('active');document.querySelectorAll('.admin-nav a').forEach(a=>a.classList.remove('active'));if(el)el.classList.add('active');if(tab==='new-article'){resetForm();loadCatSel()}if(tab==='articles')renderArtTable();if(tab==='categories')renderCatsAdmin();if(tab==='tags')renderTagsAdmin();if(tab==='pages')renderPgAdmin();if(tab==='settings')loadSettings();if(tab==='overview')refreshAdmin()}
+function refreshAdmin(){updateStats();renderOverview();loadCatSel()}
+function updateStats(){document.getElementById('aStatArt').textContent=DB.g('articles',[]).length;document.getElementById('aStatCat').textContent=DB.g('cats',[]).length;document.getElementById('aStatTag').textContent=DB.g('tags',[]).length;document.getElementById('aStatViews').textContent=formatNum(getTotalViews())}
+function loadCatSel(){document.getElementById('artCat').innerHTML=DB.g('cats',[]).map(c=>`<option value="${c.id}">${c.icon} ${c.name}</option>`).join('')}
 
-function loadCategorySelect(){
-    const sel=document.getElementById('artCategory');const cats=DB.get('categories');
-    sel.innerHTML=cats.map(c=>`<option value="${c.id}">${c.icon} ${c.name}</option>`).join('');
-}
+// IMAGES
+function imgUp(input,wId,pId){const f=input.files[0];if(!f)return;if(f.size>5*1024*1024){toast('Max 5MB!','error');return}const r=new FileReader();r.onload=e=>{document.getElementById(pId).src=e.target.result;document.getElementById(wId).classList.add('has-image')};r.readAsDataURL(f)}
+function imgRm(e,wId,pId){e.stopPropagation();e.preventDefault();document.getElementById(pId).src='';document.getElementById(wId).classList.remove('has-image');document.querySelector('#'+wId+' input').value=''}
 
-// IMAGE HANDLING
-function handleCoverUpload(input){handleImgUpload(input,'coverUpload','coverPreview')}
-function handleContentImgUpload(input){handleImgUpload(input,'contentImgUpload','contentImgPreview')}
-function handleHeroImgUpload(input){handleImgUpload(input,'heroImgUpload','heroImgPreview')}
-
-function handleImgUpload(input,wrapId,prevId){
-    const file=input.files[0];if(!file)return;
-    if(file.size>5*1024*1024){toast('Imagem muito grande! Máx 5MB.','error');return}
-    const reader=new FileReader();
-    reader.onload=e=>{document.getElementById(prevId).src=e.target.result;document.getElementById(wrapId).classList.add('has-image')};
-    reader.readAsDataURL(file);
-}
-
-function removeCover(e){e.stopPropagation();e.preventDefault();document.getElementById('coverPreview').src='';document.getElementById('coverUpload').classList.remove('has-image');document.querySelector('#coverUpload input').value=''}
-function removeContentImg(e){e.stopPropagation();e.preventDefault();document.getElementById('contentImgPreview').src='';document.getElementById('contentImgUpload').classList.remove('has-image');document.querySelector('#contentImgUpload input').value=''}
-function removeHeroImg(e){e.stopPropagation();e.preventDefault();document.getElementById('heroImgPreview').src='';document.getElementById('heroImgUpload').classList.remove('has-image');document.querySelector('#heroImgUpload input').value=''}
+// RICH EDITOR
+function execCmd(cmd,val){document.execCommand(cmd,false,val||null);document.getElementById('editorArea').focus()}
+function execFontSize(size){document.execCommand('fontSize',false,size);document.getElementById('editorArea').focus()}
 
 // ARTICLE TAGS
-document.getElementById('artTagsInput').addEventListener('keydown',function(e){
-    if(e.key==='Enter'||e.key===','){e.preventDefault();const v=this.value.trim().replace(',','');if(v&&!articleTags.includes(v)){articleTags.push(v);renderArticleTags()}this.value=''}
-    if(e.key==='Backspace'&&!this.value&&articleTags.length){articleTags.pop();renderArticleTags()}
-});
+document.getElementById('artTagsIn').addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===','){e.preventDefault();const v=this.value.trim().replace(',','');if(v&&!artTags.includes(v)){artTags.push(v);renderATags()}this.value=''}if(e.key==='Backspace'&&!this.value&&artTags.length){artTags.pop();renderATags()}});
+function renderATags(){const w=document.getElementById('artTagsWrap'),inp=document.getElementById('artTagsIn');w.querySelectorAll('.tag-pill').forEach(p=>p.remove());artTags.forEach((t,i)=>{const p=document.createElement('span');p.className='tag-pill';p.innerHTML=`${t} <button onclick="artTags.splice(${i},1);renderATags()">✕</button>`;w.insertBefore(p,inp)})}
+function resetForm(){document.getElementById('editId').value='';document.getElementById('artFormTitle').textContent='Nova Matéria';['artTitle','artExcerpt','artAuthor','artRead'].forEach(id=>document.getElementById(id).value='');document.getElementById('artStatus').value='published';document.getElementById('editorArea').innerHTML='';artTags=[];renderATags();['coverUp','extraUp'].forEach(w=>{const el=document.getElementById(w);el.classList.remove('has-image');el.querySelector('.preview-img').src='';el.querySelector('input').value=''})}
 
-function renderArticleTags(){
-    const wrap=document.getElementById('artTagsWrap');const input=document.getElementById('artTagsInput');
-    wrap.querySelectorAll('.tag-pill').forEach(p=>p.remove());
-    articleTags.forEach((t,i)=>{const pill=document.createElement('span');pill.className='tag-pill';pill.innerHTML=`${t} <button onclick="articleTags.splice(${i},1);renderArticleTags()">✕</button>`;wrap.insertBefore(pill,input)});
-}
+function saveArticle(){const title=document.getElementById('artTitle').value.trim();if(!title){toast('Título obrigatório!','error');return}const eId=document.getElementById('editId').value;const arts=DB.g('articles',[]);const art={id:eId?parseInt(eId):Date.now(),title,excerpt:document.getElementById('artExcerpt').value.trim(),categoryId:parseInt(document.getElementById('artCat').value),status:document.getElementById('artStatus').value,coverImage:document.getElementById('coverPrev').src||'',contentImage:document.getElementById('extraPrev').src||'',content:document.getElementById('editorArea').innerHTML,tags:[...artTags],author:document.getElementById('artAuthor').value.trim()||'Redação GG',readTime:document.getElementById('artRead').value.trim()||'3 min'};if(eId){const idx=arts.findIndex(a=>a.id===art.id);if(idx>=0)arts[idx]=art}else arts.push(art);DB.s('articles',arts);toast(eId?'Atualizada! ✅':'Publicada! 🎉','success');resetForm();adminTab('articles');render()}
 
-function resetArticleForm(){
-    document.getElementById('editArticleId').value='';document.getElementById('articleFormTitle').textContent='Nova Matéria';
-    ['artTitle','artExcerpt','artContent','artAuthor','artReadTime'].forEach(id=>document.getElementById(id).value='');
-    document.getElementById('artStatus').value='published';articleTags=[];renderArticleTags();
-    removeCover(new Event('click'));removeContentImg(new Event('click'));
-}
+function editArt(id){const a=DB.g('articles',[]).find(x=>x.id===id);if(!a)return;adminTab('new-article');document.getElementById('artFormTitle').textContent='Editar Matéria';document.getElementById('editId').value=a.id;document.getElementById('artTitle').value=a.title;document.getElementById('artExcerpt').value=a.excerpt||'';document.getElementById('artStatus').value=a.status;document.getElementById('editorArea').innerHTML=a.content||'';document.getElementById('artAuthor').value=a.author||'';document.getElementById('artRead').value=a.readTime||'';if(a.coverImage){document.getElementById('coverPrev').src=a.coverImage;document.getElementById('coverUp').classList.add('has-image')}if(a.contentImage){document.getElementById('extraPrev').src=a.contentImage;document.getElementById('extraUp').classList.add('has-image')}artTags=a.tags||[];renderATags();loadCatSel();document.getElementById('artCat').value=a.categoryId}
+function delArt(id){if(!confirm('Deletar?'))return;DB.s('articles',DB.g('articles',[]).filter(a=>a.id!==id));toast('Deletada.','info');renderArtTable();render();refreshAdmin()}
 
-// SAVE ARTICLE
-function saveArticle(){
-    const title=document.getElementById('artTitle').value.trim();
-    if(!title){toast('Preencha o título!','error');return}
-    const editId=document.getElementById('editArticleId').value;
-    const articles=DB.get('articles');
-    const article={
-        id:editId?parseInt(editId):Date.now(),
-        title,
-        excerpt:document.getElementById('artExcerpt').value.trim(),
-        categoryId:parseInt(document.getElementById('artCategory').value),
-        status:document.getElementById('artStatus').value,
-        coverImage:document.getElementById('coverPreview').src||'',
-        contentImage:document.getElementById('contentImgPreview').src||'',
-        content:document.getElementById('artContent').value,
-        tags:[...articleTags],
-        author:document.getElementById('artAuthor').value.trim()||'Redação GG',
-        readTime:document.getElementById('artReadTime').value.trim()||'3 min'
-    };
-    if(editId){const idx=articles.findIndex(a=>a.id===article.id);if(idx>=0)articles[idx]=article}
-    else articles.push(article);
-    DB.set('articles',articles);toast(editId?'Matéria atualizada! ✅':'Matéria publicada! 🎉','success');
-    resetArticleForm();adminTab('articles');renderSite();
-}
+function renderArtTable(){const arts=DB.g('articles',[]).sort((a,b)=>b.id-a.id),cats=DB.g('cats',[]);document.getElementById('articlesTable').innerHTML=arts.length?`<table class="a-table"><thead><tr><th></th><th>Título</th><th>Cat</th><th>Views</th><th>Status</th><th>Ações</th></tr></thead><tbody>${arts.map(a=>{const cat=cats.find(c=>c.id==a.categoryId)||{name:'Geral',icon:'📰'};const th=a.coverImage?`<img class="thumb" src="${a.coverImage}">`:`<div class="thumb-ph">${cat.icon}</div>`;return`<tr><td>${th}</td><td><strong>${a.title}</strong></td><td>${cat.icon} ${cat.name}</td><td>👁️ ${formatNum(getViews(a.id))}</td><td><span class="status ${a.status}">${a.status==='published'?'Pub':'Draft'}</span></td><td><div class="actions"><button onclick="editArt(${a.id})">✏️</button><button class="del" onclick="delArt(${a.id})">🗑️</button></div></td></tr>`}).join('')}</tbody></table>`:'<div class="empty-state"><span>📭</span><p>Nenhuma matéria.</p></div>'}
+function renderOverview(){const arts=DB.g('articles',[]).sort((a,b)=>b.id-a.id).slice(0,5),cats=DB.g('cats',[]);document.getElementById('overviewTable').innerHTML=arts.length?`<table class="a-table"><thead><tr><th></th><th>Título</th><th>Views</th><th>Status</th></tr></thead><tbody>${arts.map(a=>{const cat=cats.find(c=>c.id==a.categoryId)||{icon:'📰'};const th=a.coverImage?`<img class="thumb" src="${a.coverImage}">`:`<div class="thumb-ph">${cat.icon}</div>`;return`<tr><td>${th}</td><td>${a.title}</td><td>👁️ ${formatNum(getViews(a.id))}</td><td><span class="status ${a.status}">${a.status==='published'?'Pub':'Draft'}</span></td></tr>`}).join('')}</tbody></table>`:'<div class="empty-state"><span>📭</span><p>Crie sua primeira matéria!</p></div>'}
 
-function editArticle(id){
-    const a=DB.get('articles').find(x=>x.id===id);if(!a)return;
-    adminTab('new-article');document.getElementById('articleFormTitle').textContent='Editar Matéria';
-    document.getElementById('editArticleId').value=a.id;document.getElementById('artTitle').value=a.title;
-    document.getElementById('artExcerpt').value=a.excerpt||'';document.getElementById('artCategory').value=a.categoryId;
-    document.getElementById('artStatus').value=a.status;document.getElementById('artContent').value=a.content||'';
-    document.getElementById('artAuthor').value=a.author||'';document.getElementById('artReadTime').value=a.readTime||'';
-    if(a.coverImage){document.getElementById('coverPreview').src=a.coverImage;document.getElementById('coverUpload').classList.add('has-image')}
-    if(a.contentImage){document.getElementById('contentImgPreview').src=a.contentImage;document.getElementById('contentImgUpload').classList.add('has-image')}
-    articleTags=a.tags||[];renderArticleTags();loadCategorySelect();document.getElementById('artCategory').value=a.categoryId;
-}
-
-function deleteArticle(id){if(!confirm('Deletar esta matéria?'))return;const arts=DB.get('articles').filter(a=>a.id!==id);DB.set('articles',arts);toast('Matéria deletada.','info');renderArticlesTable();renderSite();refreshAdminData()}
-
-function renderArticlesTable(){
-    const arts=DB.get('articles').sort((a,b)=>b.id-a.id);const cats=DB.get('categories');
-    const body=document.getElementById('articlesBody');const empty=document.getElementById('articlesEmpty');
-    if(!arts.length){body.innerHTML='';empty.style.display='block';return}
-    empty.style.display='none';
-    body.innerHTML=arts.map(a=>{const cat=cats.find(c=>c.id==a.categoryId)||{name:'Geral',icon:'📰'};
-    const thumb=a.coverImage?`<img class="thumb" src="${a.coverImage}">`:`<div class="thumb-ph">${cat.icon}</div>`;
-    return`<tr><td>${thumb}</td><td><strong>${a.title}</strong></td><td>${cat.icon} ${cat.name}</td><td><span class="status ${a.status}">${a.status==='published'?'Publicado':'Rascunho'}</span></td><td>${new Date(a.id).toLocaleDateString('pt-BR')}</td><td><div class="actions"><button onclick="editArticle(${a.id})">✏️ Editar</button><button class="del" onclick="deleteArticle(${a.id})">🗑️</button></div></td></tr>`}).join('');
-}
-
-function renderOverviewTable(){
-    const arts=DB.get('articles').sort((a,b)=>b.id-a.id).slice(0,5);const cats=DB.get('categories');
-    const body=document.getElementById('overviewBody');const empty=document.getElementById('overviewEmpty');
-    if(!arts.length){body.innerHTML='';empty.style.display='block';document.querySelector('#ap-overview .a-table').style.display='none';return}
-    empty.style.display='none';document.querySelector('#ap-overview .a-table').style.display='';
-    body.innerHTML=arts.map(a=>{const cat=cats.find(c=>c.id==a.categoryId)||{name:'Geral',icon:'📰'};
-    const thumb=a.coverImage?`<img class="thumb" src="${a.coverImage}">`:`<div class="thumb-ph">${cat.icon}</div>`;
-    return`<tr><td>${thumb}</td><td>${a.title}</td><td>${cat.icon} ${cat.name}</td><td><span class="status ${a.status}">${a.status==='published'?'Publicado':'Rascunho'}</span></td><td>${new Date(a.id).toLocaleDateString('pt-BR')}</td></tr>`}).join('');
-}
-
-// CATEGORIES ADMIN
-function saveCategory(){
-    const name=document.getElementById('catName').value.trim();if(!name){toast('Nome obrigatório!','error');return}
-    const cats=DB.get('categories');cats.push({id:Date.now(),name,icon:document.getElementById('catIcon').value||'📂',color:document.getElementById('catColor').value});
-    DB.set('categories',cats);document.getElementById('catName').value='';document.getElementById('catIcon').value='';
-    toast('Categoria criada! 📂','success');renderCategoriesAdmin();renderSite();updateAdminStats();
-}
-
-function deleteCategory(id){if(!confirm('Deletar categoria?'))return;DB.set('categories',DB.get('categories').filter(c=>c.id!==id));toast('Categoria deletada.','info');renderCategoriesAdmin();renderSite();updateAdminStats()}
-
-function renderCategoriesAdmin(){
-    const cats=DB.get('categories');
-    document.getElementById('catsList').innerHTML=`<table class="a-table"><thead><tr><th>Ícone</th><th>Nome</th><th>Cor</th><th>Ação</th></tr></thead><tbody>${cats.map(c=>`<tr><td>${c.icon}</td><td>${c.name}</td><td><span class="n-cat ${c.color}" style="position:static">${c.color}</span></td><td><div class="actions"><button class="del" onclick="deleteCategory(${c.id})">🗑️</button></div></td></tr>`).join('')}</tbody></table>`;
-}
+// CATS ADMIN
+function saveCat(){const n=document.getElementById('catName').value.trim();if(!n){toast('Nome!','error');return}const cats=DB.g('cats',[]);cats.push({id:Date.now(),name:n,icon:document.getElementById('catIcon').value||'📂',color:document.getElementById('catColor').value});DB.s('cats',cats);document.getElementById('catName').value='';document.getElementById('catIcon').value='';toast('Criada! 📂','success');renderCatsAdmin();render();updateStats()}
+function delCat(id){if(!confirm('Deletar?'))return;DB.s('cats',DB.g('cats',[]).filter(c=>c.id!==id));toast('Deletada.','info');renderCatsAdmin();render();updateStats()}
+function renderCatsAdmin(){const cats=DB.g('cats',[]);document.getElementById('catsList').innerHTML=`<table class="a-table"><thead><tr><th>Ícone</th><th>Nome</th><th>Cor</th><th></th></tr></thead><tbody>${cats.map(c=>`<tr><td>${c.icon}</td><td>${c.name}</td><td><span class="n-cat ${c.color}" style="position:static">${c.color}</span></td><td><div class="actions"><button class="del" onclick="delCat(${c.id})">🗑️</button></div></td></tr>`).join('')}</tbody></table>`}
 
 // TAGS ADMIN
-function saveTag(){
-    const v=document.getElementById('newTagInput').value.trim();if(!v)return;
-    const tags=DB.get('tags');if(tags.includes(v)){toast('Tag já existe!','error');return}
-    tags.push(v);DB.set('tags',tags);document.getElementById('newTagInput').value='';toast('Tag criada! 🏷️','success');renderTagsAdmin();updateAdminStats();
-}
-
-function deleteTag(t){const tags=DB.get('tags').filter(x=>x!==t);DB.set('tags',tags);toast('Tag removida.','info');renderTagsAdmin();updateAdminStats()}
-
-function renderTagsAdmin(){
-    const tags=DB.get('tags');
-    document.getElementById('tagsList').innerHTML=tags.map(t=>`<span class="tag-pill" style="font-size:14px;padding:8px 16px">${t} <button onclick="deleteTag('${t}')" style="background:none;border:none;color:#fbbf24;cursor:pointer;font-size:16px;margin-left:4px">✕</button></span>`).join('');
-}
+function saveTagAdmin(){const v=document.getElementById('newTagIn').value.trim();if(!v)return;const tags=DB.g('tags',[]);if(tags.includes(v)){toast('Já existe!','error');return}tags.push(v);DB.s('tags',tags);document.getElementById('newTagIn').value='';toast('Tag criada! 🏷️','success');renderTagsAdmin();updateStats()}
+function delTag(t){DB.s('tags',DB.g('tags',[]).filter(x=>x!==t));toast('Removida.','info');renderTagsAdmin();updateStats()}
+function renderTagsAdmin(){document.getElementById('tagsList').innerHTML=DB.g('tags',[]).map(t=>`<span class="tag-pill" style="font-size:14px;padding:8px 16px">${t} <button onclick="delTag('${t}')" style="background:none;border:none;color:#fbbf24;cursor:pointer;font-size:16px;margin-left:4px">✕</button></span>`).join('')}
 
 // PAGES ADMIN
-function savePage(){
-    const name=document.getElementById('pageName').value.trim();if(!name){toast('Título obrigatório!','error');return}
-    const pages=DB.get('pages');pages.push({id:Date.now(),name,slug:document.getElementById('pageSlug').value.trim()||name.toLowerCase().replace(/\s+/g,'-'),content:document.getElementById('pageContent').value});
-    DB.set('pages',pages);['pageName','pageSlug','pageContent'].forEach(id=>document.getElementById(id).value='');
-    toast('Página criada! 📄','success');renderPagesAdmin();updateAdminStats();
-}
-
-function deletePage(id){if(!confirm('Deletar página?'))return;DB.set('pages',DB.get('pages').filter(p=>p.id!==id));toast('Página deletada.','info');renderPagesAdmin();updateAdminStats()}
-
-function renderPagesAdmin(){
-    const pages=DB.get('pages');
-    document.getElementById('pagesList').innerHTML=pages.length?`<table class="a-table"><thead><tr><th>Título</th><th>Slug</th><th>Ação</th></tr></thead><tbody>${pages.map(p=>`<tr><td>${p.name}</td><td>/${p.slug}</td><td><div class="actions"><button class="del" onclick="deletePage(${p.id})">🗑️</button></div></td></tr>`).join('')}</tbody></table>`:'<div class="empty-state"><span>📄</span><p>Nenhuma página.</p></div>';
-}
+function savePg(){const n=document.getElementById('pgName').value.trim();if(!n){toast('Título!','error');return}const pgs=DB.g('pages',[]);pgs.push({id:Date.now(),name:n,slug:document.getElementById('pgSlug').value.trim()||n.toLowerCase().replace(/\s+/g,'-'),content:document.getElementById('pgContent').value});DB.s('pages',pgs);['pgName','pgSlug','pgContent'].forEach(id=>document.getElementById(id).value='');toast('Página criada! 📄','success');renderPgAdmin();updateStats()}
+function delPg(id){if(!confirm('Deletar?'))return;DB.s('pages',DB.g('pages',[]).filter(p=>p.id!==id));toast('Deletada.','info');renderPgAdmin();updateStats()}
+function renderPgAdmin(){const pgs=DB.g('pages',[]);document.getElementById('pgList').innerHTML=pgs.length?`<table class="a-table"><thead><tr><th>Título</th><th>Slug</th><th></th></tr></thead><tbody>${pgs.map(p=>`<tr><td>${p.name}</td><td>/${p.slug}</td><td><div class="actions"><button class="del" onclick="delPg(${p.id})">🗑️</button></div></td></tr>`).join('')}</tbody></table>`:'<div class="empty-state"><span>📄</span><p>Nenhuma página.</p></div>'}
 
 // SETTINGS
-function loadSettings(){
-    const s=DB.get('settings',{});
-    document.getElementById('setSiteName').value=s.siteName||'';document.getElementById('setSiteDesc').value=s.siteDesc||'';
-    document.getElementById('setHeroTitle').value=s.heroTitle||'';document.getElementById('setHeroDesc').value=s.heroDesc||'';
-    if(s.heroImage){document.getElementById('heroImgPreview').src=s.heroImage;document.getElementById('heroImgUpload').classList.add('has-image')}
-}
+function loadSettings(){const s=DB.g('settings',{});document.getElementById('setName').value=s.siteName||'';document.getElementById('setDesc').value=s.siteDesc||'';document.getElementById('setHeroT').value=s.heroTitle||'';document.getElementById('setHeroD').value=s.heroDesc||'';if(s.heroImage){document.getElementById('heroPrev').src=s.heroImage;document.getElementById('heroUp').classList.add('has-image')}}
+function saveSettings(){DB.s('settings',{siteName:document.getElementById('setName').value,siteDesc:document.getElementById('setDesc').value,heroTitle:document.getElementById('setHeroT').value,heroDesc:document.getElementById('setHeroD').value,heroImage:document.getElementById('heroPrev').src||''});toast('Salvo! ⚙️','success');renderHero()}
 
-function saveSettings(){
-    const s={siteName:document.getElementById('setSiteName').value,siteDesc:document.getElementById('setSiteDesc').value,heroTitle:document.getElementById('setHeroTitle').value,heroDesc:document.getElementById('setHeroDesc').value,heroImage:document.getElementById('heroImgPreview').src||''};
-    DB.set('settings',s);toast('Configurações salvas! ⚙️','success');renderHero();
-}
-
-// ═══ HEADER/DROPDOWN/MOBILE ═══
-window.addEventListener('scroll',()=>{document.getElementById('header').classList.toggle('scrolled',window.scrollY>20)});
+// UI
+window.addEventListener('scroll',()=>document.getElementById('header').classList.toggle('scrolled',window.scrollY>20));
 function toggleDD(){document.getElementById('uDD').classList.toggle('show')}
 function closeDD(){document.getElementById('uDD').classList.remove('show')}
 document.addEventListener('click',e=>{if(!e.target.closest('.u-profile'))closeDD()});
 function openMob(){document.getElementById('mobSide').classList.add('show');document.getElementById('mobOverlay').classList.add('show');document.getElementById('mobOverlay').style.display='block';document.body.style.overflow='hidden'}
 function closeMob(){document.getElementById('mobSide').classList.remove('show');document.getElementById('mobOverlay').classList.remove('show');setTimeout(()=>document.getElementById('mobOverlay').style.display='none',300);document.body.style.overflow=''}
-
-// ═══ TOAST ═══
-function toast(msg,type='info'){const box=document.getElementById('toastBox');const t=document.createElement('div');t.classList.add('toast',type);const i={success:'✅',error:'❌',info:'ℹ️'};t.innerHTML=`<span>${i[type]}</span><span>${msg}</span>`;box.appendChild(t);setTimeout(()=>t.remove(),4000)}
-function showLMsg(t,type){const el=document.getElementById('loginMsg');const i={success:'✅',error:'❌',info:'ℹ️'};el.innerHTML=`<span>${i[type]}</span><span>${t}</span>`;el.className=`login-msg ${type} show`}
-function hideLMsg(){document.getElementById('loginMsg').classList.remove('show')}
-
-// ═══ SEARCH ═══
+function toast(msg,type='info'){const b=document.getElementById('toastBox'),t=document.createElement('div');t.classList.add('toast',type);t.innerHTML=`<span>${{success:'✅',error:'❌',info:'ℹ️'}[type]}</span><span>${msg}</span>`;b.appendChild(t);setTimeout(()=>t.remove(),4000)}
+function showLM(t,type){const el=document.getElementById('loginMsg');el.innerHTML=`<span>${{info:'ℹ️',error:'❌'}[type]}</span><span>${t}</span>`;el.className=`login-msg ${type} show`}
+function hideLM(){document.getElementById('loginMsg').classList.remove('show')}
 document.getElementById('searchInput')?.addEventListener('keypress',e=>{if(e.key==='Enter'&&e.target.value.trim())toast(`Buscando "${e.target.value.trim()}"...`,'info')});
 
-// ═══ URL TOKEN CHECK ═══
-(function(){const h=window.location.hash;if(h&&h.includes('access_token')){const p=new URLSearchParams(h.substring(1));const tk=p.get('access_token');if(tk){history.replaceState(null,'',window.location.pathname);const btn=document.getElementById('googleBtn');btn.classList.add('loading');fetchGUser(tk,btn)}}})();
+// URL TOKEN
+(function(){const h=location.hash;if(h&&h.includes('access_token')){const tk=new URLSearchParams(h.substring(1)).get('access_token');if(tk){history.replaceState(null,'',location.pathname);const b=document.getElementById('googleBtn');b.classList.add('loading');fetchGU(tk,b)}}})();
 
-// ═══ AUTO SESSION ═══
-(function(){if(window.location.hash&&window.location.hash.includes('access_token'))return;
-    const mode=DB.get('mode','');const saved=DB.get('user',null);
-    if(mode==='logged'&&saved){currentUser=saved;isGuest=false;isAdmin=(saved.email===ADMIN_EMAIL);document.getElementById('loginPage').classList.add('hidden');document.getElementById('homePage').classList.add('active');isAdmin?uiAdmin(saved):uiUser(saved);renderSite()}
-    else if(mode==='guest'){isGuest=true;document.getElementById('loginPage').classList.add('hidden');document.getElementById('homePage').classList.add('active');uiGuest();renderSite()}
-    else renderSite();
-})();
+// SESSION
+(function(){if(location.hash&&location.hash.includes('access_token'))return;const mode=DB.g('mode',''),saved=DB.g('user',null);if(mode==='logged'&&saved){cUser=saved;isGuest=false;isAdm=(saved.email===ADMIN);document.getElementById('loginPage').classList.add('hidden');document.getElementById('homePage').classList.add('active');isAdm?uiAdmin(saved):uiUser(saved);render()}else if(mode==='guest'){isGuest=true;document.getElementById('loginPage').classList.add('hidden');document.getElementById('homePage').classList.add('active');uiGuest();render()}else render()})();
 </script>
 </body>
 </html>
