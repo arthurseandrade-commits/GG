@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GG - Global Games | Notícias de Games</title>
-    <!-- Fontes modernas (eSports e Leitura) -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        /* Variáveis de Cores */
         :root {
             --bg-dark: #0a0a0c;
             --bg-card: #15151a;
@@ -15,9 +13,10 @@
             --neon-green: #39ff14;
             --text-main: #e2e8f0;
             --text-muted: #94a3b8;
+            --danger: #e63946;
+            --warning: #f4a261;
         }
 
-        /* Reset e Base */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
@@ -44,22 +43,37 @@
             box-shadow: 0 0 15px rgba(157, 78, 221, 0.3);
             backdrop-filter: blur(10px);
         }
-        .logo { font-size: 2rem; font-weight: 900; color: #fff; cursor: pointer;}
+        .logo { font-size: 2rem; font-weight: 900; color: #fff; cursor: pointer; }
         .logo span { color: var(--neon-purple); text-shadow: 0 0 10px var(--neon-purple); }
-        .nav-links { display: flex; gap: 1.5rem; }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
         .nav-links li a:hover { color: var(--neon-green); text-shadow: 0 0 8px var(--neon-green); transition: 0.3s; }
-        .search-bar { padding: 0.6rem; border-radius: 4px; border: 1px solid var(--neon-purple); background: var(--bg-card); color: #fff; outline: none; width: 200px; transition: 0.3s;}
+        .search-bar { padding: 0.6rem; border-radius: 4px; border: 1px solid var(--neon-purple); background: var(--bg-card); color: #fff; outline: none; width: 200px; transition: 0.3s; }
         .search-bar:focus { box-shadow: 0 0 10px rgba(157, 78, 221, 0.5); width: 250px; }
 
-        /* Estrutura Geral */
+        /* Admin icon */
+        .admin-toggle {
+            background: none;
+            border: 1px solid var(--text-muted);
+            color: var(--text-muted);
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-family: 'Orbitron', sans-serif;
+            transition: 0.3s;
+        }
+        .admin-toggle:hover { border-color: var(--neon-purple); color: var(--neon-purple); }
+        .admin-toggle.logged { border-color: var(--neon-green); color: var(--neon-green); }
+
+        /* Estrutura */
         .container { max-width: 1200px; margin: 0 auto; padding: 2rem 5%; min-height: 80vh; }
         .page { display: none; }
         .page.active { display: block; animation: fadeIn 0.5s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Página Inicial - Banner */
+        /* Banner */
         .banner {
-            background: linear-gradient(to top, var(--bg-dark), transparent), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070') center/cover;
+            background: linear-gradient(to top, var(--bg-dark), transparent), url('') center/cover;
             height: 400px;
             border-radius: 10px;
             display: flex;
@@ -70,11 +84,11 @@
             margin-bottom: 2rem;
             position: relative;
         }
-        .banner-tag { background: var(--neon-purple); color: #fff; padding: 5px 10px; font-weight: bold; border-radius: 3px; display: inline-block; margin-bottom: 10px; font-size: 0.8rem;}
+        .banner-tag { background: var(--neon-purple); color: #fff; padding: 5px 10px; font-weight: bold; border-radius: 3px; display: inline-block; margin-bottom: 10px; font-size: 0.8rem; }
         .banner h1 { font-size: 2.5rem; margin-bottom: 10px; }
 
-        /* Sistema de Filtro de Categorias */
-        .filters { display:flex; gap: 10px; margin-bottom: 2rem; flex-wrap: wrap; }
+        /* Filtros */
+        .filters { display: flex; gap: 10px; margin-bottom: 2rem; flex-wrap: wrap; }
         .filter-btn {
             background: transparent;
             color: var(--text-muted);
@@ -84,14 +98,10 @@
             font-family: 'Orbitron', sans-serif;
             cursor: pointer;
             transition: 0.3s;
+            font-size: 0.8rem;
         }
         .filter-btn:hover { color: white; border-color: var(--neon-purple); }
-        .filter-btn.active {
-            background: var(--neon-purple);
-            color: white;
-            border-color: var(--neon-purple);
-            box-shadow: 0 0 10px rgba(157, 78, 221, 0.5);
-        }
+        .filter-btn.active { background: var(--neon-purple); color: white; border-color: var(--neon-purple); box-shadow: 0 0 10px rgba(157, 78, 221, 0.5); }
 
         /* Grid de Notícias */
         .section-title { font-size: 1.8rem; border-left: 4px solid var(--neon-green); padding-left: 10px; margin-bottom: 1.5rem; }
@@ -104,7 +114,7 @@
             transition: transform 0.3s;
         }
         .news-card:hover { transform: translateY(-5px); border-color: var(--neon-purple); box-shadow: 0 5px 15px rgba(157, 78, 221, 0.2); }
-        .news-img { width: 100%; height: 180px; object-fit: cover; background-color: #333; }
+        .news-img { width: 100%; height: 180px; object-fit: cover; background-color: #333; display: block; }
         .news-content { padding: 1.5rem; }
         .news-content h3 { font-size: 1.2rem; margin-bottom: 10px; }
         .news-content p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px; }
@@ -117,29 +127,255 @@
             font-family: 'Orbitron', sans-serif;
             transition: 0.3s;
             cursor: pointer;
+            font-size: 0.75rem;
         }
         .btn-read:hover { background: var(--neon-green); color: #000; box-shadow: 0 0 10px var(--neon-green); }
 
-        /* Página de Artigo */
+        /* Artigo */
         .article-header { text-align: center; margin-bottom: 2rem; }
-        .article-header h1 { font-size: 3rem; margin-bottom: 10px; color: var(--neon-green); }
+        .article-header h1 { font-size: 2.5rem; margin-bottom: 10px; color: var(--neon-green); }
         .article-meta { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; }
-        .article-hero-img { width: 100%; max-height: 500px; object-fit: cover; border-radius: 10px; margin-bottom: 2rem; border: 1px solid var(--neon-purple);}
+        .article-hero-img { width: 100%; max-height: 500px; object-fit: cover; border-radius: 10px; margin-bottom: 2rem; border: 1px solid var(--neon-purple); }
         .article-body { font-size: 1.1rem; color: #cbd5e1; margin-bottom: 3rem; }
         .article-body p { margin-bottom: 1.5rem; }
-        
-        /* Compartilhar e Comentários */
         .share-buttons { display: flex; gap: 10px; margin-bottom: 3rem; }
-        .share-btn { padding: 10px 20px; border-radius: 5px; font-weight: bold; border: none; cursor: pointer; color: white;}
-        .bg-twitter { background: #1DA1F2; } .bg-zap { background: #25D366; }
-        .comments-section { background: var(--bg-card); padding: 2rem; border-radius: 8px; border: 1px solid #2a2a35;}
-        .comments-section textarea { width: 100%; padding: 10px; background: var(--bg-dark); color: white; border: 1px solid var(--text-muted); border-radius: 5px; margin-bottom: 10px; resize: vertical;}
+        .share-btn { padding: 10px 20px; border-radius: 5px; font-weight: bold; border: none; cursor: pointer; color: white; }
+        .bg-twitter { background: #1DA1F2; }
+        .bg-zap { background: #25D366; }
+        .comments-section { background: var(--bg-card); padding: 2rem; border-radius: 8px; border: 1px solid #2a2a35; }
+        .comments-section textarea { width: 100%; padding: 10px; background: var(--bg-dark); color: white; border: 1px solid var(--text-muted); border-radius: 5px; margin-bottom: 10px; resize: vertical; font-family: 'Inter', sans-serif; }
+        .btn-back { margin-bottom: 2rem; }
 
-        /* Página Sobre */
+        /* Sobre */
         .about-box { background: var(--bg-card); padding: 3rem; border-radius: 10px; text-align: center; border-top: 4px solid var(--neon-purple); }
 
         /* Footer */
         footer { background: #050505; text-align: center; padding: 2rem; border-top: 1px solid #2a2a35; margin-top: 2rem; }
+
+        /* ============================== */
+        /* MODAL DE LOGIN                 */
+        /* ============================== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-overlay.show { display: flex; }
+        .modal-box {
+            background: var(--bg-card);
+            border: 2px solid var(--neon-purple);
+            border-radius: 12px;
+            padding: 2.5rem;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(157, 78, 221, 0.4);
+            animation: fadeIn 0.3s ease;
+        }
+        .modal-box h2 { color: var(--neon-purple); margin-bottom: 0.5rem; font-size: 1.5rem; }
+        .modal-box p { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.9rem; }
+        .modal-input {
+            width: 100%;
+            padding: 12px;
+            background: var(--bg-dark);
+            border: 1px solid #555;
+            border-radius: 6px;
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            outline: none;
+            text-align: center;
+            letter-spacing: 3px;
+            font-family: 'Orbitron', sans-serif;
+        }
+        .modal-input:focus { border-color: var(--neon-purple); box-shadow: 0 0 10px rgba(157, 78, 221, 0.3); }
+        .modal-error { color: var(--danger); font-size: 0.85rem; margin-bottom: 1rem; display: none; }
+        .modal-btns { display: flex; gap: 10px; }
+        .modal-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .modal-btn.primary { background: var(--neon-purple); color: white; }
+        .modal-btn.primary:hover { box-shadow: 0 0 15px rgba(157, 78, 221, 0.5); }
+        .modal-btn.secondary { background: transparent; color: var(--text-muted); border: 1px solid #555; }
+        .modal-btn.secondary:hover { border-color: var(--text-muted); }
+
+        /* ============================== */
+        /* DASHBOARD                      */
+        /* ============================== */
+        .dash-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .dash-header h2 { color: var(--neon-purple); }
+        .dash-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid #2a2a35;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .stat-card .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--neon-green);
+        }
+        .stat-card .stat-label { color: var(--text-muted); font-size: 0.85rem; margin-top: 5px; }
+
+        /* Formulário */
+        .dash-form {
+            background: var(--bg-card);
+            border: 1px solid #2a2a35;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-top: 3px solid var(--neon-purple);
+        }
+        .dash-form h3 { color: var(--neon-green); margin-bottom: 1.5rem; font-size: 1.2rem; }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .form-group { display: flex; flex-direction: column; gap: 6px; }
+        .form-group.full { grid-column: 1 / -1; }
+        .form-group label {
+            font-size: 0.85rem;
+            color: var(--neon-purple);
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 500;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 10px 12px;
+            background: var(--bg-dark);
+            border: 1px solid #333;
+            border-radius: 6px;
+            color: white;
+            font-size: 0.95rem;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+            transition: 0.3s;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 8px rgba(157, 78, 221, 0.2);
+        }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .form-group select option { background: var(--bg-dark); }
+        .form-actions { display: flex; gap: 10px; margin-top: 1.5rem; }
+        .btn-dash {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-dash.save { background: var(--neon-green); color: #000; }
+        .btn-dash.save:hover { box-shadow: 0 0 15px var(--neon-green); }
+        .btn-dash.cancel { background: transparent; color: var(--text-muted); border: 1px solid #555; }
+        .btn-dash.cancel:hover { border-color: white; color: white; }
+        .btn-dash.danger { background: var(--danger); color: white; }
+        .btn-dash.danger:hover { box-shadow: 0 0 15px var(--danger); }
+        .btn-dash.edit { background: var(--warning); color: #000; }
+        .btn-dash.new { background: var(--neon-purple); color: white; }
+        .btn-dash.new:hover { box-shadow: 0 0 15px rgba(157, 78, 221, 0.5); }
+
+        /* Tabela de Notícias */
+        .dash-table-wrapper { overflow-x: auto; }
+        .dash-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #2a2a35;
+        }
+        .dash-table th {
+            background: rgba(157, 78, 221, 0.15);
+            color: var(--neon-purple);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            padding: 14px 16px;
+            text-align: left;
+            white-space: nowrap;
+        }
+        .dash-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #1e1e28;
+            font-size: 0.9rem;
+            vertical-align: middle;
+        }
+        .dash-table tr:hover td { background: rgba(157, 78, 221, 0.05); }
+        .dash-table .cat-badge {
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .dash-table .actions-cell { display: flex; gap: 6px; flex-wrap: wrap; }
+        .dash-table .featured-star { color: var(--neon-green); font-size: 1.2rem; cursor: pointer; title: "Destaque"; }
+        .dash-table .featured-star.inactive { color: #555; }
+        .img-preview {
+            width: 60px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid #333;
+        }
+        .no-data {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--neon-green);
+            color: #000;
+            padding: 14px 24px;
+            border-radius: 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
+            z-index: 10000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: 0.4s;
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast.error { background: var(--danger); color: white; box-shadow: 0 0 20px rgba(230, 57, 70, 0.4); }
 
         /* Responsividade */
         @media (max-width: 768px) {
@@ -148,116 +384,89 @@
             .search-bar { width: 100%; }
             .search-bar:focus { width: 100%; }
             .banner h1 { font-size: 1.8rem; }
-            .article-header h1 { font-size: 2rem; }
+            .article-header h1 { font-size: 1.8rem; }
+            .form-grid { grid-template-columns: 1fr; }
+            .dash-header { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
 <body>
 
-    <!-- CABEÇALHO / NAVEGAÇÃO -->
+    <!-- CABEÇALHO -->
     <header>
         <div class="logo" onclick="navigate('home')">GG<span>.</span></div>
         <ul class="nav-links">
             <li><a onclick="navigate('home')">Início</a></li>
-            <li><a onclick="navigate('home'); filterNews('roblox', document.getElementById('btn-roblox'))">Roblox</a></li>
+            <li><a onclick="navigate('home'); setTimeout(()=>filterNews('roblox', document.getElementById('btn-roblox')),100)">Roblox</a></li>
             <li><a onclick="navigate('home')">Atualizações</a></li>
             <li><a onclick="navigate('about')">Sobre</a></li>
+            <li>
+                <button id="adminBtn" class="admin-toggle" onclick="handleAdminClick()">
+                    ⚙ Admin
+                </button>
+            </li>
         </ul>
-        <!-- Adicionei um ID e um evento onkeyup para a busca funcionar -->
         <input type="text" id="searchInput" class="search-bar" placeholder="Buscar game ou notícia..." onkeyup="searchNews()">
     </header>
 
+    <!-- MODAL DE LOGIN -->
+    <div id="loginModal" class="modal-overlay">
+        <div class="modal-box">
+            <h2>🔒 Acesso Admin</h2>
+            <p>Digite a senha para acessar o painel</p>
+            <input type="password" id="loginPassword" class="modal-input" placeholder="••••••" onkeydown="if(event.key==='Enter') attemptLogin()">
+            <p id="loginError" class="modal-error">❌ Senha incorreta! Tente novamente.</p>
+            <div class="modal-btns">
+                <button class="modal-btn secondary" onclick="closeLoginModal()">Cancelar</button>
+                <button class="modal-btn primary" onclick="attemptLogin()">Entrar</button>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
+
         <!-- PÁGINA INICIAL -->
         <main id="home" class="page active">
-            
-            <!-- Banner Destaque -->
-            <div class="banner">
+            <div class="banner" id="mainBanner">
                 <span class="banner-tag">DESTAQUE</span>
-                <h1>Fortnite: Nova Temporada traz mapa revolucionário e parceria com Anime</h1>
-                <p>Confira todas as novidades do patch 29.00 e o que muda no meta competitivo.</p>
+                <h1 id="bannerTitle">Carregando...</h1>
+                <p id="bannerDesc"></p>
                 <br>
                 <div>
-                    <button class="btn-read" onclick="navigate('article')">Ler Matéria Completa</button>
+                    <button class="btn-read" onclick="openFeaturedArticle()">Ler Matéria Completa</button>
                 </div>
             </div>
 
-            <!-- Categorias / Filtro (FUNCIONAL) -->
             <div class="filters">
                 <button id="btn-todos" class="filter-btn active" onclick="filterNews('todos', this)">Todos</button>
                 <button id="btn-roblox" class="filter-btn" onclick="filterNews('roblox', this)">Roblox</button>
                 <button id="btn-minecraft" class="filter-btn" onclick="filterNews('minecraft', this)">Minecraft</button>
-                <button id="btn-hardware" class="filter-btn" onclick="filterNews('hardware', this)">Hardware & Setup</button>
+                <button id="btn-fortnite" class="filter-btn" onclick="filterNews('fortnite', this)">Fortnite</button>
+                <button id="btn-hardware" class="filter-btn" onclick="filterNews('hardware', this)">Hardware</button>
             </div>
 
-            <!-- Lista de Notícias -->
             <h2 class="section-title">Últimas Notícias</h2>
-            <div class="news-grid" id="news-container">
-                
-                <!-- Card 1 (Roblox) -->
-                <div class="news-card" data-category="roblox">
-                    <img src="https://images.unsplash.com/photo-1607853202273-797f1c22a38e?q=80&w=600" alt="Roblox" class="news-img">
-                    <div class="news-content">
-                        <span class="banner-tag" style="background: #e63946;">ROBLOX</span>
-                        <h3>Blox Fruits: Novo código de XP Duplo revelado!</h3>
-                        <p>Desenvolvedores liberaram um novo código surpresa neste fim de semana. Veja como resgatar.</p>
-                        <button class="btn-read" onclick="navigate('article')">Ler mais</button>
-                    </div>
-                </div>
-
-                <!-- Card 2 (Minecraft) -->
-                <div class="news-card" data-category="minecraft">
-                    <img src="https://images.unsplash.com/photo-1628527305929-e889ee839171?q=80&w=600" alt="Minecraft" class="news-img">
-                    <div class="news-content">
-                        <span class="banner-tag" style="background: #2a9d8f;">MINECRAFT</span>
-                        <h3>Atualização 1.21: Novo mob adicionado ao jogo</h3>
-                        <p>A Mojang finalmente detalhou as mecânicas do novo mob hostil que chegará nas próximas snapshots.</p>
-                        <button class="btn-read" onclick="navigate('article')">Ler mais</button>
-                    </div>
-                </div>
-
-                <!-- Card 3 (Hardware) -->
-                <div class="news-card" data-category="hardware">
-                    <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=600" alt="Setup" class="news-img">
-                    <div class="news-content">
-                        <span class="banner-tag" style="background: var(--neon-purple);">HARDWARE</span>
-                        <h3>Review: O melhor mouse custo-benefício para FPS</h3>
-                        <p>Testamos o novo lançamento focado em jogadores de Valorant e CS2. Vale a pena?</p>
-                        <button class="btn-read" onclick="navigate('article')">Ler mais</button>
-                    </div>
-                </div>
-
-            </div>
+            <div class="news-grid" id="news-container"></div>
         </main>
 
-        <!-- PÁGINA DE NOTÍCIA -->
+        <!-- PÁGINA DE ARTIGO (Dinâmica) -->
         <main id="article" class="page">
+            <div class="btn-back">
+                <button class="btn-read" onclick="navigate('home')">← Voltar</button>
+            </div>
             <div class="article-header">
-                <span class="banner-tag">FORTNITE</span>
-                <h1>Fortnite: Nova Temporada traz mapa revolucionário</h1>
-                <div class="article-meta">
-                    Por <strong style="color: var(--neon-purple);">Admin GG</strong> | Publicado em 24 de Outubro de 2023 | 5 min de leitura
-                </div>
+                <span class="banner-tag" id="articleTag">TAG</span>
+                <h1 id="articleTitle">Título</h1>
+                <div class="article-meta" id="articleMeta"></div>
             </div>
-            
-            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070" alt="Capa" class="article-hero-img">
+            <img id="articleImg" src="" alt="Capa" class="article-hero-img">
+            <div class="article-body" id="articleBody"></div>
 
-            <div class="article-body">
-                <p>A Epic Games surpreendeu a comunidade nesta manhã com o lançamento da aguardada nova temporada de Fortnite. Trazendo um mapa completamente reformulado, novas mecânicas de movimento e um passe de batalha recheado de parcerias com animes famosos.</p>
-                
-                <h3 style="color: var(--neon-green); margin: 2rem 0 1rem;">O que muda no Mapa?</h3>
-                <p>As clássicas Torres Tortas deram espaço para uma metrópole futurista com trens em movimento, onde os jogadores podem lutar enquanto atravessam a ilha. Além disso, três novos biomas foram adicionados.</p>
-
-                <p><em>"Nós queríamos trazer a sensação de velocidade e verticalidade de volta ao jogo"</em>, afirmou o diretor de design do game em nota oficial. Os servidores já estão online e a atualização pesa cerca de 25GB nos consoles e PC.</p>
-            </div>
-
-            <!-- Botões de Compartilhar -->
             <div class="share-buttons">
-                <button class="share-btn bg-twitter">X (Twitter)</button>
-                <button class="share-btn bg-zap">WhatsApp</button>
+                <button class="share-btn bg-twitter" onclick="shareTwitter()">X (Twitter)</button>
+                <button class="share-btn bg-zap" onclick="shareWhatsApp()">WhatsApp</button>
             </div>
 
-            <!-- Comentários -->
             <div class="comments-section">
                 <h3 style="margin-bottom: 1rem;">Deixe seu comentário</h3>
                 <textarea rows="4" placeholder="O que você achou dessa novidade?"></textarea>
@@ -271,8 +480,113 @@
                 <div class="logo" style="font-size: 3rem; margin-bottom: 1rem;">GG<span>.</span></div>
                 <h2 style="color: var(--neon-green); margin-bottom: 1.5rem;">GLOBAL GAMES</h2>
                 <p style="font-size: 1.2rem; color: #cbd5e1; max-width: 800px; margin: 0 auto;">
-                    O <strong>GG – Global Games</strong> é o seu portal definitivo focado em notícias de games, atualizações, eventos de eSports e novidades do mundo gamer. Nascemos com a missão de manter a comunidade atualizada sobre os maiores fenômenos da atualidade, como Roblox, Fortnite, Minecraft, Valorant e muito mais. Se tem controle, teclado ou mobile envolvido, é aqui que você fica sabendo primeiro!
+                    O <strong>GG – Global Games</strong> é o seu portal definitivo focado em notícias de games, atualizações, eventos de eSports e novidades do mundo gamer.
                 </p>
+            </div>
+        </main>
+
+        <!-- ============================== -->
+        <!-- DASHBOARD ADMIN                -->
+        <!-- ============================== -->
+        <main id="dashboard" class="page">
+            <div class="dash-header">
+                <div>
+                    <h2>⚡ Painel Admin</h2>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Gerencie todas as notícias do portal</p>
+                </div>
+                <div style="display:flex; gap:10px; flex-wrap: wrap;">
+                    <button class="btn-dash new" onclick="showForm()">+ Nova Notícia</button>
+                    <button class="btn-dash cancel" onclick="handleLogout()">Sair do Painel</button>
+                </div>
+            </div>
+
+            <!-- Estatísticas -->
+            <div class="dash-stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="statTotal">0</div>
+                    <div class="stat-label">Total de Notícias</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="statRoblox">0</div>
+                    <div class="stat-label">Roblox</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="statMinecraft">0</div>
+                    <div class="stat-label">Minecraft</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="statFortnite">0</div>
+                    <div class="stat-label">Fortnite</div>
+                </div>
+            </div>
+
+            <!-- Formulário Adicionar/Editar -->
+            <div class="dash-form" id="newsForm" style="display: none;">
+                <h3 id="formTitle">➕ Adicionar Nova Notícia</h3>
+                <input type="hidden" id="editingId">
+                <div class="form-grid">
+                    <div class="form-group full">
+                        <label>Título da Notícia</label>
+                        <input type="text" id="inputTitle" placeholder="Ex: Blox Fruits: Novo código revelado!">
+                    </div>
+                    <div class="form-group">
+                        <label>Categoria</label>
+                        <select id="inputCategory">
+                            <option value="roblox">Roblox</option>
+                            <option value="minecraft">Minecraft</option>
+                            <option value="fortnite">Fortnite</option>
+                            <option value="hardware">Hardware & Setup</option>
+                            <option value="esports">eSports</option>
+                            <option value="geral">Geral</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>URL da Imagem</label>
+                        <input type="text" id="inputImage" placeholder="https://exemplo.com/imagem.jpg">
+                    </div>
+                    <div class="form-group full">
+                        <label>Descrição Curta (card)</label>
+                        <input type="text" id="inputDesc" placeholder="Resumo que aparece no card da notícia">
+                    </div>
+                    <div class="form-group full">
+                        <label>Conteúdo Completo (use Enter para parágrafos)</label>
+                        <textarea id="inputBody" rows="8" placeholder="Escreva o conteúdo completo da matéria aqui..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Destaque no Banner?</label>
+                        <select id="inputFeatured">
+                            <option value="false">Não</option>
+                            <option value="true">✰ Sim - Destaque Principal</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Data</label>
+                        <input type="date" id="inputDate">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button class="btn-dash save" onclick="saveNews()">💾 Salvar Notícia</button>
+                    <button class="btn-dash cancel" onclick="hideForm()">Cancelar</button>
+                </div>
+            </div>
+
+            <!-- Tabela de Notícias -->
+            <h3 style="color: var(--neon-green); margin-bottom: 1rem; font-family: 'Orbitron';">📋 Todas as Notícias</h3>
+            <div class="dash-table-wrapper">
+                <table class="dash-table">
+                    <thead>
+                        <tr>
+                            <th>⭐</th>
+                            <th>Imagem</th>
+                            <th>Título</th>
+                            <th>Categoria</th>
+                            <th>Data</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dashTableBody">
+                    </tbody>
+                </table>
             </div>
         </main>
     </div>
@@ -280,38 +594,222 @@
     <!-- RODAPÉ -->
     <footer>
         <div class="logo">GG<span>.</span></div>
-        <p style="color: var(--text-muted); margin-top: 10px;">&copy; 2023 GG - Global Games. Todos os direitos reservados.</p>
+        <p style="color: var(--text-muted); margin-top: 10px;">&copy; 2024 GG - Global Games. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- SCRIPT DE INTERAÇÕES (NAVEGAÇÃO, FILTROS E BUSCA) -->
-    <script>
-        // 1. Função de navegar entre as páginas
-        function navigate(pageId) {
-            // Esconde todas as páginas
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            // Mostra a página solicitada
-            document.getElementById(pageId).classList.add('active');
-            // Rola para o topo
-            window.scrollTo(0, 0);
+    <!-- TOAST -->
+    <div id="toast" class="toast"></div>
 
-            // Limpa a barra de pesquisa se mudar de página
-            document.getElementById('searchInput').value = "";
-            searchNews(); 
+    <script>
+        // ============================
+        // CONFIGURAÇÃO
+        // ============================
+        const ADMIN_PASSWORD = "gg2024"; // 🔑 MUDE ESTA SENHA!
+        let isLoggedIn = false;
+
+        // Categorias com cores
+        const categoryColors = {
+            roblox: '#e63946',
+            minecraft: '#2a9d8f',
+            fortnite: '#4361ee',
+            hardware: '#9d4edd',
+            esports: '#f77f00',
+            geral: '#6c757d'
+        };
+
+        const categoryLabels = {
+            roblox: 'Roblox',
+            minecraft: 'Minecraft',
+            fortnite: 'Fortnite',
+            hardware: 'Hardware',
+            esports: 'eSports',
+            geral: 'Geral'
+        };
+
+        // ============================
+        // DADOS INICIAIS (default)
+        // ============================
+        const defaultNews = [
+            {
+                id: 1,
+                title: "Fortnite: Nova Temporada traz mapa revolucionário e parceria com Anime",
+                category: "fortnite",
+                image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070",
+                description: "Confira todas as novidades do patch 29.00 e o que muda no meta competitivo.",
+                body: "A Epic Games surpreendeu a comunidade nesta manhã com o lançamento da aguardada nova temporada de Fortnite. Trazendo um mapa completamente reformulado, novas mecânicas de movimento e um passe de batalha recheado de parcerias com animes famosos.\n\nAs clássicas Torres Tortas deram espaço para uma metrópole futurista com trens em movimento, onde os jogadores podem lutar enquanto atravessam a ilha. Além disso, três novos biomas foram adicionados.\n\n\"Nós queríamos trazer a sensação de velocidade e verticalidade de volta ao jogo\", afirmou o diretor de design do game em nota oficial. Os servidores já estão online e a atualização pesa cerca de 25GB nos consoles e PC.",
+                featured: true,
+                date: "2024-10-24"
+            },
+            {
+                id: 2,
+                title: "Blox Fruits: Novo código de XP Duplo revelado!",
+                category: "roblox",
+                image: "https://images.unsplash.com/photo-1607853202273-797f1c22a38e?q=80&w=600",
+                description: "Desenvolvedores liberaram um novo código surpresa neste fim de semana. Veja como resgatar.",
+                body: "Os desenvolvedores de Blox Fruits acabaram de liberar um código especial de XP Duplo que vai facilitar muito a vida dos jogadores que estão tentando subir de nível!\n\nO código é válido por tempo limitado, então corra para resgatar. Basta abrir o menu de códigos dentro do jogo e digitar o código promocional.\n\nAlém disso, a próxima atualização promete trazer uma nova fruta lendária e um novo bioma no Terceiro Mar. Fiquem atentos às redes sociais oficiais!",
+                featured: false,
+                date: "2024-10-23"
+            },
+            {
+                id: 3,
+                title: "Atualização 1.21: Novo mob adicionado ao Minecraft",
+                category: "minecraft",
+                image: "https://images.unsplash.com/photo-1628527305929-e889ee839171?q=80&w=600",
+                description: "A Mojang finalmente detalhou as mecânicas do novo mob hostil que chegará nas próximas snapshots.",
+                body: "A Mojang anunciou oficialmente os detalhes da atualização 1.21 do Minecraft, que trará um novo mob hostil às cavernas profundas do jogo.\n\nO novo mob promete mudar completamente a dinâmica de exploração subterrânea, forçando os jogadores a serem mais estratégicos em suas aventuras.\n\nA atualização também inclui novos blocos decorativos, uma nova mecânica de crafting e melhorias gerais de performance.",
+                featured: false,
+                date: "2024-10-22"
+            },
+            {
+                id: 4,
+                title: "Review: O melhor mouse custo-benefício para FPS",
+                category: "hardware",
+                image: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=600",
+                description: "Testamos o novo lançamento focado em jogadores de Valorant e CS2. Vale a pena?",
+                body: "Se você está procurando um mouse gamer que ofereça desempenho competitivo sem estourar o orçamento, este review é para você!\n\nTestamos durante duas semanas o novo modelo que promete sensor de alta precisão, design ergonômico e peso ultraleve por um preço acessível.\n\nNos testes em Valorant e CS2, o sensor se mostrou extremamente preciso, sem aceleração ou suavização indesejada. A construção é sólida e os switches principais têm um clique satisfatório.\n\nVeredicto: Para quem busca custo-benefício, este é facilmente o melhor mouse da faixa de preço.",
+                featured: false,
+                date: "2024-10-21"
+            }
+        ];
+
+        // ============================
+        // GERENCIAMENTO DE DADOS (localStorage)
+        // ============================
+        function getNews() {
+            const stored = localStorage.getItem('gg_news');
+            if (!stored) {
+                localStorage.setItem('gg_news', JSON.stringify(defaultNews));
+                return defaultNews;
+            }
+            return JSON.parse(stored);
         }
 
-        // 2. Sistema de Filtro de Categorias (Botões)
-        function filterNews(category, buttonElement) {
-            // Atualiza cor do botão clicado
-            let buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            if(buttonElement) {
-                buttonElement.classList.add('active');
+        function saveNewsData(data) {
+            localStorage.setItem('gg_news', JSON.stringify(data));
+        }
+
+        function getNextId() {
+            const news = getNews();
+            if (news.length === 0) return 1;
+            return Math.max(...news.map(n => n.id)) + 1;
+        }
+
+        // ============================
+        // NAVEGAÇÃO
+        // ============================
+        function navigate(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+            document.getElementById('searchInput').value = "";
+
+            if (pageId === 'home') {
+                renderNewsCards();
+                renderBanner();
+            }
+            if (pageId === 'dashboard') {
+                renderDashboard();
+            }
+        }
+
+        // ============================
+        // RENDERIZAR NOTÍCIAS (Frontend)
+        // ============================
+        function renderBanner() {
+            const news = getNews();
+            const featured = news.find(n => n.featured) || news[0];
+            if (!featured) return;
+
+            const banner = document.getElementById('mainBanner');
+            banner.style.background = `linear-gradient(to top, var(--bg-dark), transparent), url('${featured.image}') center/cover`;
+            document.getElementById('bannerTitle').textContent = featured.title;
+            document.getElementById('bannerDesc').textContent = featured.description;
+            banner.setAttribute('data-id', featured.id);
+        }
+
+        function openFeaturedArticle() {
+            const banner = document.getElementById('mainBanner');
+            const id = parseInt(banner.getAttribute('data-id'));
+            openArticle(id);
+        }
+
+        function renderNewsCards() {
+            const news = getNews();
+            const container = document.getElementById('news-container');
+            container.innerHTML = '';
+
+            if (news.length === 0) {
+                container.innerHTML = '<p style="color: var(--text-muted); text-align: center; grid-column: 1/-1; padding: 3rem;">Nenhuma notícia publicada ainda.</p>';
+                return;
             }
 
-            // Filtra os cards
-            let cards = document.querySelectorAll('.news-card');
+            // Ordena por data (mais recente primeiro)
+            const sorted = [...news].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            sorted.forEach(item => {
+                const color = categoryColors[item.category] || '#9d4edd';
+                const label = categoryLabels[item.category] || item.category;
+                const card = document.createElement('div');
+                card.className = 'news-card';
+                card.setAttribute('data-category', item.category);
+                card.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}" class="news-img" onerror="this.src='https://via.placeholder.com/600x300/15151a/9d4edd?text=GG+News'">
+                    <div class="news-content">
+                        <span class="banner-tag" style="background: ${color};">${label}</span>
+                        <h3>${item.title}</h3>
+                        <p>${item.description}</p>
+                        <button class="btn-read" onclick="openArticle(${item.id})">Ler mais</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // ============================
+        // ABRIR ARTIGO
+        // ============================
+        function openArticle(id) {
+            const news = getNews();
+            const item = news.find(n => n.id === id);
+            if (!item) return;
+
+            const color = categoryColors[item.category] || '#9d4edd';
+            const label = categoryLabels[item.category] || item.category;
+
+            document.getElementById('articleTag').textContent = label;
+            document.getElementById('articleTag').style.background = color;
+            document.getElementById('articleTitle').textContent = item.title;
+
+            const dateFormatted = new Date(item.date + 'T12:00:00').toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
+            document.getElementById('articleMeta').innerHTML = `Por <strong style="color: var(--neon-purple);">Admin GG</strong> | ${dateFormatted}`;
+            document.getElementById('articleImg').src = item.image;
+
+            const bodyHtml = item.body.split('\n').filter(p => p.trim()).map(p => `<p>${p}</p>`).join('');
+            document.getElementById('articleBody').innerHTML = bodyHtml;
+
+            navigate('article');
+        }
+
+        // ============================
+        // SHARE
+        // ============================
+        function shareTwitter() {
+            const title = document.getElementById('articleTitle').textContent;
+            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title + ' | GG - Global Games')}`);
+        }
+        function shareWhatsApp() {
+            const title = document.getElementById('articleTitle').textContent;
+            window.open(`https://wa.me/?text=${encodeURIComponent(title + ' | GG - Global Games')}`);
+        }
+
+        // ============================
+        // FILTROS E BUSCA
+        // ============================
+        function filterNews(category, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+
+            const cards = document.querySelectorAll('.news-card');
             cards.forEach(card => {
                 if (category === 'todos' || card.getAttribute('data-category') === category) {
                     card.style.display = 'block';
@@ -320,38 +818,254 @@
                     card.style.display = 'none';
                 }
             });
-
-            // Limpa a busca ao clicar em uma categoria
             document.getElementById('searchInput').value = "";
         }
 
-        // 3. Sistema de Busca (Input de texto)
         function searchNews() {
-            // Pega o texto digitado e transforma em letras minúsculas
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let cards = document.querySelectorAll('.news-card');
-            
-            // Garante que estamos na página inicial ao buscar
-            if(input.length > 0) {
-                navigate('home');
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            if (input.length > 0) {
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                document.getElementById('home').classList.add('active');
             }
-
-            // Tira a cor de botão ativo das categorias quando fazemos uma busca
-            let buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-
-            // Verifica card por card se o título ou o texto batem com a busca
-            cards.forEach(card => {
-                let title = card.querySelector('h3').innerText.toLowerCase();
-                let desc = card.querySelector('p').innerText.toLowerCase();
-
-                if (title.includes(input) || desc.includes(input)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.news-card').forEach(card => {
+                const title = card.querySelector('h3').innerText.toLowerCase();
+                const desc = card.querySelector('p').innerText.toLowerCase();
+                card.style.display = (title.includes(input) || desc.includes(input)) ? 'block' : 'none';
             });
         }
+
+        // ============================
+        // LOGIN / AUTH
+        // ============================
+        function handleAdminClick() {
+            if (isLoggedIn) {
+                navigate('dashboard');
+            } else {
+                openLoginModal();
+            }
+        }
+
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.add('show');
+            document.getElementById('loginPassword').value = '';
+            document.getElementById('loginError').style.display = 'none';
+            setTimeout(() => document.getElementById('loginPassword').focus(), 200);
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.remove('show');
+        }
+
+        function attemptLogin() {
+            const pw = document.getElementById('loginPassword').value;
+            if (pw === ADMIN_PASSWORD) {
+                isLoggedIn = true;
+                closeLoginModal();
+                document.getElementById('adminBtn').classList.add('logged');
+                document.getElementById('adminBtn').textContent = '⚡ Dashboard';
+                showToast('✅ Login realizado com sucesso!');
+                navigate('dashboard');
+            } else {
+                document.getElementById('loginError').style.display = 'block';
+                document.getElementById('loginPassword').value = '';
+                document.getElementById('loginPassword').focus();
+            }
+        }
+
+        function handleLogout() {
+            isLoggedIn = false;
+            document.getElementById('adminBtn').classList.remove('logged');
+            document.getElementById('adminBtn').textContent = '⚙ Admin';
+            showToast('Você saiu do painel');
+            navigate('home');
+        }
+
+        // ============================
+        // DASHBOARD
+        // ============================
+        function renderDashboard() {
+            const news = getNews();
+
+            // Stats
+            document.getElementById('statTotal').textContent = news.length;
+            document.getElementById('statRoblox').textContent = news.filter(n => n.category === 'roblox').length;
+            document.getElementById('statMinecraft').textContent = news.filter(n => n.category === 'minecraft').length;
+            document.getElementById('statFortnite').textContent = news.filter(n => n.category === 'fortnite').length;
+
+            // Tabela
+            const tbody = document.getElementById('dashTableBody');
+            tbody.innerHTML = '';
+
+            if (news.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="no-data">Nenhuma notícia cadastrada. Clique em "+ Nova Notícia" para começar!</td></tr>';
+                return;
+            }
+
+            const sorted = [...news].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            sorted.forEach(item => {
+                const color = categoryColors[item.category] || '#9d4edd';
+                const label = categoryLabels[item.category] || item.category;
+                const dateStr = new Date(item.date + 'T12:00:00').toLocaleDateString('pt-BR');
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>
+                        <span class="featured-star ${item.featured ? '' : 'inactive'}" onclick="toggleFeatured(${item.id})" title="Clique para alternar destaque">
+                            ${item.featured ? '★' : '☆'}
+                        </span>
+                    </td>
+                    <td><img src="${item.image}" class="img-preview" onerror="this.src='https://via.placeholder.com/60x40/15151a/9d4edd?text=GG'"></td>
+                    <td><strong>${item.title.length > 50 ? item.title.substring(0, 50) + '...' : item.title}</strong></td>
+                    <td><span class="cat-badge" style="background: ${color}; color: white;">${label}</span></td>
+                    <td style="white-space: nowrap;">${dateStr}</td>
+                    <td>
+                        <div class="actions-cell">
+                            <button class="btn-dash edit" onclick="editNews(${item.id})" style="font-size:0.7rem; padding:5px 10px;">✏ Editar</button>
+                            <button class="btn-dash danger" onclick="deleteNews(${item.id})" style="font-size:0.7rem; padding:5px 10px;">🗑 Excluir</button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Formulário
+        function showForm(editing = false) {
+            document.getElementById('newsForm').style.display = 'block';
+            if (!editing) {
+                document.getElementById('formTitle').textContent = '➕ Adicionar Nova Notícia';
+                clearForm();
+                document.getElementById('inputDate').value = new Date().toISOString().split('T')[0];
+            }
+            document.getElementById('newsForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function hideForm() {
+            document.getElementById('newsForm').style.display = 'none';
+            clearForm();
+        }
+
+        function clearForm() {
+            document.getElementById('editingId').value = '';
+            document.getElementById('inputTitle').value = '';
+            document.getElementById('inputCategory').value = 'roblox';
+            document.getElementById('inputImage').value = '';
+            document.getElementById('inputDesc').value = '';
+            document.getElementById('inputBody').value = '';
+            document.getElementById('inputFeatured').value = 'false';
+            document.getElementById('inputDate').value = '';
+        }
+
+        function saveNews() {
+            const title = document.getElementById('inputTitle').value.trim();
+            const category = document.getElementById('inputCategory').value;
+            const image = document.getElementById('inputImage').value.trim();
+            const description = document.getElementById('inputDesc').value.trim();
+            const body = document.getElementById('inputBody').value.trim();
+            const featured = document.getElementById('inputFeatured').value === 'true';
+            const date = document.getElementById('inputDate').value;
+            const editingId = document.getElementById('editingId').value;
+
+            // Validação
+            if (!title || !description || !body) {
+                showToast('❌ Preencha título, descrição e conteúdo!', true);
+                return;
+            }
+
+            let news = getNews();
+
+            // Se marcou como destaque, desmarcar o anterior
+            if (featured) {
+                news = news.map(n => ({ ...n, featured: false }));
+            }
+
+            if (editingId) {
+                // Editando
+                const idx = news.findIndex(n => n.id === parseInt(editingId));
+                if (idx !== -1) {
+                    news[idx] = {
+                        ...news[idx],
+                        title, category,
+                        image: image || 'https://via.placeholder.com/600x300/15151a/9d4edd?text=GG+News',
+                        description, body, featured,
+                        date: date || news[idx].date
+                    };
+                }
+                showToast('✅ Notícia atualizada com sucesso!');
+            } else {
+                // Nova notícia
+                news.push({
+                    id: getNextId(),
+                    title, category,
+                    image: image || 'https://via.placeholder.com/600x300/15151a/9d4edd?text=GG+News',
+                    description, body, featured,
+                    date: date || new Date().toISOString().split('T')[0]
+                });
+                showToast('✅ Notícia publicada com sucesso!');
+            }
+
+            saveNewsData(news);
+            hideForm();
+            renderDashboard();
+        }
+
+        function editNews(id) {
+            const news = getNews();
+            const item = news.find(n => n.id === id);
+            if (!item) return;
+
+            document.getElementById('editingId').value = item.id;
+            document.getElementById('inputTitle').value = item.title;
+            document.getElementById('inputCategory').value = item.category;
+            document.getElementById('inputImage').value = item.image;
+            document.getElementById('inputDesc').value = item.description;
+            document.getElementById('inputBody').value = item.body;
+            document.getElementById('inputFeatured').value = item.featured ? 'true' : 'false';
+            document.getElementById('inputDate').value = item.date;
+
+            document.getElementById('formTitle').textContent = '✏️ Editando: ' + item.title.substring(0, 40) + '...';
+            showForm(true);
+        }
+
+        function deleteNews(id) {
+            if (!confirm('⚠️ Tem certeza que deseja excluir esta notícia? Essa ação não pode ser desfeita.')) return;
+
+            let news = getNews();
+            news = news.filter(n => n.id !== id);
+            saveNewsData(news);
+            showToast('🗑 Notícia excluída!');
+            renderDashboard();
+        }
+
+        function toggleFeatured(id) {
+            let news = getNews();
+            news = news.map(n => ({
+                ...n,
+                featured: n.id === id ? !n.featured : false
+            }));
+            saveNewsData(news);
+            showToast('⭐ Destaque atualizado!');
+            renderDashboard();
+        }
+
+        // ============================
+        // TOAST NOTIFICATION
+        // ============================
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast show' + (isError ? ' error' : '');
+            setTimeout(() => toast.className = 'toast', 3000);
+        }
+
+        // ============================
+        // INICIALIZAÇÃO
+        // ============================
+        document.addEventListener('DOMContentLoaded', () => {
+            renderNewsCards();
+            renderBanner();
+        });
     </script>
 </body>
 </html>
