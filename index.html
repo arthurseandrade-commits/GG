@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GG. - Global Games</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
 
@@ -38,13 +39,11 @@
             overflow-x: hidden;
         }
 
-        /* ==================== ANIMATED BACKGROUND ==================== */
+        /* ===== BACKGROUND ANIMATION ===== */
         .bg-animation {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: 0;
             pointer-events: none;
             overflow: hidden;
@@ -59,29 +58,22 @@
         }
 
         .bg-animation .orb:nth-child(1) {
-            width: 400px;
-            height: 400px;
+            width: 400px; height: 400px;
             background: var(--primary-purple);
-            top: -100px;
-            right: -100px;
-            animation-delay: 0s;
+            top: -100px; right: -100px;
         }
 
         .bg-animation .orb:nth-child(2) {
-            width: 300px;
-            height: 300px;
+            width: 300px; height: 300px;
             background: var(--primary-green);
-            bottom: -50px;
-            left: -50px;
+            bottom: -50px; left: -50px;
             animation-delay: -7s;
         }
 
         .bg-animation .orb:nth-child(3) {
-            width: 250px;
-            height: 250px;
+            width: 250px; height: 250px;
             background: #6366f1;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             animation-delay: -14s;
         }
 
@@ -92,21 +84,18 @@
             75% { transform: translate(50px, 50px) scale(1.05); }
         }
 
-        /* ==================== PARTICLES ==================== */
+        /* ===== PARTICLES ===== */
         .particles {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: 0;
             pointer-events: none;
         }
 
         .particle {
             position: absolute;
-            width: 2px;
-            height: 2px;
+            width: 2px; height: 2px;
             background: var(--primary-purple);
             border-radius: 50%;
             animation: particleFloat linear infinite;
@@ -120,13 +109,11 @@
             100% { opacity: 0; transform: translateY(-10vh) scale(1); }
         }
 
-        /* ==================== LOGIN PAGE ==================== */
+        /* ===== LOGIN PAGE ===== */
         .login-page {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: 10000;
             display: flex;
             align-items: center;
@@ -143,7 +130,7 @@
 
         .login-container {
             width: 100%;
-            max-width: 440px;
+            max-width: 460px;
             padding: 20px;
             position: relative;
             z-index: 2;
@@ -162,9 +149,7 @@
         .login-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 3px;
             background: linear-gradient(90deg, var(--primary-purple), var(--primary-green), var(--primary-purple));
             background-size: 200% 100%;
@@ -178,272 +163,89 @@
 
         .login-logo {
             text-align: center;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .login-logo h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 48px;
+            font-size: 52px;
             font-weight: 900;
-            color: var(--text-primary);
             letter-spacing: 4px;
         }
 
-        .login-logo h1 span {
-            color: var(--primary-green);
-        }
+        .login-logo h1 span { color: var(--primary-green); }
 
         .login-subtitle {
             text-align: center;
             color: var(--text-secondary);
-            font-size: 14px;
-            margin-bottom: 36px;
-            letter-spacing: 2px;
+            font-size: 13px;
+            margin-bottom: 40px;
+            letter-spacing: 3px;
             text-transform: uppercase;
             font-weight: 500;
         }
 
-        .login-tabs {
-            display: flex;
-            background: rgba(255,255,255,0.05);
-            border-radius: 12px;
-            padding: 4px;
-            margin-bottom: 28px;
+        /* Google Button Custom */
+        .google-login-section {
+            margin-bottom: 16px;
         }
 
-        .login-tab {
-            flex: 1;
-            padding: 12px;
-            text-align: center;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            transition: all 0.3s ease;
-            border: none;
-            background: transparent;
-        }
-
-        .login-tab.active {
-            background: var(--gradient-purple);
-            color: white;
-            box-shadow: var(--shadow-purple);
-        }
-
-        .login-tab:hover:not(.active) {
-            color: var(--text-primary);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .form-group .input-wrapper {
-            position: relative;
-        }
-
-        .form-group .input-icon {
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 18px;
-            transition: color 0.3s ease;
-        }
-
-        .form-group input {
+        .google-btn {
             width: 100%;
-            padding: 14px 16px 14px 48px;
-            background: rgba(255,255,255,0.05);
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            color: var(--text-primary);
-            font-size: 15px;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.3s ease;
-            outline: none;
-        }
-
-        .form-group input:focus {
-            border-color: var(--primary-purple);
-            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.15);
-            background: rgba(124, 58, 237, 0.05);
-        }
-
-        .form-group input:focus + .input-icon,
-        .form-group input:focus ~ .input-icon {
-            color: var(--primary-purple);
-        }
-
-        .form-group input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .password-toggle {
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
+            padding: 16px 24px;
+            background: #ffffff;
             border: none;
-            color: var(--text-muted);
+            border-radius: 14px;
+            color: #1f1f1f;
+            font-size: 15px;
+            font-weight: 600;
             cursor: pointer;
-            font-size: 18px;
-            transition: color 0.3s ease;
-        }
-
-        .password-toggle:hover {
-            color: var(--primary-purple);
-        }
-
-        .form-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-        }
-
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-        }
-
-        .remember-me input[type="checkbox"] {
-            display: none;
-        }
-
-        .checkmark {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--border-color);
-            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
-            background: rgba(255,255,255,0.05);
-        }
-
-        .remember-me input:checked + .checkmark {
-            background: var(--gradient-purple);
-            border-color: var(--primary-purple);
-        }
-
-        .checkmark::after {
-            content: '✓';
-            color: white;
-            font-size: 12px;
-            font-weight: bold;
-            opacity: 0;
-            transition: opacity 0.2s ease;
-        }
-
-        .remember-me input:checked + .checkmark::after {
-            opacity: 1;
-        }
-
-        .remember-me span {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        .forgot-password {
-            font-size: 13px;
-            color: var(--primary-purple);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .forgot-password:hover {
-            color: #a855f7;
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 16px;
-            background: var(--gradient-purple);
-            border: none;
-            border-radius: 12px;
-            color: white;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            gap: 12px;
             position: relative;
             overflow: hidden;
         }
 
-        .login-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .login-btn:hover::before {
-            left: 100%;
-        }
-
-        .login-btn:hover {
+        .google-btn:hover {
             transform: translateY(-2px);
-            box-shadow: var(--shadow-purple);
+            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.15);
         }
 
-        .login-btn:active {
+        .google-btn:active {
             transform: translateY(0);
         }
 
-        .login-btn.loading {
+        .google-btn svg {
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
+        }
+
+        .google-btn.loading {
             pointer-events: none;
             opacity: 0.8;
         }
 
-        .login-btn .spinner {
+        .google-btn .g-spinner {
             display: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-top-color: white;
+            width: 22px; height: 22px;
+            border: 3px solid rgba(0,0,0,0.1);
+            border-top-color: #4285f4;
             border-radius: 50%;
-            animation: spin 0.6s linear infinite;
-            margin: 0 auto;
+            animation: spin 0.7s linear infinite;
         }
 
-        .login-btn.loading .btn-text {
-            display: none;
-        }
+        .google-btn.loading .g-spinner { display: block; }
+        .google-btn.loading .g-icon { display: none; }
+        .google-btn.loading .g-text { display: none; }
 
-        .login-btn.loading .spinner {
-            display: block;
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
+        /* Divider */
         .divider {
             display: flex;
             align-items: center;
@@ -464,47 +266,98 @@
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 1px;
+            white-space: nowrap;
         }
 
-        .social-login {
-            display: flex;
-            gap: 12px;
-        }
-
-        .social-btn {
-            flex: 1;
-            padding: 12px;
-            background: rgba(255,255,255,0.05);
+        /* Guest Button */
+        .guest-btn {
+            width: 100%;
+            padding: 16px 24px;
+            background: transparent;
             border: 2px solid var(--border-color);
-            border-radius: 12px;
-            color: var(--text-primary);
-            font-size: 20px;
+            border-radius: 14px;
+            color: var(--text-secondary);
+            font-size: 15px;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
         }
 
-        .social-btn span {
-            font-size: 13px;
-            font-weight: 500;
-        }
-
-        .social-btn:hover {
+        .guest-btn:hover {
             border-color: var(--primary-purple);
-            background: rgba(124, 58, 237, 0.1);
+            color: var(--text-primary);
+            background: rgba(124, 58, 237, 0.08);
             transform: translateY(-2px);
         }
 
-        .login-form-container {
-            display: none;
+        .guest-info {
+            text-align: center;
+            margin-top: 16px;
+            padding: 14px;
+            background: rgba(124, 58, 237, 0.06);
+            border: 1px solid rgba(124, 58, 237, 0.15);
+            border-radius: 12px;
         }
 
-        .login-form-container.active {
-            display: block;
+        .guest-info p {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .guest-info p span {
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+
+        .login-footer-text {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .login-footer-text a {
+            color: var(--primary-purple);
+            text-decoration: none;
+        }
+
+        /* Login error/success messages */
+        .login-msg {
+            padding: 14px 18px;
+            border-radius: 12px;
+            font-size: 13px;
+            margin-bottom: 16px;
+            display: none;
+            align-items: center;
+            gap: 10px;
             animation: fadeInUp 0.3s ease;
+        }
+
+        .login-msg.show { display: flex; }
+
+        .login-msg.error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.25);
+            color: #fca5a5;
+        }
+
+        .login-msg.success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            color: #6ee7b7;
+        }
+
+        .login-msg.info {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            color: #93c5fd;
         }
 
         @keyframes fadeInUp {
@@ -512,57 +365,78 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .login-error {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            border-radius: 10px;
-            padding: 12px 16px;
-            margin-bottom: 16px;
-            font-size: 13px;
-            color: #fca5a5;
+        /* ===== VISITOR BANNER ===== */
+        .visitor-banner {
             display: none;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.12), rgba(16, 185, 129, 0.08));
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 16px;
+            padding: 16px 24px;
+            margin-bottom: 24px;
             align-items: center;
-            gap: 8px;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
         }
 
-        .login-error.show {
+        .visitor-banner.show { display: flex; }
+
+        .visitor-banner-text {
             display: flex;
-        }
-
-        .login-success {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            border-radius: 10px;
-            padding: 12px 16px;
-            margin-bottom: 16px;
-            font-size: 13px;
-            color: #6ee7b7;
-            display: none;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
+            font-size: 14px;
+            color: var(--text-secondary);
         }
 
-        .login-success.show {
+        .visitor-banner-text strong {
+            color: var(--text-primary);
+        }
+
+        .visitor-banner-actions {
             display: flex;
+            gap: 10px;
         }
 
-        /* ==================== MAIN APP ==================== */
-        .app-container {
-            display: none;
-            position: relative;
-            z-index: 1;
+        .visitor-login-btn {
+            padding: 10px 24px;
+            background: var(--gradient-purple);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
         }
 
-        .app-container.active {
-            display: block;
+        .visitor-login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-purple);
         }
 
-        /* ==================== HEADER ==================== */
+        .visitor-dismiss-btn {
+            padding: 10px 16px;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-muted);
+            font-size: 13px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .visitor-dismiss-btn:hover {
+            border-color: var(--text-muted);
+            color: var(--text-secondary);
+        }
+
+        /* ===== HEADER ===== */
         header {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             z-index: 1000;
             background: rgba(10, 10, 15, 0.85);
             backdrop-filter: blur(20px);
@@ -594,13 +468,11 @@
             text-decoration: none;
             letter-spacing: 3px;
             flex-shrink: 0;
+            cursor: pointer;
         }
 
-        .logo span {
-            color: var(--primary-green);
-        }
+        .logo span { color: var(--primary-green); }
 
-        /* Nav */
         .nav-links {
             display: flex;
             align-items: center;
@@ -615,8 +487,8 @@
             padding: 8px 16px;
             border-radius: 10px;
             transition: all 0.3s ease;
-            position: relative;
             white-space: nowrap;
+            cursor: pointer;
         }
 
         .nav-links a:hover,
@@ -625,19 +497,6 @@
             background: rgba(124, 58, 237, 0.15);
         }
 
-        .nav-links a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 3px;
-            background: var(--primary-purple);
-            border-radius: 3px;
-        }
-
-        /* Search bar */
         .search-container {
             flex: 1;
             max-width: 400px;
@@ -660,27 +519,22 @@
         .search-container input:focus {
             border-color: var(--primary-purple);
             box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
-            background: rgba(124, 58, 237, 0.05);
         }
 
-        .search-container input::placeholder {
-            color: var(--text-muted);
-        }
+        .search-container input::placeholder { color: var(--text-muted); }
 
         .search-icon {
             position: absolute;
-            left: 14px;
-            top: 50%;
+            left: 14px; top: 50%;
             transform: translateY(-50%);
             color: var(--text-muted);
             font-size: 16px;
         }
 
-        /* User area */
         .user-area {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
             flex-shrink: 0;
         }
 
@@ -703,10 +557,8 @@
 
         .notification-badge {
             position: absolute;
-            top: -4px;
-            right: -4px;
-            width: 18px;
-            height: 18px;
+            top: -4px; right: -4px;
+            width: 18px; height: 18px;
             background: #ef4444;
             border-radius: 50%;
             font-size: 10px;
@@ -729,13 +581,10 @@
             position: relative;
         }
 
-        .user-profile:hover {
-            background: rgba(255,255,255,0.06);
-        }
+        .user-profile:hover { background: rgba(255,255,255,0.06); }
 
         .user-avatar {
-            width: 40px;
-            height: 40px;
+            width: 40px; height: 40px;
             border-radius: 12px;
             background: var(--gradient-purple);
             display: flex;
@@ -745,6 +594,13 @@
             font-size: 16px;
             color: white;
             border: 2px solid rgba(124, 58, 237, 0.5);
+            overflow: hidden;
+        }
+
+        .user-avatar img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
         }
 
         .user-info {
@@ -761,16 +617,17 @@
 
         .user-level {
             font-size: 11px;
-            color: var(--primary-green);
             font-weight: 500;
         }
 
-        /* Dropdown */
+        .user-level.guest { color: var(--text-muted); }
+        .user-level.member { color: var(--primary-green); }
+
         .user-dropdown {
             position: absolute;
             top: calc(100% + 12px);
             right: 0;
-            width: 220px;
+            width: 240px;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 16px;
@@ -787,6 +644,47 @@
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
+        }
+
+        .dropdown-user-header {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .dropdown-user-header .mini-avatar {
+            width: 36px; height: 36px;
+            border-radius: 10px;
+            background: var(--gradient-purple);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .dropdown-user-header .mini-avatar img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+
+        .dropdown-user-info .dd-name {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .dropdown-user-info .dd-email {
+            font-size: 11px;
+            color: var(--text-muted);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 150px;
         }
 
         .user-dropdown a,
@@ -819,16 +717,21 @@
             margin: 6px 8px;
         }
 
-        .user-dropdown .logout-btn {
-            color: #ef4444;
-        }
-
+        .user-dropdown .logout-btn { color: #ef4444; }
         .user-dropdown .logout-btn:hover {
             background: rgba(239, 68, 68, 0.15);
             color: #fca5a5;
         }
 
-        /* Mobile menu */
+        .user-dropdown .login-btn-dd {
+            color: var(--primary-green);
+        }
+
+        .user-dropdown .login-btn-dd:hover {
+            background: rgba(16, 185, 129, 0.15);
+            color: #6ee7b7;
+        }
+
         .mobile-menu-btn {
             display: none;
             background: rgba(255,255,255,0.06);
@@ -841,21 +744,25 @@
             transition: all 0.3s ease;
         }
 
-        .mobile-menu-btn:hover {
-            border-color: var(--primary-purple);
+        .mobile-menu-btn:hover { border-color: var(--primary-purple); }
+
+        /* ===== MAIN CONTENT ===== */
+        .app-container {
+            display: none;
+            position: relative;
+            z-index: 1;
         }
 
-        /* ==================== MAIN CONTENT ==================== */
+        .app-container.active { display: block; }
+
         main {
             max-width: 1400px;
             margin: 0 auto;
             padding: 96px 24px 40px;
         }
 
-        /* Hero Section */
-        .hero-section {
-            margin-bottom: 48px;
-        }
+        /* Hero */
+        .hero-section { margin-bottom: 48px; }
 
         .hero-card {
             position: relative;
@@ -878,20 +785,16 @@
 
         .hero-bg-effects {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             overflow: hidden;
         }
 
         .hero-grid {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
                 linear-gradient(rgba(124, 58, 237, 0.05) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(124, 58, 237, 0.05) 1px, transparent 1px);
             background-size: 40px 40px;
@@ -899,33 +802,22 @@
 
         .hero-glow {
             position: absolute;
-            width: 300px;
-            height: 300px;
             border-radius: 50%;
             filter: blur(100px);
-            opacity: 0.3;
         }
 
         .hero-glow.purple {
+            width: 300px; height: 300px;
             background: var(--primary-purple);
-            top: -100px;
-            right: 10%;
+            top: -100px; right: 10%;
+            opacity: 0.3;
         }
 
         .hero-glow.green {
+            width: 300px; height: 300px;
             background: var(--primary-green);
-            bottom: -100px;
-            left: 20%;
+            bottom: -100px; left: 20%;
             opacity: 0.15;
-        }
-
-        .hero-glow.blue {
-            background: #3b82f6;
-            top: 50%;
-            right: 30%;
-            width: 200px;
-            height: 200px;
-            opacity: 0.1;
         }
 
         .hero-content {
@@ -951,8 +843,7 @@
         }
 
         .hero-badge .pulse {
-            width: 8px;
-            height: 8px;
+            width: 8px; height: 8px;
             background: var(--primary-green);
             border-radius: 50%;
             animation: pulse 2s ease-in-out infinite;
@@ -986,7 +877,6 @@
         .hero-actions {
             display: flex;
             gap: 16px;
-            align-items: center;
             flex-wrap: wrap;
         }
 
@@ -1030,7 +920,6 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: 'Inter', sans-serif;
-            text-decoration: none;
         }
 
         .btn-secondary:hover {
@@ -1041,8 +930,7 @@
 
         .hero-stats {
             position: absolute;
-            top: 48px;
-            right: 48px;
+            top: 48px; right: 48px;
             display: flex;
             flex-direction: column;
             gap: 12px;
@@ -1074,7 +962,7 @@
             margin-top: 4px;
         }
 
-        /* ==================== SECTION HEADERS ==================== */
+        /* Section */
         .section-header {
             display: flex;
             align-items: center;
@@ -1089,8 +977,7 @@
         }
 
         .section-title .accent-bar {
-            width: 4px;
-            height: 32px;
+            width: 4px; height: 32px;
             background: var(--gradient-green);
             border-radius: 4px;
         }
@@ -1112,9 +999,6 @@
         }
 
         .see-all {
-            display: flex;
-            align-items: center;
-            gap: 6px;
             color: var(--primary-purple);
             text-decoration: none;
             font-size: 14px;
@@ -1122,197 +1006,9 @@
             transition: all 0.3s ease;
         }
 
-        .see-all:hover {
-            color: #a855f7;
-            gap: 10px;
-        }
+        .see-all:hover { color: #a855f7; }
 
-        /* ==================== NEWS GRID ==================== */
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 24px;
-            margin-bottom: 48px;
-        }
-
-        .news-card {
-            background: var(--gradient-card);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            cursor: pointer;
-            position: relative;
-            group: true;
-        }
-
-        .news-card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(124, 58, 237, 0.3);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-        }
-
-        .news-card-image {
-            position: relative;
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .news-card-image .img-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 48px;
-            transition: transform 0.4s ease;
-        }
-
-        .news-card:hover .img-placeholder {
-            transform: scale(1.05);
-        }
-
-        .news-card-image .img-placeholder.purple {
-            background: linear-gradient(135deg, #2d1b69 0%, #1a0a3e 100%);
-        }
-
-        .news-card-image .img-placeholder.green {
-            background: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
-        }
-
-        .news-card-image .img-placeholder.blue {
-            background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
-        }
-
-        .news-card-image .img-placeholder.red {
-            background: linear-gradient(135deg, #5f1e1e 0%, #2a0f0f 100%);
-        }
-
-        .news-card-image .img-placeholder.orange {
-            background: linear-gradient(135deg, #5f3f1e 0%, #2a1a0f 100%);
-        }
-
-        .news-card-image .img-placeholder.cyan {
-            background: linear-gradient(135deg, #1e4a5f 0%, #0f2a3a 100%);
-        }
-
-        .card-category {
-            position: absolute;
-            top: 14px;
-            left: 14px;
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .card-category.esports { background: rgba(124, 58, 237, 0.9); }
-        .card-category.lancamento { background: rgba(16, 185, 129, 0.9); }
-        .card-category.analise { background: rgba(59, 130, 246, 0.9); }
-        .card-category.atualizacao { background: rgba(245, 158, 11, 0.9); }
-        .card-category.indie { background: rgba(236, 72, 153, 0.9); }
-        .card-category.hardware { background: rgba(239, 68, 68, 0.9); }
-
-        .card-read-time {
-            position: absolute;
-            top: 14px;
-            right: 14px;
-            padding: 6px 12px;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 8px;
-            font-size: 11px;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        .news-card-body {
-            padding: 24px;
-        }
-
-        .news-card-title {
-            font-size: 18px;
-            font-weight: 700;
-            line-height: 1.4;
-            margin-bottom: 10px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            transition: color 0.3s ease;
-        }
-
-        .news-card:hover .news-card-title {
-            color: var(--primary-purple);
-        }
-
-        .news-card-excerpt {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 18px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .news-card-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .card-author {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .card-author-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 10px;
-            background: var(--gradient-purple);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        .card-author-info {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card-author-name {
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .card-date {
-            font-size: 11px;
-            color: var(--text-muted);
-        }
-
-        .card-engagement {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .card-engagement span {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-
-        /* ==================== CATEGORIES STRIP ==================== */
+        /* Categories */
         .categories-strip {
             display: flex;
             gap: 10px;
@@ -1322,9 +1018,7 @@
             scrollbar-width: none;
         }
 
-        .categories-strip::-webkit-scrollbar {
-            display: none;
-        }
+        .categories-strip::-webkit-scrollbar { display: none; }
 
         .category-chip {
             display: flex;
@@ -1355,10 +1049,192 @@
             border-color: transparent;
         }
 
-        /* ==================== TRENDING ==================== */
-        .trending-section {
+        /* News Grid */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
             margin-bottom: 48px;
         }
+
+        .news-card {
+            background: var(--gradient-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .news-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(124, 58, 237, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .news-card-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .news-card-image .img-placeholder {
+            width: 100%; height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            transition: transform 0.4s ease;
+        }
+
+        .news-card:hover .img-placeholder { transform: scale(1.05); }
+
+        .img-placeholder.purple { background: linear-gradient(135deg, #2d1b69, #1a0a3e); }
+        .img-placeholder.green { background: linear-gradient(135deg, #064e3b, #022c22); }
+        .img-placeholder.blue { background: linear-gradient(135deg, #1e3a5f, #0f172a); }
+        .img-placeholder.red { background: linear-gradient(135deg, #5f1e1e, #2a0f0f); }
+        .img-placeholder.orange { background: linear-gradient(135deg, #5f3f1e, #2a1a0f); }
+        .img-placeholder.cyan { background: linear-gradient(135deg, #1e4a5f, #0f2a3a); }
+
+        .card-category {
+            position: absolute;
+            top: 14px; left: 14px;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card-category.esports { background: rgba(124, 58, 237, 0.9); }
+        .card-category.lancamento { background: rgba(16, 185, 129, 0.9); }
+        .card-category.analise { background: rgba(59, 130, 246, 0.9); }
+        .card-category.atualizacao { background: rgba(245, 158, 11, 0.9); }
+        .card-category.indie { background: rgba(236, 72, 153, 0.9); }
+        .card-category.hardware { background: rgba(239, 68, 68, 0.9); }
+
+        .card-read-time {
+            position: absolute;
+            top: 14px; right: 14px;
+            padding: 6px 12px;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        .news-card-body { padding: 24px; }
+
+        .news-card-title {
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            transition: color 0.3s ease;
+        }
+
+        .news-card:hover .news-card-title { color: var(--primary-purple); }
+
+        .news-card-excerpt {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 18px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .news-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-author-avatar {
+            width: 32px; height: 32px;
+            border-radius: 10px;
+            background: var(--gradient-purple);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .card-author-name { font-size: 13px; font-weight: 600; }
+        .card-date { font-size: 11px; color: var(--text-muted); }
+
+        .card-engagement {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card-engagement span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* Restricted overlay for visitors */
+        .restricted-overlay {
+            display: none;
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(4px);
+            border-radius: 20px;
+            z-index: 10;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .restricted-overlay.show { display: flex; }
+
+        .restricted-overlay span {
+            font-size: 28px;
+        }
+
+        .restricted-overlay p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .restricted-overlay .restricted-btn {
+            padding: 8px 20px;
+            background: var(--gradient-purple);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Trending */
+        .trending-section { margin-bottom: 48px; }
 
         .trending-list {
             display: grid;
@@ -1397,15 +1273,10 @@
         .trending-rank.bronze { color: #d97706; }
         .trending-rank.normal { color: var(--text-muted); }
 
-        .trending-info {
-            flex: 1;
-        }
-
         .trending-title {
             font-size: 15px;
             font-weight: 600;
             margin-bottom: 4px;
-            line-height: 1.3;
         }
 
         .trending-meta {
@@ -1416,13 +1287,10 @@
             gap: 8px;
         }
 
-        .trending-meta .trend-up {
-            color: var(--primary-green);
-        }
+        .trending-meta .trend-up { color: var(--primary-green); }
 
         .trending-thumb {
-            width: 64px;
-            height: 64px;
+            width: 64px; height: 64px;
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -1431,7 +1299,7 @@
             flex-shrink: 0;
         }
 
-        /* ==================== FOOTER ==================== */
+        /* Footer */
         footer {
             border-top: 1px solid var(--border-color);
             background: rgba(10, 10, 15, 0.9);
@@ -1443,17 +1311,12 @@
         footer::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 3px;
             background: linear-gradient(90deg, var(--primary-purple), var(--primary-green));
         }
 
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+        .footer-content { max-width: 1400px; margin: 0 auto; }
 
         .footer-top {
             display: grid;
@@ -1462,17 +1325,12 @@
             margin-bottom: 40px;
         }
 
-        .footer-brand .logo {
-            font-size: 32px;
-            display: inline-block;
-            margin-bottom: 12px;
-        }
-
         .footer-brand p {
             color: var(--text-secondary);
             font-size: 14px;
             line-height: 1.7;
             max-width: 300px;
+            margin-top: 12px;
         }
 
         .footer-links h4 {
@@ -1481,7 +1339,6 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 16px;
-            color: var(--text-primary);
         }
 
         .footer-links a {
@@ -1508,10 +1365,7 @@
             gap: 16px;
         }
 
-        .footer-bottom p {
-            font-size: 13px;
-            color: var(--text-muted);
-        }
+        .footer-bottom p { font-size: 13px; color: var(--text-muted); }
 
         .footer-social {
             display: flex;
@@ -1519,8 +1373,7 @@
         }
 
         .footer-social a {
-            width: 40px;
-            height: 40px;
+            width: 40px; height: 40px;
             border-radius: 10px;
             background: rgba(255,255,255,0.05);
             border: 1px solid var(--border-color);
@@ -1540,16 +1393,14 @@
             transform: translateY(-2px);
         }
 
-        /* ==================== DASHBOARD ==================== */
+        /* ===== DASHBOARD ===== */
         .dashboard-page {
             display: none;
             position: relative;
             z-index: 1;
         }
 
-        .dashboard-page.active {
-            display: block;
-        }
+        .dashboard-page.active { display: block; }
 
         .dashboard-layout {
             max-width: 1400px;
@@ -1560,7 +1411,6 @@
             gap: 24px;
         }
 
-        /* Sidebar */
         .dashboard-sidebar {
             background: var(--gradient-card);
             border: 1px solid var(--border-color);
@@ -1579,8 +1429,7 @@
         }
 
         .sidebar-avatar {
-            width: 80px;
-            height: 80px;
+            width: 80px; height: 80px;
             border-radius: 20px;
             background: var(--gradient-purple);
             display: flex;
@@ -1591,30 +1440,35 @@
             margin: 0 auto 14px;
             border: 3px solid rgba(124, 58, 237, 0.4);
             box-shadow: var(--shadow-purple);
+            overflow: hidden;
         }
 
-        .sidebar-name {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 4px;
+        .sidebar-avatar img {
+            width: 100%; height: 100%;
+            object-fit: cover;
         }
 
-        .sidebar-email {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-bottom: 12px;
-        }
+        .sidebar-name { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+        .sidebar-email { font-size: 13px; color: var(--text-muted); margin-bottom: 12px; }
 
         .sidebar-badge {
             display: inline-flex;
             align-items: center;
             gap: 6px;
             padding: 6px 16px;
-            background: rgba(16, 185, 129, 0.15);
-            color: var(--primary-green);
             border-radius: 20px;
             font-size: 12px;
             font-weight: 600;
+        }
+
+        .sidebar-badge.pro {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--primary-green);
+        }
+
+        .sidebar-badge.visitor {
+            background: rgba(124, 58, 237, 0.15);
+            color: var(--primary-purple);
         }
 
         .sidebar-nav {
@@ -1634,6 +1488,7 @@
             font-size: 14px;
             font-weight: 500;
             transition: all 0.2s ease;
+            cursor: pointer;
         }
 
         .sidebar-nav a:hover,
@@ -1648,16 +1503,13 @@
             box-shadow: var(--shadow-purple);
         }
 
-        .sidebar-nav a .nav-icon {
+        .sidebar-nav .nav-icon {
             font-size: 18px;
             width: 24px;
             text-align: center;
         }
 
-        /* Dashboard Main */
-        .dashboard-main {
-            min-width: 0;
-        }
+        .dashboard-main { min-width: 0; }
 
         .dashboard-welcome {
             background: linear-gradient(135deg, #1a0a3e 0%, #13131f 100%);
@@ -1672,10 +1524,8 @@
         .dashboard-welcome::after {
             content: '';
             position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 200px;
-            height: 200px;
+            top: -50px; right: -50px;
+            width: 200px; height: 200px;
             background: var(--primary-purple);
             border-radius: 50%;
             filter: blur(80px);
@@ -1698,7 +1548,6 @@
             z-index: 1;
         }
 
-        /* Stats Grid */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -1724,11 +1573,8 @@
         .stat-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 3px;
-            border-radius: 3px 3px 0 0;
         }
 
         .stat-card:nth-child(1)::before { background: var(--gradient-purple); }
@@ -1744,8 +1590,7 @@
         }
 
         .stat-card-icon {
-            width: 44px;
-            height: 44px;
+            width: 44px; height: 44px;
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -1759,35 +1604,20 @@
         .stat-card:nth-child(4) .stat-card-icon { background: rgba(245, 158, 11, 0.15); }
 
         .stat-change {
-            font-size: 12px;
-            font-weight: 600;
-            padding: 4px 8px;
-            border-radius: 6px;
+            font-size: 12px; font-weight: 600;
+            padding: 4px 8px; border-radius: 6px;
         }
 
-        .stat-change.up {
-            background: rgba(16, 185, 129, 0.15);
-            color: var(--primary-green);
-        }
-
-        .stat-change.down {
-            background: rgba(239, 68, 68, 0.15);
-            color: #ef4444;
-        }
+        .stat-change.up { background: rgba(16, 185, 129, 0.15); color: var(--primary-green); }
 
         .stat-card-value {
             font-family: 'Orbitron', sans-serif;
-            font-size: 28px;
-            font-weight: 800;
+            font-size: 28px; font-weight: 800;
             margin-bottom: 4px;
         }
 
-        .stat-card-label {
-            font-size: 13px;
-            color: var(--text-muted);
-        }
+        .stat-card-label { font-size: 13px; color: var(--text-muted); }
 
-        /* Dashboard Grid */
         .dashboard-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1810,28 +1640,18 @@
         }
 
         .dash-panel-title {
-            font-size: 16px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-size: 16px; font-weight: 700;
+            display: flex; align-items: center; gap: 10px;
         }
 
         .dash-panel-action {
             font-size: 13px;
             color: var(--primary-purple);
-            cursor: pointer;
-            font-weight: 500;
-            border: none;
-            background: none;
+            cursor: pointer; font-weight: 500;
+            border: none; background: none;
             font-family: 'Inter', sans-serif;
         }
 
-        .dash-panel-action:hover {
-            color: #a855f7;
-        }
-
-        /* Activity List */
         .activity-list {
             display: flex;
             flex-direction: column;
@@ -1847,13 +1667,10 @@
             transition: background 0.2s ease;
         }
 
-        .activity-item:hover {
-            background: rgba(255,255,255,0.03);
-        }
+        .activity-item:hover { background: rgba(255,255,255,0.03); }
 
         .activity-icon {
-            width: 40px;
-            height: 40px;
+            width: 40px; height: 40px;
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -1867,23 +1684,9 @@
         .activity-icon.blue { background: rgba(59, 130, 246, 0.15); }
         .activity-icon.orange { background: rgba(245, 158, 11, 0.15); }
 
-        .activity-content {
-            flex: 1;
-            min-width: 0;
-        }
+        .activity-text { font-size: 14px; font-weight: 500; margin-bottom: 2px; }
+        .activity-time { font-size: 12px; color: var(--text-muted); }
 
-        .activity-text {
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 2px;
-        }
-
-        .activity-time {
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-
-        /* Favorite Games */
         .fav-games-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -1904,12 +1707,10 @@
 
         .fav-game-card:hover {
             border-color: rgba(124, 58, 237, 0.3);
-            background: rgba(124, 58, 237, 0.05);
         }
 
         .fav-game-icon {
-            width: 44px;
-            height: 44px;
+            width: 44px; height: 44px;
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -1917,17 +1718,9 @@
             font-size: 20px;
         }
 
-        .fav-game-name {
-            font-size: 13px;
-            font-weight: 600;
-        }
+        .fav-game-name { font-size: 13px; font-weight: 600; }
+        .fav-game-hours { font-size: 11px; color: var(--text-muted); }
 
-        .fav-game-hours {
-            font-size: 11px;
-            color: var(--text-muted);
-        }
-
-        /* Quick Actions */
         .quick-actions-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -1955,41 +1748,30 @@
             transform: translateY(-2px);
         }
 
-        .quick-action-icon {
-            font-size: 24px;
-        }
-
+        .quick-action-icon { font-size: 24px; }
         .quick-action-label {
-            font-size: 12px;
-            font-weight: 600;
-            text-align: center;
-            color: var(--text-secondary);
+            font-size: 12px; font-weight: 600;
+            text-align: center; color: var(--text-secondary);
         }
 
-        /* ==================== MOBILE SIDEBAR ==================== */
+        /* ===== MOBILE SIDEBAR ===== */
         .mobile-sidebar-overlay {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: rgba(0,0,0,0.6);
             z-index: 9998;
             opacity: 0;
             transition: opacity 0.3s ease;
         }
 
-        .mobile-sidebar-overlay.show {
-            opacity: 1;
-        }
+        .mobile-sidebar-overlay.show { opacity: 1; }
 
         .mobile-sidebar {
             position: fixed;
-            top: 0;
-            left: -300px;
-            width: 280px;
-            height: 100%;
+            top: 0; left: -300px;
+            width: 280px; height: 100%;
             background: var(--card-bg);
             border-right: 1px solid var(--border-color);
             z-index: 9999;
@@ -1998,19 +1780,14 @@
             overflow-y: auto;
         }
 
-        .mobile-sidebar.show {
-            left: 0;
-        }
+        .mobile-sidebar.show { left: 0; }
 
         .mobile-sidebar .sidebar-close {
             position: absolute;
-            top: 16px;
-            right: 16px;
-            background: none;
-            border: none;
+            top: 16px; right: 16px;
+            background: none; border: none;
             color: var(--text-secondary);
-            font-size: 24px;
-            cursor: pointer;
+            font-size: 24px; cursor: pointer;
         }
 
         .mobile-sidebar .mobile-nav {
@@ -2028,13 +1805,12 @@
             border-radius: 12px;
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
+            font-size: 15px; font-weight: 500;
             transition: all 0.2s ease;
+            cursor: pointer;
         }
 
-        .mobile-sidebar .mobile-nav a:hover,
-        .mobile-sidebar .mobile-nav a.active {
+        .mobile-sidebar .mobile-nav a:hover {
             background: rgba(124, 58, 237, 0.15);
             color: var(--text-primary);
         }
@@ -2045,11 +1821,10 @@
             margin: 8px 0;
         }
 
-        /* ==================== TOAST NOTIFICATIONS ==================== */
+        /* ===== TOAST ===== */
         .toast-container {
             position: fixed;
-            top: 90px;
-            right: 24px;
+            top: 90px; right: 24px;
             z-index: 10001;
             display: flex;
             flex-direction: column;
@@ -2059,8 +1834,7 @@
         .toast {
             padding: 16px 24px;
             border-radius: 14px;
-            font-size: 14px;
-            font-weight: 500;
+            font-size: 14px; font-weight: 500;
             min-width: 300px;
             display: flex;
             align-items: center;
@@ -2098,194 +1872,109 @@
             to { transform: translateX(100px); opacity: 0; }
         }
 
-        /* ==================== RESPONSIVE ==================== */
+        /* ===== VISITOR LOCKED ===== */
+        .visitor-locked-section {
+            display: none;
+            background: var(--gradient-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 48px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .visitor-locked-section.show { display: block; }
+
+        .visitor-locked-section .lock-icon { font-size: 48px; margin-bottom: 16px; }
+
+        .visitor-locked-section h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .visitor-locked-section p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .visitor-locked-section .lock-login-btn {
+            padding: 12px 32px;
+            background: var(--gradient-purple);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .visitor-locked-section .lock-login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-purple);
+        }
+
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: flex;
-            }
-
-            .hero-stats {
-                display: none;
-            }
-
-            .hero-title {
-                font-size: 36px;
-            }
-
-            .hero-content {
-                padding: 32px;
-            }
-
-            .footer-top {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .dashboard-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .dashboard-sidebar {
-                position: static;
-                display: none;
-            }
-
-            .dashboard-sidebar.mobile-show {
-                display: block;
-            }
-
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: flex; }
+            .hero-stats { display: none; }
+            .hero-title { font-size: 36px; }
+            .hero-content { padding: 32px; }
+            .footer-top { grid-template-columns: 1fr 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .dashboard-layout { grid-template-columns: 1fr; }
+            .dashboard-sidebar { display: none; }
+            .dashboard-grid { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 768px) {
-            .header-content {
-                height: 64px;
-                padding: 0 16px;
-            }
-
-            .logo {
-                font-size: 24px;
-            }
-
-            .search-container {
-                display: none;
-            }
-
-            .user-info {
-                display: none;
-            }
-
-            main {
-                padding: 80px 16px 24px;
-            }
-
-            .hero-card {
-                min-height: 320px;
-            }
-
-            .hero-content {
-                padding: 24px;
-            }
-
-            .hero-title {
-                font-size: 28px;
-            }
-
-            .hero-description {
-                font-size: 15px;
-            }
-
-            .hero-actions {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .btn-primary, .btn-secondary {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .news-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .trending-list {
-                grid-template-columns: 1fr;
-            }
-
-            .section-title h2 {
-                font-size: 20px;
-            }
-
-            .footer-top {
-                grid-template-columns: 1fr;
-                gap: 24px;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .dashboard-layout {
-                padding: 80px 16px 24px;
-            }
-
-            .dashboard-welcome h2 {
-                font-size: 20px;
-            }
-
-            .fav-games-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .login-card {
-                padding: 32px 24px;
-            }
-
-            .login-logo h1 {
-                font-size: 36px;
-            }
+            .header-content { height: 64px; padding: 0 16px; }
+            .logo { font-size: 24px; }
+            .search-container { display: none; }
+            .user-info { display: none; }
+            main { padding: 80px 16px 24px; }
+            .hero-card { min-height: 320px; }
+            .hero-content { padding: 24px; }
+            .hero-title { font-size: 28px; }
+            .hero-actions { flex-direction: column; align-items: flex-start; }
+            .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+            .news-grid { grid-template-columns: 1fr; }
+            .trending-list { grid-template-columns: 1fr; }
+            .section-title h2 { font-size: 20px; }
+            .footer-top { grid-template-columns: 1fr; gap: 24px; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .dashboard-layout { padding: 80px 16px 24px; }
+            .dashboard-welcome h2 { font-size: 20px; }
+            .fav-games-grid { grid-template-columns: 1fr; }
+            .login-card { padding: 32px 24px; }
+            .login-logo h1 { font-size: 40px; }
+            .visitor-banner { flex-direction: column; text-align: center; }
+            .toast { min-width: unset; margin-left: 24px; }
         }
 
         @media (max-width: 480px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .quick-actions-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .hero-title {
-                font-size: 24px;
-            }
-
-            .stat-card-value {
-                font-size: 22px;
-            }
-
-            .social-login {
-                flex-direction: column;
-            }
-
-            .form-options {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
-            }
+            .stats-grid { grid-template-columns: 1fr; }
+            .quick-actions-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero-title { font-size: 24px; }
+            .stat-card-value { font-size: 22px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Background Animation -->
     <div class="bg-animation">
         <div class="orb"></div>
         <div class="orb"></div>
         <div class="orb"></div>
     </div>
-
-    <!-- Particles -->
     <div class="particles" id="particles"></div>
-
-    <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
 
-    <!-- ==================== LOGIN PAGE ==================== -->
+    <!-- ===== LOGIN PAGE ===== -->
     <div class="login-page" id="loginPage">
         <div class="bg-animation">
             <div class="orb"></div>
@@ -2299,156 +1988,85 @@
                 </div>
                 <p class="login-subtitle">Global Games Portal</p>
 
-                <div class="login-tabs">
-                    <button class="login-tab active" onclick="switchTab('login')">Entrar</button>
-                    <button class="login-tab" onclick="switchTab('register')">Criar Conta</button>
-                </div>
+                <div class="login-msg" id="loginMsg"></div>
 
-                <!-- Login Form -->
-                <div class="login-form-container active" id="loginForm">
-                    <div class="login-error" id="loginError">
-                        <span>⚠️</span>
-                        <span id="loginErrorText">Credenciais inválidas</span>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Email ou Usuário</label>
-                        <div class="input-wrapper">
-                            <input type="text" id="loginEmail" placeholder="seu@email.com" autocomplete="username">
-                            <span class="input-icon">👤</span>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Senha</label>
-                        <div class="input-wrapper">
-                            <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password">
-                            <span class="input-icon">🔒</span>
-                            <button class="password-toggle" onclick="togglePassword('loginPassword', this)">👁️</button>
-                        </div>
-                    </div>
-
-                    <div class="form-options">
-                        <label class="remember-me">
-                            <input type="checkbox" id="rememberMe" checked>
-                            <div class="checkmark"></div>
-                            <span>Lembrar de mim</span>
-                        </label>
-                        <a href="#" class="forgot-password">Esqueceu a senha?</a>
-                    </div>
-
-                    <button class="login-btn" id="loginBtn" onclick="handleLogin()">
-                        <span class="btn-text">ENTRAR</span>
-                        <div class="spinner"></div>
-                    </button>
-
-                    <div class="divider">
-                        <span>ou continue com</span>
-                    </div>
-
-                    <div class="social-login">
-                        <button class="social-btn" onclick="socialLogin('Google')">
-                            🔴 <span>Google</span>
-                        </button>
-                        <button class="social-btn" onclick="socialLogin('Discord')">
-                            🟣 <span>Discord</span>
-                        </button>
-                        <button class="social-btn" onclick="socialLogin('Steam')">
-                            ⚫ <span>Steam</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Register Form -->
-                <div class="login-form-container" id="registerForm">
-                    <div class="login-error" id="registerError">
-                        <span>⚠️</span>
-                        <span id="registerErrorText">Erro</span>
-                    </div>
-                    <div class="login-success" id="registerSuccess">
-                        <span>✅</span>
-                        <span>Conta criada com sucesso!</span>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Nome de Usuário</label>
-                        <div class="input-wrapper">
-                            <input type="text" id="regUsername" placeholder="SeuNickGamer">
-                            <span class="input-icon">🎮</span>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Email</label>
-                        <div class="input-wrapper">
-                            <input type="email" id="regEmail" placeholder="seu@email.com">
-                            <span class="input-icon">📧</span>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Senha</label>
-                        <div class="input-wrapper">
-                            <input type="password" id="regPassword" placeholder="Mínimo 6 caracteres">
-                            <span class="input-icon">🔒</span>
-                            <button class="password-toggle" onclick="togglePassword('regPassword', this)">👁️</button>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Confirmar Senha</label>
-                        <div class="input-wrapper">
-                            <input type="password" id="regConfirmPassword" placeholder="Repita a senha">
-                            <span class="input-icon">🔒</span>
-                            <button class="password-toggle" onclick="togglePassword('regConfirmPassword', this)">👁️</button>
-                        </div>
-                    </div>
-
-                    <button class="login-btn" id="registerBtn" onclick="handleRegister()">
-                        <span class="btn-text">CRIAR CONTA</span>
-                        <div class="spinner"></div>
+                <!-- Google Login -->
+                <div class="google-login-section">
+                    <button class="google-btn" id="googleBtn" onclick="loginWithGoogle()">
+                        <div class="g-spinner"></div>
+                        <svg class="g-icon" viewBox="0 0 24 24">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                        </svg>
+                        <span class="g-text">Continuar com Google</span>
                     </button>
                 </div>
+
+                <div id="g_id_onload"
+                     data-client_id="YOUR_GOOGLE_CLIENT_ID"
+                     data-callback="handleGoogleResponse"
+                     data-auto_prompt="false"
+                     style="display:none;">
+                </div>
+
+                <div class="divider">
+                    <span>ou</span>
+                </div>
+
+                <!-- Guest Mode -->
+                <button class="guest-btn" onclick="enterAsGuest()">
+                    👁️ Entrar como Visitante
+                </button>
+
+                <div class="guest-info">
+                    <p>
+                        Como visitante você pode <span>navegar</span> e <span>ler matérias</span>, mas algumas funcionalidades como comentários, favoritos e dashboard completo ficam bloqueados.
+                    </p>
+                </div>
+
+                <p class="login-footer-text">
+                    Ao continuar, você concorda com nossos<br>
+                    <a href="#">Termos de Uso</a> e <a href="#">Política de Privacidade</a>
+                </p>
             </div>
         </div>
     </div>
 
-    <!-- ==================== MOBILE SIDEBAR ==================== -->
+    <!-- ===== MOBILE SIDEBAR ===== -->
     <div class="mobile-sidebar-overlay" id="mobileSidebarOverlay" onclick="closeMobileSidebar()"></div>
     <div class="mobile-sidebar" id="mobileSidebar">
         <button class="sidebar-close" onclick="closeMobileSidebar()">✕</button>
-        <div class="login-logo" style="margin-top:8px;">
-            <h1 style="font-family:'Orbitron';font-size:28px;font-weight:900;">GG<span style="color:#10b981;">.</span></h1>
+        <div style="margin-top:8px;text-align:center;">
+            <span class="logo">GG<span>.</span></span>
         </div>
         <div class="mobile-nav">
-            <a href="#" class="active" onclick="navigate('home')">🏠 Início</a>
-            <a href="#" onclick="navigate('dashboard')">📊 Dashboard</a>
+            <a onclick="navigate('home');closeMobileSidebar()">🏠 Início</a>
+            <a onclick="navigate('dashboard');closeMobileSidebar()">📊 Dashboard</a>
             <div class="nav-divider"></div>
             <a href="#">🔥 Em Alta</a>
             <a href="#">🎮 Jogos</a>
             <a href="#">🏆 E-Sports</a>
             <a href="#">📰 Notícias</a>
-            <a href="#">🎬 Análises</a>
             <div class="nav-divider"></div>
-            <a href="#">⚙️ Configurações</a>
-            <a href="#" onclick="handleLogout()" style="color:#ef4444;">🚪 Sair</a>
+            <a id="mobileAuthBtn" onclick="handleMobileAuth()">🚪 Sair</a>
         </div>
     </div>
 
-    <!-- ==================== HEADER ==================== -->
+    <!-- ===== HEADER ===== -->
     <header id="header">
         <div class="header-content">
             <button class="mobile-menu-btn" onclick="openMobileSidebar()">☰</button>
-            
-            <a href="#" class="logo" onclick="navigate('home')">GG<span>.</span></a>
+            <a class="logo" onclick="navigate('home')">GG<span>.</span></a>
 
             <nav class="nav-links">
-                <a href="#" class="active" onclick="navigate('home')">Início</a>
+                <a onclick="navigate('home')" class="active">Início</a>
                 <a href="#">Em Alta</a>
                 <a href="#">Jogos</a>
                 <a href="#">E-Sports</a>
                 <a href="#">Análises</a>
-                <a href="#" onclick="navigate('dashboard')">Dashboard</a>
+                <a onclick="navigate('dashboard')">Dashboard</a>
             </nav>
 
             <div class="search-container">
@@ -2462,27 +2080,45 @@
                     <span class="notification-badge">3</span>
                 </button>
                 <div class="user-profile" onclick="toggleDropdown()">
-                    <div class="user-avatar" id="userAvatar">G</div>
+                    <div class="user-avatar" id="userAvatar">V</div>
                     <div class="user-info">
-                        <span class="user-name" id="userName">Gamer</span>
-                        <span class="user-level">⭐ Nível 42</span>
+                        <span class="user-name" id="userName">Visitante</span>
+                        <span class="user-level guest" id="userLevel">👁️ Modo Visitante</span>
                     </div>
                     <div class="user-dropdown" id="userDropdown">
-                        <a href="#" onclick="navigate('dashboard')">📊 Dashboard</a>
+                        <div class="dropdown-user-header">
+                            <div class="mini-avatar" id="ddAvatar">V</div>
+                            <div class="dropdown-user-info">
+                                <div class="dd-name" id="ddName">Visitante</div>
+                                <div class="dd-email" id="ddEmail">Não logado</div>
+                            </div>
+                        </div>
+                        <a onclick="navigate('dashboard')">📊 Dashboard</a>
                         <a href="#">👤 Meu Perfil</a>
                         <a href="#">⚙️ Configurações</a>
-                        <a href="#">🎮 Meus Jogos</a>
                         <div class="dropdown-divider"></div>
-                        <button class="logout-btn" onclick="handleLogout()">🚪 Sair</button>
+                        <div id="ddAuthArea"></div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- ==================== MAIN APP (HOME) ==================== -->
+    <!-- ===== HOME PAGE ===== -->
     <div class="app-container" id="homePage">
         <main>
+            <!-- Visitor Banner -->
+            <div class="visitor-banner" id="visitorBanner">
+                <div class="visitor-banner-text">
+                    <span>👁️</span>
+                    <span>Você está no <strong>modo visitante</strong>. Faça login para desbloquear todos os recursos!</span>
+                </div>
+                <div class="visitor-banner-actions">
+                    <button class="visitor-login-btn" onclick="goToLogin()">Fazer Login</button>
+                    <button class="visitor-dismiss-btn" onclick="dismissBanner()">Dispensar</button>
+                </div>
+            </div>
+
             <!-- Hero -->
             <section class="hero-section">
                 <div class="hero-card">
@@ -2490,9 +2126,7 @@
                         <div class="hero-grid"></div>
                         <div class="hero-glow purple"></div>
                         <div class="hero-glow green"></div>
-                        <div class="hero-glow blue"></div>
                     </div>
-
                     <div class="hero-stats">
                         <div class="hero-stat">
                             <div class="hero-stat-value">2.4M</div>
@@ -2507,7 +2141,6 @@
                             <div class="hero-stat-label">Reviews</div>
                         </div>
                     </div>
-
                     <div class="hero-content">
                         <div class="hero-badge">
                             <span class="pulse"></span>
@@ -2546,7 +2179,7 @@
                     <a href="#" class="see-all">Ver todas →</a>
                 </div>
 
-                <div class="news-grid">
+                <div class="news-grid" id="newsGrid">
                     <article class="news-card">
                         <div class="news-card-image">
                             <div class="img-placeholder purple">🎮</div>
@@ -2564,10 +2197,7 @@
                                         <span class="card-date">Há 2 horas</span>
                                     </div>
                                 </div>
-                                <div class="card-engagement">
-                                    <span>❤️ 1.2k</span>
-                                    <span>💬 89</span>
-                                </div>
+                                <div class="card-engagement"><span>❤️ 1.2k</span><span>💬 89</span></div>
                             </div>
                         </div>
                     </article>
@@ -2589,10 +2219,7 @@
                                         <span class="card-date">Há 4 horas</span>
                                     </div>
                                 </div>
-                                <div class="card-engagement">
-                                    <span>❤️ 5.8k</span>
-                                    <span>💬 342</span>
-                                </div>
+                                <div class="card-engagement"><span>❤️ 5.8k</span><span>💬 342</span></div>
                             </div>
                         </div>
                     </article>
@@ -2614,22 +2241,25 @@
                                         <span class="card-date">Há 6 horas</span>
                                     </div>
                                 </div>
-                                <div class="card-engagement">
-                                    <span>❤️ 3.1k</span>
-                                    <span>💬 198</span>
-                                </div>
+                                <div class="card-engagement"><span>❤️ 3.1k</span><span>💬 198</span></div>
                             </div>
                         </div>
                     </article>
 
-                    <article class="news-card">
+                    <!-- Card 4 - restricted for visitors -->
+                    <article class="news-card" style="position:relative;">
+                        <div class="restricted-overlay" id="restricted1">
+                            <span>🔒</span>
+                            <p>Conteúdo exclusivo</p>
+                            <button class="restricted-btn" onclick="goToLogin()">Fazer Login</button>
+                        </div>
                         <div class="news-card-image">
                             <div class="img-placeholder red">💻</div>
                             <span class="card-category hardware">Hardware</span>
                             <span class="card-read-time">6 min</span>
                         </div>
                         <div class="news-card-body">
-                            <h3 class="news-card-title">NVIDIA RTX 5090: Benchmark completo e comparações com a geração anterior</h3>
+                            <h3 class="news-card-title">NVIDIA RTX 5090: Benchmark completo e comparações</h3>
                             <p class="news-card-excerpt">Testamos a nova placa de vídeo da NVIDIA e os resultados são impressionantes em ray tracing.</p>
                             <div class="news-card-footer">
                                 <div class="card-author">
@@ -2639,22 +2269,24 @@
                                         <span class="card-date">Há 8 horas</span>
                                     </div>
                                 </div>
-                                <div class="card-engagement">
-                                    <span>❤️ 2.4k</span>
-                                    <span>💬 156</span>
-                                </div>
+                                <div class="card-engagement"><span>❤️ 2.4k</span><span>💬 156</span></div>
                             </div>
                         </div>
                     </article>
 
-                    <article class="news-card">
+                    <article class="news-card" style="position:relative;">
+                        <div class="restricted-overlay" id="restricted2">
+                            <span>🔒</span>
+                            <p>Conteúdo exclusivo</p>
+                            <button class="restricted-btn" onclick="goToLogin()">Fazer Login</button>
+                        </div>
                         <div class="news-card-image">
                             <div class="img-placeholder orange">🕹️</div>
                             <span class="card-category indie">Indie</span>
                             <span class="card-read-time">4 min</span>
                         </div>
                         <div class="news-card-body">
-                            <h3 class="news-card-title">Hollow Knight: Silksong finalmente ganha data de lançamento oficial</h3>
+                            <h3 class="news-card-title">Hollow Knight: Silksong finalmente ganha data de lançamento</h3>
                             <p class="news-card-excerpt">Após anos de espera, Team Cherry confirma a data e mostra trailer inédito do aguardado sequel.</p>
                             <div class="news-card-footer">
                                 <div class="card-author">
@@ -2664,22 +2296,24 @@
                                         <span class="card-date">Há 10 horas</span>
                                     </div>
                                 </div>
-                                <div class="card-engagement">
-                                    <span>❤️ 4.2k</span>
-                                    <span>💬 267</span>
-                                </div>
+                                <div class="card-engagement"><span>❤️ 4.2k</span><span>💬 267</span></div>
                             </div>
                         </div>
                     </article>
 
-                    <article class="news-card">
+                    <article class="news-card" style="position:relative;">
+                        <div class="restricted-overlay" id="restricted3">
+                            <span>🔒</span>
+                            <p>Conteúdo exclusivo</p>
+                            <button class="restricted-btn" onclick="goToLogin()">Fazer Login</button>
+                        </div>
                         <div class="news-card-image">
                             <div class="img-placeholder cyan">🎯</div>
                             <span class="card-category atualizacao">Atualização</span>
                             <span class="card-read-time">3 min</span>
                         </div>
                         <div class="news-card-body">
-                            <h3 class="news-card-title">Valorant: Patch 9.0 traz novo agente e reformula o sistema de ranqueada</h3>
+                            <h3 class="news-card-title">Valorant: Patch 9.0 traz novo agente e reformula ranqueada</h3>
                             <p class="news-card-excerpt">A Riot Games aposta em mudanças ousadas para renovar a experiência competitiva do FPS tático.</p>
                             <div class="news-card-footer">
                                 <div class="card-author">
@@ -2689,10 +2323,7 @@
                                         <span class="card-date">Há 12 horas</span>
                                     </div>
                                 </div>
-                                <div class="card-engagement">
-                                    <span>❤️ 1.8k</span>
-                                    <span>💬 134</span>
-                                </div>
+                                <div class="card-engagement"><span>❤️ 1.8k</span><span>💬 134</span></div>
                             </div>
                         </div>
                     </article>
@@ -2708,56 +2339,36 @@
                     </div>
                     <a href="#" class="see-all">Ver mais →</a>
                 </div>
-
                 <div class="trending-list">
                     <div class="trending-item">
                         <span class="trending-rank gold">01</span>
-                        <div class="trending-info">
+                        <div style="flex:1">
                             <div class="trending-title">PS5 Pro recebe corte de preço no Brasil</div>
-                            <div class="trending-meta">
-                                <span>📈</span>
-                                <span class="trend-up">+340% buscas</span>
-                                <span>• 15 min atrás</span>
-                            </div>
+                            <div class="trending-meta"><span>📈</span><span class="trend-up">+340%</span><span>• 15 min</span></div>
                         </div>
                         <div class="trending-thumb" style="background:rgba(124,58,237,0.15);">🎮</div>
                     </div>
-
                     <div class="trending-item">
                         <span class="trending-rank silver">02</span>
-                        <div class="trending-info">
+                        <div style="flex:1">
                             <div class="trending-title">Nintendo Switch 2 - Todos os jogos confirmados</div>
-                            <div class="trending-meta">
-                                <span>📈</span>
-                                <span class="trend-up">+280% buscas</span>
-                                <span>• 32 min atrás</span>
-                            </div>
+                            <div class="trending-meta"><span>📈</span><span class="trend-up">+280%</span><span>• 32 min</span></div>
                         </div>
                         <div class="trending-thumb" style="background:rgba(239,68,68,0.15);">🕹️</div>
                     </div>
-
                     <div class="trending-item">
                         <span class="trending-rank bronze">03</span>
-                        <div class="trending-info">
+                        <div style="flex:1">
                             <div class="trending-title">Minecraft recebe update com IA generativa</div>
-                            <div class="trending-meta">
-                                <span>📈</span>
-                                <span class="trend-up">+190% buscas</span>
-                                <span>• 1h atrás</span>
-                            </div>
+                            <div class="trending-meta"><span>📈</span><span class="trend-up">+190%</span><span>• 1h</span></div>
                         </div>
                         <div class="trending-thumb" style="background:rgba(16,185,129,0.15);">⛏️</div>
                     </div>
-
                     <div class="trending-item">
                         <span class="trending-rank normal">04</span>
-                        <div class="trending-info">
-                            <div class="trending-title">Counter-Strike 2 bate recorde de jogadores simultâneos</div>
-                            <div class="trending-meta">
-                                <span>📈</span>
-                                <span class="trend-up">+150% buscas</span>
-                                <span>• 2h atrás</span>
-                            </div>
+                        <div style="flex:1">
+                            <div class="trending-title">Counter-Strike 2 bate recorde de jogadores</div>
+                            <div class="trending-meta"><span>📈</span><span class="trend-up">+150%</span><span>• 2h</span></div>
                         </div>
                         <div class="trending-thumb" style="background:rgba(59,130,246,0.15);">🔫</div>
                     </div>
@@ -2765,223 +2376,172 @@
             </section>
         </main>
 
-        <!-- Footer -->
         <footer>
             <div class="footer-content">
                 <div class="footer-top">
                     <div class="footer-brand">
                         <span class="logo">GG<span>.</span></span>
-                        <p>Sua fonte definitiva de notícias, análises e reviews do mundo gamer. Transmitindo em todas as frequências desde 2024.</p>
+                        <p>Sua fonte definitiva de notícias, análises e reviews do mundo gamer.</p>
                     </div>
                     <div class="footer-links">
                         <h4>Navegação</h4>
-                        <a href="#">Início</a>
-                        <a href="#">Notícias</a>
-                        <a href="#">Análises</a>
-                        <a href="#">E-Sports</a>
-                        <a href="#">Hardware</a>
+                        <a href="#">Início</a><a href="#">Notícias</a><a href="#">Análises</a><a href="#">E-Sports</a>
                     </div>
                     <div class="footer-links">
                         <h4>Comunidade</h4>
-                        <a href="#">Fórum</a>
-                        <a href="#">Discord</a>
-                        <a href="#">Eventos</a>
-                        <a href="#">Parceiros</a>
+                        <a href="#">Fórum</a><a href="#">Discord</a><a href="#">Eventos</a><a href="#">Parceiros</a>
                     </div>
                     <div class="footer-links">
                         <h4>Suporte</h4>
-                        <a href="#">Contato</a>
-                        <a href="#">FAQ</a>
-                        <a href="#">Termos de Uso</a>
-                        <a href="#">Privacidade</a>
+                        <a href="#">Contato</a><a href="#">FAQ</a><a href="#">Termos</a><a href="#">Privacidade</a>
                     </div>
                 </div>
                 <div class="footer-bottom">
-                    <p>© 2024 GG - Global Games. Transmitindo em todas as frequências.</p>
+                    <p>© 2024 GG - Global Games. Todos os direitos reservados.</p>
                     <div class="footer-social">
-                        <a href="#">🐦</a>
-                        <a href="#">📸</a>
-                        <a href="#">🎬</a>
-                        <a href="#">💬</a>
+                        <a href="#">🐦</a><a href="#">📸</a><a href="#">🎬</a><a href="#">💬</a>
                     </div>
                 </div>
             </div>
         </footer>
     </div>
 
-    <!-- ==================== DASHBOARD PAGE ==================== -->
+    <!-- ===== DASHBOARD PAGE ===== -->
     <div class="dashboard-page" id="dashboardPage">
         <div class="dashboard-layout">
-            <!-- Sidebar -->
-            <aside class="dashboard-sidebar" id="dashSidebar">
+            <aside class="dashboard-sidebar">
                 <div class="sidebar-profile">
                     <div class="sidebar-avatar" id="sidebarAvatar">G</div>
                     <div class="sidebar-name" id="sidebarName">Gamer</div>
                     <div class="sidebar-email" id="sidebarEmail">gamer@gg.com</div>
-                    <div class="sidebar-badge">⭐ PRO GAMER</div>
+                    <div class="sidebar-badge pro" id="sidebarBadge">⭐ PRO GAMER</div>
                 </div>
                 <nav class="sidebar-nav">
-                    <a href="#" class="active"><span class="nav-icon">📊</span> Visão Geral</a>
-                    <a href="#"><span class="nav-icon">📰</span> Minhas Matérias</a>
-                    <a href="#"><span class="nav-icon">🎮</span> Meus Jogos</a>
-                    <a href="#"><span class="nav-icon">❤️</span> Favoritos</a>
-                    <a href="#"><span class="nav-icon">💬</span> Comentários</a>
-                    <a href="#"><span class="nav-icon">🏆</span> Conquistas</a>
-                    <a href="#"><span class="nav-icon">⚙️</span> Configurações</a>
-                    <a href="#" onclick="navigate('home')"><span class="nav-icon">🏠</span> Voltar ao Início</a>
+                    <a class="active"><span class="nav-icon">📊</span> Visão Geral</a>
+                    <a><span class="nav-icon">📰</span> Minhas Matérias</a>
+                    <a><span class="nav-icon">🎮</span> Meus Jogos</a>
+                    <a><span class="nav-icon">❤️</span> Favoritos</a>
+                    <a><span class="nav-icon">💬</span> Comentários</a>
+                    <a><span class="nav-icon">🏆</span> Conquistas</a>
+                    <a><span class="nav-icon">⚙️</span> Configurações</a>
+                    <a onclick="navigate('home')"><span class="nav-icon">🏠</span> Voltar ao Início</a>
                 </nav>
             </aside>
 
-            <!-- Main Content -->
             <div class="dashboard-main">
-                <div class="dashboard-welcome">
-                    <h2>👋 Bem-vindo de volta, <span id="dashWelcomeName">Gamer</span>!</h2>
-                    <p>Aqui está um resumo da sua atividade na plataforma.</p>
+                <!-- Visitor locked message for dashboard -->
+                <div class="visitor-locked-section" id="dashVisitorLocked">
+                    <div class="lock-icon">🔐</div>
+                    <h3>Dashboard Bloqueado</h3>
+                    <p>Faça login com sua conta Google para acessar seu dashboard completo com estatísticas, conquistas e configurações.</p>
+                    <button class="lock-login-btn" onclick="goToLogin()">🔑 Fazer Login com Google</button>
                 </div>
 
-                <!-- Stats -->
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-card-header">
-                            <div class="stat-card-icon">📰</div>
-                            <span class="stat-change up">+12%</span>
-                        </div>
-                        <div class="stat-card-value">156</div>
-                        <div class="stat-card-label">Matérias Lidas</div>
+                <div id="dashContent">
+                    <div class="dashboard-welcome">
+                        <h2>👋 Bem-vindo, <span id="dashWelcomeName">Gamer</span>!</h2>
+                        <p>Aqui está um resumo da sua atividade na plataforma.</p>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-card-header">
-                            <div class="stat-card-icon">💬</div>
-                            <span class="stat-change up">+28%</span>
-                        </div>
-                        <div class="stat-card-value">43</div>
-                        <div class="stat-card-label">Comentários</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-card-header">
-                            <div class="stat-card-icon">⏰</div>
-                            <span class="stat-change up">+5%</span>
-                        </div>
-                        <div class="stat-card-value">28h</div>
-                        <div class="stat-card-label">Tempo no Site</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-card-header">
-                            <div class="stat-card-icon">⭐</div>
-                            <span class="stat-change up">+2</span>
-                        </div>
-                        <div class="stat-card-value">Lv.42</div>
-                        <div class="stat-card-label">Seu Nível</div>
-                    </div>
-                </div>
 
-                <!-- Dashboard Grid -->
-                <div class="dashboard-grid">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-card-header">
+                                <div class="stat-card-icon">📰</div>
+                                <span class="stat-change up">+12%</span>
+                            </div>
+                            <div class="stat-card-value">156</div>
+                            <div class="stat-card-label">Matérias Lidas</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-header">
+                                <div class="stat-card-icon">💬</div>
+                                <span class="stat-change up">+28%</span>
+                            </div>
+                            <div class="stat-card-value">43</div>
+                            <div class="stat-card-label">Comentários</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-header">
+                                <div class="stat-card-icon">⏰</div>
+                                <span class="stat-change up">+5%</span>
+                            </div>
+                            <div class="stat-card-value">28h</div>
+                            <div class="stat-card-label">Tempo no Site</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-header">
+                                <div class="stat-card-icon">⭐</div>
+                                <span class="stat-change up">+2</span>
+                            </div>
+                            <div class="stat-card-value">Lv.42</div>
+                            <div class="stat-card-label">Seu Nível</div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <div class="dash-panel">
+                            <div class="dash-panel-header">
+                                <span class="dash-panel-title">📋 Atividade Recente</span>
+                                <button class="dash-panel-action">Ver tudo</button>
+                            </div>
+                            <div class="activity-list">
+                                <div class="activity-item">
+                                    <div class="activity-icon purple">📖</div>
+                                    <div><div class="activity-text">Você leu "CBLOL 2025"</div><div class="activity-time">Há 30 min</div></div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon green">💬</div>
+                                    <div><div class="activity-text">Comentou em "GTA VI"</div><div class="activity-time">Há 2 horas</div></div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon blue">❤️</div>
+                                    <div><div class="activity-text">Curtiu "Review: Elden Ring"</div><div class="activity-time">Há 4 horas</div></div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon orange">🏆</div>
+                                    <div><div class="activity-text">Conquista: "Leitor Ávido"</div><div class="activity-time">Há 1 dia</div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dash-panel">
+                            <div class="dash-panel-header">
+                                <span class="dash-panel-title">🎮 Jogos Favoritos</span>
+                                <button class="dash-panel-action">Gerenciar</button>
+                            </div>
+                            <div class="fav-games-grid">
+                                <div class="fav-game-card">
+                                    <div class="fav-game-icon" style="background:rgba(124,58,237,0.15);">⚔️</div>
+                                    <div><div class="fav-game-name">Elden Ring</div><div class="fav-game-hours">320h</div></div>
+                                </div>
+                                <div class="fav-game-card">
+                                    <div class="fav-game-icon" style="background:rgba(16,185,129,0.15);">🎯</div>
+                                    <div><div class="fav-game-name">Valorant</div><div class="fav-game-hours">580h</div></div>
+                                </div>
+                                <div class="fav-game-card">
+                                    <div class="fav-game-icon" style="background:rgba(59,130,246,0.15);">🏎️</div>
+                                    <div><div class="fav-game-name">Forza Horizon 5</div><div class="fav-game-hours">145h</div></div>
+                                </div>
+                                <div class="fav-game-card">
+                                    <div class="fav-game-icon" style="background:rgba(245,158,11,0.15);">🔫</div>
+                                    <div><div class="fav-game-name">CS2</div><div class="fav-game-hours">1.2k h</div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="dash-panel">
                         <div class="dash-panel-header">
-                            <span class="dash-panel-title">📋 Atividade Recente</span>
-                            <button class="dash-panel-action">Ver tudo</button>
+                            <span class="dash-panel-title">⚡ Ações Rápidas</span>
                         </div>
-                        <div class="activity-list">
-                            <div class="activity-item">
-                                <div class="activity-icon purple">📖</div>
-                                <div class="activity-content">
-                                    <div class="activity-text">Você leu "CBLOL 2025: Nova temporada"</div>
-                                    <div class="activity-time">Há 30 min</div>
-                                </div>
-                            </div>
-                            <div class="activity-item">
-                                <div class="activity-icon green">💬</div>
-                                <div class="activity-content">
-                                    <div class="activity-text">Comentou em "GTA VI: Novos detalhes"</div>
-                                    <div class="activity-time">Há 2 horas</div>
-                                </div>
-                            </div>
-                            <div class="activity-item">
-                                <div class="activity-icon blue">❤️</div>
-                                <div class="activity-content">
-                                    <div class="activity-text">Curtiu "Review: Elden Ring Nightreign"</div>
-                                    <div class="activity-time">Há 4 horas</div>
-                                </div>
-                            </div>
-                            <div class="activity-item">
-                                <div class="activity-icon orange">🏆</div>
-                                <div class="activity-content">
-                                    <div class="activity-text">Conquista desbloqueada: "Leitor Ávido"</div>
-                                    <div class="activity-time">Há 1 dia</div>
-                                </div>
-                            </div>
+                        <div class="quick-actions-grid">
+                            <a class="quick-action" onclick="navigate('home')"><span class="quick-action-icon">📰</span><span class="quick-action-label">Ver Notícias</span></a>
+                            <a class="quick-action"><span class="quick-action-icon">🔍</span><span class="quick-action-label">Buscar Jogos</span></a>
+                            <a class="quick-action"><span class="quick-action-icon">🏆</span><span class="quick-action-label">Conquistas</span></a>
+                            <a class="quick-action"><span class="quick-action-icon">👤</span><span class="quick-action-label">Editar Perfil</span></a>
+                            <a class="quick-action"><span class="quick-action-icon">⚙️</span><span class="quick-action-label">Configurações</span></a>
+                            <a class="quick-action"><span class="quick-action-icon">📊</span><span class="quick-action-label">Estatísticas</span></a>
                         </div>
-                    </div>
-
-                    <div class="dash-panel">
-                        <div class="dash-panel-header">
-                            <span class="dash-panel-title">🎮 Jogos Favoritos</span>
-                            <button class="dash-panel-action">Gerenciar</button>
-                        </div>
-                        <div class="fav-games-grid">
-                            <div class="fav-game-card">
-                                <div class="fav-game-icon" style="background:rgba(124,58,237,0.15);">⚔️</div>
-                                <div>
-                                    <div class="fav-game-name">Elden Ring</div>
-                                    <div class="fav-game-hours">320h jogadas</div>
-                                </div>
-                            </div>
-                            <div class="fav-game-card">
-                                <div class="fav-game-icon" style="background:rgba(16,185,129,0.15);">🎯</div>
-                                <div>
-                                    <div class="fav-game-name">Valorant</div>
-                                    <div class="fav-game-hours">580h jogadas</div>
-                                </div>
-                            </div>
-                            <div class="fav-game-card">
-                                <div class="fav-game-icon" style="background:rgba(59,130,246,0.15);">🏎️</div>
-                                <div>
-                                    <div class="fav-game-name">Forza Horizon 5</div>
-                                    <div class="fav-game-hours">145h jogadas</div>
-                                </div>
-                            </div>
-                            <div class="fav-game-card">
-                                <div class="fav-game-icon" style="background:rgba(245,158,11,0.15);">🔫</div>
-                                <div>
-                                    <div class="fav-game-name">CS2</div>
-                                    <div class="fav-game-hours">1.2k h jogadas</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quick Actions -->
-                <div class="dash-panel">
-                    <div class="dash-panel-header">
-                        <span class="dash-panel-title">⚡ Ações Rápidas</span>
-                    </div>
-                    <div class="quick-actions-grid">
-                        <a href="#" class="quick-action" onclick="navigate('home')">
-                            <span class="quick-action-icon">📰</span>
-                            <span class="quick-action-label">Ver Notícias</span>
-                        </a>
-                        <a href="#" class="quick-action">
-                            <span class="quick-action-icon">🔍</span>
-                            <span class="quick-action-label">Buscar Jogos</span>
-                        </a>
-                        <a href="#" class="quick-action">
-                            <span class="quick-action-icon">🏆</span>
-                            <span class="quick-action-label">Conquistas</span>
-                        </a>
-                        <a href="#" class="quick-action">
-                            <span class="quick-action-icon">👤</span>
-                            <span class="quick-action-label">Editar Perfil</span>
-                        </a>
-                        <a href="#" class="quick-action">
-                            <span class="quick-action-icon">⚙️</span>
-                            <span class="quick-action-label">Configurações</span>
-                        </a>
-                        <a href="#" class="quick-action">
-                            <span class="quick-action-icon">📊</span>
-                            <span class="quick-action-label">Estatísticas</span>
-                        </a>
                     </div>
                 </div>
             </div>
@@ -2989,241 +2549,317 @@
     </div>
 
     <script>
-        // ==================== DATABASE (LocalStorage) ====================
-        const DB = {
-            getUsers: () => JSON.parse(localStorage.getItem('gg_users') || '[]'),
-            saveUsers: (users) => localStorage.setItem('gg_users', JSON.stringify(users)),
-            getCurrentUser: () => JSON.parse(localStorage.getItem('gg_current_user') || 'null'),
-            setCurrentUser: (user) => localStorage.setItem('gg_current_user', JSON.stringify(user)),
-            clearCurrentUser: () => localStorage.removeItem('gg_current_user'),
-            getRemember: () => JSON.parse(localStorage.getItem('gg_remember') || 'null'),
-            setRemember: (data) => localStorage.setItem('gg_remember', JSON.stringify(data)),
-            clearRemember: () => localStorage.removeItem('gg_remember')
-        };
+        // ===== STATE =====
+        let currentUser = null;
+        let isGuest = false;
 
-        // Initialize default admin user
-        (function initDB() {
-            const users = DB.getUsers();
-            if (users.length === 0) {
-                users.push({
-                    id: 1,
-                    username: 'Admin',
-                    email: 'admin@gg.com',
-                    password: 'admin123',
-                    createdAt: new Date().toISOString()
-                });
-                DB.saveUsers(users);
-            }
-        })();
-
-        // ==================== PARTICLES ====================
-        (function createParticles() {
-            const container = document.getElementById('particles');
+        // ===== PARTICLES =====
+        (function() {
+            const c = document.getElementById('particles');
             for (let i = 0; i < 30; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
-                particle.style.animationDelay = (Math.random() * 15) + 's';
-                particle.style.width = (Math.random() * 3 + 1) + 'px';
-                particle.style.height = particle.style.width;
-                if (Math.random() > 0.5) {
-                    particle.style.background = '#10b981';
-                }
-                container.appendChild(particle);
+                const p = document.createElement('div');
+                p.classList.add('particle');
+                p.style.left = Math.random() * 100 + '%';
+                p.style.animationDuration = (Math.random() * 15 + 10) + 's';
+                p.style.animationDelay = (Math.random() * 15) + 's';
+                p.style.width = (Math.random() * 3 + 1) + 'px';
+                p.style.height = p.style.width;
+                if (Math.random() > 0.5) p.style.background = '#10b981';
+                c.appendChild(p);
             }
         })();
 
-        // ==================== LOGIN SYSTEM ====================
-        function switchTab(tab) {
-            document.querySelectorAll('.login-tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.login-form-container').forEach(f => f.classList.remove('active'));
+        // ===== GOOGLE LOGIN =====
+        // For REAL Google login, replace YOUR_GOOGLE_CLIENT_ID with your actual ID from:
+        // https://console.cloud.google.com/apis/credentials
+        // Without a valid Client ID, the popup method below is used as demo
+
+        function loginWithGoogle() {
+            const btn = document.getElementById('googleBtn');
+            btn.classList.add('loading');
             
-            if (tab === 'login') {
-                document.querySelectorAll('.login-tab')[0].classList.add('active');
-                document.getElementById('loginForm').classList.add('active');
-            } else {
-                document.querySelectorAll('.login-tab')[1].classList.add('active');
-                document.getElementById('registerForm').classList.add('active');
-            }
+            showLoginMsg('Conectando com Google...', 'info');
 
-            // Clear errors
-            document.querySelectorAll('.login-error, .login-success').forEach(e => e.classList.remove('show'));
-        }
-
-        function togglePassword(inputId, btn) {
-            const input = document.getElementById(inputId);
-            if (input.type === 'password') {
-                input.type = 'text';
-                btn.textContent = '🙈';
-            } else {
-                input.type = 'password';
-                btn.textContent = '👁️';
-            }
-        }
-
-        function handleLogin() {
-            const email = document.getElementById('loginEmail').value.trim();
-            const password = document.getElementById('loginPassword').value;
-            const remember = document.getElementById('rememberMe').checked;
-            const errorEl = document.getElementById('loginError');
-            const errorText = document.getElementById('loginErrorText');
-            const btn = document.getElementById('loginBtn');
-
-            // Validation
-            if (!email || !password) {
-                errorText.textContent = 'Preencha todos os campos!';
-                errorEl.classList.add('show');
-                return;
-            }
-
-            errorEl.classList.remove('show');
-            btn.classList.add('loading');
-
-            setTimeout(() => {
-                const users = DB.getUsers();
-                const user = users.find(u => 
-                    (u.email === email || u.username === email) && u.password === password
-                );
-
-                if (user) {
-                    DB.setCurrentUser(user);
+            // Check if Google API is available
+            if (typeof google !== 'undefined' && google.accounts) {
+                try {
+                    google.accounts.id.initialize({
+                        client_id: 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com',
+                        callback: handleGoogleResponse,
+                        auto_select: false,
+                    });
                     
-                    if (remember) {
-                        DB.setRemember({ email: user.email });
-                    } else {
-                        DB.clearRemember();
-                    }
-
-                    showToast('Login realizado com sucesso! 🎮', 'success');
-                    
-                    setTimeout(() => {
-                        loginSuccess(user);
-                    }, 500);
-                } else {
-                    errorText.textContent = 'Email/usuário ou senha incorretos!';
-                    errorEl.classList.add('show');
-                    btn.classList.remove('loading');
+                    google.accounts.id.prompt((notification) => {
+                        if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+                            // Fallback: render button approach or popup
+                            tryGooglePopup(btn);
+                        }
+                    });
+                } catch (e) {
+                    tryGooglePopup(btn);
                 }
-            }, 1200);
+            } else {
+                tryGooglePopup(btn);
+            }
         }
 
-        function handleRegister() {
-            const username = document.getElementById('regUsername').value.trim();
-            const email = document.getElementById('regEmail').value.trim();
-            const password = document.getElementById('regPassword').value;
-            const confirmPassword = document.getElementById('regConfirmPassword').value;
-            const errorEl = document.getElementById('registerError');
-            const errorText = document.getElementById('registerErrorText');
-            const successEl = document.getElementById('registerSuccess');
-            const btn = document.getElementById('registerBtn');
-
-            errorEl.classList.remove('show');
-            successEl.classList.remove('show');
-
-            if (!username || !email || !password || !confirmPassword) {
-                errorText.textContent = 'Preencha todos os campos!';
-                errorEl.classList.add('show');
+        function tryGooglePopup(btn) {
+            // Fallback using OAuth2 popup
+            const clientId = 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
+            
+            if (clientId.includes('YOUR_GOOGLE_CLIENT_ID')) {
+                // DEMO MODE - simulate Google login for testing
+                setTimeout(() => {
+                    btn.classList.remove('loading');
+                    simulateGoogleLogin();
+                }, 1500);
                 return;
             }
 
-            if (password.length < 6) {
-                errorText.textContent = 'A senha deve ter no mínimo 6 caracteres!';
-                errorEl.classList.add('show');
-                return;
-            }
+            const redirectUri = window.location.origin + window.location.pathname;
+            const scope = 'openid profile email';
+            const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=token&scope=${encodeURIComponent(scope)}&prompt=select_account`;
+            
+            const popup = window.open(authUrl, 'Google Login', 'width=500,height=600,scrollbars=yes');
+            
+            const checkPopup = setInterval(() => {
+                try {
+                    if (popup.closed) {
+                        clearInterval(checkPopup);
+                        btn.classList.remove('loading');
+                    }
+                    if (popup.location.href.includes('access_token')) {
+                        const hash = popup.location.hash;
+                        const token = new URLSearchParams(hash.substring(1)).get('access_token');
+                        popup.close();
+                        clearInterval(checkPopup);
+                        fetchGoogleProfile(token, btn);
+                    }
+                } catch(e) {}
+            }, 500);
+        }
 
-            if (password !== confirmPassword) {
-                errorText.textContent = 'As senhas não coincidem!';
-                errorEl.classList.add('show');
-                return;
-            }
-
-            const users = DB.getUsers();
-            if (users.find(u => u.email === email)) {
-                errorText.textContent = 'Este email já está cadastrado!';
-                errorEl.classList.add('show');
-                return;
-            }
-
-            if (users.find(u => u.username === username)) {
-                errorText.textContent = 'Este nome de usuário já existe!';
-                errorEl.classList.add('show');
-                return;
-            }
-
-            btn.classList.add('loading');
-
-            setTimeout(() => {
-                const newUser = {
-                    id: Date.now(),
-                    username,
-                    email,
-                    password,
-                    createdAt: new Date().toISOString()
-                };
-
-                users.push(newUser);
-                DB.saveUsers(users);
-
+        function fetchGoogleProfile(token, btn) {
+            fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+            .then(res => res.json())
+            .then(data => {
                 btn.classList.remove('loading');
-                successEl.classList.add('show');
-                showToast('Conta criada com sucesso! Faça login.', 'success');
+                const user = {
+                    name: data.name,
+                    email: data.email,
+                    picture: data.picture,
+                    provider: 'google'
+                };
+                completeLogin(user);
+            })
+            .catch(() => {
+                btn.classList.remove('loading');
+                showLoginMsg('Erro ao conectar com Google. Tente novamente.', 'error');
+            });
+        }
 
-                // Clear fields
-                document.getElementById('regUsername').value = '';
-                document.getElementById('regEmail').value = '';
-                document.getElementById('regPassword').value = '';
-                document.getElementById('regConfirmPassword').value = '';
+        function handleGoogleResponse(response) {
+            const btn = document.getElementById('googleBtn');
+            btn.classList.remove('loading');
+            
+            // Decode JWT token
+            const payload = JSON.parse(atob(response.credential.split('.')[1]));
+            
+            const user = {
+                name: payload.name,
+                email: payload.email,
+                picture: payload.picture,
+                provider: 'google'
+            };
+            
+            completeLogin(user);
+        }
 
-                setTimeout(() => switchTab('login'), 1500);
+        function simulateGoogleLogin() {
+            // Demo: simulate picking a Google account
+            showLoginMsg('⚠️ Modo demo: configure seu Google Client ID para login real. Entrando como demo...', 'info');
+            
+            setTimeout(() => {
+                const user = {
+                    name: 'Gamer Pro',
+                    email: 'gamer@gmail.com',
+                    picture: null,
+                    provider: 'google-demo'
+                };
+                completeLogin(user);
             }, 1500);
         }
 
-        function socialLogin(provider) {
-            showToast(`Login com ${provider} será implementado em breve!`, 'info');
-        }
-
-        function loginSuccess(user) {
+        // ===== GUEST MODE =====
+        function enterAsGuest() {
+            isGuest = true;
+            currentUser = null;
+            
+            localStorage.setItem('gg_mode', 'guest');
+            localStorage.removeItem('gg_user');
+            
+            showToast('Bem-vindo, visitante! 👁️ Navegue à vontade.', 'info');
+            
             document.getElementById('loginPage').classList.add('hidden');
             document.getElementById('homePage').classList.add('active');
-            updateUserUI(user);
-        }
-
-        function updateUserUI(user) {
-            const initial = user.username.charAt(0).toUpperCase();
-            document.getElementById('userAvatar').textContent = initial;
-            document.getElementById('userName').textContent = user.username;
-            document.getElementById('sidebarAvatar').textContent = initial;
-            document.getElementById('sidebarName').textContent = user.username;
-            document.getElementById('sidebarEmail').textContent = user.email;
-            document.getElementById('dashWelcomeName').textContent = user.username;
-        }
-
-        function handleLogout() {
-            DB.clearCurrentUser();
             
-            // Reset
+            updateUIForGuest();
+        }
+
+        // ===== COMPLETE LOGIN =====
+        function completeLogin(user) {
+            currentUser = user;
+            isGuest = false;
+            
+            localStorage.setItem('gg_user', JSON.stringify(user));
+            localStorage.setItem('gg_mode', 'logged');
+            
+            showToast(`Bem-vindo, ${user.name}! 🎮`, 'success');
+            
+            document.getElementById('loginPage').classList.add('hidden');
+            document.getElementById('homePage').classList.add('active');
+            
+            updateUIForUser(user);
+        }
+
+        // ===== UI UPDATES =====
+        function updateUIForUser(user) {
+            const initial = user.name.charAt(0).toUpperCase();
+            const avatarHTML = user.picture 
+                ? `<img src="${user.picture}" alt="${user.name}" referrerpolicy="no-referrer">` 
+                : initial;
+            
+            // Header
+            document.getElementById('userAvatar').innerHTML = avatarHTML;
+            document.getElementById('userName').textContent = user.name;
+            const levelEl = document.getElementById('userLevel');
+            levelEl.textContent = '⭐ Nível 42';
+            levelEl.className = 'user-level member';
+            
+            // Dropdown
+            document.getElementById('ddAvatar').innerHTML = avatarHTML;
+            document.getElementById('ddName').textContent = user.name;
+            document.getElementById('ddEmail').textContent = user.email;
+            document.getElementById('ddAuthArea').innerHTML = `
+                <button class="logout-btn" onclick="handleLogout()">🚪 Sair da Conta</button>
+            `;
+            
+            // Dashboard sidebar
+            document.getElementById('sidebarAvatar').innerHTML = avatarHTML;
+            document.getElementById('sidebarName').textContent = user.name;
+            document.getElementById('sidebarEmail').textContent = user.email;
+            document.getElementById('sidebarBadge').className = 'sidebar-badge pro';
+            document.getElementById('sidebarBadge').textContent = '⭐ PRO GAMER';
+            
+            // Dashboard welcome
+            document.getElementById('dashWelcomeName').textContent = user.name.split(' ')[0];
+            
+            // Hide visitor elements
+            document.getElementById('visitorBanner').classList.remove('show');
+            document.getElementById('dashVisitorLocked').classList.remove('show');
+            document.getElementById('dashContent').style.display = 'block';
+            
+            // Remove restricted overlays
+            document.querySelectorAll('.restricted-overlay').forEach(el => el.classList.remove('show'));
+            
+            // Mobile
+            const mobileBtn = document.getElementById('mobileAuthBtn');
+            mobileBtn.textContent = '🚪 Sair';
+            mobileBtn.style.color = '#ef4444';
+            mobileBtn.onclick = handleMobileLogout;
+        }
+
+        function updateUIForGuest() {
+            // Header
+            document.getElementById('userAvatar').innerHTML = '👁️';
+            document.getElementById('userName').textContent = 'Visitante';
+            const levelEl = document.getElementById('userLevel');
+            levelEl.textContent = '👁️ Modo Visitante';
+            levelEl.className = 'user-level guest';
+            
+            // Dropdown
+            document.getElementById('ddAvatar').innerHTML = '👁️';
+            document.getElementById('ddName').textContent = 'Visitante';
+            document.getElementById('ddEmail').textContent = 'Não logado';
+            document.getElementById('ddAuthArea').innerHTML = `
+                <button class="login-btn-dd" onclick="goToLogin()">🔑 Fazer Login</button>
+            `;
+            
+            // Dashboard sidebar
+            document.getElementById('sidebarAvatar').innerHTML = '👁️';
+            document.getElementById('sidebarName').textContent = 'Visitante';
+            document.getElementById('sidebarEmail').textContent = 'Não logado';
+            document.getElementById('sidebarBadge').className = 'sidebar-badge visitor';
+            document.getElementById('sidebarBadge').textContent = '👁️ VISITANTE';
+            
+            // Show visitor elements
+            document.getElementById('visitorBanner').classList.add('show');
+            document.getElementById('dashVisitorLocked').classList.add('show');
+            document.getElementById('dashContent').style.display = 'none';
+            
+            // Show restricted overlays
+            document.querySelectorAll('.restricted-overlay').forEach(el => el.classList.add('show'));
+            
+            // Mobile
+            const mobileBtn = document.getElementById('mobileAuthBtn');
+            mobileBtn.textContent = '🔑 Fazer Login';
+            mobileBtn.style.color = '#10b981';
+            mobileBtn.onclick = () => { closeMobileSidebar(); goToLogin(); };
+        }
+
+        // ===== LOGOUT =====
+        function handleLogout() {
+            currentUser = null;
+            isGuest = false;
+            localStorage.removeItem('gg_user');
+            localStorage.removeItem('gg_mode');
+            
+            // Google sign out
+            if (typeof google !== 'undefined' && google.accounts) {
+                try { google.accounts.id.disableAutoSelect(); } catch(e) {}
+            }
+            
             document.getElementById('homePage').classList.remove('active');
             document.getElementById('dashboardPage').classList.remove('active');
             document.getElementById('loginPage').classList.remove('hidden');
             
-            // Clear form
-            document.getElementById('loginPassword').value = '';
-            
-            document.getElementById('loginBtn').classList.remove('loading');
-            
-            closeMobileSidebar();
             closeDropdown();
-
             showToast('Logout realizado. Até mais! 👋', 'info');
         }
 
-        // ==================== NAVIGATION ====================
+        function handleMobileLogout() {
+            closeMobileSidebar();
+            handleLogout();
+        }
+
+        function handleMobileAuth() {
+            closeMobileSidebar();
+            if (currentUser) {
+                handleLogout();
+            } else {
+                goToLogin();
+            }
+        }
+
+        function goToLogin() {
+            closeDropdown();
+            document.getElementById('homePage').classList.remove('active');
+            document.getElementById('dashboardPage').classList.remove('active');
+            document.getElementById('loginPage').classList.remove('hidden');
+            isGuest = false;
+            localStorage.removeItem('gg_mode');
+        }
+
+        function dismissBanner() {
+            document.getElementById('visitorBanner').classList.remove('show');
+        }
+
+        // ===== NAVIGATION =====
         function navigate(page) {
             closeMobileSidebar();
             closeDropdown();
-
             document.getElementById('homePage').classList.remove('active');
             document.getElementById('dashboardPage').classList.remove('active');
 
@@ -3232,24 +2868,15 @@
             } else if (page === 'dashboard') {
                 document.getElementById('dashboardPage').classList.add('active');
             }
-
             window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            // Update nav active state
-            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
         }
 
-        // ==================== HEADER SCROLL ====================
+        // ===== HEADER SCROLL =====
         window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 20) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
+            document.getElementById('header').classList.toggle('scrolled', window.scrollY > 20);
         });
 
-        // ==================== DROPDOWN ====================
+        // ===== DROPDOWN =====
         function toggleDropdown() {
             document.getElementById('userDropdown').classList.toggle('show');
         }
@@ -3259,12 +2886,10 @@
         }
 
         document.addEventListener('click', (e) => {
-            if (!e.target.closest('.user-profile')) {
-                closeDropdown();
-            }
+            if (!e.target.closest('.user-profile')) closeDropdown();
         });
 
-        // ==================== MOBILE SIDEBAR ====================
+        // ===== MOBILE SIDEBAR =====
         function openMobileSidebar() {
             document.getElementById('mobileSidebar').classList.add('show');
             document.getElementById('mobileSidebarOverlay').classList.add('show');
@@ -3281,7 +2906,7 @@
             document.body.style.overflow = '';
         }
 
-        // ==================== CATEGORY CHIPS ====================
+        // ===== CATEGORIES =====
         document.querySelectorAll('.category-chip').forEach(chip => {
             chip.addEventListener('click', () => {
                 document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active'));
@@ -3289,59 +2914,58 @@
             });
         });
 
-        // ==================== TOAST ====================
+        // ===== TOAST =====
         function showToast(message, type = 'info') {
             const container = document.getElementById('toastContainer');
             const toast = document.createElement('div');
             toast.classList.add('toast', type);
-
             const icons = { success: '✅', error: '❌', info: 'ℹ️' };
             toast.innerHTML = `<span>${icons[type]}</span><span>${message}</span>`;
-            
             container.appendChild(toast);
-            
-            setTimeout(() => {
-                toast.remove();
-            }, 4000);
+            setTimeout(() => toast.remove(), 4000);
         }
 
-        // ==================== ENTER KEY ====================
-        document.getElementById('loginPassword').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') handleLogin();
-        });
-
-        document.getElementById('loginEmail').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') handleLogin();
-        });
-
-        document.getElementById('regConfirmPassword').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') handleRegister();
-        });
-
-        // ==================== AUTO LOGIN CHECK ====================
-        (function checkAutoLogin() {
-            const currentUser = DB.getCurrentUser();
-            if (currentUser) {
-                // Auto login - user was remembered
-                loginSuccess(currentUser);
-                return;
+        function showLoginMsg(text, type) {
+            const el = document.getElementById('loginMsg');
+            const icons = { success: '✅', error: '❌', info: 'ℹ️' };
+            el.innerHTML = `<span>${icons[type]}</span><span>${text}</span>`;
+            el.className = `login-msg ${type} show`;
+            if (type !== 'error') {
+                setTimeout(() => el.classList.remove('show'), 4000);
             }
+        }
 
-            const remembered = DB.getRemember();
-            if (remembered) {
-                document.getElementById('loginEmail').value = remembered.email;
+        // ===== SEARCH =====
+        document.getElementById('searchInput')?.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && e.target.value.trim()) {
+                showToast(`Buscando por "${e.target.value.trim()}"...`, 'info');
+            }
+        });
+
+        // ===== AUTO LOGIN CHECK =====
+        (function checkSession() {
+            const mode = localStorage.getItem('gg_mode');
+            const savedUser = localStorage.getItem('gg_user');
+            
+            if (mode === 'logged' && savedUser) {
+                try {
+                    const user = JSON.parse(savedUser);
+                    currentUser = user;
+                    isGuest = false;
+                    document.getElementById('loginPage').classList.add('hidden');
+                    document.getElementById('homePage').classList.add('active');
+                    updateUIForUser(user);
+                } catch(e) {
+                    localStorage.removeItem('gg_user');
+                    localStorage.removeItem('gg_mode');
+                }
+            } else if (mode === 'guest') {
+                isGuest = true;
+                document.getElementById('loginPage').classList.add('hidden');
+                document.getElementById('homePage').classList.add('active');
+                updateUIForGuest();
             }
         })();
-
-        // ==================== SEARCH ====================
-        document.getElementById('searchInput')?.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                const query = e.target.value.trim();
-                if (query) {
-                    showToast(`Buscando por "${query}"...`, 'info');
-                }
-            }
-        });
     </script>
 </body>
 </html>
