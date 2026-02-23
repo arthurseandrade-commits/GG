@@ -1,30 +1,36 @@
-
-
-# Dashboard com Gerenciamento de Categorias
-
-Aqui está o código completo com o sistema de **criar, editar e excluir categorias** totalmente dinâmico:
-
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GG - Global Games | Notícias de Games</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <title>GG - Global Games | Notícias de Games e eSports</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
+        /* ==========================================================================
+           VARIÁVEIS DE CORES & TEMA
+           ========================================================================== */
         :root {
-            --bg-dark: #0a0a0c;
-            --bg-card: #15151a;
-            --neon-purple: #9d4edd;
-            --neon-green: #39ff14;
-            --text-main: #e2e8f0;
+            --bg-dark: #070709;
+            --bg-card: #121217;
+            --bg-hover: #1a1a24;
+            --neon-purple: #a855f7;
+            --neon-purple-glow: rgba(168, 85, 247, 0.4);
+            --neon-green: #22c55e;
+            --neon-green-glow: rgba(34, 197, 94, 0.4);
+            --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --danger: #e63946;
-            --warning: #f4a261;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --border-color: #272732;
         }
 
+        /* ==========================================================================
+           RESET & SCROLLBAR
+           ========================================================================== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+        
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-dark);
@@ -32,13 +38,23 @@ Aqui está o código completo com o sistema de **criar, editar e excluir categor
             line-height: 1.6;
             overflow-x: hidden;
         }
-        h1, h2, h3, .logo { font-family: 'Orbitron', sans-serif; text-transform: uppercase; }
-        a { text-decoration: none; color: inherit; cursor: pointer; }
-        ul { list-style: none; }
 
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--neon-purple); }
+
+        h1, h2, h3, h4, .logo { font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+        a { text-decoration: none; color: inherit; cursor: pointer; transition: color 0.3s; }
+        ul { list-style: none; }
+        button { outline: none; }
+
+        /* ==========================================================================
+           HEADER & NAVEGAÇÃO
+           ========================================================================== */
         header {
-            background-color: rgba(10, 10, 12, 0.95);
-            border-bottom: 2px solid var(--neon-purple);
+            background-color: rgba(7, 7, 9, 0.85);
+            border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -46,442 +62,520 @@ Aqui está o código completo com o sistema de **criar, editar e excluir categor
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 0 15px rgba(157, 78, 221, 0.3);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
         }
-        .logo { font-size: 2rem; font-weight: 900; color: #fff; cursor: pointer; }
-        .logo span { color: var(--neon-purple); text-shadow: 0 0 10px var(--neon-purple); }
-        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
-        .nav-links li a:hover { color: var(--neon-green); text-shadow: 0 0 8px var(--neon-green); transition: 0.3s; }
+        
+        .logo { font-size: 2.2rem; font-weight: 900; color: #fff; cursor: pointer; display: flex; align-items: center;}
+        .logo span { color: var(--neon-purple); text-shadow: 0 0 15px var(--neon-purple-glow); }
+        
+        .nav-links { display: flex; gap: 2rem; align-items: center; font-weight: 600; font-size: 0.95rem; }
+        .nav-links li a { position: relative; padding-bottom: 5px; }
+        .nav-links li a::after {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0;
+            background-color: var(--neon-green); transition: width 0.3s ease;
+        }
+        .nav-links li a:hover { color: var(--neon-green); }
+        .nav-links li a:hover::after { width: 100%; box-shadow: 0 0 10px var(--neon-green-glow); }
+
         .search-bar {
-            padding: 0.6rem; border-radius: 4px; border: 1px solid var(--neon-purple);
-            background: var(--bg-card); color: #fff; outline: none; width: 200px; transition: 0.3s;
-            font-family: 'Inter', sans-serif;
+            padding: 0.7rem 1rem; border-radius: 8px; border: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.03); color: #fff; width: 220px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Inter', sans-serif; font-size: 0.9rem;
         }
-        .search-bar:focus { box-shadow: 0 0 10px rgba(157, 78, 221, 0.5); width: 250px; }
+        .search-bar:focus { width: 280px; border-color: var(--neon-purple); background: var(--bg-card); box-shadow: 0 0 15px var(--neon-purple-glow); }
 
         .admin-toggle {
-            background: none; border: 1px solid var(--text-muted); color: var(--text-muted);
-            padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;
-            font-family: 'Orbitron', sans-serif; transition: 0.3s;
+            background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-muted);
+            padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.85rem;
+            font-family: 'Orbitron', sans-serif; transition: all 0.3s; font-weight: bold; letter-spacing: 1px;
         }
-        .admin-toggle:hover { border-color: var(--neon-purple); color: var(--neon-purple); }
-        .admin-toggle.logged { border-color: var(--neon-green); color: var(--neon-green); }
+        .admin-toggle:hover { border-color: var(--neon-purple); color: var(--text-main); background: var(--neon-purple-glow); transform: translateY(-2px); }
+        .admin-toggle.logged { border-color: var(--neon-green); color: var(--neon-green); background: rgba(34, 197, 94, 0.1); }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 2rem 5%; min-height: 80vh; }
-        .page { display: none; }
-        .page.active { display: block; animation: fadeIn 0.5s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* ==========================================================================
+           LAYOUT GERAL
+           ========================================================================== */
+        .container { max-width: 1280px; margin: 0 auto; padding: 2rem 5%; min-height: 85vh; }
+        .page { display: none; opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease; }
+        .page.active { display: block; opacity: 1; transform: translateY(0); animation: slideUp 0.5s ease forwards; }
+        
+        @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
 
+        /* ==========================================================================
+           HOME: BANNER & DESTAQUE
+           ========================================================================== */
         .banner {
-            height: 400px; border-radius: 10px; display: flex; flex-direction: column;
-            justify-content: flex-end; padding: 2rem; border: 1px solid #2a2a35;
-            margin-bottom: 2rem; position: relative;
-            background: linear-gradient(to top, var(--bg-dark), transparent), url('') center/cover;
+            height: 450px; border-radius: 16px; display: flex; flex-direction: column;
+            justify-content: flex-end; padding: 3rem; margin-bottom: 3rem; position: relative;
+            background: linear-gradient(to top, #070709 5%, rgba(7,7,9,0.2) 60%), url('') center/cover;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+        .banner::before { /* Glow effect inner */
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            box-shadow: inset 0 0 50px rgba(168, 85, 247, 0.2); pointer-events: none;
         }
         .banner-tag {
-            background: var(--neon-purple); color: #fff; padding: 5px 10px; font-weight: bold;
-            border-radius: 3px; display: inline-block; margin-bottom: 10px; font-size: 0.8rem;
+            background: var(--neon-purple); color: #fff; padding: 6px 14px; font-weight: 900;
+            border-radius: 4px; display: inline-block; margin-bottom: 15px; font-size: 0.8rem;
+            letter-spacing: 2px; text-transform: uppercase; box-shadow: 0 0 15px var(--neon-purple-glow);
         }
-        .banner h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .banner h1 { font-size: 3rem; margin-bottom: 15px; text-shadow: 2px 4px 10px rgba(0,0,0,0.8); max-width: 900px; line-height: 1.2; }
+        .banner p { font-size: 1.1rem; color: #cbd5e1; max-width: 700px; text-shadow: 1px 2px 5px rgba(0,0,0,0.8); margin-bottom: 25px; }
 
-        .filters { display: flex; gap: 10px; margin-bottom: 2rem; flex-wrap: wrap; }
+        /* ==========================================================================
+           HOME: FILTROS E GRID DE NOTÍCIAS
+           ========================================================================== */
+        .filters { display: flex; gap: 12px; margin-bottom: 2.5rem; flex-wrap: wrap; }
         .filter-btn {
-            background: transparent; color: var(--text-muted); border: 1px solid #555;
-            padding: 8px 15px; border-radius: 4px; font-family: 'Orbitron', sans-serif;
-            cursor: pointer; transition: 0.3s; font-size: 0.8rem;
+            background: var(--bg-card); color: var(--text-muted); border: 1px solid var(--border-color);
+            padding: 10px 20px; border-radius: 8px; font-family: 'Orbitron', sans-serif; font-size: 0.85rem;
+            cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); font-weight: 600;
         }
-        .filter-btn:hover { color: white; border-color: var(--neon-purple); }
+        .filter-btn:hover { color: var(--text-main); border-color: var(--text-muted); transform: translateY(-2px); }
         .filter-btn.active {
             background: var(--neon-purple); color: white; border-color: var(--neon-purple);
-            box-shadow: 0 0 10px rgba(157, 78, 221, 0.5);
+            box-shadow: 0 5px 15px var(--neon-purple-glow); transform: translateY(-2px);
         }
 
-        .section-title { font-size: 1.8rem; border-left: 4px solid var(--neon-green); padding-left: 10px; margin-bottom: 1.5rem; }
-        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .section-title { 
+            font-size: 2rem; border-left: 5px solid var(--neon-green); 
+            padding-left: 15px; margin-bottom: 2rem; display: flex; align-items: center; gap: 10px;
+        }
+
+        .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; }
         .news-card {
-            background: var(--bg-card); border-radius: 8px; overflow: hidden;
-            border: 1px solid #2a2a35; transition: transform 0.3s;
+            background: var(--bg-card); border-radius: 12px; overflow: hidden;
+            border: 1px solid var(--border-color); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex; flex-direction: column; cursor: pointer;
         }
-        .news-card:hover { transform: translateY(-5px); border-color: var(--neon-purple); box-shadow: 0 5px 15px rgba(157, 78, 221, 0.2); }
-        .news-img { width: 100%; height: 180px; object-fit: cover; background-color: #333; display: block; }
-        .news-content { padding: 1.5rem; }
-        .news-content h3 { font-size: 1.2rem; margin-bottom: 10px; }
-        .news-content p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px; }
+        .news-card:hover { 
+            transform: translateY(-10px) scale(1.02); 
+            border-color: var(--neon-purple); 
+            box-shadow: 0 15px 30px var(--neon-purple-glow); 
+        }
+        .news-card:hover .news-img { transform: scale(1.05); }
+        
+        .news-img-wrapper { width: 100%; height: 200px; overflow: hidden; }
+        .news-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; background-color: #222; }
+        
+        .news-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .news-content h3 { font-size: 1.3rem; margin: 15px 0 10px; line-height: 1.4; color: var(--text-main); transition: color 0.3s; }
+        .news-card:hover .news-content h3 { color: var(--neon-green); }
+        .news-content p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; flex-grow: 1; }
+        
         .btn-read {
-            background: transparent; color: var(--neon-green); border: 1px solid var(--neon-green);
-            padding: 8px 15px; border-radius: 4px; font-family: 'Orbitron', sans-serif;
-            transition: 0.3s; cursor: pointer; font-size: 0.75rem;
+            align-self: flex-start; background: transparent; color: var(--neon-green); 
+            border: 2px solid var(--neon-green); padding: 10px 20px; border-radius: 6px; 
+            font-family: 'Orbitron', sans-serif; font-weight: 700; transition: all 0.3s; 
+            cursor: pointer; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;
         }
-        .btn-read:hover { background: var(--neon-green); color: #000; box-shadow: 0 0 10px var(--neon-green); }
+        .btn-read:hover { background: var(--neon-green); color: var(--bg-dark); box-shadow: 0 0 20px var(--neon-green-glow); }
 
+        /* ==========================================================================
+           PÁGINA DO ARTIGO
+           ========================================================================== */
+        .btn-back { margin-bottom: 2rem; display: inline-block;}
+        .article-container { max-width: 900px; margin: 0 auto; }
         .article-header { text-align: center; margin-bottom: 2rem; }
-        .article-header h1 { font-size: 2.5rem; margin-bottom: 10px; color: var(--neon-green); }
-        .article-meta { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; }
-        .article-hero-img { width: 100%; max-height: 500px; object-fit: cover; border-radius: 10px; margin-bottom: 2rem; border: 1px solid var(--neon-purple); }
-        .article-body { font-size: 1.1rem; color: #cbd5e1; margin-bottom: 3rem; }
+        .article-header h1 { font-size: 3.5rem; margin: 15px 0; color: var(--text-main); line-height: 1.2; text-transform: none; font-family: 'Inter', sans-serif; font-weight: 900; }
+        .article-meta { color: var(--text-muted); font-size: 1rem; margin-bottom: 25px; display: flex; justify-content: center; gap: 15px; align-items: center; }
+        
+        .article-hero-img { width: 100%; max-height: 550px; object-fit: cover; border-radius: 16px; margin-bottom: 3rem; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        
+        .article-body { font-size: 1.15rem; color: #cbd5e1; margin-bottom: 4rem; line-height: 1.8; }
         .article-body p { margin-bottom: 1.5rem; }
-        .share-buttons { display: flex; gap: 10px; margin-bottom: 3rem; }
-        .share-btn { padding: 10px 20px; border-radius: 5px; font-weight: bold; border: none; cursor: pointer; color: white; }
+        .article-body strong { color: #fff; font-weight: 600; }
+        
+        .share-section { border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 2rem 0; margin-bottom: 3rem; display: flex; align-items: center; justify-content: space-between;}
+        .share-buttons { display: flex; gap: 15px; }
+        .share-btn { padding: 12px 24px; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; color: white; display: flex; align-items: center; gap: 8px; transition: 0.3s; font-family: 'Inter', sans-serif;}
+        .share-btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
         .bg-twitter { background: #1DA1F2; } .bg-zap { background: #25D366; }
-        .comments-section { background: var(--bg-card); padding: 2rem; border-radius: 8px; border: 1px solid #2a2a35; }
+
+        .comments-section { background: var(--bg-card); padding: 2.5rem; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
         .comments-section textarea {
-            width: 100%; padding: 10px; background: var(--bg-dark); color: white;
-            border: 1px solid var(--text-muted); border-radius: 5px; margin-bottom: 10px;
-            resize: vertical; font-family: 'Inter', sans-serif;
+            width: 100%; padding: 15px; background: rgba(0,0,0,0.3); color: white;
+            border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 15px;
+            resize: vertical; font-family: 'Inter', sans-serif; transition: 0.3s; font-size: 1rem;
         }
-        .btn-back { margin-bottom: 2rem; }
-        .about-box { background: var(--bg-card); padding: 3rem; border-radius: 10px; text-align: center; border-top: 4px solid var(--neon-purple); }
+        .comments-section textarea:focus { border-color: var(--neon-purple); outline: none; box-shadow: 0 0 10px var(--neon-purple-glow); }
 
-        footer { background: #050505; text-align: center; padding: 2rem; border-top: 1px solid #2a2a35; margin-top: 2rem; }
+        /* ==========================================================================
+           SOBRE
+           ========================================================================== */
+        .about-box { 
+            background: linear-gradient(145deg, var(--bg-card), #0f0f13); padding: 5rem 3rem; 
+            border-radius: 20px; text-align: center; border-top: 5px solid var(--neon-purple); 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5); border-bottom: 1px solid var(--border-color);
+        }
+        .about-box .logo { justify-content: center; font-size: 4rem; margin-bottom: 1rem; }
 
-        /* ========= MODAL ========= */
+        /* ==========================================================================
+           MODAL LOGIN
+           ========================================================================== */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.85); z-index: 9999; justify-content: center; align-items: center;
+            background: rgba(0,0,0,0.9); z-index: 9999; justify-content: center; align-items: center;
+            backdrop-filter: blur(5px);
         }
-        .modal-overlay.show { display: flex; }
+        .modal-overlay.show { display: flex; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
         .modal-box {
-            background: var(--bg-card); border: 2px solid var(--neon-purple); border-radius: 12px;
-            padding: 2.5rem; max-width: 400px; width: 90%; text-align: center;
-            box-shadow: 0 0 40px rgba(157, 78, 221, 0.4); animation: fadeIn 0.3s ease;
+            background: var(--bg-card); border: 2px solid var(--neon-purple); border-radius: 16px;
+            padding: 3rem; max-width: 420px; width: 90%; text-align: center;
+            box-shadow: 0 0 50px var(--neon-purple-glow); transform: scale(0.9); transition: transform 0.3s;
         }
-        .modal-box h2 { color: var(--neon-purple); margin-bottom: 0.5rem; font-size: 1.5rem; }
-        .modal-box p { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.9rem; }
+        .modal-overlay.show .modal-box { transform: scale(1); }
+        .modal-box h2 { color: var(--text-main); margin-bottom: 0.5rem; font-size: 1.8rem; letter-spacing: 2px; }
+        .modal-box p { color: var(--text-muted); margin-bottom: 2rem; font-size: 0.95rem; }
+        
         .modal-input {
-            width: 100%; padding: 12px; background: var(--bg-dark); border: 1px solid #555;
-            border-radius: 6px; color: white; font-size: 1rem; margin-bottom: 1rem; outline: none;
-            text-align: center; letter-spacing: 3px; font-family: 'Orbitron', sans-serif;
+            width: 100%; padding: 15px; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color);
+            border-radius: 8px; color: white; font-size: 1.2rem; margin-bottom: 1rem; outline: none;
+            text-align: center; letter-spacing: 5px; font-family: 'Orbitron', sans-serif; transition: 0.3s;
         }
-        .modal-input:focus { border-color: var(--neon-purple); box-shadow: 0 0 10px rgba(157, 78, 221, 0.3); }
-        .modal-error { color: var(--danger); font-size: 0.85rem; margin-bottom: 1rem; display: none; }
-        .modal-btns { display: flex; gap: 10px; }
+        .modal-input:focus { border-color: var(--neon-purple); box-shadow: inset 0 0 10px var(--neon-purple-glow); }
+        .modal-error { color: var(--danger); font-size: 0.9rem; margin-bottom: 1.5rem; display: none; font-weight: bold; background: rgba(239, 68, 68, 0.1); padding: 10px; border-radius: 6px; }
+        
+        .modal-btns { display: flex; gap: 15px; }
         .modal-btn {
-            flex: 1; padding: 12px; border: none; border-radius: 6px;
-            font-family: 'Orbitron', sans-serif; font-size: 0.85rem; cursor: pointer; transition: 0.3s;
+            flex: 1; padding: 14px; border: none; border-radius: 8px;
+            font-family: 'Orbitron', sans-serif; font-size: 0.9rem; cursor: pointer; transition: all 0.3s; font-weight: bold; text-transform: uppercase;
         }
         .modal-btn.primary { background: var(--neon-purple); color: white; }
-        .modal-btn.primary:hover { box-shadow: 0 0 15px rgba(157, 78, 221, 0.5); }
-        .modal-btn.secondary { background: transparent; color: var(--text-muted); border: 1px solid #555; }
+        .modal-btn.primary:hover { box-shadow: 0 0 20px var(--neon-purple-glow); transform: translateY(-2px); }
+        .modal-btn.secondary { background: transparent; color: var(--text-muted); border: 1px solid var(--border-color); }
+        .modal-btn.secondary:hover { background: rgba(255,255,255,0.05); color: white; }
 
-        /* ========= DASHBOARD ========= */
-        .dash-header {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;
-        }
-        .dash-header h2 { color: var(--neon-purple); }
+        /* ==========================================================================
+           DASHBOARD
+           ========================================================================== */
+        .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1.5rem; }
+        .dash-header h2 { color: var(--text-main); font-size: 2.2rem; text-transform: none; font-family: 'Inter', sans-serif; font-weight: 900;}
+        .dash-header h2 span { color: var(--neon-purple); }
 
         /* Tabs */
-        .dash-tabs { display: flex; gap: 0; margin-bottom: 2rem; border-bottom: 2px solid #2a2a35; }
+        .dash-tabs { display: flex; gap: 10px; margin-bottom: 2.5rem; }
         .dash-tab {
-            padding: 12px 24px; background: none; border: none; color: var(--text-muted);
-            font-family: 'Orbitron', sans-serif; font-size: 0.85rem; cursor: pointer;
-            border-bottom: 3px solid transparent; transition: 0.3s; position: relative; bottom: -2px;
+            padding: 12px 24px; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-muted);
+            font-family: 'Orbitron', sans-serif; font-size: 0.9rem; cursor: pointer;
+            border-radius: 8px; transition: all 0.3s; font-weight: bold; letter-spacing: 1px;
         }
-        .dash-tab:hover { color: var(--text-main); }
-        .dash-tab.active {
-            color: var(--neon-green); border-bottom-color: var(--neon-green);
-        }
-        .tab-content { display: none; animation: fadeIn 0.4s ease; }
-        .tab-content.active { display: block; }
+        .dash-tab:hover { background: rgba(255,255,255,0.05); color: var(--text-main); }
+        .dash-tab.active { background: var(--neon-purple); color: white; border-color: var(--neon-purple); box-shadow: 0 5px 15px var(--neon-purple-glow); }
+        
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.4s ease; }
 
-        .dash-stats {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 1rem; margin-bottom: 2rem;
-        }
+        /* Stats */
+        .dash-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
         .stat-card {
-            background: var(--bg-card); border: 1px solid #2a2a35;
-            border-radius: 8px; padding: 1.2rem; text-align: center;
+            background: linear-gradient(145deg, var(--bg-card), rgba(255,255,255,0.02)); border: 1px solid var(--border-color);
+            border-radius: 12px; padding: 2rem; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.2); transition: 0.3s;
         }
-        .stat-card .stat-number {
-            font-family: 'Orbitron', sans-serif; font-size: 2.2rem; font-weight: 900; color: var(--neon-green);
-        }
-        .stat-card .stat-label { color: var(--text-muted); font-size: 0.8rem; margin-top: 5px; }
+        .stat-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.1); }
+        .stat-card .stat-number { font-family: 'Orbitron', sans-serif; font-size: 3rem; font-weight: 900; color: var(--neon-green); line-height: 1; text-shadow: 0 0 15px var(--neon-green-glow); }
+        .stat-card .stat-label { color: var(--text-muted); font-size: 0.9rem; margin-top: 10px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; }
 
+        /* Forms */
         .dash-form {
-            background: var(--bg-card); border: 1px solid #2a2a35; border-radius: 10px;
-            padding: 2rem; margin-bottom: 2rem; border-top: 3px solid var(--neon-purple);
+            background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px;
+            padding: 2.5rem; margin-bottom: 3rem; border-top: 4px solid var(--neon-purple); box-shadow: 0 15px 30px rgba(0,0,0,0.3);
         }
-        .dash-form h3 { color: var(--neon-green); margin-bottom: 1.5rem; font-size: 1.1rem; }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        .form-group { display: flex; flex-direction: column; gap: 6px; }
+        .dash-form h3 { color: var(--text-main); margin-bottom: 2rem; font-size: 1.5rem; display: flex; align-items: center; gap: 10px; }
+        
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
         .form-group.full { grid-column: 1 / -1; }
-        .form-group label {
-            font-size: 0.8rem; color: var(--neon-purple);
-            font-family: 'Orbitron', sans-serif; font-weight: 500;
-        }
+        .form-group label { font-size: 0.85rem; color: var(--text-muted); font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        
         .form-group input, .form-group select, .form-group textarea {
-            padding: 10px 12px; background: var(--bg-dark); border: 1px solid #333;
-            border-radius: 6px; color: white; font-size: 0.95rem; outline: none;
-            font-family: 'Inter', sans-serif; transition: 0.3s;
+            padding: 12px 16px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-color);
+            border-radius: 8px; color: white; font-size: 1rem; outline: none;
+            font-family: 'Inter', sans-serif; transition: all 0.3s;
         }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-            border-color: var(--neon-purple); box-shadow: 0 0 8px rgba(157, 78, 221, 0.2);
+            border-color: var(--neon-purple); box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2); background: var(--bg-dark);
         }
-        .form-group textarea { resize: vertical; min-height: 120px; }
-        .form-group select option { background: var(--bg-dark); }
-        .form-actions { display: flex; gap: 10px; margin-top: 1.5rem; }
+        .form-group textarea { resize: vertical; min-height: 150px; line-height: 1.6; }
+        .form-group select option { background: var(--bg-card); color: white; }
+        
+        .form-actions { display: flex; gap: 15px; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); }
 
+        /* Buttons Generics */
         .btn-dash {
-            padding: 10px 20px; border: none; border-radius: 6px;
-            font-family: 'Orbitron', sans-serif; font-size: 0.8rem; cursor: pointer; transition: 0.3s;
+            padding: 12px 24px; border: none; border-radius: 8px; font-weight: bold;
+            font-family: 'Orbitron', sans-serif; font-size: 0.85rem; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
         }
-        .btn-dash.save { background: var(--neon-green); color: #000; }
-        .btn-dash.save:hover { box-shadow: 0 0 15px var(--neon-green); }
-        .btn-dash.cancel { background: transparent; color: var(--text-muted); border: 1px solid #555; }
-        .btn-dash.cancel:hover { border-color: white; color: white; }
-        .btn-dash.danger { background: var(--danger); color: white; }
-        .btn-dash.danger:hover { box-shadow: 0 0 15px var(--danger); }
-        .btn-dash.edit { background: var(--warning); color: #000; }
+        .btn-dash.save { background: var(--neon-green); color: var(--bg-dark); }
+        .btn-dash.save:hover { box-shadow: 0 0 20px var(--neon-green-glow); transform: translateY(-2px); }
+        .btn-dash.cancel { background: transparent; color: var(--text-muted); border: 1px solid var(--border-color); }
+        .btn-dash.cancel:hover { border-color: var(--text-main); color: var(--text-main); }
+        .btn-dash.danger { background: rgba(239, 68, 68, 0.1); color: var(--danger); border: 1px solid var(--danger); }
+        .btn-dash.danger:hover { background: var(--danger); color: white; box-shadow: 0 0 15px rgba(239, 68, 68, 0.4); transform: translateY(-2px); }
+        .btn-dash.edit { background: rgba(245, 158, 11, 0.1); color: var(--warning); border: 1px solid var(--warning); }
+        .btn-dash.edit:hover { background: var(--warning); color: var(--bg-dark); box-shadow: 0 0 15px rgba(245, 158, 11, 0.4); transform: translateY(-2px); }
         .btn-dash.new { background: var(--neon-purple); color: white; }
-        .btn-dash.new:hover { box-shadow: 0 0 15px rgba(157, 78, 221, 0.5); }
+        .btn-dash.new:hover { box-shadow: 0 0 20px var(--neon-purple-glow); transform: translateY(-2px); }
 
-        .dash-table-wrapper { overflow-x: auto; }
-        .dash-table {
-            width: 100%; border-collapse: collapse; background: var(--bg-card);
-            border-radius: 10px; overflow: hidden; border: 1px solid #2a2a35;
-        }
+        /* Tables */
+        .dash-table-wrapper { overflow-x: auto; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .dash-table { width: 100%; border-collapse: collapse; text-align: left; }
         .dash-table th {
-            background: rgba(157, 78, 221, 0.15); color: var(--neon-purple);
-            font-family: 'Orbitron', sans-serif; font-size: 0.7rem; padding: 12px 14px;
-            text-align: left; white-space: nowrap;
+            background: rgba(255,255,255,0.02); color: var(--text-muted); font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem; padding: 16px 20px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid var(--border-color);
         }
-        .dash-table td {
-            padding: 10px 14px; border-bottom: 1px solid #1e1e28;
-            font-size: 0.85rem; vertical-align: middle;
-        }
-        .dash-table tr:hover td { background: rgba(157, 78, 221, 0.05); }
-        .dash-table .cat-badge {
-            padding: 3px 10px; border-radius: 3px; font-size: 0.7rem;
-            font-weight: bold; text-transform: uppercase; display: inline-block;
-        }
-        .dash-table .actions-cell { display: flex; gap: 6px; flex-wrap: wrap; }
-        .dash-table .featured-star { color: var(--neon-green); font-size: 1.2rem; cursor: pointer; }
-        .dash-table .featured-star.inactive { color: #555; }
-        .img-preview { width: 60px; height: 40px; object-fit: cover; border-radius: 4px; border: 1px solid #333; }
-        .no-data { text-align: center; padding: 3rem; color: var(--text-muted); }
+        .dash-table td { padding: 16px 20px; border-bottom: 1px solid var(--border-color); font-size: 0.95rem; vertical-align: middle; }
+        .dash-table tr:last-child td { border-bottom: none; }
+        .dash-table tr:hover td { background: rgba(255,255,255,0.02); }
+        
+        .cat-badge { padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; display: inline-block; letter-spacing: 0.5px; }
+        .actions-cell { display: flex; gap: 8px; flex-wrap: wrap; }
+        .featured-star { color: var(--neon-green); font-size: 1.5rem; cursor: pointer; transition: 0.2s; display: inline-block;}
+        .featured-star:hover { transform: scale(1.2); }
+        .featured-star.inactive { color: var(--border-color); }
+        .featured-star.inactive:hover { color: var(--text-muted); }
+        
+        .img-preview { width: 80px; height: 50px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border-color); }
+        .no-data { text-align: center; padding: 4rem !important; color: var(--text-muted); font-size: 1.1rem;}
 
-        /* Color Preview */
-        .color-row { display: flex; align-items: center; gap: 10px; }
+        /* Category Grid */
+        .color-row { display: flex; align-items: center; gap: 15px; }
         .color-row input[type="color"] {
-            width: 50px; height: 38px; border: 1px solid #555; border-radius: 6px;
-            background: var(--bg-dark); cursor: pointer; padding: 2px;
+            width: 60px; height: 45px; border: 1px solid var(--border-color); border-radius: 8px;
+            background: rgba(0,0,0,0.2); cursor: pointer; padding: 4px;
         }
-        .color-row input[type="text"] { flex: 1; }
-        .color-dot {
-            width: 14px; height: 14px; border-radius: 50%; display: inline-block;
-            margin-right: 6px; vertical-align: middle; border: 1px solid rgba(255,255,255,0.2);
-        }
-        .cat-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1rem; margin-top: 1rem;
-        }
+        .color-row input[type="text"] { flex: 1; text-transform: uppercase; font-family: monospace; letter-spacing: 1px; }
+        
+        .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
         .cat-card {
-            background: var(--bg-dark); border: 1px solid #2a2a35; border-radius: 8px;
-            padding: 1.2rem; display: flex; flex-direction: column; gap: 10px;
-            transition: 0.3s; position: relative;
+            background: linear-gradient(145deg, var(--bg-card), rgba(255,255,255,0.02)); border: 1px solid var(--border-color); border-radius: 12px;
+            padding: 1.5rem; display: flex; flex-direction: column; gap: 15px; transition: 0.3s; position: relative;
         }
-        .cat-card:hover { border-color: var(--neon-purple); }
-        .cat-card-header { display: flex; align-items: center; gap: 10px; }
-        .cat-card-color {
-            width: 40px; height: 40px; border-radius: 8px; flex-shrink: 0;
-        }
-        .cat-card-info h4 { font-size: 1rem; font-family: 'Orbitron', sans-serif; }
-        .cat-card-info small { color: var(--text-muted); font-size: 0.75rem; }
-        .cat-card-actions { display: flex; gap: 6px; margin-top: auto; }
+        .cat-card:hover { border-color: var(--neon-purple); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .cat-card-header { display: flex; align-items: center; gap: 15px; }
+        .cat-card-color { width: 50px; height: 50px; border-radius: 12px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: inset 0 0 10px rgba(0,0,0,0.5); }
+        .cat-card-info h4 { font-size: 1.1rem; font-family: 'Inter', sans-serif; font-weight: 800; text-transform: none; margin-bottom: 2px;}
+        .cat-card-info small { color: var(--text-muted); font-size: 0.8rem; font-family: monospace;}
+        .cat-card-actions { display: flex; gap: 10px; margin-top: auto; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.05); }
         .cat-card-count {
-            position: absolute; top: 10px; right: 12px; background: rgba(255,255,255,0.05);
-            padding: 2px 8px; border-radius: 10px; font-size: 0.7rem; color: var(--text-muted);
-            font-family: 'Orbitron', sans-serif;
+            position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color);
+            padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; color: var(--text-main); font-weight: bold;
         }
-        .cat-card.default-cat { border-left: 3px solid var(--neon-green); }
 
-        /* Toast */
+        /* ==========================================================================
+           FOOTER & TOAST
+           ========================================================================== */
+        footer { 
+            background: #040405; text-align: center; padding: 3rem 2rem; 
+            border-top: 1px solid var(--border-color); margin-top: auto; 
+            background-image: linear-gradient(to top, rgba(168, 85, 247, 0.05), transparent);
+        }
+        
         .toast {
-            position: fixed; bottom: 30px; right: 30px; background: var(--neon-green); color: #000;
-            padding: 14px 24px; border-radius: 8px; font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem; font-weight: 700; box-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
-            z-index: 10000; transform: translateY(100px); opacity: 0; transition: 0.4s;
+            position: fixed; bottom: 40px; right: 40px; background: var(--bg-card); color: var(--text-main);
+            padding: 16px 24px; border-radius: 12px; font-family: 'Inter', sans-serif; border-left: 5px solid var(--neon-green);
+            font-size: 0.95rem; font-weight: 600; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 10000; transform: translateX(120%); opacity: 0; transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: flex; align-items: center; gap: 10px;
         }
-        .toast.show { transform: translateY(0); opacity: 1; }
-        .toast.error { background: var(--danger); color: white; box-shadow: 0 0 20px rgba(230, 57, 70, 0.4); }
+        .toast.show { transform: translateX(0); opacity: 1; }
+        .toast.error { border-left-color: var(--danger); }
 
+        /* ==========================================================================
+           RESPONSIVIDADE
+           ========================================================================== */
+        @media (max-width: 900px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .banner h1 { font-size: 2.2rem; }
+        }
         @media (max-width: 768px) {
-            header { flex-direction: column; gap: 1rem; }
-            .nav-links { flex-wrap: wrap; justify-content: center; }
+            header { flex-direction: column; gap: 1.5rem; padding: 1.5rem; }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 1rem; width: 100%;}
             .search-bar { width: 100%; }
             .search-bar:focus { width: 100%; }
-            .banner h1 { font-size: 1.8rem; }
-            .article-header h1 { font-size: 1.8rem; }
-            .form-grid { grid-template-columns: 1fr; }
+            .banner { height: auto; min-height: 350px; padding: 2rem; }
+            .article-header h1 { font-size: 2.2rem; }
             .dash-header { flex-direction: column; align-items: flex-start; }
-            .dash-tabs { overflow-x: auto; }
-            .cat-grid { grid-template-columns: 1fr; }
+            .dash-tabs { flex-wrap: wrap; }
+            .dash-tab { flex: 1; text-align: center; }
+            .share-section { flex-direction: column; gap: 20px; text-align: center;}
         }
     </style>
 </head>
 <body>
 
-    <!-- HEADER -->
     <header>
         <div class="logo" onclick="navigate('home')">GG<span>.</span></div>
         <ul class="nav-links" id="navLinks">
-            <li><a onclick="navigate('home')">Início</a></li>
-            <li><a onclick="navigate('about')">Sobre</a></li>
-            <li>
-                <button id="adminBtn" class="admin-toggle" onclick="handleAdminClick()">⚙ Admin</button>
-            </li>
+            <!-- Links gerados via JS -->
         </ul>
-        <input type="text" id="searchInput" class="search-bar" placeholder="Buscar notícia..." onkeyup="searchNews()">
+        <input type="text" id="searchInput" class="search-bar" placeholder="Buscar game ou notícia..." onkeyup="searchNews()">
     </header>
 
-    <!-- MODAL LOGIN -->
     <div id="loginModal" class="modal-overlay">
         <div class="modal-box">
-            <h2>🔒 Acesso Admin</h2>
-            <p>Digite a senha para acessar o painel</p>
+            <h2>🔒 Acesso Restrito</h2>
+            <p>Insira a credencial de administrador</p>
             <input type="password" id="loginPassword" class="modal-input" placeholder="••••••" onkeydown="if(event.key==='Enter') attemptLogin()">
-            <p id="loginError" class="modal-error">❌ Senha incorreta!</p>
+            <p id="loginError" class="modal-error">Acesso Negado. Tente novamente.</p>
             <div class="modal-btns">
                 <button class="modal-btn secondary" onclick="closeLoginModal()">Cancelar</button>
-                <button class="modal-btn primary" onclick="attemptLogin()">Entrar</button>
+                <button class="modal-btn primary" onclick="attemptLogin()">Autenticar</button>
             </div>
         </div>
     </div>
 
     <div class="container">
-
-        <!-- HOME -->
+        <!-- =================== HOME =================== -->
         <main id="home" class="page active">
             <div class="banner" id="mainBanner">
-                <span class="banner-tag">DESTAQUE</span>
-                <h1 id="bannerTitle">Carregando...</h1>
-                <p id="bannerDesc"></p>
-                <br>
-                <div><button class="btn-read" onclick="openFeaturedArticle()">Ler Matéria Completa</button></div>
+                <div>
+                    <span class="banner-tag">Destaque Principal</span>
+                    <h1 id="bannerTitle">Iniciando Servidores...</h1>
+                    <p id="bannerDesc">Carregando as últimas atualizações do mundo gamer para você.</p>
+                    <button class="btn-read" onclick="openFeaturedArticle()" style="margin-top: 10px;">Acessar Matéria</button>
+                </div>
             </div>
-            <div class="filters" id="filtersContainer"></div>
-            <h2 class="section-title">Últimas Notícias</h2>
-            <div class="news-grid" id="news-container"></div>
+            
+            <div class="filters" id="filtersContainer">
+                <!-- Filtros gerados via JS -->
+            </div>
+            
+            <h2 class="section-title">Radar Gamer</h2>
+            <div class="news-grid" id="news-container">
+                <!-- Cards gerados via JS -->
+            </div>
         </main>
 
-        <!-- ARTIGO -->
+        <!-- =================== ARTIGO =================== -->
         <main id="article" class="page">
-            <div class="btn-back"><button class="btn-read" onclick="navigate('home')">← Voltar</button></div>
-            <div class="article-header">
-                <span class="banner-tag" id="articleTag">TAG</span>
-                <h1 id="articleTitle">Título</h1>
-                <div class="article-meta" id="articleMeta"></div>
-            </div>
-            <img id="articleImg" src="" alt="Capa" class="article-hero-img">
-            <div class="article-body" id="articleBody"></div>
-            <div class="share-buttons">
-                <button class="share-btn bg-twitter" onclick="shareTwitter()">X (Twitter)</button>
-                <button class="share-btn bg-zap" onclick="shareWhatsApp()">WhatsApp</button>
-            </div>
-            <div class="comments-section">
-                <h3 style="margin-bottom:1rem;">Deixe seu comentário</h3>
-                <textarea rows="4" placeholder="O que você achou?"></textarea>
-                <button class="btn-read">Publicar</button>
+            <div class="article-container">
+                <div class="btn-back"><button class="btn-read" onclick="navigate('home')">← Retornar ao Início</button></div>
+                
+                <div class="article-header">
+                    <span class="banner-tag" id="articleTag">Categoria</span>
+                    <h1 id="articleTitle">Título da Matéria</h1>
+                    <div class="article-meta" id="articleMeta"></div>
+                </div>
+                
+                <img id="articleImg" src="" alt="Capa do Artigo" class="article-hero-img">
+                
+                <div class="article-body" id="articleBody">
+                    <!-- Conteúdo gerado via JS -->
+                </div>
+                
+                <div class="share-section">
+                    <h3 style="margin: 0; font-size: 1.2rem;">Compartilhe o drop:</h3>
+                    <div class="share-buttons">
+                        <button class="share-btn bg-twitter" onclick="shareTwitter()">𝕏 Postar</button>
+                        <button class="share-btn bg-zap" onclick="shareWhatsApp()">💬 Enviar</button>
+                    </div>
+                </div>
+                
+                <div class="comments-section">
+                    <h3 style="margin-bottom:1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">Log de Comentários</h3>
+                    <textarea rows="4" placeholder="Deixe sua opinião sobre essa att..."></textarea>
+                    <button class="btn-dash save">Postar Comentário</button>
+                </div>
             </div>
         </main>
 
-        <!-- SOBRE -->
+        <!-- =================== SOBRE =================== -->
         <main id="about" class="page">
             <div class="about-box">
-                <div class="logo" style="font-size:3rem;margin-bottom:1rem;">GG<span>.</span></div>
-                <h2 style="color:var(--neon-green);margin-bottom:1.5rem;">GLOBAL GAMES</h2>
-                <p style="font-size:1.2rem;color:#cbd5e1;max-width:800px;margin:0 auto;">
-                    O <strong>GG – Global Games</strong> é o seu portal definitivo de notícias de games, atualizações, eSports e novidades do mundo gamer.
+                <div class="logo">GG<span>.</span></div>
+                <h2 style="color:var(--text-main);margin-bottom:1.5rem; font-size: 2rem;">GLOBAL GAMES</h2>
+                <p style="font-size:1.2rem;color:var(--text-muted);max-width:800px;margin:0 auto; line-height: 1.8;">
+                    O <strong>GG – Global Games</strong> é a sua base definitiva para intel sobre jogos, patch notes, eSports e hardwares. Operamos 24/7 para garantir que você não perca nenhum frame das novidades. Se roda em uma tela, nós cobrimos.
                 </p>
             </div>
         </main>
 
-        <!-- ============================= -->
-        <!-- DASHBOARD                     -->
-        <!-- ============================= -->
+        <!-- =================== DASHBOARD ADMIN =================== -->
         <main id="dashboard" class="page">
             <div class="dash-header">
                 <div>
-                    <h2>⚡ Painel Admin</h2>
-                    <p style="color:var(--text-muted);font-size:0.85rem;">Gerencie notícias e categorias</p>
+                    <h2><span>⚡</span> Central de Comando</h2>
+                    <p style="color:var(--text-muted);font-size:0.95rem; margin-top: 5px;">Gerenciamento de banco de dados do portal</p>
                 </div>
-                <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                    <button class="btn-dash cancel" onclick="handleLogout()">🚪 Sair</button>
+                <div>
+                    <button class="btn-dash cancel" onclick="handleLogout()">Encerrar Sessão 🚪</button>
                 </div>
             </div>
 
-            <!-- Stats -->
-            <div class="dash-stats" id="dashStats"></div>
+            <div class="dash-stats" id="dashStats">
+                <!-- Stats via JS -->
+            </div>
 
-            <!-- Tabs -->
             <div class="dash-tabs">
-                <button class="dash-tab active" onclick="switchTab('tabNews', this)">📰 Notícias</button>
-                <button class="dash-tab" onclick="switchTab('tabCategories', this)">🏷 Categorias</button>
+                <button class="dash-tab active" onclick="switchTab('tabNews', this)">📰 Postagens</button>
+                <button class="dash-tab" onclick="switchTab('tabCategories', this)">🏷️ Categorias (Tags)</button>
             </div>
 
-            <!-- ========== TAB: NOTÍCIAS ========== -->
+            <!-- TABS: NOTÍCIAS -->
             <div id="tabNews" class="tab-content active">
-
-                <div style="margin-bottom:1.5rem;">
-                    <button class="btn-dash new" onclick="showNewsForm()">+ Nova Notícia</button>
+                <div style="margin-bottom:2rem;">
+                    <button class="btn-dash new" onclick="showNewsForm()">+ Nova Publicação</button>
                 </div>
 
-                <!-- Form Notícia -->
                 <div class="dash-form" id="newsForm" style="display:none;">
-                    <h3 id="newsFormTitle">➕ Adicionar Notícia</h3>
+                    <h3 id="newsFormTitle">Criar Nova Publicação</h3>
                     <input type="hidden" id="editingNewsId">
                     <div class="form-grid">
                         <div class="form-group full">
-                            <label>Título</label>
-                            <input type="text" id="inputTitle" placeholder="Ex: Novo código no Blox Fruits!">
+                            <label>Manchete (Título)</label>
+                            <input type="text" id="inputTitle" placeholder="Ex: Novo passe de batalha revelado!">
                         </div>
                         <div class="form-group">
-                            <label>Categoria</label>
+                            <label>Categoria Principal</label>
                             <select id="inputCategory"></select>
                         </div>
                         <div class="form-group">
-                            <label>URL da Imagem</label>
+                            <label>URL da Thumbnail</label>
                             <input type="text" id="inputImage" placeholder="https://...">
                         </div>
                         <div class="form-group full">
-                            <label>Descrição Curta</label>
-                            <input type="text" id="inputDesc" placeholder="Resumo do card">
+                            <label>Lead (Resumo do Card)</label>
+                            <input type="text" id="inputDesc" placeholder="Uma frase chamativa para o card inicial...">
                         </div>
                         <div class="form-group full">
-                            <label>Conteúdo Completo</label>
-                            <textarea id="inputBody" rows="8" placeholder="Texto da matéria completa..."></textarea>
+                            <label>Corpo da Matéria (Use quebras de linha para parágrafos)</label>
+                            <textarea id="inputBody" placeholder="Desenvolva o texto completo aqui..."></textarea>
                         </div>
                         <div class="form-group">
-                            <label>Destaque no Banner?</label>
+                            <label>Status: Hero Banner?</label>
                             <select id="inputFeatured">
-                                <option value="false">Não</option>
-                                <option value="true">✰ Sim</option>
+                                <option value="false">Padrão</option>
+                                <option value="true">★ Definir como Destaque Principal</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Data</label>
+                            <label>Data de Publicação</label>
                             <input type="date" id="inputDate">
                         </div>
                     </div>
                     <div class="form-actions">
-                        <button class="btn-dash save" onclick="saveNews()">💾 Salvar</button>
-                        <button class="btn-dash cancel" onclick="hideNewsForm()">Cancelar</button>
+                        <button class="btn-dash save" onclick="saveNews()">Gravar no Banco de Dados</button>
+                        <button class="btn-dash cancel" onclick="hideNewsForm()">Descartar Edição</button>
                     </div>
                 </div>
 
-                <!-- Tabela -->
-                <h3 style="color:var(--neon-green);margin-bottom:1rem;font-family:'Orbitron';">📋 Todas as Notícias</h3>
                 <div class="dash-table-wrapper">
                     <table class="dash-table">
                         <thead>
                             <tr>
-                                <th>⭐</th>
-                                <th>Img</th>
-                                <th>Título</th>
-                                <th>Categoria</th>
+                                <th style="width: 50px; text-align: center;">Hero</th>
+                                <th style="width: 100px;">Thumb</th>
+                                <th>Manchete</th>
+                                <th>Tag</th>
                                 <th>Data</th>
-                                <th>Ações</th>
+                                <th style="width: 200px;">Comandos</th>
                             </tr>
                         </thead>
                         <tbody id="dashNewsBody"></tbody>
@@ -489,102 +583,98 @@ Aqui está o código completo com o sistema de **criar, editar e excluir categor
                 </div>
             </div>
 
-            <!-- ========== TAB: CATEGORIAS ========== -->
+            <!-- TABS: CATEGORIAS -->
             <div id="tabCategories" class="tab-content">
-
-                <div style="margin-bottom:1.5rem;">
-                    <button class="btn-dash new" onclick="showCatForm()">+ Nova Categoria</button>
+                <div style="margin-bottom:2rem;">
+                    <button class="btn-dash new" onclick="showCatForm()">+ Nova Tag</button>
                 </div>
 
-                <!-- Form Categoria -->
                 <div class="dash-form" id="catForm" style="display:none;">
-                    <h3 id="catFormTitle">➕ Criar Categoria</h3>
+                    <h3 id="catFormTitle">Configurar Tag (Categoria)</h3>
                     <input type="hidden" id="editingCatId">
                     <div class="form-grid">
                         <div class="form-group">
-                            <label>Nome da Categoria</label>
-                            <input type="text" id="catName" placeholder="Ex: Valorant">
+                            <label>Nome Visível</label>
+                            <input type="text" id="catName" placeholder="Ex: eSports">
                         </div>
                         <div class="form-group">
-                            <label>Slug (ID interno)</label>
-                            <input type="text" id="catSlug" placeholder="Ex: valorant" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9-]/g,'')">
+                            <label>Slug (Identificador na URL)</label>
+                            <input type="text" id="catSlug" placeholder="Ex: esports" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9-]/g,'')">
                         </div>
                         <div class="form-group">
-                            <label>Cor da Categoria</label>
+                            <label>Esquema de Cor</label>
                             <div class="color-row">
-                                <input type="color" id="catColor" value="#9d4edd" oninput="document.getElementById('catColorText').value=this.value">
-                                <input type="text" id="catColorText" value="#9d4edd" placeholder="#hex" oninput="document.getElementById('catColor').value=this.value">
+                                <input type="color" id="catColor" value="#a855f7" oninput="document.getElementById('catColorText').value=this.value">
+                                <input type="text" id="catColorText" value="#a855f7" placeholder="#hex" oninput="document.getElementById('catColor').value=this.value">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Ícone (Emoji)</label>
-                            <input type="text" id="catIcon" placeholder="🎮" maxlength="2" style="font-size:1.5rem;text-align:center;">
+                            <label>Ícone / Emoji</label>
+                            <input type="text" id="catIcon" placeholder="🏆" maxlength="2" style="font-size:1.5rem;text-align:center;">
                         </div>
                         <div class="form-group">
-                            <label>Mostrar no Menu?</label>
+                            <label>Exibir na Navbar Header?</label>
                             <select id="catShowNav">
-                                <option value="true">✅ Sim</option>
-                                <option value="false">Não</option>
+                                <option value="true">✅ Visível</option>
+                                <option value="false">Oculto</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Mostrar nos Filtros?</label>
+                            <label>Exibir na barra de Filtros?</label>
                             <select id="catShowFilter">
-                                <option value="true">✅ Sim</option>
-                                <option value="false">Não</option>
+                                <option value="true">✅ Visível</option>
+                                <option value="false">Oculto</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-actions">
-                        <button class="btn-dash save" onclick="saveCategory()">💾 Salvar Categoria</button>
-                        <button class="btn-dash cancel" onclick="hideCatForm()">Cancelar</button>
+                        <button class="btn-dash save" onclick="saveCategory()">Gravar Tag</button>
+                        <button class="btn-dash cancel" onclick="hideCatForm()">Descartar Edição</button>
                     </div>
                 </div>
 
-                <!-- Lista de categorias -->
-                <h3 style="color:var(--neon-green);margin-bottom:1rem;font-family:'Orbitron';">🏷 Categorias Cadastradas</h3>
                 <div class="cat-grid" id="catGrid"></div>
             </div>
         </main>
     </div>
 
     <footer>
-        <div class="logo">GG<span>.</span></div>
-        <p style="color:var(--text-muted);margin-top:10px;">&copy; 2024 GG - Global Games. Todos os direitos reservados.</p>
+        <div class="logo" style="justify-content: center; font-size: 1.8rem; margin-bottom: 10px;">GG<span>.</span></div>
+        <p style="color:var(--text-muted); font-size: 0.9rem;">&copy; 2024 GG - Global Games. Transmitindo em todas as frequências.</p>
     </footer>
 
-    <div id="toast" class="toast"></div>
+    <div id="toast" class="toast">Notificação do Sistema</div>
 
     <script>
-        // ============================
-        // CONFIG
-        // ============================
-        const ADMIN_PASSWORD = "gg2024"; // 🔑 Troque aqui!
+        // ==========================================
+        // CONFIGURAÇÕES BASE
+        // ==========================================
+        const ADMIN_PASSWORD = "gg"; // Senha padrão para acesso
         let isLoggedIn = false;
 
-        // ============================
-        // CATEGORIAS - DADOS
-        // ============================
+        // ==========================================
+        // BANCO DE DADOS: CATEGORIAS
+        // ==========================================
         const defaultCategories = [
-            { id: 1, name: "Roblox",    slug: "roblox",    color: "#e63946", icon: "🟥", showNav: true,  showFilter: true,  isDefault: true },
-            { id: 2, name: "Minecraft", slug: "minecraft", color: "#2a9d8f", icon: "⛏️", showNav: false, showFilter: true,  isDefault: true },
-            { id: 3, name: "Fortnite",  slug: "fortnite",  color: "#4361ee", icon: "🔫", showNav: false, showFilter: true,  isDefault: true },
-            { id: 4, name: "Hardware",  slug: "hardware",  color: "#9d4edd", icon: "🖱️", showNav: false, showFilter: true,  isDefault: true },
-            { id: 5, name: "eSports",   slug: "esports",   color: "#f77f00", icon: "🏆", showNav: false, showFilter: true,  isDefault: true },
-            { id: 6, name: "Geral",     slug: "geral",     color: "#6c757d", icon: "📰", showNav: false, showFilter: false, isDefault: true }
+            { id: 1, name: "Roblox",    slug: "roblox",    color: "#ef4444", icon: "🟥", showNav: true,  showFilter: true,  isDefault: true },
+            { id: 2, name: "Minecraft", slug: "minecraft", color: "#10b981", icon: "⛏️", showNav: false, showFilter: true,  isDefault: true },
+            { id: 3, name: "Fortnite",  slug: "fortnite",  color: "#3b82f6", icon: "🚌", showNav: false, showFilter: true,  isDefault: true },
+            { id: 4, name: "Hardware",  slug: "hardware",  color: "#a855f7", icon: "⌨️", showNav: false, showFilter: true,  isDefault: true },
+            { id: 5, name: "eSports",   slug: "esports",   color: "#f59e0b", icon: "🏆", showNav: false, showFilter: true,  isDefault: true },
+            { id: 6, name: "Geral",     slug: "geral",     color: "#64748b", icon: "📰", showNav: false, showFilter: false, isDefault: true }
         ];
 
         function getCategories() {
-            const stored = localStorage.getItem('gg_categories');
+            const stored = localStorage.getItem('gg_v2_categories');
             if (!stored) {
-                localStorage.setItem('gg_categories', JSON.stringify(defaultCategories));
+                localStorage.setItem('gg_v2_categories', JSON.stringify(defaultCategories));
                 return JSON.parse(JSON.stringify(defaultCategories));
             }
             return JSON.parse(stored);
         }
 
         function saveCategoriesData(data) {
-            localStorage.setItem('gg_categories', JSON.stringify(data));
+            localStorage.setItem('gg_v2_categories', JSON.stringify(data));
         }
 
         function getCatNextId() {
@@ -592,99 +682,70 @@ Aqui está o código completo com o sistema de **criar, editar e excluir categor
             return cats.length === 0 ? 1 : Math.max(...cats.map(c => c.id)) + 1;
         }
 
-        function getCatBySlug(slug) {
-            return getCategories().find(c => c.slug === slug);
-        }
+        function getCatBySlug(slug) { return getCategories().find(c => c.slug === slug); }
+        function getCatColor(slug) { const c = getCatBySlug(slug); return c ? c.color : '#64748b'; }
+        function getCatLabel(slug) { const c = getCatBySlug(slug); return c ? c.name : slug; }
 
-        function getCatColor(slug) {
-            const c = getCatBySlug(slug);
-            return c ? c.color : '#6c757d';
-        }
-
-        function getCatLabel(slug) {
-            const c = getCatBySlug(slug);
-            return c ? c.name : slug;
-        }
-
-        // ============================
-        // NOTÍCIAS - DADOS
-        // ============================
+        // ==========================================
+        // BANCO DE DADOS: NOTÍCIAS
+        // ==========================================
         const defaultNews = [
             {
                 id: 1,
-                title: "Fortnite: Nova Temporada traz mapa revolucionário e parceria com Anime",
+                title: "Fortnite: O.G. Season quebra recorde simultâneo na Twitch",
                 category: "fortnite",
                 image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070",
-                description: "Confira todas as novidades do patch 29.00 e o que muda no meta competitivo.",
-                body: "A Epic Games surpreendeu a comunidade nesta manhã com o lançamento da aguardada nova temporada de Fortnite.\n\nTrazendo um mapa completamente reformulado, novas mecânicas de movimento e um passe de batalha recheado de parcerias com animes famosos.\n\nAs clássicas Torres Tortas deram espaço para uma metrópole futurista com trens em movimento. Os servidores já estão online!",
+                description: "O retorno ao mapa clássico trouxe milhões de veteranos de volta aos servidores da Epic.",
+                body: "A Epic Games acertou em cheio na nostalgia. Na manhã desta quinta-feira, a nova temporada 'O.G.', que traz de volta o mapa original do Capítulo 1, registrou mais de 5 milhões de jogadores simultâneos.\n\nAlém de locais icônicos como as Torres Tortas, mecânicas clássicas de armas e cura foram restauradas, embora a ausência de sprint tático tenha dividido a comunidade competitiva.\n\nEspecialistas preveem que este final de semana baterá todos os recordes históricos da empresa em receita e engajamento.",
                 featured: true,
                 date: "2024-10-24"
             },
             {
                 id: 2,
-                title: "Blox Fruits: Novo código de XP Duplo revelado!",
+                title: "Blox Fruits: Códigos v20.0 e a nova fruta mítica",
                 category: "roblox",
                 image: "https://images.unsplash.com/photo-1607853202273-797f1c22a38e?q=80&w=600",
-                description: "Desenvolvedores liberaram um novo código surpresa neste fim de semana.",
-                body: "Os desenvolvedores de Blox Fruits acabaram de liberar um código especial de XP Duplo!\n\nO código é válido por tempo limitado, então corra para resgatar.\n\nAlém disso, a próxima atualização promete trazer uma nova fruta lendária e um novo bioma no Terceiro Mar.",
+                description: "Desenvolvedores liberaram lote massivo de reset stats e 2x XP.",
+                body: "O aguardado update v20.0 finalmente dropou nos servidores. Focado em rebalanceamento naval e introdução da fruta 'Kitsune', o meta do jogo mudou drasticamente.\n\nPara comemorar, os devs soltaram 5 novos códigos de Double XP. Lembre-se de acessar o menu lateral no jogo para resgatar antes que expirem em 48 horas.",
                 featured: false,
                 date: "2024-10-23"
             },
             {
                 id: 3,
-                title: "Atualização 1.21: Novo mob adicionado ao Minecraft",
-                category: "minecraft",
-                image: "https://images.unsplash.com/photo-1628527305929-e889ee839171?q=80&w=600",
-                description: "A Mojang detalhou as mecânicas do novo mob hostil que chegará nas snapshots.",
-                body: "A Mojang anunciou oficialmente os detalhes da atualização 1.21 do Minecraft.\n\nO novo mob promete mudar completamente a dinâmica de exploração subterrânea.\n\nA atualização também inclui novos blocos decorativos e melhorias de performance.",
-                featured: false,
-                date: "2024-10-22"
-            },
-            {
-                id: 4,
-                title: "Review: O melhor mouse custo-benefício para FPS",
+                title: "Novo sensor 8K Hz vira padrão em mouses competitivos",
                 category: "hardware",
                 image: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=600",
-                description: "Testamos o novo lançamento focado em jogadores de Valorant e CS2.",
-                body: "Se você está procurando um mouse gamer acessível, este review é para você!\n\nTestamos durante duas semanas o novo modelo com sensor de alta precisão.\n\nVeredicto: Para quem busca custo-benefício, este é o melhor da faixa de preço.",
+                description: "Testamos se o polling rate absurdo realmente faz diferença no Valorant.",
+                body: "A nova corrida armamentista dos periféricos não é mais sobre DPI, mas sim Polling Rate. Modelos recentes estão adotando 8000Hz como padrão.\n\nNos nossos testes de laboratório em pareamento com monitores de 360Hz, a latência de clique caiu para submilisegundos. A pergunta que fica é: o jogador médio consegue notar a diferença? Spoiler: sim, mas o custo em CPU é alto.",
                 featured: false,
                 date: "2024-10-21"
             }
         ];
 
         function getNews() {
-            const stored = localStorage.getItem('gg_news');
+            const stored = localStorage.getItem('gg_v2_news');
             if (!stored) {
-                localStorage.setItem('gg_news', JSON.stringify(defaultNews));
+                localStorage.setItem('gg_v2_news', JSON.stringify(defaultNews));
                 return JSON.parse(JSON.stringify(defaultNews));
             }
             return JSON.parse(stored);
         }
 
-        function saveNewsData(data) {
-            localStorage.setItem('gg_news', JSON.stringify(data));
-        }
+        function saveNewsData(data) { localStorage.setItem('gg_v2_news', JSON.stringify(data)); }
+        function getNewsNextId() { const news = getNews(); return news.length === 0 ? 1 : Math.max(...news.map(n => n.id)) + 1; }
 
-        function getNewsNextId() {
-            const news = getNews();
-            return news.length === 0 ? 1 : Math.max(...news.map(n => n.id)) + 1;
-        }
-
-        // ============================
-        // NAVEGAÇÃO
-        // ============================
+        // ==========================================
+        // ROTAS & RENDERIZAÇÃO PRINCIPAL
+        // ==========================================
         function navigate(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
-            window.scrollTo(0, 0);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             document.getElementById('searchInput').value = "";
             if (pageId === 'home') renderHome();
             if (pageId === 'dashboard') renderDashboard();
         }
 
-        // ============================
-        // RENDER HOME (Dinâmico)
-        // ============================
         function renderHome() {
             renderFilters();
             renderBanner();
@@ -694,7 +755,7 @@ Aqui está o código completo com o sistema de **criar, editar e excluir categor
         function renderFilters() {
             const cats = getCategories().filter(c => c.showFilter);
             const container = document.getElementById('filtersContainer');
-            container.innerHTML = `<button class="filter-btn active" onclick="filterNews('todos', this)">Todos</button>`;
+            container.innerHTML = `<button class="filter-btn active" onclick="filterNews('todos', this)">Todas as Tags</button>`;
             cats.forEach(cat => {
                 container.innerHTML += `<button class="filter-btn" onclick="filterNews('${cat.slug}', this)">${cat.name}</button>`;
             });
@@ -703,25 +764,30 @@ Aqui está o código completo com o sistema de **criar, editar e excluir categor
         function renderNavLinks() {
             const cats = getCategories().filter(c => c.showNav);
             const nav = document.getElementById('navLinks');
-            let html = `<li><a onclick="navigate('home')">Início</a></li>`;
+            let html = `<li><a onclick="navigate('home')">Página Inicial</a></li>`;
             cats.forEach(cat => {
                 html += `<li><a onclick="navigate('home'); setTimeout(()=>filterNews('${cat.slug}', document.querySelector('.filter-btn')),100)">${cat.name}</a></li>`;
             });
-            html += `<li><a onclick="navigate('about')">Sobre</a></li>`;
-            html += `<li><button id="adminBtn" class="admin-toggle ${isLoggedIn ? 'logged' : ''}" onclick="handleAdminClick()">${isLoggedIn ? '⚡ Dashboard' : '⚙ Admin'}</button></li>`;
+            html += `<li><a onclick="navigate('about')">Missão GG</a></li>`;
+            html += `<li><button id="adminBtn" class="admin-toggle ${isLoggedIn ? 'logged' : ''}" onclick="handleAdminClick()">
+                ${isLoggedIn ? '🛡️ Dashboard' : '🔑 Admin'}
+            </button></li>`;
             nav.innerHTML = html;
         }
 
         function renderBanner() {
             const news = getNews();
             const featured = news.find(n => n.featured) || news[0];
+            const banner = document.getElementById('mainBanner');
+            
             if (!featured) {
-                document.getElementById('bannerTitle').textContent = 'Bem-vindo ao GG!';
-                document.getElementById('bannerDesc').textContent = 'Nenhuma notícia publicada ainda.';
+                document.getElementById('bannerTitle').textContent = 'Sinal Perdido.';
+                document.getElementById('bannerDesc').textContent = 'Nenhuma transmissão encontrada no banco de dados.';
+                banner.style.background = `var(--bg-card)`;
                 return;
             }
-            const banner = document.getElementById('mainBanner');
-            banner.style.background = `linear-gradient(to top, var(--bg-dark), transparent), url('${featured.image}') center/cover`;
+            
+            banner.style.background = `linear-gradient(to top, #070709 5%, rgba(7,7,9,0.2) 60%), url('${featured.image}') center/cover`;
             document.getElementById('bannerTitle').textContent = featured.title;
             document.getElementById('bannerDesc').textContent = featured.description;
             banner.setAttribute('data-id', featured.id);
@@ -736,65 +802,84 @@ Aqui está o código completo com o sistema de **criar, editar e excluir categor
             const news = getNews();
             const container = document.getElementById('news-container');
             container.innerHTML = '';
+            
             if (news.length === 0) {
-                container.innerHTML = '<p style="color:var(--text-muted);text-align:center;grid-column:1/-1;padding:3rem;">Nenhuma notícia publicada ainda.</p>';
+                container.innerHTML = '<p class="no-data" style="grid-column:1/-1;">Sem registros encontrados no banco de dados.</p>';
                 return;
             }
+            
             const sorted = [...news].sort((a, b) => new Date(b.date) - new Date(a.date));
             sorted.forEach(item => {
                 const color = getCatColor(item.category);
                 const label = getCatLabel(item.category);
+                
                 const card = document.createElement('div');
                 card.className = 'news-card';
                 card.setAttribute('data-category', item.category);
+                card.onclick = () => openArticle(item.id);
+                
                 card.innerHTML = `
-                    <img src="${item.image}" alt="${item.title}" class="news-img" onerror="this.src='https://via.placeholder.com/600x300/15151a/9d4edd?text=GG'">
+                    <div class="news-img-wrapper">
+                        <img src="${item.image}" alt="${item.title}" class="news-img" onerror="this.src='https://via.placeholder.com/600x300/121217/a855f7?text=NO+SIGNAL'">
+                    </div>
                     <div class="news-content">
-                        <span class="banner-tag" style="background:${color};">${label}</span>
+                        <div><span class="banner-tag" style="background:${color}; box-shadow: 0 0 10px ${color}80; font-size: 0.7rem;">${label}</span></div>
                         <h3>${item.title}</h3>
                         <p>${item.description}</p>
-                        <button class="btn-read" onclick="openArticle(${item.id})">Ler mais</button>
+                        <button class="btn-read">Acessar Arquivo</button>
                     </div>
                 `;
                 container.appendChild(card);
             });
         }
 
-        // ============================
-        // ARTIGO
-        // ============================
+        // ==========================================
+        // ARTIGO E INTERAÇÕES
+        // ==========================================
         function openArticle(id) {
             const item = getNews().find(n => n.id === id);
             if (!item) return;
+            
+            const color = getCatColor(item.category);
             document.getElementById('articleTag').textContent = getCatLabel(item.category);
-            document.getElementById('articleTag').style.background = getCatColor(item.category);
+            document.getElementById('articleTag').style.background = color;
+            document.getElementById('articleTag').style.boxShadow = `0 0 15px ${color}80`;
+            
             document.getElementById('articleTitle').textContent = item.title;
-            const dt = new Date(item.date + 'T12:00:00').toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
-            document.getElementById('articleMeta').innerHTML = `Por <strong style="color:var(--neon-purple);">Admin GG</strong> | ${dt}`;
+            
+            const dt = new Date(item.date + 'T12:00:00').toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
+            document.getElementById('articleMeta').innerHTML = `Autorizado por: <strong style="color:var(--neon-purple);">System_Admin</strong> | Update: ${dt}`;
+            
             document.getElementById('articleImg').src = item.image;
-            document.getElementById('articleBody').innerHTML = item.body.split('\n').filter(p => p.trim()).map(p => `<p>${p}</p>`).join('');
+            
+            // Formatador básico de parágrafos
+            const safeBody = item.body.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            const htmlBody = safeBody.split('\n')
+                                     .filter(p => p.trim())
+                                     .map(p => `<p>${p}</p>`)
+                                     .join('');
+                                     
+            document.getElementById('articleBody').innerHTML = htmlBody;
             navigate('article');
         }
 
         function shareTwitter() {
             const t = document.getElementById('articleTitle').textContent;
-            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(t + ' | GG')}`);
+            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent('Dropping intel: ' + t + ' via @GlobalGames')}`);
         }
         function shareWhatsApp() {
             const t = document.getElementById('articleTitle').textContent;
-            window.open(`https://wa.me/?text=${encodeURIComponent(t + ' | GG')}`);
+            window.open(`https://wa.me/?text=${encodeURIComponent('Se liga nessa att: ' + t + ' | GG Portal')}`);
         }
 
-        // ============================
-        // FILTROS E BUSCA
-        // ============================
         function filterNews(category, btn) {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             if (btn) btn.classList.add('active');
+            
             document.querySelectorAll('.news-card').forEach(card => {
                 if (category === 'todos' || card.getAttribute('data-category') === category) {
-                    card.style.display = 'block';
-                    card.style.animation = 'fadeIn 0.5s ease';
+                    card.style.display = 'flex';
+                    card.style.animation = 'fadeIn 0.4s ease';
                 } else {
                     card.style.display = 'none';
                 }
@@ -812,13 +897,13 @@ Aqui está o código completo com o sistema de **criar, editar e excluir categor
             document.querySelectorAll('.news-card').forEach(card => {
                 const t = card.querySelector('h3').innerText.toLowerCase();
                 const d = card.querySelector('p').innerText.toLowerCase();
-                card.style.display = (t.includes(input) || d.includes(input)) ? 'block' : 'none';
+                card.style.display = (t.includes(input) || d.includes(input)) ? 'flex' : 'none';
             });
         }
 
-        // ============================
-        // AUTH
-        // ============================
+        // ==========================================
+        // SISTEMA DE AUTENTICAÇÃO
+        // ==========================================
         function handleAdminClick() {
             if (isLoggedIn) navigate('dashboard');
             else openLoginModal();
@@ -827,17 +912,16 @@ Aqui está o código completo com o sistema de **criar, editar e excluir categor
             document.getElementById('loginModal').classList.add('show');
             document.getElementById('loginPassword').value = '';
             document.getElementById('loginError').style.display = 'none';
-            setTimeout(() => document.getElementById('loginPassword').focus(), 200);
+            setTimeout(() => document.getElementById('loginPassword').focus(), 100);
         }
-        function closeLoginModal() {
-            document.getElementById('loginModal').classList.remove('show');
-        }
+        function closeLoginModal() { document.getElementById('loginModal').classList.remove('show'); }
+        
         function attemptLogin() {
             if (document.getElementById('loginPassword').value === ADMIN_PASSWORD) {
                 isLoggedIn = true;
                 closeLoginModal();
                 renderNavLinks();
-                showToast('✅ Login realizado!');
+                showToast('Acesso Concedido. Bem-vindo, Admin.');
                 navigate('dashboard');
             } else {
                 document.getElementById('loginError').style.display = 'block';
@@ -848,13 +932,13 @@ Aqui está o código completo com o sistema de **criar, editar e excluir categor
         function handleLogout() {
             isLoggedIn = false;
             renderNavLinks();
-            showToast('Você saiu do painel');
+            showToast('Sessão encerrada com segurança.');
             navigate('home');
         }
 
-        // ============================
-        // DASHBOARD - TABS
-        // ============================
+        // ==========================================
+        // DASHBOARD CORE
+        // ==========================================
         function switchTab(tabId, btn) {
             document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.dash-tab').forEach(b => b.classList.remove('active'));
@@ -862,9 +946,6 @@ Aqui está o código completo com o sistema de **criar, editar e excluir categor
             btn.classList.add('active');
         }
 
-        // ============================
-        // DASHBOARD - RENDER
-        // ============================
         function renderDashboard() {
             renderDashStats();
             renderDashNewsTable();
@@ -876,42 +957,43 @@ Aqui está o código completo com o sistema de **criar, editar e excluir categor
             const news = getNews();
             const cats = getCategories();
             const container = document.getElementById('dashStats');
+            
             let html = `
                 <div class="stat-card">
                     <div class="stat-number">${news.length}</div>
-                    <div class="stat-label">Total Notícias</div>
+                    <div class="stat-label">Arquivos Publicados</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number">${cats.length}</div>
-                    <div class="stat-label">Categorias</div>
+                    <div class="stat-label">Tags de Sistema</div>
                 </div>
             `;
-            // Top 3 categorias com mais notícias
+            
+            // Top categoria
             const catCounts = {};
             news.forEach(n => { catCounts[n.category] = (catCounts[n.category] || 0) + 1; });
-            const topCats = Object.entries(catCounts).sort((a, b) => b[1] - a[1]).slice(0, 3);
-            topCats.forEach(([slug, count]) => {
+            const topCats = Object.entries(catCounts).sort((a, b) => b[1] - a[1]).slice(0, 1);
+            
+            if(topCats.length > 0) {
                 html += `
                     <div class="stat-card">
-                        <div class="stat-number">${count}</div>
-                        <div class="stat-label">${getCatLabel(slug)}</div>
+                        <div class="stat-number" style="color:var(--neon-purple); text-shadow: 0 0 15px var(--neon-purple-glow);">${topCats[0][1]}</div>
+                        <div class="stat-label">Top Tag: ${getCatLabel(topCats[0][0])}</div>
                     </div>
                 `;
-            });
+            }
             container.innerHTML = html;
         }
 
-        // ============================
-        // DASHBOARD - NOTÍCIAS
-        // ============================
+        // ==========================================
+        // DASHBOARD: NOTÍCIAS (CRUD)
+        // ==========================================
         function renderCategorySelect() {
             const cats = getCategories();
             const select = document.getElementById('inputCategory');
             const current = select.value;
             select.innerHTML = '';
-            cats.forEach(c => {
-                select.innerHTML += `<option value="${c.slug}">${c.icon || '📁'} ${c.name}</option>`;
-            });
+            cats.forEach(c => { select.innerHTML += `<option value="${c.slug}">${c.icon || '📁'} ${c.name}</option>`; });
             if (current) select.value = current;
         }
 
@@ -919,14 +1001,16 @@ Aqui está o código completo com o sistema de **criar, editar e excluir categor
             renderCategorySelect();
             document.getElementById('newsForm').style.display = 'block';
             if (!editing) {
-                document.getElementById('newsFormTitle').textContent = '➕ Adicionar Notícia';
+                document.getElementById('newsFormTitle').innerHTML = '📄 Criar Nova Publicação';
                 clearNewsForm();
                 document.getElementById('inputDate').value = new Date().toISOString().split('T')[0];
             }
-            document.getElementById('newsForm').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('newsForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         function hideNewsForm() {
+            const title = document.getElementById('inputTitle').value;
+            if (title && !confirm('Existem alterações não salvas. Deseja descartar?')) return;
             document.getElementById('newsForm').style.display = 'none';
             clearNewsForm();
         }
@@ -934,13 +1018,12 @@ Aqui está o código completo com o sistema de **criar, editar e excluir categor
         function clearNewsForm() {
             ['editingNewsId', 'inputTitle', 'inputImage', 'inputDesc', 'inputBody'].forEach(id => document.getElementById(id).value = '');
             document.getElementById('inputFeatured').value = 'false';
-            document.getElementById('inputDate').value = '';
         }
 
         function saveNews() {
             const title = document.getElementById('inputTitle').value.trim();
             const category = document.getElementById('inputCategory').value;
-            const image = document.getElementById('inputImage').value.trim() || 'https://via.placeholder.com/600x300/15151a/9d4edd?text=GG+News';
+            const image = document.getElementById('inputImage').value.trim() || 'https://via.placeholder.com/600x300/121217/a855f7?text=NO+IMAGE';
             const description = document.getElementById('inputDesc').value.trim();
             const body = document.getElementById('inputBody').value.trim();
             const featured = document.getElementById('inputFeatured').value === 'true';
@@ -948,23 +1031,24 @@ Aqui está o código completo com o sistema de **criar, editar e excluir categor
             const editId = document.getElementById('editingNewsId').value;
 
             if (!title || !description || !body) {
-                showToast('❌ Preencha título, descrição e conteúdo!', true);
+                showToast('Erro de integridade: Preencha Manchete, Lead e Corpo.', true);
                 return;
             }
 
             let news = getNews();
-            if (featured) news = news.map(n => ({ ...n, featured: false }));
+            if (featured) news = news.map(n => ({ ...n, featured: false })); // Remove destaque anterior
 
             if (editId) {
                 const idx = news.findIndex(n => n.id === parseInt(editId));
                 if (idx !== -1) news[idx] = { ...news[idx], title, category, image, description, body, featured, date };
-                showToast('✅ Notícia atualizada!');
+                showToast('Base de dados atualizada.');
             } else {
                 news.push({ id: getNewsNextId(), title, category, image, description, body, featured, date });
-                showToast('✅ Notícia publicada!');
+                showToast('Novo arquivo indexado com sucesso.');
             }
 
             saveNewsData(news);
+            document.getElementById('inputTitle').value = ''; // hack para bypass no hideNewsForm confirm
             hideNewsForm();
             renderDashboard();
         }
@@ -981,21 +1065,21 @@ Aqui está o código completo com o sistema de **criar, editar e excluir categor
             document.getElementById('inputBody').value = item.body;
             document.getElementById('inputFeatured').value = item.featured ? 'true' : 'false';
             document.getElementById('inputDate').value = item.date;
-            document.getElementById('newsFormTitle').textContent = '✏️ Editando: ' + item.title.substring(0, 35) + '...';
+            document.getElementById('newsFormTitle').innerHTML = '✏️ Editando Arquivo Ref: #' + item.id;
             showNewsForm(true);
         }
 
         function deleteNews(id) {
-            if (!confirm('⚠️ Excluir esta notícia? Ação irreversível.')) return;
+            if (!confirm('Aviso crítico: Purgar este arquivo permanentemente?')) return;
             saveNewsData(getNews().filter(n => n.id !== id));
-            showToast('🗑 Notícia excluída!');
+            showToast('Arquivo purgado do sistema.');
             renderDashboard();
         }
 
         function toggleFeatured(id) {
             let news = getNews().map(n => ({ ...n, featured: n.id === id ? !n.featured : false }));
             saveNewsData(news);
-            showToast('⭐ Destaque atualizado!');
+            showToast('Hero Banner reconfigurado.');
             renderDashboard();
         }
 
@@ -1003,25 +1087,31 @@ Aqui está o código completo com o sistema de **criar, editar e excluir categor
             const news = getNews();
             const tbody = document.getElementById('dashNewsBody');
             tbody.innerHTML = '';
+            
             if (news.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6" class="no-data">Nenhuma notícia. Clique em "+ Nova Notícia".</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="6" class="no-data">Nenhum bloco de dados encontrado.</td></tr>';
                 return;
             }
+            
             [...news].sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(item => {
                 const color = getCatColor(item.category);
-                const label = getCatLabel(item.category);
                 const dt = new Date(item.date + 'T12:00:00').toLocaleDateString('pt-BR');
                 const tr = document.createElement('tr');
+                
                 tr.innerHTML = `
-                    <td><span class="featured-star ${item.featured ? '' : 'inactive'}" onclick="toggleFeatured(${item.id})">${item.featured ? '★' : '☆'}</span></td>
-                    <td><img src="${item.image}" class="img-preview" onerror="this.src='https://via.placeholder.com/60x40/15151a/9d4edd?text=GG'"></td>
-                    <td><strong>${item.title.length > 45 ? item.title.substring(0, 45) + '...' : item.title}</strong></td>
-                    <td><span class="cat-badge" style="background:${color};color:white;">${label}</span></td>
-                    <td style="white-space:nowrap;">${dt}</td>
+                    <td style="text-align:center;">
+                        <span class="featured-star ${item.featured ? '' : 'inactive'}" onclick="toggleFeatured(${item.id})" title="Tornar Hero">
+                            ${item.featured ? '★' : '☆'}
+                        </span>
+                    </td>
+                    <td><img src="${item.image}" class="img-preview" onerror="this.src='https://via.placeholder.com/80x50/121217/a855f7?text=IMG'"></td>
+                    <td><strong style="color:var(--text-main);">${item.title.length > 50 ? item.title.substring(0, 50) + '...' : item.title}</strong></td>
+                    <td><span class="cat-badge" style="background:${color}30; color:${color}; border: 1px solid ${color};">${getCatLabel(item.category)}</span></td>
+                    <td style="white-space:nowrap; font-family:monospace; color:var(--text-muted);">${dt}</td>
                     <td>
                         <div class="actions-cell">
-                            <button class="btn-dash edit" onclick="editNews(${item.id})" style="font-size:0.65rem;padding:4px 8px;">✏ Editar</button>
-                            <button class="btn-dash danger" onclick="deleteNews(${item.id})" style="font-size:0.65rem;padding:4px 8px;">🗑</button>
+                            <button class="btn-dash edit" onclick="editNews(${item.id})">Editar</button>
+                            <button class="btn-dash danger" onclick="deleteNews(${item.id})">Del</button>
                         </div>
                     </td>
                 `;
@@ -1029,19 +1119,21 @@ Aqui está o código completo com o sistema de **criar, editar e excluir categor
             });
         }
 
-        // ============================
-        // DASHBOARD - CATEGORIAS
-        // ============================
+        // ==========================================
+        // DASHBOARD: CATEGORIAS (CRUD)
+        // ==========================================
         function showCatForm(editing = false) {
             document.getElementById('catForm').style.display = 'block';
             if (!editing) {
-                document.getElementById('catFormTitle').textContent = '➕ Criar Categoria';
+                document.getElementById('catFormTitle').innerHTML = '🏷️ Gerar Nova Tag';
                 clearCatForm();
             }
-            document.getElementById('catForm').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('catForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         function hideCatForm() {
+            const name = document.getElementById('catName').value;
+            if(name && !confirm('Descartar configurações de tag?')) return;
             document.getElementById('catForm').style.display = 'none';
             clearCatForm();
         }
@@ -1050,9 +1142,9 @@ Aqui está o código completo com o sistema de **criar, editar e excluir categor
             document.getElementById('editingCatId').value = '';
             document.getElementById('catName').value = '';
             document.getElementById('catSlug').value = '';
-            document.getElementById('catColor').value = '#9d4edd';
-            document.getElementById('catColorText').value = '#9d4edd';
-            document.getElementById('catIcon').value = '🎮';
+            document.getElementById('catColor').value = '#a855f7';
+            document.getElementById('catColorText').value = '#a855f7';
+            document.getElementById('catIcon').value = '';
             document.getElementById('catShowNav').value = 'true';
             document.getElementById('catShowFilter').value = 'true';
         }
@@ -1061,30 +1153,19 @@ Aqui está o código completo com o sistema de **criar, editar e excluir categor
             const name = document.getElementById('catName').value.trim();
             let slug = document.getElementById('catSlug').value.trim().toLowerCase().replace(/[^a-z0-9-]/g, '');
             const color = document.getElementById('catColor').value;
-            const icon = document.getElementById('catIcon').value.trim() || '📁';
+            const icon = document.getElementById('catIcon').value.trim();
             const showNav = document.getElementById('catShowNav').value === 'true';
             const showFilter = document.getElementById('catShowFilter').value === 'true';
             const editId = document.getElementById('editingCatId').value;
 
-            if (!name) {
-                showToast('❌ Digite o nome da categoria!', true);
-                return;
-            }
+            if (!name) { showToast('Defina um nome visível para a tag.', true); return; }
 
-            // Auto-gerar slug se vazio
-            if (!slug) {
-                slug = name.toLowerCase()
-                    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-                    .replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-            }
+            // Slug auto-gen
+            if (!slug) slug = name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
             let cats = getCategories();
-
-            // Verificar duplicata de slug
-            const duplicate = cats.find(c => c.slug === slug && (!editId || c.id !== parseInt(editId)));
-            if (duplicate) {
-                showToast('❌ Já existe uma categoria com esse slug!', true);
-                return;
+            if (cats.find(c => c.slug === slug && (!editId || c.id !== parseInt(editId)))) {
+                showToast('Conflito de ID: Slug já em uso no sistema.', true); return;
             }
 
             if (editId) {
@@ -1092,20 +1173,20 @@ Aqui está o código completo com o sistema de **criar, editar e excluir categor
                 if (idx !== -1) {
                     const oldSlug = cats[idx].slug;
                     cats[idx] = { ...cats[idx], name, slug, color, icon, showNav, showFilter };
-                    // Atualizar notícias se o slug mudou
                     if (oldSlug !== slug) {
                         let news = getNews();
                         news = news.map(n => n.category === oldSlug ? { ...n, category: slug } : n);
                         saveNewsData(news);
                     }
                 }
-                showToast('✅ Categoria atualizada!');
+                showToast('Tag reconfigurada.');
             } else {
                 cats.push({ id: getCatNextId(), name, slug, color, icon, showNav, showFilter, isDefault: false });
-                showToast('✅ Categoria criada!');
+                showToast('Nova tag ativada.');
             }
 
             saveCategoriesData(cats);
+            document.getElementById('catName').value = ''; // bypass confirm
             hideCatForm();
             renderDashboard();
             renderNavLinks();
@@ -1119,10 +1200,10 @@ Aqui está o código completo com o sistema de **criar, editar e excluir categor
             document.getElementById('catSlug').value = cat.slug;
             document.getElementById('catColor').value = cat.color;
             document.getElementById('catColorText').value = cat.color;
-            document.getElementById('catIcon').value = cat.icon || '🎮';
+            document.getElementById('catIcon').value = cat.icon || '';
             document.getElementById('catShowNav').value = cat.showNav ? 'true' : 'false';
             document.getElementById('catShowFilter').value = cat.showFilter ? 'true' : 'false';
-            document.getElementById('catFormTitle').textContent = '✏️ Editando: ' + cat.name;
+            document.getElementById('catFormTitle').innerHTML = '✏️ Editando Tag: ' + cat.name;
             showCatForm(true);
         }
 
@@ -1132,13 +1213,11 @@ Aqui está o código completo com o sistema de **criar, editar e excluir categor
             if (!cat) return;
 
             const newsCount = getNews().filter(n => n.category === cat.slug).length;
-            let msg = `⚠️ Excluir a categoria "${cat.name}"?`;
-            if (newsCount > 0) {
-                msg += `\n\n⚠️ ATENÇÃO: ${newsCount} notícia(s) usam esta categoria.\nElas serão movidas para "Geral".`;
-            }
+            let msg = `CUIDADO: Purgar a tag "${cat.name}" do sistema?`;
+            if (newsCount > 0) msg += `\n\nALERTA: ${newsCount} arquivo(s) usam esta tag. Eles serão recategorizados para "Geral".`;
+            
             if (!confirm(msg)) return;
 
-            // Mover notícias para "geral"
             if (newsCount > 0) {
                 let news = getNews();
                 news = news.map(n => n.category === cat.slug ? { ...n, category: 'geral' } : n);
@@ -1146,7 +1225,7 @@ Aqui está o código completo com o sistema de **criar, editar e excluir categor
             }
 
             saveCategoriesData(cats.filter(c => c.id !== id));
-            showToast('🗑 Categoria excluída!');
+            showToast('Tag purgada.');
             renderDashboard();
             renderNavLinks();
         }
@@ -1158,7 +1237,7 @@ Aqui está o código completo com o sistema de **criar, editar e excluir categor
             grid.innerHTML = '';
 
             if (cats.length === 0) {
-                grid.innerHTML = '<p class="no-data">Nenhuma categoria. Crie a primeira!</p>';
+                grid.innerHTML = '<p class="no-data" style="grid-column:1/-1;">Nenhuma tag alocada.</p>';
                 return;
             }
 
@@ -1168,44 +1247,43 @@ Aqui está o código completo com o sistema de **criar, editar e excluir categor
                 card.className = 'cat-card';
 
                 card.innerHTML = `
-                    <span class="cat-card-count">${count} notícia${count !== 1 ? 's' : ''}</span>
+                    <span class="cat-card-count">${count} reqs</span>
                     <div class="cat-card-header">
-                        <div class="cat-card-color" style="background:${cat.color};display:flex;align-items:center;justify-content:center;font-size:1.3rem;">
-                            ${cat.icon || '📁'}
+                        <div class="cat-card-color" style="background:${cat.color}20; color: ${cat.color}; border: 1px solid ${cat.color}50;">
+                            ${cat.icon || '🏷️'}
                         </div>
                         <div class="cat-card-info">
                             <h4>${cat.name}</h4>
-                            <small>slug: ${cat.slug}</small>
-                            <br>
-                            <small style="color:${cat.color};">● ${cat.color}</small>
+                            <small>ID: /${cat.slug}</small>
                         </div>
                     </div>
-                    <div style="display:flex;gap:8px;flex-wrap:wrap;font-size:0.7rem;color:var(--text-muted);">
-                        ${cat.showNav ? '<span style="color:var(--neon-green);">✅ Menu</span>' : '<span>❌ Menu</span>'}
-                        ${cat.showFilter ? '<span style="color:var(--neon-green);">✅ Filtro</span>' : '<span>❌ Filtro</span>'}
+                    <div style="display:flex; gap:10px; font-size:0.75rem; font-family: monospace;">
+                        <span style="color:${cat.showNav ? 'var(--neon-green)' : 'var(--text-muted)'}">${cat.showNav ? '▣ Nav Ativa' : '□ Nav Off'}</span>
+                        <span style="color:${cat.showFilter ? 'var(--neon-green)' : 'var(--text-muted)'}">${cat.showFilter ? '▣ Filtro Ativo' : '□ Filtro Off'}</span>
                     </div>
                     <div class="cat-card-actions">
-                        <button class="btn-dash edit" onclick="editCategory(${cat.id})" style="font-size:0.65rem;padding:5px 10px;flex:1;">✏ Editar</button>
-                        <button class="btn-dash danger" onclick="deleteCategory(${cat.id})" style="font-size:0.65rem;padding:5px 10px;">🗑</button>
+                        <button class="btn-dash edit" onclick="editCategory(${cat.id})" style="flex:1;">Configurar</button>
+                        <button class="btn-dash danger" onclick="deleteCategory(${cat.id})">Del</button>
                     </div>
                 `;
                 grid.appendChild(card);
             });
         }
 
-        // ============================
-        // TOAST
-        // ============================
+        // ==========================================
+        // UI & UTILS
+        // ==========================================
         function showToast(message, isError = false) {
             const toast = document.getElementById('toast');
-            toast.textContent = message;
+            toast.innerHTML = (isError ? '⚠️ ' : '✅ ') + message;
             toast.className = 'toast show' + (isError ? ' error' : '');
-            setTimeout(() => toast.className = 'toast', 3000);
+            
+            // limpa timeouts anteriores para evitar bugs visuais
+            if(window.toastTimer) clearTimeout(window.toastTimer);
+            window.toastTimer = setTimeout(() => toast.className = 'toast', 3000);
         }
 
-        // ============================
-        // INIT
-        // ============================
+        // Inicialização do sistema
         document.addEventListener('DOMContentLoaded', () => {
             renderNavLinks();
             renderHome();
@@ -1213,31 +1291,3 @@ Aqui está o código completo com o sistema de **criar, editar e excluir categor
     </script>
 </body>
 </html>
-```
-
----
-
-## 🎯 O que foi adicionado — Gerenciamento de Categorias
-
-### 🏷 Aba "Categorias" no Dashboard
-
-| Recurso | Descrição |
-|---------|-----------|
-| **➕ Criar** | Nome, slug, cor (color picker), emoji/ícone |
-| **✏️ Editar** | Todos os campos, inclusive slug (atualiza notícias automaticamente) |
-| **🗑 Excluir** | Remove com confirmação; redireciona notícias para "Geral" |
-| **📊 Contagem** | Cada card mostra quantas notícias usam aquela categoria |
-| **🎨 Cor personalizada** | Color picker + campo hex para escolher a cor |
-| **📌 Visibilidade** | Opção de exibir no **Menu** e/ou nos **Filtros** da home |
-| **🔄 Auto-slug** | Se não digitar o slug, gera automaticamente a partir do nome |
-
-### 🔗 Integração Total
-
-- **Filtros da home** → gerados dinamicamente pelas categorias marcadas como "Filtro"
-- **Menu de navegação** → links gerados pelas categorias marcadas como "Menu"
-- **Select de notícias** → populado dinamicamente com todas as categorias
-- **Estatísticas** → atualizadas em tempo real por categoria
-- **Ao excluir categoria** → notícias são migradas para "Geral"
-- **Ao editar slug** → todas as notícias são atualizadas
-
-> 🔑 **Senha padrão: `gg2024`** — altere em `const ADMIN_PASSWORD`
