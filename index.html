@@ -546,7 +546,11 @@
 
 <script>
 const GID='990622112342-63jj23kj8tv13m1qt770ojn0hqb2ib3v.apps.googleusercontent.com',ADMIN='ggglobalgamesgg@gmail.com';
-let cUser=null,isGuest=false,isAdm=false,artTags=[],commentFilter='pending';
+let cUser=null,isGuest=false,isAdm=false,artTags=[],commentFilter='pending',pendingSlug=null;
+
+function slugify(t){return t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s-]/g,'').trim().replace(/\s+/g,'-').replace(/-+/g,'-').substring(0,80)}
+function uniqueSlug(base,arts,excludeId){let s=base,i=2;while(arts.find(a=>a.slug===s&&a.id!==excludeId))s=base+'-'+(i++);return s}
+function updateMeta(title,desc,img){document.title=(title?title+' — ':'')+'GG. Global Games';let m=document.querySelector('meta[name="description"]');if(!m){m=document.createElement('meta');m.name='description';document.head.appendChild(m)}m.content=desc||'Portal de notícias gamer';['og:title','og:description','og:image'].forEach(p=>{let el=document.querySelector(`meta[property="${p}"]`);if(!el){el=document.createElement('meta');el.setAttribute('property',p);document.head.appendChild(el)}});document.querySelector('meta[property="og:title"]').content=title||'GG. Global Games';document.querySelector('meta[property="og:description"]').content=desc||'Portal de notícias gamer';if(img)document.querySelector('meta[property="og:image"]').content=img}
 const DB={g:(k,d)=>{try{return JSON.parse(localStorage.getItem('gg_'+k))||d}catch(e){return d}},s:(k,v)=>localStorage.setItem('gg_'+k,JSON.stringify(v)),d:k=>localStorage.removeItem('gg_'+k)};
 
 // INIT DB
@@ -571,10 +575,10 @@ function fetchGU(tk,b){fetch('https://www.googleapis.com/oauth2/v3/userinfo',{he
 function gRes(r){document.getElementById('googleBtn').classList.remove('loading');try{const p=JSON.parse(atob(r.credential.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));doLogin({name:p.name||'Gamer',email:p.email||'',picture:p.picture||null})}catch(e){showLM('Erro.','error')}}
 
 // AUTH
-function enterAsGuest(){isGuest=true;cUser=null;isAdm=false;DB.s('mode','guest');DB.d('user');toast('Bem-vindo! 👁️','info');document.getElementById('loginPage').classList.add('hidden');document.getElementById('homePage').classList.add('active');uiGuest();render()}
-function doLogin(u){cUser=u;isGuest=false;isAdm=(u.email===ADMIN);DB.s('user',u);DB.s('mode','logged');toast(`Bem-vindo, ${u.name}! 🎮`,'success');document.getElementById('loginPage').classList.add('hidden');document.getElementById('homePage').classList.add('active');isAdm?uiAdmin(u):uiUser(u);render()}
+function enterAsGuest(){isGuest=true;cUser=null;isAdm=false;DB.s('mode','guest');DB.d('user');toast('Bem-vindo! 👁️','info');document.getElementById('loginPage').classList.add('hidden');document.getElementById('homePage').classList.add('active');uiGuest();render();if(pendingSlug){const a=DB.g('articles',[]).find(x=>x.slug===pendingSlug&&x.status==='published');if(a){pendingSlug=null;openArticle(a.id);return}}pendingSlug=null}
+function doLogin(u){cUser=u;isGuest=false;isAdm=(u.email===ADMIN);DB.s('user',u);DB.s('mode','logged');toast(`Bem-vindo, ${u.name}! 🎮`,'success');document.getElementById('loginPage').classList.add('hidden');document.getElementById('homePage').classList.add('active');isAdm?uiAdmin(u):uiUser(u);render();if(pendingSlug){const a=DB.g('articles',[]).find(x=>x.slug===pendingSlug&&x.status==='published');if(a){pendingSlug=null;openArticle(a.id);return}}pendingSlug=null}
 function logout(){cUser=null;isGuest=false;isAdm=false;DB.d('user');DB.d('mode');if(typeof google!=='undefined'&&google.accounts)try{google.accounts.id.disableAutoSelect()}catch(e){}document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('loginPage').classList.remove('hidden');closeDD();toast('Até mais! 👋','info')}
-function goLogin(){closeDD();closeMob();document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('loginPage').classList.remove('hidden')}
+function goLogin(){closeDD();closeMob();pendingSlug=new URLSearchParams(location.search).get('artigo')||null;document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('loginPage').classList.remove('hidden')}
 function mobAuthAction(){closeMob();cUser?logout():goLogin()}
 function avH(u){return u&&u.picture?`<img src="${u.picture}" referrerpolicy="no-referrer">`:(u&&u.name||'G').charAt(0).toUpperCase()}
 
@@ -583,7 +587,7 @@ function uiAdmin(u){uiUser(u);const r=document.getElementById('uRole');r.textCon
 function uiGuest(){document.getElementById('uAvatar').innerHTML='👁️';document.getElementById('uName').textContent='Visitante';const r=document.getElementById('uRole');r.textContent='👁️ Visitante';r.className='u-role guest';document.getElementById('ddAv').innerHTML='👁️';document.getElementById('ddN').textContent='Visitante';document.getElementById('ddE').textContent='Não logado';document.getElementById('ddAuth').innerHTML='<button class="dd-in" onclick="goLogin()">🔑 Login</button>';document.getElementById('ddAdminLink').innerHTML='';document.getElementById('navAdminLink').style.display='none';document.getElementById('mobAdminLink').style.display='none';document.getElementById('vBanner').classList.add('show');const m=document.getElementById('mobAuth');m.textContent='🔑 Login';m.style.color='#10b981';m.onclick=()=>{closeMob();goLogin()}}
 
 // NAV
-function goPage(p){closeMob();closeDD();document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.nav a').forEach(a=>a.classList.remove('active'));if(p==='home'){document.getElementById('homePage').classList.add('active');document.getElementById('navHome').classList.add('active')}else if(p==='admin'&&isAdm){document.getElementById('adminPage').classList.add('active');refreshAdmin()}else if(p==='article'){document.getElementById('articlePage').classList.add('active')}else{document.getElementById('homePage').classList.add('active');document.getElementById('navHome').classList.add('active')}window.scrollTo({top:0,behavior:'smooth'})}
+function goPage(p){closeMob();closeDD();document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.nav a').forEach(a=>a.classList.remove('active'));if(p==='home'){document.getElementById('homePage').classList.add('active');document.getElementById('navHome').classList.add('active');history.pushState({},'GG. Global Games',location.pathname);updateMeta('','')}else if(p==='admin'&&isAdm){document.getElementById('adminPage').classList.add('active');history.pushState({},'Admin',location.pathname);refreshAdmin()}else if(p==='article'){document.getElementById('articlePage').classList.add('active')}else{document.getElementById('homePage').classList.add('active');document.getElementById('navHome').classList.add('active');history.pushState({},'GG. Global Games',location.pathname);updateMeta('','')}window.scrollTo({top:0,behavior:'smooth'})}
 
 function goToTrending(){
     const isHome=document.getElementById('homePage').classList.contains('active');
@@ -654,6 +658,9 @@ function openArticle(id){
     if(isGuest){const arts=DB.g('articles',[]).filter(a=>a.status==='published').sort((a,b)=>b.id-a.id);const idx=arts.findIndex(a=>a.id===id);if(idx>=3){goLogin();return}}
     const a=DB.g('articles',[]).find(x=>x.id===id);if(!a)return;
     const views=addView(id);const cats=DB.g('cats',[]);const cat=cats.find(c=>c.id==a.categoryId)||{name:'Geral',color:'esports',icon:'📰'};
+    const slug=a.slug||String(id);
+    history.pushState({articleId:id,slug},'',`?artigo=${slug}`);
+    updateMeta(a.title,a.excerpt,a.coverImage||'');
     const coverHTML=a.coverImage?`<img src="${a.coverImage}" alt="${a.title}">`:`<div class="ph purple" style="font-size:80px">${cat.icon}</div>`;
     const contentImgHTML=a.contentImage?`<div class="ar-content-img"><img src="${a.contentImage}" alt=""></div>`:'';
     const tagsHTML=a.tags&&a.tags.length?`<div class="ar-tags">${a.tags.map(t=>`<span class="ar-tag">${t}</span>`).join('')}</div>`:'';
@@ -818,7 +825,7 @@ document.getElementById('artTagsIn').addEventListener('keydown',function(e){if(e
 function renderATags(){const w=document.getElementById('artTagsWrap'),inp=document.getElementById('artTagsIn');w.querySelectorAll('.tag-pill').forEach(p=>p.remove());artTags.forEach((t,i)=>{const p=document.createElement('span');p.className='tag-pill';p.innerHTML=`${t} <button onclick="artTags.splice(${i},1);renderATags()">✕</button>`;w.insertBefore(p,inp)})}
 function resetForm(){document.getElementById('editId').value='';document.getElementById('artFormTitle').textContent='Nova Matéria';['artTitle','artExcerpt','artAuthor','artRead'].forEach(id=>document.getElementById(id).value='');document.getElementById('artStatus').value='published';document.getElementById('editorArea').innerHTML='';artTags=[];renderATags();['coverUp','extraUp'].forEach(w=>{const el=document.getElementById(w);el.classList.remove('has-image');el.querySelector('.preview-img').src='';el.querySelector('input').value=''})}
 
-function saveArticle(){const title=document.getElementById('artTitle').value.trim();if(!title){toast('Título obrigatório!','error');return}const eId=document.getElementById('editId').value;const arts=DB.g('articles',[]);const art={id:eId?parseInt(eId):Date.now(),title,excerpt:document.getElementById('artExcerpt').value.trim(),categoryId:parseInt(document.getElementById('artCat').value),status:document.getElementById('artStatus').value,coverImage:document.getElementById('coverPrev').src||'',contentImage:document.getElementById('extraPrev').src||'',content:document.getElementById('editorArea').innerHTML,tags:[...artTags],author:document.getElementById('artAuthor').value.trim()||'Redação GG',readTime:document.getElementById('artRead').value.trim()||'3 min'};if(eId){const idx=arts.findIndex(a=>a.id===art.id);if(idx>=0)arts[idx]=art}else arts.push(art);DB.s('articles',arts);toast(eId?'Atualizada! ✅':'Publicada! 🎉','success');resetForm();adminTab('articles');render()}
+function saveArticle(){const title=document.getElementById('artTitle').value.trim();if(!title){toast('Título obrigatório!','error');return}const eId=document.getElementById('editId').value;const arts=DB.g('articles',[]);const baseSlug=slugify(title);const slug=uniqueSlug(baseSlug,arts,eId?parseInt(eId):null);const art={id:eId?parseInt(eId):Date.now(),title,slug,excerpt:document.getElementById('artExcerpt').value.trim(),categoryId:parseInt(document.getElementById('artCat').value),status:document.getElementById('artStatus').value,coverImage:document.getElementById('coverPrev').src||'',contentImage:document.getElementById('extraPrev').src||'',content:document.getElementById('editorArea').innerHTML,tags:[...artTags],author:document.getElementById('artAuthor').value.trim()||'Redação GG',readTime:document.getElementById('artRead').value.trim()||'3 min'};if(eId){const idx=arts.findIndex(a=>a.id===art.id);if(idx>=0){art.slug=arts[idx].slug||slug;arts[idx]=art}}else arts.push(art);DB.s('articles',arts);toast(eId?'Atualizada! ✅':'Publicada! 🎉','success');resetForm();adminTab('articles');render()}
 
 function editArt(id){const a=DB.g('articles',[]).find(x=>x.id===id);if(!a)return;adminTab('new-article');document.getElementById('artFormTitle').textContent='Editar Matéria';document.getElementById('editId').value=a.id;document.getElementById('artTitle').value=a.title;document.getElementById('artExcerpt').value=a.excerpt||'';document.getElementById('artStatus').value=a.status;document.getElementById('editorArea').innerHTML=a.content||'';document.getElementById('artAuthor').value=a.author||'';document.getElementById('artRead').value=a.readTime||'';if(a.coverImage){document.getElementById('coverPrev').src=a.coverImage;document.getElementById('coverUp').classList.add('has-image')}if(a.contentImage){document.getElementById('extraPrev').src=a.contentImage;document.getElementById('extraUp').classList.add('has-image')}artTags=a.tags||[];renderATags();loadCatSel();document.getElementById('artCat').value=a.categoryId}
 function delArt(id){if(!confirm('Deletar?'))return;DB.s('articles',DB.g('articles',[]).filter(a=>a.id!==id));toast('Deletada.','info');renderArtTable();render();refreshAdmin()}
@@ -873,9 +880,32 @@ function hideLM(){document.getElementById('loginMsg').classList.remove('show')}
 document.getElementById('searchInput')?.addEventListener('keypress',e=>{if(e.key==='Enter'&&e.target.value.trim())toast(`Buscando "${e.target.value.trim()}"...`,'info')});
 
 // URL TOKEN
-(function(){const h=location.hash;if(h&&h.includes('access_token')){const tk=new URLSearchParams(h.substring(1)).get('access_token');if(tk){history.replaceState(null,'',location.pathname);const b=document.getElementById('googleBtn');b.classList.add('loading');fetchGU(tk,b)}}})();
+(function(){const h=location.hash;if(h&&h.includes('access_token')){const tk=new URLSearchParams(h.substring(1)).get('access_token');if(tk){history.replaceState(null,'',location.pathname+(location.search||''));const b=document.getElementById('googleBtn');b.classList.add('loading');fetchGU(tk,b)}}})();
 // SESSION
-(function(){if(location.hash&&location.hash.includes('access_token'))return;const mode=DB.g('mode',''),saved=DB.g('user',null);if(mode==='logged'&&saved){cUser=saved;isGuest=false;isAdm=(saved.email===ADMIN);document.getElementById('loginPage').classList.add('hidden');document.getElementById('homePage').classList.add('active');isAdm?uiAdmin(saved):uiUser(saved);render()}else if(mode==='guest'){isGuest=true;document.getElementById('loginPage').classList.add('hidden');document.getElementById('homePage').classList.add('active');uiGuest();render()}else render()})();
+(function(){
+    if(location.hash&&location.hash.includes('access_token'))return;
+    const mode=DB.g('mode',''),saved=DB.g('user',null);
+    const slug=new URLSearchParams(location.search).get('artigo');
+    function afterAuth(){
+        render();
+        if(slug){
+            const a=DB.g('articles',[]).find(x=>(x.slug===slug||String(x.id)===slug)&&x.status==='published');
+            if(a){openArticle(a.id);return}
+        }
+    }
+    if(mode==='logged'&&saved){cUser=saved;isGuest=false;isAdm=(saved.email===ADMIN);document.getElementById('loginPage').classList.add('hidden');document.getElementById('homePage').classList.add('active');isAdm?uiAdmin(saved):uiUser(saved);afterAuth()}
+    else if(mode==='guest'){isGuest=true;document.getElementById('loginPage').classList.add('hidden');document.getElementById('homePage').classList.add('active');uiGuest();afterAuth()}
+    else{if(slug)pendingSlug=slug;render()}
+})();
+// POPSTATE (back/forward browser buttons)
+window.addEventListener('popstate',function(e){
+    const slug=new URLSearchParams(location.search).get('artigo');
+    if(slug){const a=DB.g('articles',[]).find(x=>(x.slug===slug||String(x.id)===slug)&&x.status==='published');if(a){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById('articlePage').classList.add('active');document.getElementById('articleReader').innerHTML='';openArticle(a.id);return}}
+    document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+    document.getElementById('homePage').classList.add('active');
+    document.getElementById('navHome').classList.add('active');
+    updateMeta('','');
+});
 </script>
 </body>
 </html>
