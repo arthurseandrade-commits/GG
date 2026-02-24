@@ -395,7 +395,7 @@
 <div class="bg"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
 <div class="login-wrap"><div class="login-card">
 <div class="login-logo">
-    <img src="https://placehold.co/250x60/0a0a0f/10b981/png?text=GLOBAL+GAMES&font=Orbitron" alt="Global Games" class="logo-img-large">
+    <img src="assets/logo.png" alt="Global Games" class="logo-img-large">
 </div>
 <p class="login-sub">Global Games Portal</p>
 <div class="login-msg" id="loginMsg"></div>
@@ -410,7 +410,7 @@
 <div class="mob-side" id="mobSide">
     <button class="m-close" onclick="closeMob()">✕</button>
     <div style="margin-top:8px;text-align:center">
-        <img src="https://placehold.co/180x50/0a0a0f/10b981/png?text=GLOBAL+GAMES&font=Orbitron" alt="Global Games" class="logo-img">
+        <img src="assets/logo.png" alt="Global Games" class="logo-img">
     </div>
     <div class="m-nav">
         <a onclick="goPage('home');closeMob()">🏠 Início</a>
@@ -424,7 +424,7 @@
 <header id="header"><div class="h-bar">
 <button class="mob-btn" onclick="openMob()">☰</button>
 <a onclick="goPage('home')" style="display: flex; align-items: center;">
-    <img src="https://placehold.co/180x40/0a0a0f/10b981/png?text=GLOBAL+GAMES&font=Orbitron" alt="Global Games" class="logo-img">
+    <img src="assets/logo.png" alt="Global Games" class="logo-img">
 </a>
 <nav class="nav">
     <a onclick="goPage('home')" class="active" id="navHome">Início</a>
@@ -449,7 +449,7 @@
 <section class="trending" id="trendingSection"><div class="sec-h"><div class="sec-t"><div class="bar"></div><h2>🔥 EM ALTA</h2></div></div><div class="t-list" id="trendingList"></div><div class="empty-state" id="emptyTrending" style="display:none"><span>📊</span><p>Matérias aparecerão aqui conforme forem visualizadas.</p></div></section>
 </main>
 <footer><div class="f-wrap"><div class="f-top"><div class="f-brand">
-    <img src="https://placehold.co/150x40/0a0a0f/10b981/png?text=GLOBAL+GAMES&font=Orbitron" alt="Global Games" class="logo-img" style="margin-bottom: 8px;">
+    <img src="assets/logo.png" alt="Global Games" class="logo-img" style="margin-bottom: 8px;">
     <p>Sua fonte definitiva de notícias gamer.</p>
 </div><div class="f-links"><h4>Navegação</h4><a onclick="goPage('home')" style="cursor:pointer">Início</a><a onclick="goToTrending()" style="cursor:pointer">🔥 Em Alta</a><a onclick="document.getElementById('newsSection').scrollIntoView({behavior:'smooth'})" style="cursor:pointer">Notícias</a></div><div class="f-links"><h4>Comunidade</h4><a href="#">Discord</a><a href="#">Fórum</a></div><div class="f-links"><h4>Suporte</h4><a href="#">Contato</a><a href="#">FAQ</a><a href="#">Termos</a></div></div><div class="f-bottom"><p>© 2024 GG - Global Games</p><div class="f-social"><a href="#">🐦</a><a href="#">📸</a><a href="#">🎬</a><a href="#">💬</a></div></div></div></footer></div>
 
@@ -677,7 +677,6 @@ function openArticle(id){
     <div class="ar-author-box"><div class="ar-author-av">${(a.author||'R').charAt(0)}</div><div><div class="ar-author-name">${a.author||'Redação GG'}</div><div class="ar-author-role">Redator · GG. Global Games</div></div></div>
     ${commentsHTML}`;
     
-    // bind comment form
     bindCommentForm(id);
     goPage('article');renderNews();renderTrending();
 }
@@ -725,9 +724,7 @@ function buildCommentForm(articleId){
     </div>`;
 }
 
-function bindCommentForm(articleId){
-    // nothing to bind additionally — all inline
-}
+function bindCommentForm(articleId){}
 
 function submitComment(articleId){
     if(!cUser){goLogin();return}
@@ -736,22 +733,12 @@ function submitComment(articleId){
     if(!text){toast('Escreva algo!','error');return}
     if(text.length<3){toast('Comentário muito curto!','error');return}
     const comments=DB.g('comments',[]);
-    comments.push({
-        id:Date.now(),
-        articleId,
-        authorName:cUser.name,
-        authorEmail:cUser.email,
-        authorPicture:cUser.picture||null,
-        text,
-        approved:false,
-        timestamp:Date.now()
-    });
+    comments.push({id:Date.now(),articleId,authorName:cUser.name,authorEmail:cUser.email,authorPicture:cUser.picture||null,text,approved:false,timestamp:Date.now()});
     DB.s('comments',comments);
     textarea.value='';
     const notice=document.getElementById('commentPendingNotice');
     if(notice){notice.classList.add('show');setTimeout(()=>notice.classList.remove('show'),5000)}
-    updateNotifBadge();
-    updatePendingBadge();
+    updateNotifBadge();updatePendingBadge();
 }
 
 function escHtml(str){const d=document.createElement('div');d.textContent=str||'';return d.innerHTML}
@@ -803,21 +790,9 @@ function renderCommentsAdmin(){
     document.getElementById('commentsAdminList').innerHTML=html;
 }
 
-function approveComment(id){
-    const cs=DB.g('comments',[]);const idx=cs.findIndex(c=>c.id===id);if(idx<0)return;
-    cs[idx].approved=true;cs[idx].rejected=false;DB.s('comments',cs);
-    toast('Comentário aprovado! ✅','success');renderCommentsAdmin();updateNotifBadge();
-}
-function rejectComment(id){
-    const cs=DB.g('comments',[]);const idx=cs.findIndex(c=>c.id===id);if(idx<0)return;
-    cs[idx].approved=false;cs[idx].rejected=true;DB.s('comments',cs);
-    toast('Comentário rejeitado.','info');renderCommentsAdmin();updateNotifBadge();
-}
-function deleteComment(id){
-    if(!confirm('Deletar permanentemente?'))return;
-    DB.s('comments',DB.g('comments',[]).filter(c=>c.id!==id));
-    toast('Removido.','info');renderCommentsAdmin();updateNotifBadge();
-}
+function approveComment(id){const cs=DB.g('comments',[]);const idx=cs.findIndex(c=>c.id===id);if(idx<0)return;cs[idx].approved=true;cs[idx].rejected=false;DB.s('comments',cs);toast('Comentário aprovado! ✅','success');renderCommentsAdmin();updateNotifBadge()}
+function rejectComment(id){const cs=DB.g('comments',[]);const idx=cs.findIndex(c=>c.id===id);if(idx<0)return;cs[idx].approved=false;cs[idx].rejected=true;DB.s('comments',cs);toast('Comentário rejeitado.','info');renderCommentsAdmin();updateNotifBadge()}
+function deleteComment(id){if(!confirm('Deletar permanentemente?'))return;DB.s('comments',DB.g('comments',[]).filter(c=>c.id!==id));toast('Removido.','info');renderCommentsAdmin();updateNotifBadge()}
 
 function timeAgo(ts){const d=Date.now()-ts;const m=Math.floor(d/60000);if(m<1)return'Agora';if(m<60)return`${m} min`;const h=Math.floor(m/60);if(h<24)return`${h}h`;return`${Math.floor(h/24)}d`}
 
@@ -830,8 +805,6 @@ function loadCatSel(){document.getElementById('artCat').innerHTML=DB.g('cats',[]
 // IMAGES
 function imgUp(input,wId,pId){const f=input.files[0];if(!f)return;if(f.size>5*1024*1024){toast('Max 5MB!','error');return}const r=new FileReader();r.onload=e=>{document.getElementById(pId).src=e.target.result;document.getElementById(wId).classList.add('has-image')};r.readAsDataURL(f)}
 function imgRm(e,wId,pId){e.stopPropagation();e.preventDefault();document.getElementById(pId).src='';document.getElementById(wId).classList.remove('has-image');document.querySelector('#'+wId+' input').value=''}
-
-// CATEGORY IMAGE UPLOAD (sm)
 function imgUpSm(input,wId,pId){const f=input.files[0];if(!f)return;if(f.size>2*1024*1024){toast('Max 2MB!','error');return}const r=new FileReader();r.onload=e=>{document.getElementById(pId).src=e.target.result;document.getElementById(wId).classList.add('has-image')};r.readAsDataURL(f)}
 function imgRmSm(e,wId,pId){e.stopPropagation();e.preventDefault();document.getElementById(pId).src='';document.getElementById(wId).classList.remove('has-image');document.querySelector('#'+wId+' input[type="file"]').value=''}
 
