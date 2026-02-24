@@ -515,11 +515,10 @@
 </nav></aside>
 <div class="admin-main">
 <div class="admin-panel active" id="ap-overview"><div class="admin-welcome"><h2>👋 Painel Admin</h2><p>Gerencie seu portal gamer.</p></div>
-<div id="migrationBox" style="display:none;background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(124,58,237,.08));border:1px solid rgba(16,185,129,.3);border-radius:16px;padding:24px;margin-bottom:24px">
-<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><span style="font-size:24px">📦</span><div><strong style="font-size:15px">Matérias encontradas no seu navegador!</strong><p style="font-size:13px;color:var(--ts);margin-top:2px">Clique para migrar tudo para o Firebase e tornar visível para todos.</p></div></div>
+<div id="migrationBox" style="background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(124,58,237,.08));border:1px solid rgba(16,185,129,.3);border-radius:16px;padding:24px;margin-bottom:24px">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><span style="font-size:24px">📦</span><div><strong style="font-size:15px" id="migrationTitle">Sincronizar dados com Firebase</strong><p style="font-size:13px;color:var(--ts);margin-top:2px">Se suas matérias não aparecem para outros usuários, clique aqui para enviar tudo ao Firebase.</p></div></div>
 <div style="display:flex;gap:10px;flex-wrap:wrap">
-<button onclick="runMigration()" style="padding:12px 28px;background:linear-gradient(135deg,#10b981,#34d399);border:none;border-radius:10px;color:#000;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif">🚀 Migrar para Firebase</button>
-<button onclick="document.getElementById('migrationBox').style.display='none'" style="padding:12px 20px;background:transparent;border:1px solid var(--border);border-radius:10px;color:var(--ts);font-size:14px;cursor:pointer;font-family:'Inter',sans-serif">Ignorar</button>
+<button onclick="runMigration()" id="migrationBtn" style="padding:12px 28px;background:linear-gradient(135deg,#10b981,#34d399);border:none;border-radius:10px;color:#000;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif">🚀 Enviar para Firebase</button>
 </div>
 <div id="migrationStatus" style="margin-top:12px;font-size:13px;color:var(--ts);display:none"></div>
 </div>
@@ -1038,39 +1037,49 @@ function checkMigration(){
 }
 async function runMigration(){
     const status=document.getElementById('migrationStatus');
-    const btn=document.querySelector('#migrationBox button');
-    if(btn){btn.disabled=true;btn.textContent='⏳ Migrando...'}
-    status.style.display='block';status.style.color='var(--ts)';status.textContent='⏳ Buscando dados locais...';
+    const btn=document.getElementById('migrationBtn');
+    if(!window._fbReady){
+        status.style.display='block';status.style.color='#fca5a5';
+        status.textContent='❌ Firebase não conectado. Verifique as regras do banco.';return;
+    }
+    btn.disabled=true;btn.textContent='⏳ Enviando...';
+    status.style.display='block';status.style.color='var(--ts)';status.textContent='⏳ Lendo dados locais...';
+    const KEYS=['articles','cats','tags','settings','pages','comments','views','likes'];
+    let sent=0,skipped=0;
     try{
-        const KEYS=['articles','cats','tags','settings','pages','comments','views'];
-        let migrated=0;
         for(const k of KEYS){
             try{
-                const local=JSON.parse(localStorage.getItem('gg_'+k)||'null');
-                if(local===null)continue;
-                const current=cache[k];
-                let merged=local;
+                const raw=localStorage.getItem('gg_'+k);
+                if(!raw){skipped++;continue;}
+                const val=JSON.parse(raw);
+                const empty=(Array.isArray(val)&&val.length===0)||(val&&typeof val==='object'&&Object.keys(val).length===0&&!Array.isArray(val));
+                if(empty){skipped++;continue;}
+                status.textContent=`⏳ Enviando "${k}"...`;
+                // Merge instead of overwrite for arrays
                 if(['articles','comments','pages'].includes(k)){
-                    const la=Array.isArray(local)?local:[];
-                    const ca=Array.isArray(current)?current:[];
-                    const ids=new Set(ca.map(x=>x.id));
-                    merged=[...ca,...la.filter(x=>!ids.has(x.id))];
-                    migrated+=la.filter(x=>!ids.has(x.id)).length;
-                }else if(k==='views'){
-                    merged={...(local||{}),...(current||{})};
+                    const current=toArr(cache[k]);
+                    const local=Array.isArray(val)?val:[];
+                    const ids=new Set(current.map(x=>x.id));
+                    const merged=[...current,...local.filter(x=>!ids.has(x.id))];
+                    cache[k]=merged;
+                    await firebase.database().ref(k).set(merged);
+                } else {
+                    cache[k]=val;
+                    await firebase.database().ref(k).set(val);
                 }
-                cache[k]=merged;
-                await firebase.database().ref(k).set(merged);
-            }catch(er){}
+                sent++;
+            }catch(er){console.warn('Erro em',k,er)}
         }
-        status.textContent=`✅ ${migrated} item(ns) migrado(s) com sucesso! Visíveis para todos agora.`;
-        status.style.color='#6ee7b7';
-        render();
-        setTimeout(()=>{document.getElementById('migrationBox').style.display='none'},4000);
+        status.innerHTML=`<span style="color:#10b981">✅ Concluído! ${sent} conjunto(s) enviado(s) ao Firebase. Agora todos verão as matérias!</span>`;
+        btn.textContent='✅ Enviado!';
+        btn.style.background='rgba(16,185,129,.2)';
+        document.getElementById('migrationTitle').textContent='✅ Dados sincronizados com sucesso!';
+        toast('Matérias no ar para todos! 🎉','success');
+        render();refreshAdmin();
     }catch(e){
-        status.textContent='❌ Erro na migração: '+e.message;
-        status.style.color='#fca5a5';
-        if(btn){btn.disabled=false;btn.textContent='🚀 Tentar novamente'}
+        status.innerHTML=`<span style="color:#fca5a5">❌ Erro: ${e.message}</span>`;
+        btn.disabled=false;btn.textContent='🚀 Tentar novamente';
+        toast('Erro na migração','error');
     }
 }
 function timeAgo(ts){const d=Date.now()-ts;const m=Math.floor(d/60000);if(m<1)return'Agora';if(m<60)return`${m} min`;const h=Math.floor(m/60);if(h<24)return`${h}h`;return`${Math.floor(h/24)}d`}
