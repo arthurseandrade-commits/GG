@@ -408,6 +408,52 @@
         /* RECS */
         .rec-tag-chip{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);border-radius:20px;font-size:11px;color:var(--gl);font-weight:600;margin-bottom:8px}
 
+        /* PROFILE PAGE */
+        .profile-page{max-width:900px;margin:0 auto;padding:96px 24px 60px}
+        .profile-header{background:var(--gc);border:1px solid var(--border);border-radius:24px;padding:40px;margin-bottom:32px;display:flex;align-items:center;gap:32px;flex-wrap:wrap;position:relative;overflow:hidden}
+        .profile-header::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--p),var(--g))}
+        .profile-av{width:100px;height:100px;border-radius:20px;background:var(--gp);display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:900;overflow:hidden;flex-shrink:0;border:3px solid rgba(124,58,237,.3)}
+        .profile-av img{width:100%;height:100%;object-fit:cover}
+        .profile-info{flex:1}
+        .profile-name{font-family:'Orbitron',sans-serif;font-size:28px;font-weight:800;margin-bottom:4px}
+        .profile-email{font-size:13px;color:var(--tm);margin-bottom:16px}
+        .profile-stats{display:flex;gap:24px;flex-wrap:wrap}
+        .profile-stat{text-align:center}
+        .profile-stat-v{font-family:'Orbitron',sans-serif;font-size:22px;font-weight:800;color:var(--g)}
+        .profile-stat-l{font-size:11px;color:var(--tm);text-transform:uppercase;letter-spacing:1px}
+        .follow-btn{padding:12px 28px;border:2px solid var(--p);border-radius:12px;background:transparent;color:var(--p);font-size:14px;font-weight:700;cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif}
+        .follow-btn:hover,.follow-btn.following{background:var(--gp);border-color:transparent;color:#fff}
+        .follow-btn.following{background:rgba(124,58,237,.15);border-color:var(--p);color:var(--p)}
+
+        /* SUBMIT PAGE */
+        .submit-page{max-width:800px;margin:0 auto;padding:96px 24px 60px}
+        .submit-page h1{font-family:'Orbitron',sans-serif;font-size:28px;font-weight:800;margin-bottom:8px}
+        .submit-page .sub-desc{color:var(--tm);font-size:14px;margin-bottom:32px;padding:16px;background:rgba(124,58,237,.06);border:1px solid rgba(124,58,237,.15);border-radius:12px}
+
+        /* USER POSTS TAB */
+        .up-card{background:var(--gc);border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:16px;display:flex;gap:16px;align-items:flex-start}
+        .up-card-av{width:44px;height:44px;border-radius:12px;background:var(--gp);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;overflow:hidden;flex-shrink:0}
+        .up-card-av img{width:100%;height:100%;object-fit:cover}
+        .up-card-body{flex:1;min-width:0}
+        .up-card-author{font-size:13px;font-weight:700;margin-bottom:2px}
+        .up-card-meta{font-size:11px;color:var(--tm);margin-bottom:8px}
+        .up-card-title{font-size:15px;font-weight:700;margin-bottom:6px}
+        .up-card-excerpt{font-size:13px;color:var(--ts);line-height:1.5;margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+        .up-card-actions{display:flex;gap:8px;flex-wrap:wrap}
+        .up-card-actions button{padding:8px 16px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--ts);font-size:12px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
+        .up-card-actions .approve:hover{border-color:var(--g);color:var(--g)}
+        .up-card-actions .reject:hover{border-color:#ef4444;color:#ef4444}
+        .up-badge-pending{display:inline-block;padding:3px 10px;background:rgba(245,158,11,.15);color:#f59e0b;border-radius:6px;font-size:10px;font-weight:700}
+        .n-author-name{cursor:pointer}.n-author-name:hover{color:var(--p);text-decoration:underline}
+        .community-badge{position:absolute;bottom:14px;left:14px;padding:5px 12px;background:linear-gradient(135deg,#7c3aed,#a855f7);border-radius:20px;font-size:10px;font-weight:800;color:#fff;letter-spacing:1px;text-transform:uppercase}
+        .up-status-pending{color:#f59e0b;font-size:12px;font-weight:700;background:rgba(245,158,11,.1);padding:4px 12px;border-radius:8px;display:inline-block}
+        .up-status-approved{color:#10b981;font-size:12px;font-weight:700;background:rgba(16,185,129,.1);padding:4px 12px;border-radius:8px;display:inline-block}
+        .up-status-rejected{color:#ef4444;font-size:12px;font-weight:700;background:rgba(239,68,68,.1);padding:4px 12px;border-radius:8px;display:inline-block}
+        .my-posts-section{margin-top:32px;padding-top:24px;border-top:1px solid var(--border)}
+        .my-post-item{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;margin-bottom:8px;gap:12px}
+        .following-feed{margin-bottom:48px}
+        .profile-posts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-top:24px}
+
         @media(max-width:1024px){.nav{display:none}.mob-btn{display:flex}.hero-stats{display:none}.hero-title{font-size:36px}.hero-content{padding:32px}.f-top{grid-template-columns:1fr 1fr}.admin-stats{grid-template-columns:repeat(2,1fr)}.admin-layout{grid-template-columns:1fr}.admin-side{display:none}}
         @media(max-width:768px){.h-bar{height:64px;padding:0 16px}.search-box{display:none}.u-info{display:none}main{padding:80px 16px 24px}.hero-card{min-height:300px}.hero-content{padding:24px}.hero-title{font-size:28px}.hero-actions{flex-direction:column;align-items:stretch}.btn-p,.btn-s{justify-content:center}.news-grid{grid-template-columns:1fr}.t-list{grid-template-columns:1fr}.sec-t h2{font-size:20px}.f-top{grid-template-columns:1fr;gap:24px}.f-bottom{flex-direction:column;text-align:center}.login-card{padding:32px 24px}.v-ban{flex-direction:column;text-align:center}.ar-title{font-size:26px}.ar-cover{height:250px}.a-row{grid-template-columns:1fr}.a-row3{grid-template-columns:1fr}.admin-stats{grid-template-columns:1fr 1fr}.editor-toolbar{gap:2px}.editor-toolbar button{padding:4px 8px;font-size:11px}}
         @media(max-width:480px){.hero-title{font-size:24px}.admin-stats{grid-template-columns:1fr}.ar-title{font-size:22px}}
@@ -461,6 +507,7 @@
 <nav class="nav">
     <a onclick="goPage('home')" class="active" id="navHome">Início</a>
     <a onclick="goToTrending()" id="navTrending">🔥 Em Alta</a>
+    <a onclick="goPage('submit')" id="navSubmit" style="display:none;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;border-radius:10px;padding:8px 16px">✍️ Publicar</a>
     <a onclick="goPage('admin')" id="navAdminLink" style="display:none">⚙️ Admin</a>
 </nav>
 <div class="search-box"><input type="text" placeholder="Buscar..." id="searchInput"><span class="si">🔍</span></div>
@@ -500,6 +547,49 @@
 
 <div class="page" id="articlePage"><div class="article-reader" id="articleReader"></div></div>
 
+<!-- SUBMIT PAGE -->
+<div class="page" id="submitPage">
+<div class="submit-page">
+<button class="ar-back" onclick="goPage('home')">← Voltar</button>
+<h1>✍️ Publicar Notícia</h1>
+<p class="sub-desc">💡 Sua notícia será revisada pelo admin antes de aparecer para todos. Capriche no conteúdo!</p>
+<div class="a-form">
+<div class="a-field"><label>Título *</label><input type="text" id="upTitle" placeholder="Título da sua notícia..."></div>
+<div class="a-field"><label>Resumo *</label><input type="text" id="upExcerpt" placeholder="Um resumo curto e chamativo..."></div>
+<div class="a-row">
+<div class="a-field"><label>Categoria</label><select id="upCat"></select></div>
+<div class="a-field"><label>Tempo de Leitura</label><input type="text" id="upRead" placeholder="3 min"></div>
+</div>
+<div class="a-field"><label>Imagem de Capa</label>
+<div class="img-upload" id="upCoverWrap"><input type="file" accept="image/*" onchange="imgUp(this,'upCoverWrap','upCoverPrev')"><img class="preview-img" id="upCoverPrev"><button class="remove-img" onclick="imgRm(event,'upCoverWrap','upCoverPrev')">✕</button><div class="upload-text"><span>📸</span>Clique para enviar capa</div></div>
+</div>
+<div class="a-field"><label>Conteúdo *</label>
+<div class="editor-toolbar">
+<button onclick="execCmdUp('bold')"><b>B</b></button>
+<button onclick="execCmdUp('italic')"><i>I</i></button>
+<button onclick="execCmdUp('underline')"><u>U</u></button>
+<div class="sep"></div>
+<button onclick="execCmdUp('formatBlock','<h2>')">H2</button>
+<button onclick="execCmdUp('formatBlock','<h3>')">H3</button>
+<button onclick="execCmdUp('formatBlock','<p>')">¶</button>
+<div class="sep"></div>
+<button onclick="execCmdUp('insertUnorderedList')">• Lista</button>
+<button onclick="execCmdUp('formatBlock','<blockquote>')">❝ Citação</button>
+</div>
+<div class="editor-area" id="upEditor" contenteditable="true" style="min-height:200px"></div>
+</div>
+<div class="a-field"><label>Tags</label><div class="tags-input-wrap" id="upTagsWrap" onclick="document.getElementById('upTagsIn').focus()"><input type="text" id="upTagsIn" placeholder="Enter para adicionar..."></div></div>
+<div id="upMyPosts" style="margin-top:32px"></div>
+<button class="a-btn" onclick="submitUserPost()" style="background:linear-gradient(135deg,#7c3aed,#a855f7);margin-top:8px">🚀 Enviar para Aprovação</button>
+</div>
+</div>
+</div>
+
+<!-- PROFILE PAGE -->
+<div class="page" id="profilePage">
+<div class="profile-page" id="profileContent"></div>
+</div>
+
 <div class="page" id="adminPage"><div class="admin-layout">
 <aside class="admin-side"><div class="admin-side-header"><h3>⚙️ ADMIN</h3><p>Painel de Controle</p></div>
 <nav class="admin-nav" id="adminNav">
@@ -507,6 +597,7 @@
 <a onclick="adminTab('articles',this)"><span class="an">📰</span>Matérias</a>
 <a onclick="adminTab('new-article',this)"><span class="an">✏️</span>Nova Matéria</a>
 <a onclick="adminTab('comments',this)" id="commentsNavLink"><span class="an">💬</span>Comentários<span class="badge-count" id="pendingBadge" style="display:none">0</span></a>
+<a onclick="adminTab('userposts',this)" id="userpostsNavLink"><span class="an">👤</span>Posts Comunidade<span class="badge-count" id="upPendingBadge" style="display:none">0</span></a>
 <a onclick="adminTab('categories',this)"><span class="an">📂</span>Categorias</a>
 <a onclick="adminTab('tags',this)"><span class="an">🏷️</span>Tags</a>
 <a onclick="adminTab('pages',this)"><span class="an">📄</span>Páginas</a>
@@ -593,6 +684,19 @@
 
 <div class="admin-panel" id="ap-pages"><div class="admin-section"><h3>📄 Páginas</h3><div class="a-form" style="max-width:600px;margin-bottom:24px"><div class="a-field"><label>Título</label><input type="text" id="pgName" placeholder="Sobre Nós"></div><div class="a-field"><label>Slug</label><input type="text" id="pgSlug" placeholder="sobre-nos"></div><div class="a-field"><label>Conteúdo</label><textarea id="pgContent" placeholder="Conteúdo..."></textarea></div><button class="a-btn" onclick="savePg()" style="width:fit-content">+ Criar</button></div><div id="pgList"></div></div></div>
 
+<div class="admin-panel" id="ap-userposts">
+<div class="admin-section">
+<h3>👤 Posts da Comunidade</h3>
+<div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap">
+<button class="chip active" id="upFilterPending" onclick="filterUserPosts('pending',this)">⏳ Pendentes</button>
+<button class="chip" id="upFilterApproved" onclick="filterUserPosts('approved',this)">✅ Aprovados</button>
+<button class="chip" id="upFilterRejected" onclick="filterUserPosts('rejected',this)">❌ Rejeitados</button>
+<button class="chip" id="upFilterAll" onclick="filterUserPosts('all',this)">📋 Todos</button>
+</div>
+<div id="userPostsAdminList"></div>
+</div>
+</div>
+
 <div class="admin-panel" id="ap-settings"><div class="admin-section"><h3>⚙️ Configurações</h3><div class="a-form" style="max-width:600px"><div class="a-field"><label>Nome do Site</label><input type="text" id="setName" placeholder="GG."></div><div class="a-field"><label>Descrição</label><textarea id="setDesc" style="min-height:80px"></textarea></div><div class="a-field"><label>Hero Título</label><input type="text" id="setHeroT"></div><div class="a-field"><label>Hero Descrição</label><input type="text" id="setHeroD"></div><div class="a-field"><label>Hero Imagem</label><div class="img-upload" id="heroUp"><input type="file" accept="image/*" onchange="imgUp(this,'heroUp','heroPrev')"><img class="preview-img" id="heroPrev"><button class="remove-img" onclick="imgRm(event,'heroUp','heroPrev')">✕</button><div class="upload-text"><span>🖼️</span>Fundo do hero (1920x600)</div></div></div><button class="a-btn" onclick="saveSettings()">💾 Salvar</button></div></div></div>
 </div></div></div>
 
@@ -622,8 +726,8 @@ const firebaseConfig = {
 };
 // ===========================
 
-const SHARED = ['articles','cats','tags','settings','comments','views','pages','likes'];
-const ARRAY_KEYS = new Set(['articles','cats','comments','pages']);
+const SHARED = ['articles','cats','tags','settings','comments','views','pages','likes','userPosts','follows'];
+const ARRAY_KEYS = new Set(['articles','cats','comments','pages','userPosts']);
 const cache = {};
 window._fbReady = false;
 
@@ -646,7 +750,7 @@ const DEFAULTS = {
     tags:['FPS','RPG','MOBA','Battle Royale','Ação','Aventura'],
     articles:[],pages:[],
     settings:{siteName:'GG.',siteDesc:'Portal Gamer',heroTitle:'BEM-VINDO AO GG.',heroDesc:'Seu portal gamer com as últimas novidades.',heroImage:''},
-    views:{},comments:[],likes:{}
+    views:{},comments:[],likes:{},userPosts:[],follows:{}
 };
 
 function initLocalFallback(){
@@ -664,11 +768,13 @@ async function initApp(){
         try{
             firebase.initializeApp(firebaseConfig);
             const db=firebase.database();
-            const snap=await db.ref('/').get();
-            const data=snap.val()||{};
+            // Read each key individually (avoids needing root read permission)
             for(const k of SHARED){
-                cache[k]=data[k]!==undefined?data[k]:DEFAULTS[k];
-                if(data[k]===undefined)db.ref(k).set(DEFAULTS[k]);
+                try{
+                    const snap=await db.ref(k).get();
+                    cache[k]=snap.val()!==null?snap.val():DEFAULTS[k];
+                    if(snap.val()===null)db.ref(k).set(DEFAULTS[k]);
+                }catch(e){cache[k]=DEFAULTS[k]}
             }
             window._fbReady=true;
             for(const k of SHARED){
@@ -704,12 +810,12 @@ function goLogin(){closeDD();closeMob();pendingSlug=new URLSearchParams(location
 function mobAuthAction(){closeMob();cUser?logout():goLogin()}
 function avH(u){return u&&u.picture?`<img src="${u.picture}" referrerpolicy="no-referrer">`:(u&&u.name||'G').charAt(0).toUpperCase()}
 
-function uiUser(u){const a=avH(u);document.getElementById('uAvatar').innerHTML=a;document.getElementById('uName').textContent=u.name;const r=document.getElementById('uRole');r.textContent='🎮 Membro';r.className='u-role member';document.getElementById('ddAv').innerHTML=a;document.getElementById('ddN').textContent=u.name;document.getElementById('ddE').textContent=u.email;document.getElementById('ddAuth').innerHTML='<button class="dd-out" onclick="logout()">🚪 Sair</button>';document.getElementById('ddAdminLink').innerHTML='';document.getElementById('navAdminLink').style.display='none';document.getElementById('mobAdminLink').style.display='none';document.getElementById('vBanner').classList.remove('show');document.querySelectorAll('.restricted').forEach(e=>e.classList.remove('show'));const m=document.getElementById('mobAuth');m.textContent='🚪 Sair';m.style.color='#ef4444';m.onclick=()=>{closeMob();logout()};updateNotifBadge()}
+function uiUser(u){const a=avH(u);document.getElementById('uAvatar').innerHTML=a;document.getElementById('uName').textContent=u.name;const r=document.getElementById('uRole');r.textContent='🎮 Membro';r.className='u-role member';document.getElementById('ddAv').innerHTML=a;document.getElementById('ddN').textContent=u.name;document.getElementById('ddE').textContent=u.email;document.getElementById('ddAuth').innerHTML='<button class="dd-out" onclick="logout()">🚪 Sair</button>';document.getElementById('ddAdminLink').innerHTML=`<a onclick="openMyProfile()">👤 Meu Perfil</a><a onclick="goPage('submit')">✍️ Publicar</a>`;document.getElementById('navAdminLink').style.display='none';const ns=document.getElementById('navSubmit');if(ns)ns.style.display='';document.getElementById('mobAdminLink').style.display='none';document.getElementById('vBanner').classList.remove('show');document.querySelectorAll('.restricted').forEach(e=>e.classList.remove('show'));const m=document.getElementById('mobAuth');m.textContent='🚪 Sair';m.style.color='#ef4444';m.onclick=()=>{closeMob();logout()};updateNotifBadge();updateUpPendingBadge()}
 function uiAdmin(u){uiUser(u);const r=document.getElementById('uRole');r.textContent='👑 Admin';r.className='u-role admin';document.getElementById('ddAdminLink').innerHTML='<a class="dd-admin" onclick="goPage(\'admin\')">⚙️ Admin</a>';document.getElementById('navAdminLink').style.display='';document.getElementById('mobAdminLink').style.display='';updateNotifBadge()}
-function uiGuest(){document.getElementById('uAvatar').innerHTML='👁️';document.getElementById('uName').textContent='Visitante';const r=document.getElementById('uRole');r.textContent='👁️ Visitante';r.className='u-role guest';document.getElementById('ddAv').innerHTML='👁️';document.getElementById('ddN').textContent='Visitante';document.getElementById('ddE').textContent='Não logado';document.getElementById('ddAuth').innerHTML='<button class="dd-in" onclick="goLogin()">🔑 Login</button>';document.getElementById('ddAdminLink').innerHTML='';document.getElementById('navAdminLink').style.display='none';document.getElementById('mobAdminLink').style.display='none';document.getElementById('vBanner').classList.add('show');const m=document.getElementById('mobAuth');m.textContent='🔑 Login';m.style.color='#10b981';m.onclick=()=>{closeMob();goLogin()}}
+function uiGuest(){document.getElementById('uAvatar').innerHTML='👁️';document.getElementById('uName').textContent='Visitante';const r=document.getElementById('uRole');r.textContent='👁️ Visitante';r.className='u-role guest';document.getElementById('ddAv').innerHTML='👁️';document.getElementById('ddN').textContent='Visitante';document.getElementById('ddE').textContent='Não logado';document.getElementById('ddAuth').innerHTML='<button class="dd-in" onclick="goLogin()">🔑 Login</button>';document.getElementById('ddAdminLink').innerHTML='';document.getElementById('navAdminLink').style.display='none';const ns=document.getElementById('navSubmit');if(ns)ns.style.display='none';document.getElementById('mobAdminLink').style.display='none';document.getElementById('vBanner').classList.add('show');const m=document.getElementById('mobAuth');m.textContent='🔑 Login';m.style.color='#10b981';m.onclick=()=>{closeMob();goLogin()}}
 
 // NAV
-function goPage(p){closeMob();closeDD();document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.nav a').forEach(a=>a.classList.remove('active'));if(p==='home'){document.getElementById('homePage').classList.add('active');document.getElementById('navHome').classList.add('active');history.pushState({},'GG. Global Games',location.pathname);updateMeta('','')}else if(p==='admin'&&isAdm){document.getElementById('adminPage').classList.add('active');history.pushState({},'Admin',location.pathname);refreshAdmin()}else if(p==='article'){document.getElementById('articlePage').classList.add('active')}else{document.getElementById('homePage').classList.add('active');document.getElementById('navHome').classList.add('active');history.pushState({},'GG. Global Games',location.pathname);updateMeta('','')}window.scrollTo({top:0,behavior:'smooth'})}
+function goPage(p,data){closeMob();closeDD();document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.nav a').forEach(a=>a.classList.remove('active'));if(p==='home'){document.getElementById('homePage').classList.add('active');document.getElementById('navHome').classList.add('active');history.pushState({},'GG. Global Games',location.pathname);updateMeta('','')}else if(p==='admin'&&isAdm){document.getElementById('adminPage').classList.add('active');history.pushState({},'Admin',location.pathname);refreshAdmin()}else if(p==='article'){document.getElementById('articlePage').classList.add('active')}else if(p==='submit'){if(!cUser){goLogin();return}document.getElementById('submitPage').classList.add('active');loadSubmitCats();renderMyPosts();const ns=document.getElementById('navSubmit');if(ns)ns.classList.add('active')}else if(p==='profile'){document.getElementById('profilePage').classList.add('active');renderProfile(data||null)}else{document.getElementById('homePage').classList.add('active');document.getElementById('navHome').classList.add('active');history.pushState({},'GG. Global Games',location.pathname);updateMeta('','')}window.scrollTo({top:0,behavior:'smooth'})}
 
 function goToTrending(){
     const isHome=document.getElementById('homePage').classList.contains('active');
@@ -726,37 +832,38 @@ function getTotalViews(){const v=DB.g('views',{});return Object.values(v).reduce
 function formatNum(n){if(n>=1000000)return(n/1000000).toFixed(1)+'M';if(n>=1000)return(n/1000).toFixed(1)+'k';return n}
 
 // RENDER
-function render(){renderCats();renderNovidades();renderNews();renderTrending();renderRecomendacoes();renderHero();updateStats();updateNotifBadge()}
+function render(){renderCats();renderNovidades();renderNews();renderTrending();renderRecomendacoes();renderHero();updateStats();updateNotifBadge();if(isAdm)updateUpPendingBadge()}
 
 function renderCats(){
     const cats=DB.g('cats',[]);
-    document.getElementById('catsStrip').innerHTML='<div class="chip active" onclick="filterByCategory(null,this)">🔥 Todos</div>'+cats.map(c=>{
+    document.getElementById('catsStrip').innerHTML='<div class="chip'+(activeCategory===null?' active':'')+'" onclick="filterByCategory(null,this)">🔥 Todos</div>'+cats.map(c=>{
         const imgPart=c.image?`<img class="chip-img" src="${c.image}">`:`${c.icon}`;
-        return`<div class="chip" onclick="filterByCategory(${c.id},this)">${imgPart} ${c.name}</div>`
+        const isAct=activeCategory==c.id?' active':'';
+        return`<div class="chip${isAct}" onclick="filterByCategory(${c.id},this)">${imgPart} ${c.name}</div>`
     }).join('');
 }
 
 let activeCategory=null;
-function filterByCategory(catId,el){
-    activeCategory=catId;
-    document.querySelectorAll('#catsStrip .chip').forEach(x=>x.classList.remove('active'));
-    el.classList.add('active');
-    renderNews();
-}
 
 function renderNews(){
-    let arts=DB.g('articles',[]).filter(a=>a.status==='published').sort((a,b)=>b.id-a.id);
-    if(activeCategory)arts=arts.filter(a=>a.categoryId==activeCategory);
+    // Merge admin articles + approved user posts
+    let arts=DB.g('articles',[]).filter(a=>a.status==='published').map(a=>({...a,_type:'article'}));
+    const uposts=DB.g('userPosts',[]).filter(p=>p.status==='approved').map(p=>({...p,_type:'community',author:p.authorName,readTime:p.readTime||'3 min'}));
+    let all=[...arts,...uposts].sort((a,b)=>b.id-a.id);
+    if(activeCategory)all=all.filter(a=>a.categoryId==activeCategory);
     const cats=DB.g('cats',[]);const grid=document.getElementById('newsGrid');
-    document.getElementById('newsCount').textContent=arts.length;document.getElementById('statArticles').textContent=DB.g('articles',[]).filter(a=>a.status==='published').length;document.getElementById('statViews').textContent=formatNum(getTotalViews());
-    if(!arts.length){grid.innerHTML='';document.getElementById('emptyNews').style.display='block';return}
+    const adminCount=DB.g('articles',[]).filter(a=>a.status==='published').length;
+    document.getElementById('newsCount').textContent=all.length;document.getElementById('statArticles').textContent=adminCount;document.getElementById('statViews').textContent=formatNum(getTotalViews());
+    if(!all.length){grid.innerHTML='';document.getElementById('emptyNews').style.display='block';return}
     document.getElementById('emptyNews').style.display='none';
-    grid.innerHTML=arts.map((a,i)=>{const cat=cats.find(c=>c.id==a.categoryId)||{name:'Geral',color:'esports',icon:'📰'};const views=getViews(a.id);
+    grid.innerHTML=all.map((a,i)=>{const cat=cats.find(c=>c.id==a.categoryId)||{name:'Geral',color:'esports',icon:'📰'};const views=getViews(a.id);
     const img=a.coverImage?`<img class="cover-img" src="${a.coverImage}" alt="${a.title}">`:`<div class="ph purple">${cat.icon}</div>`;
     const tags=a.tags&&a.tags.length?`<div class="n-tags">${a.tags.slice(0,3).map(t=>`<span class="n-tag">${t}</span>`).join('')}</div>`:'';
     const restr=isGuest&&i>=3?`<div class="restricted show"><span class="ri">🔒</span><p>Exclusivo</p><button class="rb" onclick="event.stopPropagation();goLogin()">Login</button></div>`:'';
+    const communityBadge=a._type==='community'?`<span class="community-badge">👤 Comunidade</span>`:'';
     const commCount=DB.g('comments',[]).filter(c=>c.articleId===a.id&&c.approved).length;
-    return`<article class="n-card" onclick="openArticle(${a.id})">${restr}<div class="n-img">${img}<span class="n-cat ${cat.color}">${cat.name}</span><span class="n-time">${a.readTime||'3 min'}</span>${views?`<span class="n-views">👁️ ${formatNum(views)}</span>`:''}</div><div class="n-body"><h3 class="n-title">${a.title}</h3><p class="n-excerpt">${a.excerpt||''}</p><div class="n-footer"><div class="n-author"><div class="n-author-av">${(a.author||'R').charAt(0)}</div><div><span class="n-author-name">${a.author||'Redação'}</span><br><span class="n-date">${timeAgo(a.id)}</span></div></div><div class="n-engage"><span>👁️ ${formatNum(views)}</span>${commCount?`<span>💬 ${commCount}</span>`:''}</div></div>${tags}</div></article>`}).join('');
+    const authorClick=a._type==='community'?`onclick="event.stopPropagation();openProfile('${a.authorEmail}')"`:'';
+    return`<article class="n-card" onclick="openArticle(${a.id},'${a._type}')">${restr}<div class="n-img">${img}<span class="n-cat ${cat.color}">${cat.name}</span><span class="n-time">${a.readTime||'3 min'}</span>${views?`<span class="n-views">👁️ ${formatNum(views)}</span>`:''} ${communityBadge}</div><div class="n-body"><h3 class="n-title">${a.title}</h3><p class="n-excerpt">${a.excerpt||''}</p><div class="n-footer"><div class="n-author"><div class="n-author-av">${(a.author||'R').charAt(0)}</div><div><span class="n-author-name" ${authorClick}>${a.author||'Redação'}</span><br><span class="n-date">${timeAgo(a.id)}</span></div></div><div class="n-engage"><span>👁️ ${formatNum(views)}</span>${commCount?`<span>💬 ${commCount}</span>`:''}</div></div>${tags}</div></article>`}).join('');
 }
 
 function renderTrending(){
@@ -867,9 +974,13 @@ function renderRecomendacoes(){
 function clickHero(){const arts=DB.g('articles',[]).filter(a=>a.status==='published').sort((a,b)=>b.id-a.id);if(arts.length)openArticle(arts[0].id)}
 
 // OPEN ARTICLE (READER)
-function openArticle(id){
+function openArticle(id,type){
     if(isGuest){const arts=DB.g('articles',[]).filter(a=>a.status==='published').sort((a,b)=>b.id-a.id);const idx=arts.findIndex(a=>a.id===id);if(idx>=3){goLogin();return}}
-    const a=DB.g('articles',[]).find(x=>x.id===id);if(!a)return;
+    // Find in articles or userPosts
+    let a=DB.g('articles',[]).find(x=>x.id===id);
+    let isUserPost=false;
+    if(!a){a=DB.g('userPosts',[]).find(x=>x.id===id&&x.status==='approved');isUserPost=true}
+    if(!a)return;
     const views=addView(id);const cats=DB.g('cats',[]);const cat=cats.find(c=>c.id==a.categoryId)||{name:'Geral',color:'esports',icon:'📰'};
     const slug=a.slug||String(id);
     history.pushState({articleId:id,slug},'',`?artigo=${slug}`);
@@ -878,12 +989,19 @@ function openArticle(id){
     const contentImgHTML=a.contentImage?`<div class="ar-content-img"><img src="${a.contentImage}" alt=""></div>`:'';
     const tagsHTML=a.tags&&a.tags.length?`<div class="ar-tags">${a.tags.map(t=>`<span class="ar-tag">${t}</span>`).join('')}</div>`:'';
     const commentsHTML=renderCommentsSection(id);
+    const authorEmail=isUserPost?a.authorEmail:'';
+    const authorAvHTML=isUserPost&&a.authorPicture?`<img src="${a.authorPicture}" referrerpolicy="no-referrer">`:(a.author||'R').charAt(0);
+    const authorBox=isUserPost
+        ?`<div class="ar-author-box" style="cursor:pointer" onclick="openProfile('${authorEmail}')"><div class="ar-author-av">${authorAvHTML}</div><div><div class="ar-author-name">${a.authorName||a.author}</div><div class="ar-author-role">👤 Comunidade GG · Clique para ver perfil</div></div></div>`
+        :`<div class="ar-author-box"><div class="ar-author-av">${(a.author||'R').charAt(0)}</div><div><div class="ar-author-name">${a.author||'Redação GG'}</div><div class="ar-author-role">Redator · GG. Global Games</div></div></div>`;
+    const communityBanner=isUserPost?`<div style="padding:12px 20px;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.2);border-radius:12px;font-size:13px;color:var(--pl);margin-bottom:24px;display:flex;align-items:center;gap:10px"><span>👤</span><span>Publicado pela comunidade · Aprovado pela equipe GG</span></div>`:'';
     
     document.getElementById('articleReader').innerHTML=`
     <button class="ar-back" onclick="goPage('home')">← Voltar</button>
+    ${communityBanner}
     <div class="ar-cover">${coverHTML}<div class="ar-cat-wrap"><span class="n-cat ${cat.color}">${cat.name}</span></div></div>
     <div class="ar-meta">
-        <span class="ar-meta-item">📝 ${a.author||'Redação GG'}</span>
+        <span class="ar-meta-item">📝 ${a.authorName||a.author||'Redação GG'}</span>
         <span class="ar-meta-item"><span class="dot"></span></span>
         <span class="ar-meta-item">📅 ${new Date(a.id).toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'})}</span>
         <span class="ar-meta-item"><span class="dot"></span></span>
@@ -899,9 +1017,9 @@ function openArticle(id){
         <button id="likeBtn_${id}" class="like-btn${isLiked(id)?' liked':''}" onclick="toggleLike(${id},event)">
             ${isLiked(id)?'❤️':'🤍'} ${isLiked(id)?'Curtido':'Curtir'} <span class="like-count">${getLikes(id)>0?formatNum(getLikes(id)):''}</span>
         </button>
-        <span style="font-size:13px;color:var(--tm)">${isLiked(id)?'Obrigado pela curtida! Suas recomendações foram atualizadas ⭐':'Curtiu? Isso melhora suas recomendações!'}</span>
+        <span style="font-size:13px;color:var(--tm)">${isLiked(id)?'Obrigado pela curtida! ⭐':'Curtiu? Isso melhora suas recomendações!'}</span>
     </div>
-    <div class="ar-author-box"><div class="ar-author-av">${(a.author||'R').charAt(0)}</div><div><div class="ar-author-name">${a.author||'Redação GG'}</div><div class="ar-author-role">Redator · GG. Global Games</div></div></div>
+    ${authorBox}
     ${commentsHTML}`;
     
     bindCommentForm(id);
@@ -973,12 +1091,19 @@ function escHtml(str){const d=document.createElement('div');d.textContent=str||'
 // COMMENT MODERATION
 function updateNotifBadge(){
     if(!isAdm)return;
-    const pending=DB.g('comments',[]).filter(c=>!c.approved&&!c.rejected).length;
+    const commPending=DB.g('comments',[]).filter(c=>!c.approved&&!c.rejected).length;
+    const upPending=DB.g('userPosts',[]).filter(p=>p.status==='pending').length;
+    const total=commPending+upPending;
     const badge=document.getElementById('notifBadge');
-    if(pending>0){badge.textContent=pending;badge.style.display='flex'}
-    else badge.style.display='none';
+    if(badge){if(total>0){badge.textContent=total;badge.style.display='flex'}else badge.style.display='none'}
 }
-function checkAdminNotif(){if(isAdm){goPage('admin');adminTab('comments',document.getElementById('commentsNavLink'))}}
+function checkAdminNotif(){
+    if(!isAdm)return;
+    goPage('admin');
+    const upPending=DB.g('userPosts',[]).filter(p=>p.status==='pending').length;
+    if(upPending>0)adminTab('userposts',document.getElementById('userpostsNavLink'));
+    else adminTab('comments',document.getElementById('commentsNavLink'));
+}
 function updatePendingBadge(){
     const pending=DB.g('comments',[]).filter(c=>!c.approved&&!c.rejected).length;
     const badge=document.getElementById('pendingBadge');
@@ -1083,8 +1208,8 @@ async function runMigration(){
     }
 }
 function timeAgo(ts){const d=Date.now()-ts;const m=Math.floor(d/60000);if(m<1)return'Agora';if(m<60)return`${m} min`;const h=Math.floor(m/60);if(h<24)return`${h}h`;return`${Math.floor(h/24)}d`}
-function adminTab(tab,el){document.querySelectorAll('.admin-panel').forEach(p=>p.classList.remove('active'));document.getElementById('ap-'+tab)?.classList.add('active');document.querySelectorAll('.admin-nav a').forEach(a=>a.classList.remove('active'));if(el)el.classList.add('active');if(tab==='new-article'){resetForm();loadCatSel()}if(tab==='articles')renderArtTable();if(tab==='categories')renderCatsAdmin();if(tab==='tags')renderTagsAdmin();if(tab==='pages')renderPgAdmin();if(tab==='settings')loadSettings();if(tab==='overview')refreshAdmin();if(tab==='comments'){commentFilter='pending';document.querySelectorAll('#ap-comments .chip').forEach(c=>c.classList.remove('active'));document.getElementById('filterPending').classList.add('active');renderCommentsAdmin()}}
-function refreshAdmin(){updateStats();renderOverview();loadCatSel();updateNotifBadge();updatePendingBadge();checkMigration()}
+function adminTab(tab,el){document.querySelectorAll('.admin-panel').forEach(p=>p.classList.remove('active'));document.getElementById('ap-'+tab)?.classList.add('active');document.querySelectorAll('.admin-nav a').forEach(a=>a.classList.remove('active'));if(el)el.classList.add('active');if(tab==='new-article'){resetForm();loadCatSel()}if(tab==='articles')renderArtTable();if(tab==='categories')renderCatsAdmin();if(tab==='tags')renderTagsAdmin();if(tab==='pages')renderPgAdmin();if(tab==='settings')loadSettings();if(tab==='overview')refreshAdmin();if(tab==='userposts'){upPostFilter='pending';document.querySelectorAll('#ap-userposts .chip').forEach(c=>c.classList.remove('active'));document.getElementById('upFilterPending').classList.add('active');renderUserPostsAdmin()}if(tab==='comments'){commentFilter='pending';document.querySelectorAll('#ap-comments .chip').forEach(c=>c.classList.remove('active'));document.getElementById('filterPending').classList.add('active');renderCommentsAdmin()}}
+function refreshAdmin(){updateStats();renderOverview();loadCatSel();updateNotifBadge();updatePendingBadge();updateUpPendingBadge();checkMigration()}
 function updateStats(){document.getElementById('aStatArt').textContent=DB.g('articles',[]).length;document.getElementById('aStatCat').textContent=DB.g('cats',[]).length;document.getElementById('aStatTag').textContent=DB.g('tags',[]).length;document.getElementById('aStatViews').textContent=formatNum(getTotalViews())}
 function loadCatSel(){document.getElementById('artCat').innerHTML=DB.g('cats',[]).map(c=>`<option value="${c.id}">${c.icon} ${c.name}</option>`).join('')}
 
@@ -1157,30 +1282,229 @@ function showLM(t,type){const el=document.getElementById('loginMsg');el.innerHTM
 function hideLM(){document.getElementById('loginMsg').classList.remove('show')}
 document.getElementById('searchInput')?.addEventListener('keypress',e=>{if(e.key==='Enter'&&e.target.value.trim())toast(`Buscando "${e.target.value.trim()}"...`,'info')});
 
-// URL TOKEN
-(function(){const h=location.hash;if(h&&h.includes('access_token')){const tk=new URLSearchParams(h.substring(1)).get('access_token');if(tk){history.replaceState(null,'',location.pathname+(location.search||''));const b=document.getElementById('googleBtn');b.classList.add('loading');fetchGU(tk,b)}}})();
-// SESSION (called after Firebase loads)
-function initSession(){
-    if(location.hash&&location.hash.includes('access_token'))return;
-    const mode=DB.g('mode',''),saved=DB.g('user',null);
-    const slug=new URLSearchParams(location.search).get('artigo');
-    function afterAuth(){
-        render();
-        if(slug){const a=DB.g('articles',[]).find(x=>(x.slug===slug||String(x.id)===slug)&&x.status==='published');if(a){openArticle(a.id);return}}
-    }
-    if(mode==='logged'&&saved){cUser=saved;isGuest=false;isAdm=(saved.email===ADMIN);document.getElementById('loginPage').classList.add('hidden');document.getElementById('homePage').classList.add('active');isAdm?uiAdmin(saved):uiUser(saved);afterAuth()}
-    else if(mode==='guest'){isGuest=true;document.getElementById('loginPage').classList.add('hidden');document.getElementById('homePage').classList.add('active');uiGuest();afterAuth()}
-    else{if(slug)pendingSlug=slug;render()}
+// ===== USER POSTS SYSTEM =====
+let upTags=[], upPostFilter='pending';
+
+function loadSubmitCats(){
+    const cats=DB.g('cats',[]);
+    const sel=document.getElementById('upCat');
+    if(sel)sel.innerHTML=cats.map(c=>`<option value="${c.id}">${c.icon} ${c.name}</option>`).join('');
 }
-// POPSTATE (back/forward)
-window.addEventListener('popstate',function(){
-    const slug=new URLSearchParams(location.search).get('artigo');
-    if(slug){const a=DB.g('articles',[]).find(x=>(x.slug===slug||String(x.id)===slug)&&x.status==='published');if(a){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById('articlePage').classList.add('active');openArticle(a.id);return}}
-    document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
-    document.getElementById('homePage').classList.add('active');
-    document.getElementById('navHome').classList.add('active');
-    updateMeta('','');
+
+document.addEventListener('DOMContentLoaded',()=>{
+    const upIn=document.getElementById('upTagsIn');
+    if(upIn)upIn.addEventListener('keydown',function(e){
+        if(e.key==='Enter'||e.key===','){e.preventDefault();const v=this.value.trim().replace(',','');if(v&&!upTags.includes(v)){upTags.push(v);renderUpTags()}this.value=''}
+        if(e.key==='Backspace'&&!this.value&&upTags.length){upTags.pop();renderUpTags()}
+    });
 });
+function renderUpTags(){const w=document.getElementById('upTagsWrap'),inp=document.getElementById('upTagsIn');if(!w||!inp)return;w.querySelectorAll('.tag-pill').forEach(p=>p.remove());upTags.forEach((t,i)=>{const p=document.createElement('span');p.className='tag-pill';p.innerHTML=`${t} <button onclick="upTags.splice(${i},1);renderUpTags()">✕</button>`;w.insertBefore(p,inp)})}
+function execCmdUp(cmd,val){document.execCommand(cmd,false,val||null);document.getElementById('upEditor')?.focus()}
+
+function submitUserPost(){
+    if(!cUser){goLogin();return}
+    const title=document.getElementById('upTitle')?.value.trim();
+    const excerpt=document.getElementById('upExcerpt')?.value.trim();
+    const content=document.getElementById('upEditor')?.innerHTML.trim();
+    if(!title){toast('Título obrigatório!','error');return}
+    if(!excerpt){toast('Resumo obrigatório!','error');return}
+    if(!content||content==='<br>'||content.length<10){toast('Conteúdo muito curto!','error');return}
+    const coverImg=document.getElementById('upCoverPrev')?.src||'';
+    const post={
+        id:Date.now(),title,excerpt,content,
+        coverImage:coverImg&&coverImg.startsWith('data:')?coverImg:'',
+        categoryId:parseInt(document.getElementById('upCat')?.value||1),
+        tags:[...upTags],
+        readTime:document.getElementById('upRead')?.value.trim()||'3 min',
+        authorEmail:cUser.email,authorName:cUser.name,authorPicture:cUser.picture||null,
+        status:'pending',createdAt:Date.now()
+    };
+    const posts=DB.g('userPosts',[]);
+    posts.push(post);
+    DB.s('userPosts',posts);
+    // Reset form
+    document.getElementById('upTitle').value='';
+    document.getElementById('upExcerpt').value='';
+    document.getElementById('upEditor').innerHTML='';
+    document.getElementById('upRead').value='';
+    upTags=[];renderUpTags();
+    document.getElementById('upCoverPrev').src='';
+    document.getElementById('upCoverWrap').classList.remove('has-image');
+    toast('✅ Enviado! Aguardando aprovação do admin.','success');
+    updateUpPendingBadge();
+    renderMyPosts();
+}
+
+function renderMyPosts(){
+    if(!cUser)return;
+    const container=document.getElementById('upMyPosts');if(!container)return;
+    const myPosts=DB.g('userPosts',[]).filter(p=>p.authorEmail===cUser.email).sort((a,b)=>b.id-a.id);
+    if(!myPosts.length){container.innerHTML='';return}
+    const cats=DB.g('cats',[]);
+    container.innerHTML=`<div class="my-posts-section"><h3 style="font-size:16px;font-weight:700;margin-bottom:16px">📋 Minhas Publicações (${myPosts.length})</h3>
+    ${myPosts.map(p=>{
+        const cat=cats.find(c=>c.id==p.categoryId)||{name:'Geral',icon:'📰'};
+        const statusEl=p.status==='approved'?`<span class="up-status-approved">✅ Aprovado</span>`:p.status==='rejected'?`<span class="up-status-rejected">❌ Rejeitado</span>`:`<span class="up-status-pending">⏳ Pendente</span>`;
+        return`<div class="my-post-item">
+            <div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:700;margin-bottom:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.title}</div>
+            <div style="font-size:11px;color:var(--tm)">${cat.icon} ${cat.name} · ${timeAgo(p.id)}</div></div>
+            <div style="display:flex;align-items:center;gap:10px;flex-shrink:0">${statusEl}
+            ${p.status==='approved'?`<button onclick="openArticle(${p.id},'community')" style="padding:6px 14px;border:1px solid var(--g);border-radius:8px;background:transparent;color:var(--g);font-size:12px;cursor:pointer;font-family:'Inter',sans-serif">Ver</button>`:''}
+            <button onclick="deleteMyPost(${p.id})" style="padding:6px 10px;border:1px solid rgba(239,68,68,.3);border-radius:8px;background:transparent;color:#ef4444;font-size:12px;cursor:pointer;font-family:'Inter',sans-serif">🗑️</button>
+            </div></div>`
+    }).join('')}</div>`;
+}
+
+function deleteMyPost(id){
+    if(!confirm('Deletar sua publicação?'))return;
+    DB.s('userPosts',DB.g('userPosts',[]).filter(p=>!(p.id===id&&p.authorEmail===cUser?.email)));
+    toast('Deletado.','info');renderMyPosts();updateUpPendingBadge();
+}
+
+// USER POSTS ADMIN
+function updateUpPendingBadge(){
+    if(!isAdm)return;
+    const pending=DB.g('userPosts',[]).filter(p=>p.status==='pending').length;
+    const badge=document.getElementById('upPendingBadge');
+    if(badge){if(pending>0){badge.textContent=pending;badge.style.display='inline-block'}else badge.style.display='none'}
+    const notifBadge=document.getElementById('notifBadge');
+    const commPending=DB.g('comments',[]).filter(c=>!c.approved&&!c.rejected).length;
+    const total=pending+commPending;
+    if(notifBadge){if(total>0){notifBadge.textContent=total;notifBadge.style.display='flex'}else notifBadge.style.display='none'}
+}
+
+function filterUserPosts(filter,el){
+    upPostFilter=filter;
+    document.querySelectorAll('#ap-userposts .chip').forEach(c=>c.classList.remove('active'));
+    el.classList.add('active');
+    renderUserPostsAdmin();
+}
+
+function renderUserPostsAdmin(){
+    const all=DB.g('userPosts',[]);
+    const cats=DB.g('cats',[]);
+    let filtered=upPostFilter==='all'?all:all.filter(p=>p.status===upPostFilter);
+    filtered=filtered.sort((a,b)=>b.id-a.id);
+    updateUpPendingBadge();
+    const list=document.getElementById('userPostsAdminList');if(!list)return;
+    if(!filtered.length){list.innerHTML='<div class="empty-state"><span>👤</span><p>Nenhum post aqui.</p></div>';return}
+    list.innerHTML=filtered.map(p=>{
+        const cat=cats.find(c=>c.id==p.categoryId)||{name:'Geral',icon:'📰'};
+        const avHTML=p.authorPicture?`<img src="${p.authorPicture}" style="width:36px;height:36px;border-radius:8px;object-fit:cover" referrerpolicy="no-referrer">`:`<div style="width:36px;height:36px;border-radius:8px;background:var(--gp);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">${(p.authorName||'?').charAt(0)}</div>`;
+        const statusEl=p.status==='approved'?'<span class="status approved">✅ Aprovado</span>':p.status==='rejected'?'<span class="status rejected">❌ Rejeitado</span>':'<span class="status pending">⏳ Pendente</span>';
+        const previewBtn=`<button onclick="previewUserPost(${p.id})">👁️ Ver</button>`;
+        let actions='';
+        if(p.status==='pending')actions=`<button class="approve" onclick="approveUserPost(${p.id})">✅ Aprovar</button><button class="del" onclick="rejectUserPost(${p.id})">❌ Rejeitar</button>${previewBtn}`;
+        else if(p.status==='approved')actions=`<button class="del" onclick="rejectUserPost(${p.id})">📤 Despublicar</button>${previewBtn}<button class="del" onclick="deleteUserPost(${p.id})">🗑️</button>`;
+        else actions=`<button class="approve" onclick="approveUserPost(${p.id})">↩️ Aprovar</button><button class="del" onclick="deleteUserPost(${p.id})">🗑️</button>${previewBtn}`;
+        return`<div class="up-card">
+            <div class="up-card-av">${avHTML}</div>
+            <div class="up-card-body">
+                <div class="up-card-author">${escHtml(p.authorName)} <span style="font-size:11px;color:var(--tm);font-weight:400">· ${p.authorEmail}</span></div>
+                <div class="up-card-meta">${cat.icon} ${cat.name} · ${timeAgo(p.id)}</div>
+                <div class="up-card-title">${escHtml(p.title)}</div>
+                <div class="up-card-excerpt">${escHtml(p.excerpt||'')}</div>
+                <div class="up-card-actions">${actions} ${statusEl}</div>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function previewUserPost(id){const p=DB.g('userPosts',[]).find(x=>x.id===id);if(!p)return;openArticle(id,'community')}
+function approveUserPost(id){const ps=DB.g('userPosts',[]);const idx=ps.findIndex(p=>p.id===id);if(idx<0)return;ps[idx].status='approved';DB.s('userPosts',ps);toast('✅ Post aprovado! Agora aparece no feed.','success');renderUserPostsAdmin();render();updateUpPendingBadge()}
+function rejectUserPost(id){const ps=DB.g('userPosts',[]);const idx=ps.findIndex(p=>p.id===id);if(idx<0)return;ps[idx].status='rejected';DB.s('userPosts',ps);toast('Post rejeitado.','info');renderUserPostsAdmin();render();updateUpPendingBadge()}
+function deleteUserPost(id){if(!confirm('Deletar permanentemente?'))return;DB.s('userPosts',DB.g('userPosts',[]).filter(p=>p.id!==id));toast('Removido.','info');renderUserPostsAdmin();render();updateUpPendingBadge()}
+
+// ===== FOLLOW SYSTEM =====
+function sanEmail(e){return(e||'').toLowerCase().replace(/[^a-z0-9]/g,'_')}
+function getFollowing(email){const f=DB.g('follows',{});return f[sanEmail(email)]||[]}
+function getFollowers(email){const f=DB.g('follows',{});return Object.entries(f).filter(([k,v])=>v.includes(sanEmail(email))).map(([k])=>k)}
+function isFollowing(targetEmail){if(!cUser)return false;return getFollowing(cUser.email).includes(sanEmail(targetEmail))}
+
+function toggleFollow(targetEmail,targetName){
+    if(!cUser){toast('Faça login para seguir! 🔑','info');goLogin();return}
+    if(targetEmail===cUser.email){toast('Você não pode se seguir!','info');return}
+    const follows=DB.g('follows',{});
+    const myKey=sanEmail(cUser.email);
+    const targetKey=sanEmail(targetEmail);
+    if(!follows[myKey])follows[myKey]=[];
+    const idx=follows[myKey].indexOf(targetKey);
+    if(idx>=0){follows[myKey].splice(idx,1);toast(`Deixou de seguir ${targetName}`,'info')}
+    else{follows[myKey].push(targetKey);toast(`Seguindo ${targetName}! 🎮`,'success')}
+    DB.s('follows',follows);
+    // Re-render profile if open
+    if(document.getElementById('profilePage').classList.contains('active')){
+        renderProfile(targetEmail);
+    }
+}
+
+// ===== PROFILE PAGE =====
+function openProfile(email){goPage('profile',email)}
+function openMyProfile(){if(!cUser)return;goPage('profile',cUser.email)}
+
+function renderProfile(email){
+    if(!email&&cUser)email=cUser.email;
+    if(!email){goPage('home');return}
+    const allPosts=DB.g('userPosts',[]);
+    const userPosts=allPosts.filter(p=>p.authorEmail===email&&p.status==='approved').sort((a,b)=>b.id-a.id);
+    const allPostsCount=allPosts.filter(p=>p.authorEmail===email).length;
+    const followers=getFollowers(email);
+    const following=getFollowing(email);
+    const isMe=cUser&&cUser.email===email;
+    const isF=isFollowing(email);
+    const cats=DB.g('cats',[]);
+    
+    // Get user info from posts or current user
+    let uName=email.split('@')[0],uPic=null;
+    const samplePost=allPosts.find(p=>p.authorEmail===email);
+    if(samplePost){uName=samplePost.authorName;uPic=samplePost.authorPicture}
+    if(isMe&&cUser){uName=cUser.name;uPic=cUser.picture}
+    
+    const avHTML=uPic?`<img src="${uPic}" referrerpolicy="no-referrer">`:(uName||'?').charAt(0).toUpperCase();
+    
+    const followBtn=isMe?`<button onclick="goPage('submit')" class="follow-btn">✍️ Publicar</button>`
+        :`<button onclick="toggleFollow('${email}','${escHtml(uName)}')" class="follow-btn${isF?' following':''}">${isF?'✅ Seguindo':'➕ Seguir'}</button>`;
+
+    const postsGrid=userPosts.length
+        ?`<div class="profile-posts-grid">${userPosts.map(p=>{
+            const cat=cats.find(c=>c.id==p.categoryId)||{name:'Geral',color:'esports',icon:'📰'};
+            const img=p.coverImage?`<img class="cover-img" src="${p.coverImage}" alt="${p.title}">`:`<div class="ph purple">${cat.icon}</div>`;
+            return`<article class="n-card" onclick="openArticle(${p.id},'community')">
+                <div class="n-img">${img}<span class="n-cat ${cat.color}">${cat.name}</span><span class="n-time">${p.readTime||'3 min'}</span></div>
+                <div class="n-body"><h3 class="n-title">${p.title}</h3><p class="n-excerpt">${p.excerpt||''}</p>
+                <div class="n-footer"><div style="font-size:11px;color:var(--tm)">${timeAgo(p.id)}</div><div class="n-engage"><span>❤️ ${getLikes(p.id)}</span></div></div>
+                </div></article>`
+        }).join('')}</div>`
+        :`<div class="empty-state"><span>📭</span><p>${isMe?'Você ainda não tem posts aprovados. <a style="color:var(--p);cursor:pointer" onclick="goPage(\'submit\')">Publique agora!</a>':'Nenhuma publicação aprovada ainda.'}</p></div>`;
+
+    document.getElementById('profileContent').innerHTML=`
+        <button class="ar-back" onclick="history.back()">← Voltar</button>
+        <div class="profile-header">
+            <div class="profile-av">${avHTML}</div>
+            <div class="profile-info">
+                <div class="profile-name">${escHtml(uName)}</div>
+                <div class="profile-email">${email}</div>
+                <div class="profile-stats">
+                    <div class="profile-stat"><div class="profile-stat-v">${allPostsCount}</div><div class="profile-stat-l">Posts</div></div>
+                    <div class="profile-stat"><div class="profile-stat-v">${followers.length}</div><div class="profile-stat-l">Seguidores</div></div>
+                    <div class="profile-stat"><div class="profile-stat-v">${following.length}</div><div class="profile-stat-l">Seguindo</div></div>
+                    <div class="profile-stat"><div class="profile-stat-v">${userPosts.reduce((s,p)=>s+getLikes(p.id),0)}</div><div class="profile-stat-l">Curtidas</div></div>
+                </div>
+            </div>
+            ${followBtn}
+        </div>
+        <div class="sec-h"><div class="sec-t"><div class="bar"></div><h2>📰 PUBLICAÇÕES (${userPosts.length})</h2></div></div>
+        ${postsGrid}`;
+}
+
+// ===== CATEGORY FILTER FIX =====
+function filterByCategory(catId,el){
+    activeCategory=catId?Number(catId):null;
+    document.querySelectorAll('#catsStrip .chip').forEach(x=>x.classList.remove('active'));
+    if(el)el.classList.add('active');
+    renderNews();
+}
+
 // START
 initApp();
 </script>
